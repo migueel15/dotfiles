@@ -33,6 +33,16 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn.with_shell(apps.default.app_launcher)
 	end, { description = "open app launcher", group = "app" }),
 
+        -- Notion launcher
+        awful.key({ mod }, "n", function()
+	        awful.spawn.with_shell(apps.default.notion)
+	end, { description = "open app notion", group = "app" }),
+
+        -- Obsidian launcher
+        awful.key({ mod }, "o", function()
+	        awful.spawn.with_shell(apps.default.obsidian)
+	end, { description = "open app obsidian", group = "app" }),
+
 	-- Code editor
 	awful.key({ mod }, "v", function()
 		awful.spawn(apps.default.code_editor)

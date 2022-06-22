@@ -13,6 +13,10 @@ return {
 		text_editor = "alacritty -e nvim",
 		-- Default code editor
 		code_editor = "code",
+                -- Notion
+                notion = "notion-app",
+                -- Obsidian
+                obsidian = "obsidian",
 		-- Default web browser
 		web_browser = "google-chrome-stable",
 		-- Default file manager
