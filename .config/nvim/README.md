@@ -2,7 +2,9 @@
 
 ## Install:
 ```bash
-git clone https://github.com/migueel15/NVIM.git ~/.config/nvim 
+git clone https://github.com/migueel15/dotfiles.git 
+cd dotfiles
+cp -r .config/nvim/* ~/.config/nvim 
 nvim
 ```
 ## Uninstall:
