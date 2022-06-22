@@ -38,6 +38,11 @@ awful.keyboard.append_global_keybindings({
 	        awful.spawn.with_shell(apps.default.notion)
 	end, { description = "open app notion", group = "app" }),
 
+        -- Calendar launcher
+        awful.key({ mod }, "c", function()
+	        awful.spawn.with_shell(apps.default.calendar)
+	end, { description = "open calendar", group = "app" }),
+
         -- Obsidian launcher
         awful.key({ mod }, "o", function()
 	        awful.spawn.with_shell(apps.default.obsidian)
