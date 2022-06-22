@@ -4,7 +4,7 @@
 ```bash
 git clone https://github.com/migueel15/dotfiles.git 
 cd dotfiles
-cp -r .config/nvim/* ~/.config/nvim 
+cp -r .config/nvim ~/.config/
 nvim
 ```
 ## Uninstall:
