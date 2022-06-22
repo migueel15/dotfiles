@@ -5,6 +5,8 @@
 git clone https://github.com/migueel15/dotfiles.git 
 cd dotfiles
 cp -r .config/nvim ~/.config/
+cd ..
+rm -rf dotfiles
 nvim
 ```
 ## Uninstall:
