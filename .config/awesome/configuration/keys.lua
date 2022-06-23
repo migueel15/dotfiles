@@ -155,6 +155,9 @@ awful.keyboard.append_global_keybindings({
 		bling.module.tabbed.iter()
 	end, { description = "iterate through tabbing group", group = "tabs" }),
 
+        -- Move window to other screen
+        awful.key({mod}, "p", awful.client.movetoscreen, 
+          {description = "move window to other screen"}),
 	---- Hotkeys
 	---------------
 	-- Toggle Dashboard
