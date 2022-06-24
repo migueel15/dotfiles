@@ -66,5 +66,6 @@
   "explorer.confirmDelete": false,
   "debug.onTaskErrors": "debugAnyway",
   "workbench.startupEditor": "none",
-  "editor.linkedEditing": true
+  "editor.linkedEditing": true,
+  "explorer.confirmDragAndDrop": false
 }
