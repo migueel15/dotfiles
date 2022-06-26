@@ -42,8 +42,8 @@
     "notifications.background": "#061115",
     "breadcrumb.background": "#061115"
   },
-  "workbench.list.smoothScrolling": true,
-  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": false,
+  "editor.smoothScrolling": false,
   "customizeUI.activityBar": "bottom",
   "customizeUI.titleBar": "inline",
   "customizeUI.font.regular": "SF Pro Display",
@@ -67,5 +67,7 @@
   "debug.onTaskErrors": "debugAnyway",
   "workbench.startupEditor": "none",
   "editor.linkedEditing": true,
-  "explorer.confirmDragAndDrop": false
+  "explorer.confirmDragAndDrop": false,
+  "workbench.tree.indent": 10,
+  "workbench.tree.renderIndentGuides": "always"
 }
