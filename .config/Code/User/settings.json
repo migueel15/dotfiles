@@ -69,5 +69,8 @@
   "editor.linkedEditing": true,
   "explorer.confirmDragAndDrop": false,
   "workbench.tree.indent": 10,
-  "workbench.tree.renderIndentGuides": "always"
+  "workbench.tree.renderIndentGuides": "always",
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true
 }
