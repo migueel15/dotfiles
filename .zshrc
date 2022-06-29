@@ -60,7 +60,7 @@ alias ls='lsd --group-dirs=first'
 alias cat='bat'
 alias sdw='shutdown now'
 alias rb='reboot'
-
+alias emacs='emacsclient -c -a emacs'
 # Alias for dotfiles git
 alias config='/usr/bin/git --git-dir=/home/firez/.dotfiles/ --work-tree=/home/firez'
 

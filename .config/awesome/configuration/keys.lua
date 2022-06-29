@@ -38,6 +38,11 @@ awful.keyboard.append_global_keybindings({
 	        awful.spawn.with_shell(apps.default.notion)
 	end, { description = "open app notion", group = "app" }),
 
+        -- Emacs launcher
+        awful.key({ mod }, "e", function()
+	        awful.spawn.with_shell(apps.default.emacs)
+	end, { description = "open app emacs", group = "app" }),
+
         -- Calendar launcher
         awful.key({ mod }, "c", function()
 	        awful.spawn.with_shell(apps.default.calendar)

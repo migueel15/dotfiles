@@ -13,8 +13,10 @@ return {
 		text_editor = "alacritty -e nvim",
 		-- Default code editor
 		code_editor = "code",
-                -- Calendar 
+                -- Calendar
                 calendar = "xdg-open https://calendar.google.com/calendar/u/0/r",
+                -- Emacs
+                emacs = "emacsclient -c -a emacs",
                 -- Notion
                 notion = "notion-app",
                 -- Obsidian
