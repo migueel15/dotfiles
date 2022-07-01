@@ -7,9 +7,9 @@
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
-  (setq org-auto-tangle-default t))
+  (setq org-auto-tangle-default t)
+)
 
 (setq display-line-numbers-type t)
 
 (setq org-directory "~/org/")
-dadw
