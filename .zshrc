@@ -49,7 +49,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Manual configuration
 
-PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/firez/.local/share/gem/ruby/3.0.0/bin:~/.emacs.d/bin/
+PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/firez/.local/share/gem/ruby/3.0.0/bin:~/.emacs.d/bin/:/home/firez/.local/bin/
 
 # Manual aliases
 alias ll='lsd -lh --group-dirs=first'
@@ -63,6 +63,8 @@ alias rb='reboot'
 alias emacs='emacsclient -c -a emacs'
 # Alias for dotfiles git
 alias config='/usr/bin/git --git-dir=/home/firez/.dotfiles/ --work-tree=/home/firez'
+
+export EDITOR=/usr/bin/nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

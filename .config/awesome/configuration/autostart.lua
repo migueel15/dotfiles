@@ -31,10 +31,6 @@ end
 local autostart_app = {
 	-- Compositor
 	"picom -b --experimental-backends --config " .. config_dir .. "/configuration/picom.conf",
-	-- Music server
-	"mpd",
-	-- Playertctl support for mpd
-	"mpDris2",
         "emacs --daemon"
 }
 
@@ -44,9 +40,3 @@ end
 
 -- Polkit and keyring
 run_once_ps("polkit-gnome-authentication-agent-1", "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-
--- Bluetooth
-run_once_grep("blueman-applet")
-
--- Network Manager
-run_once_grep("nm-applet")
