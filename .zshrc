@@ -137,3 +137,10 @@ function rmk(){
 # Finalize Powerlevel10k instant prompt. Should stay at the bottom of ~/.zshrc.
 (( ! ${+functions[p10k-instant-prompt-finalize]} )) || p10k-instant-prompt-finalize
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+
+# bun completions
+[ -s "/home/firez/.bun/_bun" ] && source "/home/firez/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/home/firez/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
