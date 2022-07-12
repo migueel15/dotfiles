@@ -51,6 +51,7 @@ awful.keyboard.append_global_keybindings({
         -- Obsidian launcher
         awful.key({ mod }, "o", function()
 	        awful.spawn.with_shell(apps.default.obsidian)
+                awful.spawn.with_shell("sh ~/Scripts/IfObsidianOpen.sh")
 	end, { description = "open app obsidian", group = "app" }),
 
 	-- Code editor
