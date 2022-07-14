@@ -72,5 +72,7 @@
   "workbench.tree.renderIndentGuides": "always",
   "git.confirmSync": false,
   "git.autofetch": true,
-  "git.enableSmartCommit": true
+  "git.enableSmartCommit": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true
 }
