@@ -65,6 +65,7 @@ alias emacs='emacsclient -c -a emacs'
 alias config='/usr/bin/git --git-dir=/home/firez/.dotfiles/ --work-tree=/home/firez'
 
 export EDITOR=/usr/bin/nvim
+export XDG_CONFIG_HOME="$HOME/.config"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
