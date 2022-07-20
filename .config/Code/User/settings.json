@@ -74,5 +74,6 @@
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "liveServer.settings.donotVerifyTags": true,
-  "liveServer.settings.donotShowInfoMsg": true
+  "liveServer.settings.donotShowInfoMsg": true,
+  "Lua.telemetry.enable": true
 }
