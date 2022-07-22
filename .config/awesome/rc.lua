@@ -42,7 +42,7 @@ terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 browser = "google-chrome-stable"
-
+app_launcher = "rofi -no-lazy-grab -show drun -modi drun -theme" .. gears.filesystem.get_configuration_dir() .. "rofi.rasi"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -225,6 +225,7 @@ awful.keyboard.append_global_keybindings({
               {description = "run prompt", group = "launcher"}),
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "d", function() awful.spawn.with_shell(app_launcher) end)
 })
 
 -- Tags related keybindings
