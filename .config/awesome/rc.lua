@@ -51,6 +51,7 @@ browser = "google-chrome-stable"
 app_launcher = "rofi -no-lazy-grab -show drun -modi drun -theme" ..
     gears.filesystem.get_configuration_dir() .. "rofi.rasi"
 obsidian = "obsidian"
+notion = "notion-app-enhanced"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -254,7 +255,8 @@ awful.keyboard.append_global_keybindings({
         awful.spawn.with_shell("sh ~/Scripts/IfObsidianOpen.sh")
     end,
         { description = "open obsidian", group = "launcher" }),
-
+    awful.key({ modkey, }, "n", function() awful.spawn(notion) end,
+        { description = "open notion", group = "launcher" }),
     awful.key({ modkey }, "r", function() awful.screen.focused().mypromptbox:run() end,
         { description = "run prompt", group = "launcher" }),
     -- awful.key({ modkey }, "p", function() menubar.show() end,
@@ -298,7 +300,7 @@ awful.keyboard.append_global_keybindings({
         { description = "focus the next screen", group = "screen" }),
     awful.key({ modkey, "Control" }, "k", function() awful.screen.focus_relative(-1) end,
         { description = "focus the previous screen", group = "screen" }),
-    awful.key({ modkey, "Control" }, "n",
+    awful.key({ modkey, "Control" }, "b",
         function()
             local c = awful.client.restore()
             -- Focus restored client
@@ -437,7 +439,7 @@ client.connect_signal("request::default_keybindings", function()
             { description = "move to screen", group = "client" }),
         awful.key({ modkey, }, "t", function(c) c.ontop = not c.ontop end,
             { description = "toggle keep on top", group = "client" }),
-        awful.key({ modkey, }, "n",
+        awful.key({ modkey, }, "b",
             function(c)
                 -- The client currently has the input focus, so it cannot be
                 -- minimized, since minimized clients can't have the focus.
