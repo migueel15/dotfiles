@@ -120,7 +120,12 @@ end)
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget {
+  format = "🕗%H:%M %p  %A %b %d",
+  timezone = "Europe/Madrid",
+  align = "center",
+  widget = wibox.widget.textclock
+}
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
@@ -172,15 +177,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
-                mylauncher,
+                -- mylauncher,
                 s.mytaglist,
                 s.mypromptbox,
             },
-            nil,
+            mytextclock,
             { -- Right widgets
+              wibox.widget{
+                widget = wibox.widget.textbox,
+                markup = "Hola"
+              },
                 layout = wibox.layout.fixed.horizontal,
                 wibox.widget.systray(),
-                mytextclock,
                 s.mylayoutbox,
             },
         }
