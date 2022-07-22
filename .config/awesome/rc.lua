@@ -50,6 +50,7 @@ vscode = "code"
 browser = "google-chrome-stable"
 app_launcher = "rofi -no-lazy-grab -show drun -modi drun -theme" ..
     gears.filesystem.get_configuration_dir() .. "rofi.rasi"
+obsidian = "obsidian"
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -248,11 +249,16 @@ awful.keyboard.append_global_keybindings({
         { description = "open browser", group = "launcher" }),
     awful.key({ modkey, }, "v", function() awful.spawn(vscode) end,
         { description = "open vscode", group = "launcher" }),
+    awful.key({ modkey, }, "o", function() 
+        awful.spawn(obsidian)
+        awful.spawn.with_shell("sh ~/Scripts/IfObsidianOpen.sh")
+    end,
+        { description = "open obsidian", group = "launcher" }),
 
     awful.key({ modkey }, "r", function() awful.screen.focused().mypromptbox:run() end,
         { description = "run prompt", group = "launcher" }),
-    awful.key({ modkey }, "p", function() menubar.show() end,
-        { description = "show the menubar", group = "launcher" }),
+    -- awful.key({ modkey }, "p", function() menubar.show() end,
+    --     { description = "show the menubar", group = "launcher" }),
     awful.key({ modkey }, "d", function() awful.spawn.with_shell(app_launcher) end)
 })
 
@@ -427,7 +433,7 @@ client.connect_signal("request::default_keybindings", function()
             { description = "toggle floating", group = "client" }),
         awful.key({ modkey, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end,
             { description = "move to master", group = "client" }),
-        awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,
+        awful.key({ modkey, }, "p", function(c) c:move_to_screen() end,
             { description = "move to screen", group = "client" }),
         awful.key({ modkey, }, "t", function(c) c.ontop = not c.ontop end,
             { description = "toggle keep on top", group = "client" }),
@@ -573,7 +579,7 @@ end)
 
 -- }}}
 
-beautiful.useless_gap = 10;
+beautiful.useless_gap = 5;
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
     c:activate { context = "mouse_enter", raise = false }
