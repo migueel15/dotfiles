@@ -40,7 +40,8 @@
     "quickInput.background": "#061115",
     "editorOverviewRuler.border": "#061115",
     "notifications.background": "#061115",
-    "breadcrumb.background": "#061115"
+    "breadcrumb.background": "#061115",
+    "terminal.background": "#000A0E",
   },
   "workbench.list.smoothScrolling": false,
   "editor.smoothScrolling": false,
