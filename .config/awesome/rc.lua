@@ -17,6 +17,11 @@ local naughty = require("naughty")
 local ruled = require("ruled")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- Widgets imports
+
+local lain = require("lain")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -146,6 +151,19 @@ screen.connect_signal("request::desktop_decoration", function(s)
         }
     }
 
+    -- CPU
+    s.cpu = lain.widget.cpu {
+      settings = function ()
+        widget:set_markup("CPU " .. cpu_now.usage .. "% ")
+      end
+    }
+    -- RAM
+    s.ram = lain.widget.mem {
+      settings = function ()
+        widget:set_markup("RAM " .. mem_now.perc .. "% ")
+      end
+    }
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -183,11 +201,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             mytextclock,
             { -- Right widgets
-              wibox.widget{
-                widget = wibox.widget.textbox,
-                markup = "Hola"
-              },
                 layout = wibox.layout.fixed.horizontal,
+                s.ram,
+                s.cpu,
                 wibox.widget.systray(),
                 s.mylayoutbox,
             },
