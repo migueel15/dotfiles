@@ -75,5 +75,13 @@
   "git.enableSmartCommit": true,
   "liveServer.settings.donotVerifyTags": true,
   "liveServer.settings.donotShowInfoMsg": true,
-  "Lua.telemetry.enable": true
+  "Lua.telemetry.enable": true,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+  
+    "*": true,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false
+  }
 }
