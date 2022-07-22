@@ -41,6 +41,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
+vscode = "code"
 browser = "google-chrome-stable"
 app_launcher = "rofi -no-lazy-grab -show drun -modi drun -theme" .. gears.filesystem.get_configuration_dir() .. "rofi.rasi"
 -- Default modkey.
@@ -220,6 +221,8 @@ awful.keyboard.append_global_keybindings({
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "w", function () awful.spawn(browser) end,
               {description = "open browser", group = "launcher"}),
+    awful.key({ modkey,           }, "v", function () awful.spawn(vscode) end,
+              {description = "open vscode", group = "launcher"}),
 
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
