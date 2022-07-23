@@ -21,7 +21,6 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Widgets imports
 
 local imports = require("imports")
-
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -188,6 +187,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
             awful.button({}, 5, function(t) awful.tag.viewnext(t.screen) end),
         }
     }
+
+
 
     -- Create the wibox
     s.mywibox = awful.wibar {
