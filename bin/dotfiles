@@ -12,3 +12,4 @@ fi
 if ! [ -d "$DOTFILES_DIR" ]; then
   echo "Installing dotfiles..."
   git clone --quiet https://github.com/migueel15/dotfiles.git "$DOTFILES_DIR"
+fi
