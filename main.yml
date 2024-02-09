@@ -9,10 +9,9 @@
         apply:
           tags:
             - "{{ roles_item }}"
-          name: "{{ roles_item }}"
-          loop_control:
-            loop_var: roles_item
-            with_items: "{{ run_roles}}"
-            tags:
-              - always
-
+        name: "{{ roles_item }}"
+      loop_control:
+        loop_var: roles_item
+      with_items: "{{ run_roles }}"
+      tags:
+        - always
