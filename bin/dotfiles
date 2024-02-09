@@ -12,4 +12,11 @@ fi
 if ! [ -d "$DOTFILES_DIR" ]; then
   echo "Installing dotfiles..."
   git clone --quiet https://github.com/migueel15/dotfiles.git "$DOTFILES_DIR"
+else
+  echo "Updating dotfiles..."
+  git -C "$DOTFILES_DIR" pull --quiet
 fi
+
+# run ansible playbook
+echo "Running playbook..."
+ansible-playbook "$DOTFILES_DIR/main.yml"
