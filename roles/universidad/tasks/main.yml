@@ -1,0 +1,4 @@
+- name: "Universidad | Clone repository"
+  ansible.builtin.git:
+    repo: https://github.com/migueel15/Universidad.git
+    dest: "{{ ansible_user_dir}}/Universidad"
