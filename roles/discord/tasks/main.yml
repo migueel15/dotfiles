@@ -1,0 +1,7 @@
+- name: "Discord | Install"
+  community.general.pacman:
+    name:
+      - discord
+      - betterdiscord-installer
+    state: latest
+  become: true
