@@ -1,0 +1,5 @@
+- name: "Spotify | Install"
+  community.general.pacman:
+    name: spotify-launcher
+    state: latest
+  become: true
