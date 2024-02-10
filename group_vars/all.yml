@@ -2,7 +2,7 @@ default_roles:
   # - awesomewm
   - kitty
   - tmux
-  - neovim
+  - nvim
   - fonts
   # - discord
   # - spotify
