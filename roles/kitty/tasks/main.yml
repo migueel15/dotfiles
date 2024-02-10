@@ -1,0 +1,17 @@
+- name: "Kitty | Install"
+  communitty.general.pacman:
+    name: kitty
+    state: present
+
+- name: "Kitty | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/kitty"
+    state: directory
+
+- name: "Kitty | Create symlink"
+  ansible.builtin.file:
+    src: "{{ role_path/files }}"
+    dest: "{{ ansible_user_dir }}/.config/kitty"
+    state: link
+    force: true
