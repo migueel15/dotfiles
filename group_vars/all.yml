@@ -1,2 +1,9 @@
 default_roles:
+  # - awesomewm
   - kitty
+  - tmux
+  # - nvim
+  # - discord
+  # - spotify
+  # - obsidian
+  # - universidad
