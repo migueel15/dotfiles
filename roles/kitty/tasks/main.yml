@@ -1,5 +1,5 @@
 - name: "Kitty | Install"
-  communitty.general.pacman:
+  community.general.pacman:
     name: kitty
     state: present
 
