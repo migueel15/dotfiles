@@ -1,0 +1,7 @@
+- name: "Fonts | Setup fonts"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ ansible_user_dir }}/.local/share/fonts/"
+    force: no
+  become: true
+
