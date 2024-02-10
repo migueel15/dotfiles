@@ -1,7 +1,8 @@
 - name: "Kitty | Install"
   community.general.pacman:
     name: kitty
-    state: present
+    state: latest
+  become: true
 
 - name: "Kitty | Config folder"
   ansible.builtin.file:

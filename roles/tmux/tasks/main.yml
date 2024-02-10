@@ -1,7 +1,8 @@
 - name: "Tmux | Install tmux"
   community.general.pacman:
     name: tmux
-    state: present
+    state: latest
+  become: true
 
 - name: "Tmux | Install TPM"
   ansible.builtin.git:
@@ -13,6 +14,7 @@
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/tmux"
     state: directory
+  become: true
 
 - name: "Tmux | Create symlink"
   ansible.builtin.file:

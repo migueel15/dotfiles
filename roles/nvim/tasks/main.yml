@@ -8,13 +8,13 @@
       - libtool
       - unzip
       - ripgrep
-    state: present
+    state: latest
 
 - name: "Neovim | Install"
   become: true
   community.general.pacman:
     name: neovim
-    state: present
+    state: latest
 
 - name: "Neovim | Config folder"
   ansible.builtin.file:

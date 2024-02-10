@@ -1,8 +1,11 @@
 - name: "Obsidian | Install"
   community.general.pacman:
     name: obsidian
+    state: present
+  become: true
 
 - name: "Obsidian | Clone repository"
   ansible.builtin.git:
     repo: https://github.com/migueel15/SecondBrain.git
-    dest: "{{ ansible_user_dir}}/SecondBrain"
+    dest: "{{ ansible_user_dir }}/SecondBrain"
+    force: true
