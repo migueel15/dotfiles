@@ -1,0 +1,49 @@
+- name: "AwesomeWM | Install dependecies"
+  become: true
+  community.general.pacman:
+    name:
+      - rofi
+      - visual-studio-code-bin
+      - firefox
+      - solaar
+      - bluez
+      - bluez-utils
+      - blueberry
+      - networkmanager
+      - network-manager-applet
+      - picom
+      - autorandr
+      - playerctl
+      - pamixer
+      - brightnessctl
+      - ksnip
+      - gpick
+      - pavucontrol
+      - pipewire-alsa
+      - pipewire-pulse
+      - pipewire-audio
+      - nodejs
+      - upower
+      - luarocks
+    state: latest
+
+- name: "AwesomeWM | Install luarocks lyaml"
+  become: true
+  ansible.builtin.command: luarocks install lyaml
+
+- name: "AwesomeWM | Install luarocks dkjson"
+  become: true
+  ansible.builtin.command: luarocks install dkjson
+
+- name: "AwesomeWM | Install"
+  community.general.pacman:
+    name: awesome-git
+    state: latest
+  become: true
+
+- name: "AwesomeWM | Create symlink"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/awesome"
+    state: link
+    force: true

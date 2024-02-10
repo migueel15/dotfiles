@@ -1,0 +1,5 @@
+  * {
+    primary:   #1e1e2e;
+    secondary: #89b4fa;
+    text:      #cdd6f4;
+  }
