@@ -1,5 +1,7 @@
 #!/bin/bash
 DOTFILES_DIR="$HOME/.config/dotfiles"
+VAULT_SECRET_DIR="$HOME/.config/dotfiles"
+VAULT_SECRET="$VAULT_SECRET_DIR/token.txt"
 
 # check if ansible is installed
 if ! [ -x "$(command -v ansible)" ]; then
@@ -17,6 +19,17 @@ else
   git -C "$DOTFILES_DIR" pull --quiet
 fi
 
+# check if ansible-vault password file exists
+if ! [ -d "$VAULT_SECRET_DIR" ]; then
+  mkdir -p "$VAULT_SECRET_DIR"
+fi
+
+if ! [ -f "$VAULT_SECRET" ]; then
+  read -p "Enter your ansible-vault password: " -s VAULT_PASSWORD
+  echo "$VAULT_PASSWORD" > "$VAULT_SECRET"
+fi
+
+
 # run ansible playbook
 echo "Running playbook..."
-ansible-playbook "$DOTFILES_DIR/main.yml"
+ansible-playbook --ask-become-pass --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml"
