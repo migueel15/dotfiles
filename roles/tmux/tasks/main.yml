@@ -1,20 +1,20 @@
-- name: "tmux | Install tmux"
+- name: "Tmux | Install tmux"
   community.general.pacman:
     name: tmux
     state: present
 
-- name: "tmux | Install TPM"
+- name: "Tmux | Install TPM"
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
 
-- name: "tmux | Config folder"
+- name: "Tmux | Config folder"
   ansible.builtin.file:
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/tmux"
     state: directory
 
-- name: "tmux | Create symlink"
+- name: "Tmux | Create symlink"
   ansible.builtin.file:
     src: "{{ role_path }}/files"
     dest: "{{ ansible_user_dir }}/.config/tmux"
