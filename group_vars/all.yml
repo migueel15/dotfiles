@@ -4,7 +4,9 @@ default_roles:
   - tmux
   - nvim
   - fonts
-  # - discord
-  # - spotify
-  # - obsidian
-  # - universidad
+  - discord
+  # - scripts
+  - spotify
+  - obsidian
+  - universidad
+  # - zsh
