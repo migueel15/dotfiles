@@ -32,4 +32,4 @@ fi
 
 # run ansible playbook
 echo "Running playbook..."
-ansible-playbook --ask-become-pass --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml"
+ansible-playbook --vault-password-file $VAULT_SECRET "$DOTFILES_DIR/main.yml"
