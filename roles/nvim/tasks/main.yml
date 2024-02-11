@@ -8,6 +8,7 @@
       - libtool
       - unzip
       - ripgrep
+      - xclip
     state: latest
 
 - name: "Neovim | Install"

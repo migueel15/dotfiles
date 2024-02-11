@@ -27,3 +27,27 @@
   ansible.builtin.copy:
     dest: ~/.git-credentials
     content: "https://{{ git_user_name }}:{{ git_user_token }}@github.com"
+
+- name: "Git | Set submodule recurse"
+  community.general.git_config:
+    scope: global
+    name: submodule.recurse
+    value: true
+
+- name: "Git | Set push recurseSubmodules"
+  community.general.git_config:
+    scope: global
+    name: push.recurseSubmodules
+    value: on-demand
+
+- name: "Git | Set core excludesfile"
+  community.general.git_config:
+    scope: global
+    name: core.excludesfile
+    value: .global.gitignore
+
+- name: "Git | Set credential helper"
+  community.general.git_config:
+    scope: global
+    name: credential.helper
+    value: store

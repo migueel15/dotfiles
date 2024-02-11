@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ssh ubuntu@143.47.40.193 -i ~/.ssh/oracle_server_rsa

@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
       - rofi
+      - wmctrl
       - visual-studio-code-bin
       - firefox
       - solaar
@@ -16,7 +17,6 @@
       - playerctl
       - pamixer
       - brightnessctl
-      - ksnip
       - gpick
       - pavucontrol
       - pipewire-alsa

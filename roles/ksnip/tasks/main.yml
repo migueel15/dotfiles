@@ -1,0 +1,13 @@
+- name: "Ksnip | Install"
+  community.general.pacman:
+    name: ksnip
+    state: latest
+  become: true
+
+- name: "Ksnip | Create symlink"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/ksnip"
+    state: link
+    force: true
+
