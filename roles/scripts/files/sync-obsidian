@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+REPO_DIR=~/OneDrive/SecondBrain/
+MESSAGE="Update SecondBrain - $(date)"
+GIT=`which git`
+cd ${REPO_DIR}
+${GIT} add .
+${GIT} commit -m "${MESSAGE}"
+${GIT} push
+

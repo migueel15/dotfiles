@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+while pgrep -fl "obsidian" ; do
+  sleep 300
+  ~/.scripts/sync-obsidian
+done
