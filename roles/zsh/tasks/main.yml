@@ -1,0 +1,66 @@
+- name: "zsh | Detect oh-my-zsh"
+  ansible.builtin.stat:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: ohmyzsh
+
+- name: "zsh | Register oh-my-zsh state"
+  ansible.builtin.set_fact:
+    ohmyzsh_is_installed: "{{ ohmyzsh.stat.exists }}"
+
+- name: "zsh | Debug ohmyzsh_is_installed"
+  ansible.builtin.debug:
+    var: ohmyzsh_is_installed
+
+- name: "zsh | Install oh-my-zsh"
+  when: not ohmyzsh_is_installed
+  block:
+    - name: "zsh | Download oh-my-zsh Install Script"
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: "{{ ansible_user_dir }}/oh-my-zsh.install.sh"
+        force: true
+        mode: "0755"
+
+    - name: "zsh | Run the install script"
+      ansible.builtin.script:
+        cmd: "{{ ansible_user_dir }}/oh-my-zsh.install.sh"
+
+
+- name: "zsh | Link .zshrc"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/.zshrc"
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    state: link
+    force: true
+
+- name: "zsh | Link .Xresources"
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/.Xresources"
+    dest: "{{ ansible_user_dir }}/.Xresources"
+    state: link
+    force: true
+
+- name: "zsh | Remove custom folder"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh/custom"
+    state: absent
+
+- name: "zsh | Link custom folder to ohmyzsh"
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom"
+    src: "{{ role_path }}/files/custom"
+    state: link
+    force: true
+
+- name: "zsh | Delete install script"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/oh-my-zsh.install.sh"
+    state: absent
+
+- name: "zsh | Install dependencies"
+  community.general.pacman:
+    name:
+      - zsh
+      - bat
+      - lsd
+    state: latest
