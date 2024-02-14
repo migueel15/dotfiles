@@ -155,7 +155,7 @@ ruled.notification.connect_signal('request::rules', function()
     properties = {
       fg               = beautiful.colors.text,
       screen           = awful.screen.preferred,
-      implicit_timeout = 5,
+      implicit_timeout = 0,
       border_width     = 4,
       margin           = 10,
       bg               = beautiful.colors.primary,
