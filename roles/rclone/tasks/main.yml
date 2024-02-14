@@ -1,0 +1,12 @@
+- name: "rclone | Install"
+  become: true
+  community.general.pacman:
+    name: rclone
+    state: latest
+
+- name: "rclone | Config folder"
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/rclone"
+    state: directory
+
