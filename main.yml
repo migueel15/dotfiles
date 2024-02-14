@@ -4,6 +4,7 @@
   connection: local
   tasks:
     - name: "Sync pacman"
+      become: true
       ansible.builtin.shell:
         cmd: "sudo pacman -Syy"
 
