@@ -3,6 +3,10 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: "Sync pacman"
+      ansible.builtin.shell:
+        cmd: "sudo pacman -Syy"
+
     - name: Run roles
       ansible.builtin.include_role:
         apply:
