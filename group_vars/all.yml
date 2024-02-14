@@ -1,14 +1,14 @@
 default_roles:
   - git
   - ssh
-  - awesome
   - kitty
+  - scripts
+  - fzf
+  - awesome
+  # - obsidian
   - tmux
   - nvim
-  - scripts
   - universidad
-  - obsidian
-  - fzf
   - ksnip
   - discord
   - spotify
