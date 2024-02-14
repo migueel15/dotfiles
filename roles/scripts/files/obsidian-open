@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-while pgrep -fl "obsidian" ; do
+while ps -ef | grep "electron" | grep "obsidian" ; do
   sleep 300
   ~/.scripts/sync-obsidian
 done
