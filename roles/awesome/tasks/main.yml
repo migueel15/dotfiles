@@ -17,6 +17,10 @@
       - playerctl
       - pamixer
       - brightnessctl
+      - ranger
+      - zathura
+      - tlp
+      - tlpui
       - gpick
       - pavucontrol
       - pipewire-alsa
