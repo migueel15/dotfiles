@@ -6,7 +6,6 @@ default_roles:
   - scripts
   - fzf
   - awesome
-  # - obsidian
   - tmux
   - nvim
   - universidad
@@ -14,7 +13,7 @@ default_roles:
   - discord
   - spotify
   - fonts
-    # - zsh
+  - zsh
   
 
 
