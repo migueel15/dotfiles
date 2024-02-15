@@ -42,6 +42,7 @@
 - name: "AwesomeWM | Install"
   community.general.pacman:
     name: awesome-git
+    executable: paru
     state: latest
   become: true
 
