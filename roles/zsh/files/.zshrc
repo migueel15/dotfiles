@@ -25,8 +25,6 @@ alias gb='git branch'
 alias gsw='git switch'
 alias lg='lazygit'
 
-alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME" # dotfiles
-
 #-- lsd --
 alias ll='lsd -lh --group-dirs=first'
 alias la='lsd -a --group-dirs=first'
@@ -89,6 +87,7 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # exports
+export CFLAGS="-Wall -Wextra -Werror -O2"
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
 export BW_SESSION="wFgLS9Aw8WOFw0BFBffxttf5NGW97KEb7BZsVrZCAiHrIqT1b959PIGCpwZlMjjl8cyrdMksJWvsNCyn2Z3noA==" # bitwarden ( lo metere a ansible ) 
