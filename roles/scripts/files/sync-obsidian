@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-REPO_DIR=~/OneDrive/SecondBrain/
+REPO_DIR=~/SecondBrain/
 MESSAGE="Update SecondBrain - $(date)"
 GIT=`which git`
 cd ${REPO_DIR}
