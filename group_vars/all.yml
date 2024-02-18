@@ -2,7 +2,6 @@ default_roles:
   - git
   - ssh
   - kitty
-  - rclone
   - scripts
   - fzf
   - awesome
@@ -14,8 +13,6 @@ default_roles:
   - spotify
   - fonts
   - zsh
-  
-
 
 git_user_name: migueel15
 git_user_email: !vault |
