@@ -1,7 +1,7 @@
 - name: "Obsidian | Install"
   community.general.pacman:
     name: obsidian
-    state: present
+    state: latest
   become: true
 
 - name: "Obsidian | Clone repository"

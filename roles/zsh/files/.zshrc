@@ -90,7 +90,6 @@ HISTFILE=~/.zsh_history
 export CFLAGS="-Wall -Wextra -Werror -O2"
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
-export BW_SESSION="wFgLS9Aw8WOFw0BFBffxttf5NGW97KEb7BZsVrZCAiHrIqT1b959PIGCpwZlMjjl8cyrdMksJWvsNCyn2Z3noA==" # bitwarden ( lo metere a ansible ) 
 export EDITOR=/usr/bin/nvim
 export XDG_CONFIG_HOME="$HOME/.config"
 #-- fzf color catppuccin --
@@ -108,3 +107,5 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:$HOME/.config/dotfiles/bin
 
+
+PATH=~/.console-ninja/.bin:$PATH

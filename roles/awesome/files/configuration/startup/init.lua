@@ -17,10 +17,6 @@ if not gears.filesystem.file_readable(pathFile) then
   awful.spawn(app.mpris)
   awful.spawn(app.picom)
   awful.spawn(app.discord)
-
-  -- mount Onedrive
-  awful.spawn.with_shell("~/.scripts/onedrive-mount")
-
 end
 
 awful.spawn(app.networkManager)

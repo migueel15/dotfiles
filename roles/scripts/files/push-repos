@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Dotfiles Universidad SecondBrain
+
+cd $HOME/.config/dotfiles/
+git add .
+git commit -m "Update dotfiles: $(date)"
+git push origin main
+
+cd $HOME/SecondBrain/
+git add .
+git commit -m "Update SecondBrain: $(date)"
+git push origin main
+
+cd $HOME/Universidad/
+git add .
+git commit -m "Update Universidad: $(date)"
+git push origin main

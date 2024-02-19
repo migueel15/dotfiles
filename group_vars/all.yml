@@ -8,6 +8,7 @@ default_roles:
   - tmux
   - nvim
   - universidad
+  - obsidian
   - ksnip
   - discord
   - spotify
