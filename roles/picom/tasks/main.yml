@@ -1,7 +1,3 @@
-- name: "picom | Create folder"
-
-
-
 - name: "picom | Link picom config"
   ansible.builtin.file:
     src: "{{ role_path }}/files"
