@@ -102,10 +102,8 @@ export LUA_PATH="$LUA_PATH;/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.l
 export LUA_CPATH="$LUA_CPATH;/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/$USER/.luarocks/lib/lua/5.4/?.so"
 
 export ANDROID_HOME=$HOME/Android/Sdk
+
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:$HOME/.config/dotfiles/bin
-
-
-PATH=~/.console-ninja/.bin:$PATH
