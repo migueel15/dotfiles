@@ -1,3 +1,12 @@
+- name: "zsh | Install dependencies"
+  community.general.pacman:
+    become: true
+    name:
+      - zsh
+      - bat
+      - lsd
+    state: latest
+
 - name: "zsh | Detect oh-my-zsh"
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.oh-my-zsh"
@@ -57,10 +66,3 @@
     path: "{{ ansible_user_dir }}/oh-my-zsh.install.sh"
     state: absent
 
-- name: "zsh | Install dependencies"
-  community.general.pacman:
-    name:
-      - zsh
-      - bat
-      - lsd
-    state: latest
