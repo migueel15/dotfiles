@@ -7,6 +7,6 @@ gears.timer {
   autostart = true,
   call_now = true,
   callback = function()
-    awful.spawn.with_shell("/usr/bin/node ~/repo/Notion-Sync-CampusVirtual/src/main.js")
+    awful.spawn.with_shell("/usr/bin/node ~/repos/Notion-Sync-CampusVirtual/src/main.js")
   end
 }
