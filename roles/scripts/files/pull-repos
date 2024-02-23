@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Dotfiles Universidad SecondBrain
+
+cd $HOME/.config/dotfiles/
+git pull
+
+cd $HOME/SecondBrain/
+git pull
+
+cd $HOME/Universidad/
+git pull
