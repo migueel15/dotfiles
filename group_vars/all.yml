@@ -1,6 +1,6 @@
 default_roles:
   - git
-  - ssh
+  # - ssh
   - picom
   - kitty
   - scripts

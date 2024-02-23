@@ -11,6 +11,7 @@ local pathFile = "/tmp/startUp.txt"
 if not gears.filesystem.file_readable(pathFile) then
   local command = "echo started > " .. pathFile
   awful.spawn.with_shell(command)
+  awful.spawn.with_shell("~/.scripts/set-monitors")
   awful.spawn.with_shell("~/Scripts/SyncDotfiles.sh")
 
   awful.spawn(app.solaar)
