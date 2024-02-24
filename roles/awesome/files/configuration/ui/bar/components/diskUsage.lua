@@ -3,9 +3,11 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
-local cmd = [[sh -c "df -H / | grep "/" | awk '{printf \"%d\", $4}'"]]
+-- local cmd = [[sh -c "df -H / | grep "/" | awk '{printf \"%d\", $4}'"]]
+local cmd = [[sh -c "df -H / | grep "/" | awk '{printf $4}'"]]
 local diskUsage = awful.widget.watch(cmd, 300, function(widget, stdout)
-  widget:set_text(string.format("%2dGb", stdout))
+  -- widget:set_text(string.format("%2dGb", stdout))
+  widget:set_text(stdout)
 end)
 
 local disk = wibox.widget {
@@ -28,7 +30,7 @@ local disk = wibox.widget {
         left = beautiful.widget_text_icon_gap,
         {
           widget = wibox.widget.textbox,
-          text = beautiful.disk.icon
+          text = beautiful.disk.icon,
         },
       },
     },
