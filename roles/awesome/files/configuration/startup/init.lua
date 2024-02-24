@@ -18,5 +18,5 @@ if not gears.filesystem.file_readable(pathFile) then
   awful.spawn(app.discord)
 end
 
-  awful.spawn.with_shell("~/.scripts/pull-repos")
+awful.spawn.with_shell("~/.scripts/pull-repos")
 awful.spawn(app.networkManager)
