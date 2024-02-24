@@ -32,6 +32,6 @@ app.networkManager = "nm-applet"
 app.picom = "picom"
 app.autorandrDual = "autorandr -l DockedOnly"
 app.window_picker = "rofi -show window -matching fuzzy -theme " .. rofi .. "actual_windows.rasi"
-app.openrgb = "openrgb"
+app.openrgb = "openrgb --startminimized -p 'White-blue'"
 
 return app
