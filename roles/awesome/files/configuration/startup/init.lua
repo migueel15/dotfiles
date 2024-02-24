@@ -12,6 +12,7 @@ if not gears.filesystem.file_readable(pathFile) then
   local command = "echo started > " .. pathFile
   awful.spawn.with_shell(command)
   awful.spawn.with_shell("~/.scripts/set-monitors")
+  awful.spawn(app.openrgb)
   awful.spawn(app.solaar)
   awful.spawn(app.mpris)
   awful.spawn(app.picom)
