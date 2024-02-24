@@ -23,7 +23,7 @@ theme.widget_margin          = 15
 theme.widget_text_icon_gap   = 5
 
 --------- Cpu widget ---------
-theme.cpu                    = { icon = " ", color = theme.icon_enable_color }
+theme.cpu                    = { icon = "", color = theme.icon_enable_color }
 ------------------------------
 
 --------- Ram widget ---------
@@ -68,7 +68,7 @@ theme.notification_disable   = { icon = "󰂛", color = theme.icon_disable_color
 theme.volume_muted           = { icon = "󰝟", color = theme.icon_disable_color }
 theme.volume_low             = { icon = "󰕿", color = theme.icon_enable_color }
 theme.volume_medium          = { icon = "󰖀", color = theme.icon_enable_color }
-theme.volume_high            = { icon = "󰖀", color = theme.icon_enable_color }
+theme.volume_high            = { icon = "󰕾", color = theme.icon_enable_color }
 ------------------------------
 
 ------- Systray widget -------
