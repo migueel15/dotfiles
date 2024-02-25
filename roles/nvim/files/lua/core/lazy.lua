@@ -162,4 +162,8 @@ require('lazy').setup({
   {
     'lewis6991/gitsigns.nvim',
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  }
 }, {})
