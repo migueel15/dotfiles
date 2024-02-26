@@ -11,3 +11,7 @@ git pull
 echo "Pulling Universidad"
 cd $HOME/Universidad/
 git pull
+
+echo "Pulling Notion-Sync"
+cd $HOME/repos/Notion-Sync-CampusVirtual/
+git pull

@@ -15,3 +15,8 @@ cd $HOME/Universidad/
 git add .
 git commit -m "Update Universidad: $(date)"
 git push origin main
+
+cd $HOME/repos/Notion-Sync-CampusVirtual/
+git add .
+git commit -m "Update Notion-Sync: $(date)"
+git push origin main
