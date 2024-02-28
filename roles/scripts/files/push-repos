@@ -6,10 +6,10 @@ git add .
 git commit -m "Update dotfiles: $(date)"
 git push origin main
 
-cd $HOME/SecondBrain/
-git add .
-git commit -m "Update SecondBrain: $(date)"
-git push origin main
+# cd $HOME/SecondBrain/
+# git add .
+# git commit -m "Update SecondBrain: $(date)"
+# git push origin main
 
 cd $HOME/Universidad/
 git add .

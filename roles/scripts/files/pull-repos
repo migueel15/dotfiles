@@ -4,9 +4,9 @@ echo "Pulling dotfiles"
 cd $HOME/.config/dotfiles/
 git pull
 
-echo "Pulling SecondBrain"
-cd $HOME/SecondBrain/
-git pull
+# echo "Pulling SecondBrain"
+# cd $HOME/SecondBrain/
+# git pull
 
 echo "Pulling Universidad"
 cd $HOME/Universidad/
