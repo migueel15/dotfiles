@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Dotfiles Universidad SecondBrain
 
+echo "\nPushing dotfiles"
 cd $HOME/.config/dotfiles/
 git add .
 git commit -m "Update dotfiles: $(date)"
@@ -11,11 +12,13 @@ git push origin main
 # git commit -m "Update SecondBrain: $(date)"
 # git push origin main
 
+echo "\nPushing Universidad"
 cd $HOME/Universidad/
 git add .
 git commit -m "Update Universidad: $(date)"
 git push origin main
 
+echo "\nPushing CVNotion"
 cd $HOME/repos/Notion-Sync-CampusVirtual/
 git add .
 git commit -m "Update Notion-Sync: $(date)"
