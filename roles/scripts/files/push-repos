@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}Pushing dotfiles${NC}"
+echo -e "${YELLOW}Pushing dotfiles${NC}"
 cd $HOME/.config/dotfiles/
 git add .
 git commit -m "Update dotfiles: $(date)"
@@ -13,13 +13,13 @@ git push origin main
 # git commit -m "Update SecondBrain: $(date)"
 # git push origin main
 
-echo -e "${GREEN}Pushing Universidad${NC}"
+echo -e "${YELLOW}Pushing Universidad${NC}"
 cd $HOME/Universidad/
 git add .
 git commit -m "Update Universidad: $(date)"
 git push origin main
 
-echo -e "${GREEN}Pushing CVNotion${NC}"
+echo -e "${YELLOW}Pushing CVNotion${NC}"
 cd $HOME/repos/Notion-Sync-CampusVirtual/
 git add .
 git commit -m "Update Notion-Sync: $(date)"
