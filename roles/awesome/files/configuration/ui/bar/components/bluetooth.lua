@@ -11,6 +11,7 @@ local Icon      = ""
 local Color     = ""
 
 function CheckEnable()
+  -- FIX: easy_async_with_shell make infinite process spawn
   awful.spawn.easy_async_with_shell("bluetoothctl show | grep 'Powered: yes'", function(command)
     if (command == nil) then return end
     if command == "" then
@@ -22,6 +23,7 @@ function CheckEnable()
 end
 
 function CheckConnected()
+  -- FIX: easy_async_with_shell make infinite process spawn
   awful.spawn.easy_async_with_shell("bluetoothctl info | grep 'Connected: yes'", function(command)
     if (command == nil) then return end
     if command == "" then
@@ -91,7 +93,8 @@ gears.timer {
   autostart = true,
   call_now = true,
   callback = function()
-    SetValues(bluetooth)
+    -- FIX: uncomment later
+    -- SetValues(bluetooth)
   end
 }
 
