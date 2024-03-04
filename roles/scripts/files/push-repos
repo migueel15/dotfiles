@@ -12,13 +12,13 @@ git push origin main
 # git commit -m "Update SecondBrain: $(date)"
 # git push origin main
 
-echo "\nPushing Universidad\n"
+printf "\nPushing Universidad\n"
 cd $HOME/Universidad/
 git add .
 git commit -m "Update Universidad: $(date)"
 git push origin main
 
-echo "\nPushing CVNotion\n"
+printf "\nPushing CVNotion\n"
 cd $HOME/repos/Notion-Sync-CampusVirtual/
 git add .
 git commit -m "Update Notion-Sync: $(date)"
