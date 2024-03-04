@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# Dotfiles Universidad SecondBrain
-echo "Pulling dotfiles"
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+echo -e "${YELLOW}Pulling dotfiles${NC}"
 cd $HOME/.config/dotfiles/
 git pull
 
@@ -8,10 +10,10 @@ git pull
 # cd $HOME/SecondBrain/
 # git pull
 
-echo "Pulling Universidad"
+echo -e "${YELLOW}Pulling Universidad${NC}"
 cd $HOME/Universidad/
 git pull
 
-echo "Pulling Notion-Sync"
+echo -e "${YELLOW}Pulling CVNotion${NC}"
 cd $HOME/repos/Notion-Sync-CampusVirtual/
 git pull
