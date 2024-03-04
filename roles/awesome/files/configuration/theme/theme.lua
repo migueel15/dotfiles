@@ -12,7 +12,7 @@ local theme                  = require("configuration.utils.set-colorscheme")
 theme.border_normal          = theme.colors.dark
 theme.border_focus           = theme.colors.secondary
 theme.border_width           = dpi(2)
-theme.useless_gap            = dpi(5)
+theme.useless_gap            = dpi(2)
 ------------------------------
 ------------------------------
 ------ Widgets Settings ------
