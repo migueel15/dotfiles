@@ -28,6 +28,14 @@ ruled.client.connect_signal("request::rules", function(c)
     }
     ruled.client.append_rule {
       rule = {
+        class = "whatsdesk"
+      },
+      properties = {
+        tag = screen[2].tags[6]
+      }
+    }
+    ruled.client.append_rule {
+      rule = {
         class = "Spotify"
       },
       properties = {
@@ -50,6 +58,14 @@ ruled.client.connect_signal("request::rules", function(c)
       },
       properties = {
         tag = screen[1].tags[5]
+      }
+    }
+    ruled.client.append_rule {
+      rule = {
+        class = "whatsdesk"
+      },
+      properties = {
+        tag = screen[1].tags[6]
       }
     }
     ruled.client.append_rule {
@@ -84,6 +100,7 @@ ruled.client.connect_signal("request::rules", function(c)
       ontop = true
     }
   }
+
 
   -- ScreenShot
   ruled.client.append_rule {
