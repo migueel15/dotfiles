@@ -114,3 +114,5 @@ export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:$HOME/.config/dotfiles/bin
 export PATH=$PATH:$HOME/.console-ninja/.bin
 
+
+PATH=~/.console-ninja/.bin:$PATH
