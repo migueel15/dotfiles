@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DISCORD_PATH="$HOME/repos/BetterDiscord/"
+
+if [[ ! -d $DISCORD_PATH ]]; then
+ mkdir $DISCORD_PATH 
+ cd $DISCORD_PATH
+ git clone https://github.com/BetterDiscord/BetterDiscord.git .
+fi
+
+cd $DISCORD_PATH
+git pull
+pnpm install
+pnpm build
+pnpm inject
+
+pkill Discord
+discord &
