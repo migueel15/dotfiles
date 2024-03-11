@@ -1,0 +1,15 @@
+{
+    "BDFDB": true,
+    "ZeresPluginLibrary": true,
+    "BetterFriendList": false,
+    "CallTimeCounter": true,
+    "enhancecodeblocks": false,
+    "GameActivityToggle": true,
+    "ImageUtilities": true,
+    "NoSpotifyPause": true,
+    "PluginRepo": true,
+    "QuickMention": true,
+    "ReadAllNotificationsButton": true,
+    "SpotifyControls": true,
+    "ThemeRepo": true
+}
