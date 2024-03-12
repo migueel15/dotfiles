@@ -63,7 +63,7 @@
 		"zoomSettings": {
 			"clickMode": false,
 			"lensSize": 200,
-			"pixelMode": false,
+			"pixelMode": true,
 			"zoomLevel": 2,
 			"zoomSpeed": 0.1
 		}
