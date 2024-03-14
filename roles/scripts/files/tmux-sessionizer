@@ -9,7 +9,7 @@ else
 
   sessions=$(tmux list-sessions -F "$TMUX_PLACEHOLDER:#{session_name}" 2> /dev/null)
 
-  selected=$(echo -e "$files\n$sessions" | fzf --print-query)
+  selected=$(echo -e "$sessions\n$files" | fzf --print-query --border)
 fi
 
 if [[ -z $selected ]]; then
