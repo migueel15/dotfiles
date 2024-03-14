@@ -1,26 +1,49 @@
 #!/usr/bin/env bash
+TMUX_PLACEHOLDER="Tmux"
+CREATE_SESSION_TAG="s:"
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Universidad/primero/ ~/Universidad/segundo/ ~/SecondBrain/ ~/.config ~/.config/dotfiles/roles ~/repos/ -mindepth 1 -maxdepth 1 -type d | fzf)
-fi
+  files=$(find ~/Universidad/primero/ ~/Universidad/segundo/ ~/SecondBrain/ ~/.config ~/.config/dotfiles/roles ~/repos/ -mindepth 1 -maxdepth 1 -type d)
 
+  sessions=$(tmux list-sessions -F "$TMUX_PLACEHOLDER:#{session_name}" 2> /dev/null)
+
+  selected=$(echo -e "$files\n$sessions" | fzf --print-query)
+fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
+if [[ $selected == *$CREATE_SESSION_TAG* ]]; then
+  selected=$(echo $selected | cut -d' ' -f1)
+else
+  selected=$(echo $selected | cut -d' ' -f2)
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+tmux_running=$(pgrep tmux)
+
+if [[ $selected == *$CREATE_SESSION_TAG* ]]; then
+  selected_name=$(echo $selected | cut -d':' -f2)
+  if ! tmux has-session -t=$selected_name 2> /dev/null; then
+      tmux new-session -ds $selected_name -c $HOME
+  fi
+else
+  selected_name=$(basename "$selected" | tr . _)
+fi
+
+# si es una sesion de tmux attach
+if [[ $selected == *"$TMUX_PLACEHOLDER:"* ]]; then
+  selected_name=$(echo $selected | cut -d':' -f2)
+else
+  if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+      tmux new-session -s $selected_name -c $selected
+      exit 0
+  fi
+  if ! tmux has-session -t=$selected_name 2> /dev/null; then
+      tmux new-session -ds $selected_name -c $selected
+  fi
 fi
 
 if [[ -n $tmux_running ]] && [[ -z $TMUX ]]; then
@@ -28,3 +51,4 @@ if [[ -n $tmux_running ]] && [[ -z $TMUX ]]; then
 else
   tmux switch-client -t $selected_name
 fi
+
