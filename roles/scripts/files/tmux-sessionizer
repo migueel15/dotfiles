@@ -26,9 +26,7 @@ tmux_running=$(pgrep tmux)
 
 if [[ $selected == *$CREATE_SESSION_TAG* ]]; then
   selected_name=$(echo $selected | cut -d':' -f2)
-  if ! tmux has-session -t=$selected_name 2> /dev/null; then
-      tmux new-session -ds $selected_name -c $HOME
-  fi
+  selected=$HOME
 else
   selected_name=$(basename "$selected" | tr . _)
 fi
