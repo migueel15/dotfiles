@@ -10,3 +10,5 @@ while read -r word; do
   fi
 done
 
+# reload awesome config
+awesome-client "awesome.restart()"
