@@ -35,7 +35,7 @@ awful.keyboard.append_global_keybindings({
     { description = "open vscode", group = "launcher" }),
   awful.key({ modkey, }, "o", function()
       awful.spawn(app.obsidian)
-      -- awful.spawn.with_shell("sh ~/.scripts/obsidian-open")
+      awful.spawn.with_shell("sh ~/.scripts/obsidian-open")
     end,
     { description = "open obsidian", group = "launcher" }),
   awful.key({ modkey, }, "r", function() awful.spawn.with_shell(app.reminder) end,

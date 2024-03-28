@@ -6,9 +6,10 @@ echo -e "${YELLOW}Pulling dotfiles${NC}"
 cd $HOME/.config/dotfiles/
 git pull
 
-# echo "Pulling SecondBrain"
-# cd $HOME/SecondBrain/
-# git pull
+echo "Pulling SecondBrain"
+cd $HOME/SecondBrain/
+git fetch origin
+git reset --hard origin/main
 
 echo -e "${YELLOW}Pulling Universidad${NC}"
 cd $HOME/Universidad/

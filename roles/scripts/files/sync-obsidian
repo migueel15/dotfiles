@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+notify-send "Syncing SecondBrain"
 REPO_DIR=~/SecondBrain/
 MESSAGE="Update SecondBrain - $(date)"
 GIT=`which git`
@@ -6,4 +7,3 @@ cd ${REPO_DIR}
 ${GIT} add .
 ${GIT} commit -m "${MESSAGE}"
 ${GIT} push
-
