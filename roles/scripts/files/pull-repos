@@ -6,7 +6,7 @@ echo -e "${YELLOW}Pulling dotfiles${NC}"
 cd $HOME/.config/dotfiles/
 git pull
 
-echo "Pulling SecondBrain"
+echo -e "${YELLOW}Pulling SecondBrain${NC}"
 cd $HOME/SecondBrain/
 git fetch origin
 git reset --hard origin/main
