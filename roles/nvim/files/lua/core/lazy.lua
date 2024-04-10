@@ -165,5 +165,13 @@ require('lazy').setup({
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" }
+  },
+  -- Indent lines
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      scope = { show_start = false, show_end = false },
+    }
   }
 }, {})

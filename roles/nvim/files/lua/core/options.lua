@@ -13,6 +13,7 @@ opt.completeopt = "menuone,noinsert,noselect"
 -- Neovim UI
 -----------------------------------------------------------
 opt.relativenumber = true -- Show line numbers relative to position
+opt.cursorline = true     -- Highlight current line
 opt.number = true         -- Set current line number, if disable 0
 opt.showmatch = true      -- Highlight matching parenthesis
 opt.foldmethod = 'marker' -- Enable folding (default 'foldmarker')
