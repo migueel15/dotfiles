@@ -114,6 +114,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:$HOME/.config/dotfiles/bin
 export PATH=$PATH:$HOME/.console-ninja/.bin
+export PATH=$PATH:$HOME/.local/bin
 
 
 PATH=~/.console-ninja/.bin:$PATH
