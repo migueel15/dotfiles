@@ -32,9 +32,9 @@ opt.pumheight = 15
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
-opt.expandtab = true   -- Use spaces instead of tabs
-opt.shiftwidth = 2     -- Shift 4 spaces when tab
-opt.tabstop = 2        -- 1 tab == 4 spaces
+opt.expandtab = false  -- Use spaces instead of tabs
+opt.shiftwidth = 4     -- Shift 4 spaces when tab
+opt.tabstop = 4        -- 1 tab == 4 spaces
 opt.smartindent = true -- Autoindent new lines
 
 -----------------------------------------------------------
