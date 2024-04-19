@@ -1,7 +1,7 @@
 vim.defer_fn(function()
 	require('nvim-treesitter.configs').setup {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'c', 'cpp', 'cmake', 'java', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'haskell' },
+		ensure_installed = { 'c', 'cpp', 'cmake', 'java', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', },
 		sync_install = false,
 		ignore_install = {},
 		autotag = {
@@ -12,7 +12,7 @@ vim.defer_fn(function()
 		auto_install = false,
 
 		highlight = { enable = true },
-		indent = { enable = true },
+		-- indent = { enable = true },
 		incremental_selection = {
 			enable = true,
 		},
