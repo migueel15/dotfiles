@@ -1,4 +1,4 @@
-require('plugins.nvim-cmp')
+-- require('plugins.nvim-cmp')
 require('plugins.telescope')
 require('plugins.lspconfig')
 require('plugins.catppuccin')
