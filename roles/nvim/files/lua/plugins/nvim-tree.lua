@@ -1,4 +1,8 @@
 require("nvim-tree").setup({
+	on_attach = function(bufnr)
+		-- unbind e key
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "e", "<nop>", { noremap = true, silent = true })
+	end,
 	filters = {
 		dotfiles = false,
 		exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
@@ -73,6 +77,8 @@ require("nvim-tree").setup({
 		},
 	},
 })
+
+-- disable contro + e in nvim-tree
 
 vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFocus<cr>", { desc = "Focus NvimTree" })

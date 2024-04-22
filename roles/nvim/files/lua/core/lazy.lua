@@ -12,12 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	-- Alpha
-	{
-		'goolord/alpha-nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
-	},
-
 	-- LSP
 	{
 		'neovim/nvim-lspconfig',
@@ -43,7 +37,7 @@ require('lazy').setup({
 			'hrsh7th/cmp-nvim-lua',
 			'hrsh7th/cmp-path',
 
-			'rafamadriz/friendly-snippets',
+			-- 'rafamadriz/friendly-snippets',
 		},
 	},
 
@@ -110,7 +104,10 @@ require('lazy').setup({
 	{ "onsails/lspkind.nvim" },
 
 	-- NvimTree
-	{ "nvim-tree/nvim-tree.lua" },
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+	},
 
 	-- Discord Rich
 	{ "andweeb/presence.nvim" },
