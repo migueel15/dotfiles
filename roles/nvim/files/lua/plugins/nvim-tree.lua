@@ -1,8 +1,4 @@
 require("nvim-tree").setup({
-	on_attach = function(bufnr)
-		-- unbind e key
-		vim.api.nvim_buf_set_keymap(bufnr, "n", "e", "<nop>", { noremap = true, silent = true })
-	end,
 	filters = {
 		dotfiles = false,
 		exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
