@@ -140,5 +140,8 @@ require('lazy').setup({
 		opts = {
 			scope = { show_start = false, show_end = false },
 		}
+	},
+	{
+		"tpope/vim-fugitive"
 	}
 }, {})
