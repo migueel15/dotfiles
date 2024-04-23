@@ -41,55 +41,11 @@ cmp.setup {
 		{ name = 'luasnip' },
 		{ name = 'path' },
 	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.scopes,
-			cmp.config.compare.exact,
-			-- function(e1, e2)
-			-- 	local priority = { --less appears first
-			-- 		[[ Text = ]] 5,
-			-- 		[[ Method = ]] 3,
-			-- 		[[ Function = ]] 3,
-			-- 		[[ Constructor = ]] 4,
-			-- 		[[ Field = ]] 2,
-			-- 		[[ Variable = ]] 1,
-			-- 		[[ Class = ]] 7,
-			-- 		[[ Interface = ]] 8,
-			-- 		[[ Module = ]] 19,
-			-- 		[[ Property = ]] 3,
-			-- 		[[ Unit = ]] 11,
-			-- 		[[ Value = ]] 4,
-			-- 		[[ Enum = ]] 13,
-			-- 		[[ Keyword = ]] 14,
-			-- 		[[ Snippet = ]] 15,
-			-- 		[[ Color = ]] 16,
-			-- 		[[ File = ]] 17,
-			-- 		[[ Reference = ]] 18,
-			-- 		[[ Folder = ]] 19,
-			-- 		[[ EnumMember = ]] 20,
-			-- 		[[ Constant = ]] 21,
-			-- 		[[ Struct = ]] 22,
-			-- 		[[ Event = ]] 23,
-			-- 		[[ Operator = ]] 24,
-			-- 		[[ TypeParameter = ]] 25,
-			-- 	}
-			-- 	local kind1 = priority[e1:get_kind()] or 99
-			-- 	local kind2 = priority[e2:get_kind()] or 99
-			-- 	return kind1 < kind2
-			-- end,
-			cmp.config.compare.sort_text,
-		}
-	},
-	window = {
-		completion = {
-			border = "rounded",
-		},
-		documentation = {
-			max_height = 15,
-			border = "rounded",
-		}
-	},
 	experimental = {
 		ghost_text = true,
 	},
 }
+
+-- Change beetween snippet positions
+vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true })
