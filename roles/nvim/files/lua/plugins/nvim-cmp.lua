@@ -2,6 +2,7 @@ local cmp = require('cmp')
 local luasnip = require 'luasnip'
 local lspkind = require("lspkind")
 
+
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 cmp.setup {
@@ -36,16 +37,15 @@ cmp.setup {
 		},
 	},
 	sources = {
-		{ name = 'nvim_lsp' },
+		{ name = "nvim_lsp", },
 		{ name = 'nvim_lua' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
+		{ name = 'nvim_lsp_signature_help' },
 	},
 	experimental = {
 		ghost_text = true,
 	},
 }
-
--- Change beetween snippet positions
-vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true })
