@@ -13,14 +13,14 @@ require("nvim-tree").setup({
 		update_root = false,
 	},
 	view = {
-		adaptive_size = false,
+		adaptive_size = true,
 		side = "right",
-		width = 30,
+		width = 20,
 		preserve_window_proportions = true,
 	},
 	git = {
-		enable = false,
-		ignore = true,
+		enable = true,
+		ignore = false,
 	},
 	filesystem_watchers = {
 		enable = true,
@@ -32,19 +32,19 @@ require("nvim-tree").setup({
 	},
 	renderer = {
 		root_folder_label = false,
-		highlight_git = false,
+		highlight_git = true,
 		highlight_opened_files = "none",
 
 		indent_markers = {
-			enable = false,
+			enable = true,
 		},
 
 		icons = {
 			show = {
 				file = true,
 				folder = true,
-				folder_arrow = true,
-				git = false,
+				folder_arrow = false,
+				git = true,
 			},
 
 			glyphs = {
@@ -74,7 +74,7 @@ require("nvim-tree").setup({
 	},
 })
 
--- disable contro + e in nvim-tree
+-- disable control + e in nvim-tree
 
 vim.keymap.set("n", "<leader>tt", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFocus<cr>", { desc = "Focus NvimTree" })
