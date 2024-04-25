@@ -1,20 +1,20 @@
 default_roles:
-  - git
-  - discord
+  # - git
+  # - discord
   # - ssh
-  - picom
-  - kitty
-  - scripts
-  - fzf
-  - awesome
-  - tmux
+  # - picom
+  # - kitty
+  # - scripts
+  # - fzf
+  # - awesome
+  # - tmux
   - nvim
-  - universidad
-  - obsidian
-  - ksnip
-  - spotify
-  - fonts
-  - zsh
+  # - universidad
+  # - obsidian
+  # - ksnip
+  # - spotify
+  # - fonts
+  # - zsh
 
 git_user_name: migueel15
 git_user_email: !vault |
