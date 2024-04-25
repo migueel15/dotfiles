@@ -30,9 +30,3 @@
     state: link
     force: true
 
-- name: "Neovim | Create harpoon symlink"
-  ansible.builtin.file:
-    src: "{{ role_path }}/extra/harpoon.json"
-    dest: "{{ ansible_user_dir }}/.local/share/nvim/harpoon.json"
-    state: link
-    force: true
