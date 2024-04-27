@@ -138,7 +138,7 @@ require('lazy').setup({
 	},
 	{
 		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" }
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	-- Indent lines
 	{
