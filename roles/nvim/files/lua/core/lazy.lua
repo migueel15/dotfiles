@@ -109,6 +109,13 @@ require('lazy').setup({
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
 
+	-- Toggleterm
+	{
+		'akinsho/toggleterm.nvim',
+		version = "*",
+		config = true
+	},
+
 	-- Discord Rich
 	{ "andweeb/presence.nvim" },
 

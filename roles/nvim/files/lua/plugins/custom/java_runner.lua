@@ -1,45 +1,62 @@
 local M = {}
 
 M.get_project_path = function()
-	return vim.fn.getcwd()
+	local current_file_path = M.get_current_file_path()
+	local index = string.find(current_file_path, "/src/")
+	local project_path = string.sub(current_file_path, 1, index - 1)
+	return project_path
 end
 
 M.get_current_file_path = function()
 	return vim.fn.expand("%:p")
 end
 M.get_project_name = function()
-	return vim.fn.fnamemodify(M.get_project_path(), ":t")
+	return M.get_project_path():match("([^/]+)$")
 end
 M.get_file_name = function()
 	return vim.fn.expand("%:t:r")
 end
 
-M.BuildAndRunJava = function()
-	vim.cmd(":w")
-	local build_folder = M.get_project_path() .. "/out/production/" .. M.get_project_name()
-	local src_folder = M.get_project_path() .. "/src"
-	-- os.execute("javac -d " .. build_folder .. " " .. src_folder .. "/**/*.java")
-	local build = "javac -d " .. build_folder .. " " .. src_folder .. "/**/*.java"
-
-	-- vim.cmd("TermExec direction=float cmd='" .. "javac -d " .. build_folder .. " " .. src_folder .. "/**/*.java" .. "'")
-
-	-- File relative to working directory
-	local relative_path = vim.fn.fnamemodify(vim.fn.expand(M.get_current_file_path()), ':~:.:r')
-	-- Find the index of the first occurrence of '/'
-	local index = string.find(relative_path, '/')
-	-- Extract the substring after the first '/'
-	local desiredString = string.sub(relative_path, index + 1)
-	-- Convert class file path
-	local classFile = string.gsub(desiredString, "/", ".")
-
-	local command = "java -cp " .. build_folder .. " " .. classFile
-	vim.cmd("TermExec direction=float cmd='" .. build .. "; clear; " .. command .. "'")
+-- im in a file. I have to get the path back to src.
+M.get_src_path = function()
+	local current_file_path = M.get_current_file_path()
+	local index = string.find(current_file_path, "/src/")
+	local src_path = string.sub(current_file_path, 1, index + 4)
+	return src_path
 end
 
-vim.api.nvim_create_user_command("RunJava", function()
+M.Build = function()
+	local src_path = M.get_src_path()
+	local project_path = M.get_project_path()
+
+	local command = "javac " ..
+			"-d" .. " " .. project_path .. "/out/production/" .. M.get_project_name() .. " " .. "**/*.java"
+	vim.fn.system("cd " .. src_path .. " && " .. command)
+end
+
+M.BuildAndRunJava = function()
+	M.Build()
+	local project_path = M.get_project_path()
+	-- get path from src to file and change / to .
+	local file_path = string.sub(M.get_current_file_path(), string.len(M.get_src_path()) + 1)
+	local file_path = string.gsub(file_path, "/", ".")
+	local file_path = string.gsub(file_path, ".java", "")
+	print(file_path)
+	local command = "java -cp " .. project_path .. "/out/production/" .. M.get_project_name() .. " " .. file_path
+	-- spawn a toggleterm and run the command
+	vim.cmd("TermExec go_back=0 cmd='cd " .. project_path .. " && " .. command .. "'")
+end
+
+vim.api.nvim_create_user_command("JavaBuild", function()
+	require("plugins.custom.java_runner").Build()
+end, {})
+
+vim.api.nvim_create_user_command("JavaBuildRun", function()
 	require("plugins.custom.java_runner").BuildAndRunJava()
 end, {})
 
-vim.keymap.set({ "n", "t" }, "<leader>jc", "<cmd>RunJava<cr>", { desc = "Build and run java project" })
+vim.keymap.set({ "n", "t" }, "<leader>jb", "<cmd>JavaBuild<cr>", { desc = "Build java project" })
+
+vim.keymap.set({ "n", "t" }, "<leader>jr", "<cmd>JavaBuildRun<cr>", { desc = "Build and run java project" })
 
 return M

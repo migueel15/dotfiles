@@ -44,6 +44,10 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- Copilot
 vim.keymap.set("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
+-- Toggleterm
+vim.keymap.set("t", "<C-p>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+vim.keymap.set("n", "<C-p>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+
 -- Move beetween panes
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Change to left pane", silent = false })
 vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Change to right pane", silent = false })
