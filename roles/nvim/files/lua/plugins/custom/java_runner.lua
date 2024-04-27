@@ -32,6 +32,7 @@ M.Build = function()
 	local command = "javac " ..
 			"-d" .. " " .. project_path .. "/out/production/" .. M.get_project_name() .. " " .. "**/*.java"
 	vim.fn.system("cd " .. src_path .. " && " .. command)
+	-- print("Build complete")
 end
 
 M.BuildAndRunJava = function()
