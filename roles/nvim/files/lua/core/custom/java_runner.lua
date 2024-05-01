@@ -49,11 +49,11 @@ M.BuildAndRunJava = function()
 end
 
 vim.api.nvim_create_user_command("JavaBuild", function()
-	require("plugins.custom.java_runner").Build()
+	require("core.custom.java_runner").Build()
 end, {})
 
 vim.api.nvim_create_user_command("JavaBuildRun", function()
-	require("plugins.custom.java_runner").BuildAndRunJava()
+	require("core.custom.java_runner").BuildAndRunJava()
 end, {})
 
 vim.keymap.set({ "n", "t" }, "<leader>jb", "<cmd>JavaBuild<cr>", { desc = "Build java project" })
