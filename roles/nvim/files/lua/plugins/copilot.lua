@@ -13,7 +13,7 @@ return {
 				enable_copilot = true
 			end
 		end, {})
-
+		vim.keymap.set("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true, desc = "Completar con copilot" })
 		vim.keymap.set("n", "<leader>ct", "<cmd>CopilotToggle<cr>", { noremap = true, silent = true })
 	end
 }
