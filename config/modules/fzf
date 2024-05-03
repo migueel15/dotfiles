@@ -1,5 +1,5 @@
 #!/bin/bash
 
-if [ -z (which fzf) ]; then
+if [ -z "(which fzf)" ]; then
 	yay -S fzf
 fi

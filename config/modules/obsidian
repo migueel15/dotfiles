@@ -2,7 +2,7 @@
 SECOND_BRAIN_DIR=$HOME/SecondBrain
 GIT_REPO="https://github.com/migueel15/SecondBrain.git"
 
-if [ -z (which obsidian) ]; then
+if [ -z "(which obsidian)" ]; then
 	yay -S obsidian
 fi
 

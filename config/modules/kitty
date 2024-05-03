@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z (which kitty) ]; then
+if [ -z "(which kitty)" ]; then
 	yay -S kitty
 fi
 

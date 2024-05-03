@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z (which nvim) ]; then
+if [ -z "(which nvim)" ]; then
 	yay -S neovim cmake curl pkg-config libtool unzip ripgrep xclip
 fi
 ln -snf $FILES_DIR $HOME/.config/nvim

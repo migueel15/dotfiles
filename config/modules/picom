@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z (which picom) ]; then
+if [ -z "(which picom)" ]; then
 	yay -S picom
 fi
 ln -snf $FILES_DIR $HOME/.config/picom

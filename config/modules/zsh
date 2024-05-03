@@ -1,6 +1,8 @@
 #!/bin/bash
 
-yay -S zsh bat lsd
+if [ -z "(which zsh)" ]; then
+	yay -S zsh bat lsd
+fi
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh/" ]; then
