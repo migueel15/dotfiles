@@ -5,7 +5,7 @@ CREATE_SESSION_TAG="s:"
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-  files=$(find ~/Universidad/primero/ ~/Universidad/segundo/ ~/SecondBrain/ ~/.config ~/.config/dotfiles/roles ~/repos/ -mindepth 1 -maxdepth 1 -type d)
+  files=$(find ~/Universidad/primero/ ~/Universidad/segundo/ ~/SecondBrain/ ~/.config ~/.config/dotfiles/config/files ~/repos/ -mindepth 1 -maxdepth 1 -type d)
 
   sessions=$(tmux list-sessions -F "$TMUX_PLACEHOLDER:#{session_name}" 2> /dev/null)
 
