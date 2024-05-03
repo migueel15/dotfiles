@@ -8,5 +8,4 @@ if [ -z "(which awesome)" ]; then
 	yay -S awesome-git
 fi
 
-echo "Creating symlinks"
 ln -sfn $FILES_DIR $HOME/.config/awesome
