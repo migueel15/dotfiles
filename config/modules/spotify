@@ -1,0 +1,4 @@
+#!/bin/bash
+if [ -z (which spotify-launcher) ]; then
+		yay -S spotify-launcher
+fi

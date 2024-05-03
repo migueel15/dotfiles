@@ -1,4 +1,6 @@
 #!/bin/bash
-GITHUB_USER=migueel15
-GITHUB_EMAIL=miguelangeldorado10@gmail.com
-GITHUB_TOKEN=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
+DOTFILES_DIR="$HOME/.config/dotfiles"
+BIN_DIR="$DOTFILES_DIR/bin"
+DISTROS="$BIN_DIR/distros"
+CONFIG_DIR="$DOTFILES_DIR/config"
+

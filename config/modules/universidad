@@ -1,0 +1,5 @@
+#!/bin/bash
+GIT_URL="https://github.com/migueel15/Universidad.git"
+if [ ! -d $HOME/Universidad ]; then
+	git clone $GIT_URL $HOME/Universidad
+fi

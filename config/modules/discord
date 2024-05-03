@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Installing dicord"
+if [ -z (which discord) ]; then
+	yay -S discord betterdiscord-installer
+fi
+ln -snf $FILES_DIR ~/.config/BetterDiscord

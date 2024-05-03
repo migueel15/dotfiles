@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -z (which kitty) ]; then
+	yay -S kitty
+fi
+
+ln -snf $FILES_DIR $HOME/.config/kitty
