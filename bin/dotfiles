@@ -1,5 +1,8 @@
 #!/bin/bash
-source config
+DOTFILES_DIR="$HOME/.config/dotfiles"
+BIN_DIR="$DOTFILES_DIR/bin"
+DISTROS="$BIN_DIR/distros"
+CONFIG_DIR="$DOTFILES_DIR/config"
 
 # DISTRO=$(lsb_release -si)
 #
@@ -17,7 +20,6 @@ if [ -z $(which yay) ]; then
 	makepkg -si
 else
 	echo "yay is already installed"
-	exit 1
 fi
 
 for script in $CONFIG_DIR/modules/*; do
