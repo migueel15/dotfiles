@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [ -z (which ksnip) ]; then
+		yay -S ksnip
+fi
+ln -snf $FILES_DIR $HOME/.config/ksnip

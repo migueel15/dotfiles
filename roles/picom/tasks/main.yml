@@ -1,6 +1,0 @@
-- name: "picom | Link picom config"
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/picom"
-    state: link
-    force: true

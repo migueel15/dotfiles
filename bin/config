@@ -1,0 +1,6 @@
+#!/bin/bash
+DOTFILES_DIR="$HOME/.config/dotfiles"
+BIN_DIR="$DOTFILES_DIR/bin"
+DISTROS="$BIN_DIR/distros"
+CONFIG_DIR="$DOTFILES_DIR/config"
+
