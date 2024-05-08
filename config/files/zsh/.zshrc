@@ -43,6 +43,9 @@ alias syd='~/Scripts/SyncDotfiles.sh'
 alias img='kitty +kitten icat'
 alias awm="$HOME/Scripts/runAwesomewmScript.sh"
 alias segundo="cd $HOME/Universidad/segundo/"
+alias intellij="intellij-idea-ultimate-edition"
+
+
 
 # functions
 windows(){
