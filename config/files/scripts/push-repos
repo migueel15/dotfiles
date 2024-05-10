@@ -25,3 +25,9 @@ cd $HOME/repos/Notion-Sync-CampusVirtual/
 git add .
 git commit -m "Update Notion-Sync: $(date)"
 git push origin main
+
+echo -e "${YELLOW}Pushing Test${NC}"
+cd $HOME/repos/MainTest/
+git add .
+git commit -m "Update Universidad: $(date)"
+git push origin main --recurse-submodules=on-demand
