@@ -30,4 +30,4 @@ echo -e "${YELLOW}Pushing Test${NC}"
 cd $HOME/repos/MainTest/
 git add .
 git commit -m "Update Universidad: $(date)"
-git push origin main --recurse-submodules=on-demand
+git push --recurse-submodules=on-demand
