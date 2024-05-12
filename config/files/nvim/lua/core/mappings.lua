@@ -46,3 +46,12 @@ vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Change to left pane"
 vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Change to right pane", silent = false })
 vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Change to bottom pane", silent = false })
 vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Change to top pane", silent = false })
+
+vim.keymap.set("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Change to left pane", silent = false })
+vim.keymap.set("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Change to right pane", silent = false })
+vim.keymap.set("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Change to bottom pane", silent = false })
+vim.keymap.set("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Change to top pane", silent = false })
+
+-- Delete word in insert mode
+vim.keymap.set("i", "<C-H>", "<C-w>", { desc = "Delete word in insert mode", noremap = true, silent = true })
+vim.keymap.set("t", "<C-H>", "<C-w>", { desc = "Delete word in insert mode", noremap = true, silent = true })
