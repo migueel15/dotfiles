@@ -17,3 +17,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	group = formatting_group,
 	pattern = "*"
 })
+
+vim.api.nvim_command("autocmd User FugitiveChanged NvimTreeRefresh")
