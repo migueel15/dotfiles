@@ -19,6 +19,7 @@ cd $HOME/Universidad/
 git add .
 git commit -m "Update Universidad: $(date)"
 git push origin main
+git submodule foreach "git add . && git commit -m 'Update Submodule $path: $(date)' && git push origin main"
 
 echo -e "${YELLOW}Pushing CVNotion${NC}"
 cd $HOME/repos/Notion-Sync-CampusVirtual/
