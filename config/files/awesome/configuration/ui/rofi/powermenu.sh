@@ -34,6 +34,7 @@ case $chosen in
 			systemctl suspend
         ;;
     $logout)
+			rm /tmp/startUp.txt
     	awesome-client "awesome.quit()"
         ;;
 esac
