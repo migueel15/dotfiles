@@ -11,5 +11,6 @@ Widgets.volume = require("configuration.ui.bar.components.volume")
 Widgets.notifications = require("configuration.ui.bar.components.notifications")
 Widgets.workspace = require("configuration.ui.bar.components.workspace")
 Widgets.logout = require("configuration.ui.bar.components.logout")
+Widgets.spotify = require("configuration.ui.bar.components.spotify")
 
 return Widgets
