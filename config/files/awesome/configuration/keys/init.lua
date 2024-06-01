@@ -12,6 +12,29 @@ awful.mouse.append_global_mousebindings({
   awful.button({}, 5, awful.tag.viewnext),
 })
 
+function save_to_file(var1, var2, filename)
+    local file = io.open(filename, "w")
+    if file then
+        file:write(var1 .. "," .. var2)
+        file:close()
+    else
+        print("Could not open file for writing")
+    end
+end
+
+function read_from_file(filename)
+    local file = io.open(filename, "r")
+    if file then
+        local content = file:read("*all")
+        file:close()
+        
+        local var1, var2 = content:match("([^,]+),([^,]+)")
+        return tonumber(var1), tonumber(var2)
+    else
+        print("Could not open file for reading")
+    end
+end
+
 -- Keyboard keys
 awful.keyboard.append_global_keybindings({
   awful.key({ modkey, "Control" }, "Return", function()
@@ -21,7 +44,18 @@ awful.keyboard.append_global_keybindings({
   awful.key(
     { modkey, "Control" },
     "r",
-    awesome.restart,
+    function ()
+			local idxMainScreenTag = screen[1].selected_tag.index
+			local idxSecondScreenTag = 1
+			if(screen[2]) then
+				idxSecondScreenTag = screen[2].selected_tag.index
+			end
+
+			save_to_file(idxMainScreenTag, idxSecondScreenTag, "/tmp/screenTags.txt")
+
+			awesome.restart()
+
+    end,
     { description = "reload awesome", group = "awesome" }
   ),
 

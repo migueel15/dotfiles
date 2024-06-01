@@ -31,7 +31,7 @@ ruled.client.connect_signal("request::rules", function(c)
         class = "whatsdesk"
       },
       properties = {
-        tag = screen[2].tags[6]
+        tag = screen[2].tags[4]
       }
     }
     ruled.client.append_rule {
