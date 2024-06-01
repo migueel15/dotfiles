@@ -12,7 +12,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 local formatting_group = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
-		vim.lsp.buf.format()
+		-- run :Neoformat if installed
+		vim.api.nvim_command("silent! Neoformat")
 	end,
 	group = formatting_group,
 	pattern = "*"
