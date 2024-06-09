@@ -45,8 +45,6 @@ alias awm="$HOME/Scripts/runAwesomewmScript.sh"
 alias segundo="cd $HOME/Universidad/segundo/"
 alias ij="intellij-idea-ultimate-edition"
 
-
-
 # functions
 windows(){
   sudo grub-reboot 1

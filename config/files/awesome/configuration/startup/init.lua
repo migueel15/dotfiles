@@ -29,6 +29,11 @@ if not gears.filesystem.file_readable(pathFile) then
   awful.spawn(app.mpris)
   awful.spawn(app.picom)
   awful.spawn(app.discord)
+
+	-- Set screen to never sleep
+	awful.spawn.with_shell("xset s off")
+	awful.spawn.with_shell("xset s noblank")
+	awful.spawn.with_shell("xset -dpms")
 end
 
 awful.spawn.with_shell("~/.scripts/pull-repos")
