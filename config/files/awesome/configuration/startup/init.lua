@@ -32,7 +32,6 @@ if not gears.filesystem.file_readable(pathFile) then
 
 	-- Set screen to never sleep
 	awful.spawn.with_shell("xset s off")
-	awful.spawn.with_shell("xset s noblank")
 	awful.spawn.with_shell("xset -dpms")
 end
 
