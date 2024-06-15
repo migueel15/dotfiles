@@ -29,8 +29,14 @@ M.Build = function()
 	local src_path = M.get_src_path()
 	local project_path = M.get_project_path()
 
-	local command = "javac " ..
-			"-d" .. " " .. project_path .. "/out/production/" .. M.get_project_name() .. " " .. "**/*.java"
+	local command = "javac "
+			.. "-d"
+			.. " "
+			.. project_path
+			.. "/out/production/"
+			.. M.get_project_name()
+			.. " "
+			.. "**/*.java"
 	vim.fn.system("cd " .. src_path .. " && " .. command)
 	-- print("Build complete")
 end
@@ -40,8 +46,8 @@ M.BuildAndRunJava = function()
 	local project_path = M.get_project_path()
 	-- get path from src to file and change / to .
 	local file_path = string.sub(M.get_current_file_path(), string.len(M.get_src_path()) + 1)
-	local file_path = string.gsub(file_path, "/", ".")
-	local file_path = string.gsub(file_path, ".java", "")
+	file_path = string.gsub(file_path, "/", ".")
+	file_path = string.gsub(file_path, ".java", "")
 	print(file_path)
 	local command = "java -cp " .. project_path .. "/out/production/" .. M.get_project_name() .. " " .. file_path
 	-- spawn a toggleterm and run the command
