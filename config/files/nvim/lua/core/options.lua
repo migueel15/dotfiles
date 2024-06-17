@@ -4,8 +4,8 @@ local opt = vim.opt
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
-g.mapleader = ','
-g.copilot_no_tab_map = true
+g.mapleader = ","
+g.copilot_no_tab_map = false
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menuone,noinsert,noselect"
 
@@ -16,8 +16,8 @@ opt.relativenumber = true -- Show line numbers relative to position
 opt.cursorline = true     -- Highlight current line
 opt.number = true         -- Set current line number, if disable 0
 opt.showmatch = true      -- Highlight matching parenthesis
-opt.foldmethod = 'marker' -- Enable folding (default 'foldmarker')
-opt.colorcolumn = '80'    -- Line lenght marker at 80 columns
+opt.foldmethod = "marker" -- Enable folding (default 'foldmarker')
+opt.colorcolumn = "80"    -- Line lenght marker at 80 columns
 opt.splitright = true     -- Vertical split to the right
 opt.splitbelow = true     -- Horizontal split to the bottom
 opt.ignorecase = true     -- Ignore case letters when search
@@ -33,8 +33,8 @@ opt.pumheight = 15
 -- Tabs, indent
 -----------------------------------------------------------
 opt.expandtab = false  -- Use spaces instead of tabs
-opt.shiftwidth = 2     -- Shift 4 spaces when tab
-opt.tabstop = 2        -- 1 tab == 4 spaces
+opt.shiftwidth = 2     -- Shift 2 spaces when tab
+opt.tabstop = 2        -- 1 tab == 2 spaces
 opt.smartindent = true -- Autoindent new lines
 
 -----------------------------------------------------------
