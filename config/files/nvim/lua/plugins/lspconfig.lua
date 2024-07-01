@@ -53,6 +53,9 @@ return {
 			end, { desc = "Format current buffer with LSP" })
 		end
 
+		-- set glsl analyzer
+		require("lspconfig").glsl_analyzer.setup({})
+
 		-- mason-lspconfig requires that these setup functions are called in this order
 		-- before setting up the servers.
 		require("mason").setup()

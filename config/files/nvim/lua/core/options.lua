@@ -8,6 +8,7 @@ g.mapleader = ","
 g.copilot_no_tab_map = false
 opt.clipboard = "unnamedplus"
 opt.completeopt = "menuone,noinsert,noselect"
+opt.guicursor = ""
 
 -----------------------------------------------------------
 -- Neovim UI
@@ -42,4 +43,4 @@ opt.smartindent = true -- Autoindent new lines
 -----------------------------------------------------------
 opt.history = 100     -- Remember N lines in history
 opt.lazyredraw = true -- Faster scrolling
-opt.updatetime = 250  -- ms to wait for trigger an event
+opt.updatetime = 50   -- ms to wait for trigger an event
