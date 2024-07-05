@@ -86,7 +86,7 @@ man()
 
 # mappings
 bindkey -s '^o' 'fzfvim^M' # Control + o -> fzfvim
-bindkey -s '^f' "tmux-sessionizer\n"
+bindkey -s '^F' "tmux-sessionizer\n"
 
 # config
 HISTSIZE=1000
