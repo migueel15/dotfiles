@@ -10,6 +10,7 @@ app.browser = "firefox"
 app.locker = "~/Scripts/LockScreen.sh"
 app.sysmenu = rofi .. "powermenu.sh &"
 app.obsidian = "obsidian"
+app.explorer = "GTK_THEME=Adwaita:dark nautilus"
 
 app.notion = "firefox https://notion.so"
 app.create_notion_task = "~/.config/awesome/configuration/ui/rofi/notion/create_task.sh"
