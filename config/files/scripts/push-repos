@@ -27,8 +27,8 @@ git add .
 git commit -m "Update Notion-Sync: $(date)"
 git push origin main
 
-echo -e "${YELLOW}Pushing minecraft backup${NC}"
-cd $HOME/.modMinecraft/Instances/Server/
-git add .
-git commit -m "Update minecraft-backup: $(date)"
-git push origin main
+# echo -e "${YELLOW}Pushing minecraft backup${NC}"
+# cd $HOME/.modMinecraft/Instances/Server/
+# git add .
+# git commit -m "Update minecraft-backup: $(date)"
+# git push origin main
