@@ -7,4 +7,10 @@ GITHUB_TOKEN=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
 git config --global user.email $GITHUB_EMAIL
 git config --global user.name $GITHUB_USER
 git config --global credential.helper store
+
+# Crear ~/.git-credentials si no existe
+if [ ! -f ~/.git-credentials ]; then
+    touch ~/.git-credentials
+fi
+
 echo "https://$GITHUB_USER:$GITHUB_TOKEN@github.com" > ~/.git-credentials

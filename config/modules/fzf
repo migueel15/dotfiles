@@ -1,5 +1,6 @@
 #!/bin/bash
 
-if [ -z "(which fzf)" ]; then
-	yay -S fzf
+if ! which fzf &> /dev/null; then
+    echo "Instalando fzf"
+    yay -S fzf
 fi

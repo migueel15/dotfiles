@@ -1,11 +1,12 @@
 #!/bin/bash
+
 SECOND_BRAIN_DIR=$HOME/SecondBrain
 GIT_REPO="https://github.com/migueel15/SecondBrain.git"
 
-if [ -z "(which obsidian)" ]; then
-	yay -S obsidian
+if ! which obsidian &> /dev/null; then
+    yay -S obsidian
 fi
 
 if [ ! -d "$SECOND_BRAIN_DIR" ]; then
-	git clone $GIT_REPO $SECOND_BRAIN_DIR
+    git clone $GIT_REPO $SECOND_BRAIN_DIR
 fi

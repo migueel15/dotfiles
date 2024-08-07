@@ -1,7 +1,10 @@
 #!/bin/bash
 
-if [ -z "(which discord)" ]; then
-	echo "Installing dicord"
-	yay -S discord betterdiscord-installer
+# Verifica si discord está instalado
+if ! which discord &> /dev/null; then
+    echo "Installing discord"
+    yay -S discord betterdiscord-installer
 fi
+
+# Crear enlace simbólico
 ln -snf $FILES_DIR ~/.config/BetterDiscord

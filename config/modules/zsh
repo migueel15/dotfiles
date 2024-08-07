@@ -1,17 +1,17 @@
 #!/bin/bash
 
-if [ -z "(which zsh)" ]; then
-	yay -S zsh bat lsd
+if ! which zsh &> /dev/null; then
+    yay -S zsh bat lsd
 fi
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh/" ]; then
-		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 ln -snf $FILES_DIR/.zshrc $HOME/.zshrc
 ln -snf $FILES_DIR/.Xresources $HOME/.Xresources
 
-if [ -d "$HOME/.oh-my-zsh" ]; then
-	ln -snf $FILES_DIR/custom $HOME/.oh-my-zsh/custom
+if [ -d "$FILES_DIR/custom" ]; then
+    ln -snf $FILES_DIR/custom $HOME/.oh-my-zsh/custom
 fi
