@@ -4,15 +4,9 @@ BIN_DIR="$DOTFILES_DIR/bin"
 DISTROS="$BIN_DIR/distros"
 CONFIG_DIR="$DOTFILES_DIR/config"
 
-# DISTRO=$(lsb_release -si)
-#
-# if [ "$DISTRO" = "Arch" ]; then
-# 	$DISTROS/archlinux
-# fi
-
 sudo pacman -Syy
-
-if [ -z $(which yay) ]; then
+! which awesome &> /dev/null
+if ! which yay &> /dev/null; then
 	echo "Installing yay"
 	sudo pacman -S --noconfirm git
 	git clone https://aur.archlinux.org/yay.git /tmp/yay
