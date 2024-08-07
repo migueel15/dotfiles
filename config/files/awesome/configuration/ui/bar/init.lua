@@ -5,13 +5,12 @@ local Widgets = require("configuration.ui.bar.components")
 require("awful.autofocus")
 local gears = require("gears")
 
-
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- Create the wibox
-	s.mywibox = awful.wibar {
+	s.mywibox = awful.wibar({
 		position = "top",
-		screen   = s,
-		widget   = {
+		screen = s,
+		widget = {
 			layout = wibox.layout.stack,
 			{
 				layout = wibox.layout.align.horizontal,
@@ -21,7 +20,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					Widgets.cpu,
 					Widgets.ram,
 					Widgets.disk,
-					Widgets.spotify
+					Widgets.spotify,
 				},
 				nil,
 				{
@@ -38,8 +37,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				Widgets.date,
 				valign = "center",
 				halign = "center",
-				layout = wibox.container.place
-			}
-		}
-	}
+				layout = wibox.container.place,
+			},
+		},
+	})
 end)
