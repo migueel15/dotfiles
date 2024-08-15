@@ -36,7 +36,6 @@ alias cat='bat'
 #-- system --
 alias sdw='shutdown now'
 alias rb='reboot'
-alias paru='yay'
 
 #-- shortcuts --
 alias syd='~/Scripts/SyncDotfiles.sh'
@@ -86,7 +85,7 @@ man()
 
 # mappings
 bindkey -s '^o' 'fzfvim^M' # Control + o -> fzfvim
-bindkey -s '^F' "tmux-sessionizer\n"
+bindkey -s '^f' "tmux-sessionizer\n"
 
 # config
 HISTSIZE=1000
