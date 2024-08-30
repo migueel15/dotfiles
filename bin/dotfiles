@@ -4,21 +4,63 @@ BIN_DIR="$DOTFILES_DIR/bin"
 DISTROS="$BIN_DIR/distros"
 CONFIG_DIR="$DOTFILES_DIR/config"
 
-sudo pacman -Syy
-! which awesome &> /dev/null
-if ! which yay &> /dev/null; then
-	echo "Installing yay"
-	sudo pacman -S --noconfirm git
-	git clone https://aur.archlinux.org/yay.git /tmp/yay
-	cd /tmp/yay
-	makepkg -si
-else
-	echo "yay is already installed"
+clear
+
+# Sync pacman
+sudo pacman -Syy &> /dev/null
+
+# Install gum
+if ! which gum &> /dev/null; then
+	sudo pacman -S --noconfirm gum &> /dev/null
 fi
 
-for script in $CONFIG_DIR/modules/*; do
-	BASENAME=$(basename $script)
+# Welcome message
+gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "Hello, there! Welcome to my $(gum style --foreground 212 'dotfiles')."
+sleep 1
+
+# Install yay
+
+gum spin --spinner dot --title "Checking for $(gum style --foreground 212 'yay')" -- sleep 1
+if ! which yay &> /dev/null; then
+	gum spin --spinner dot --title "Installing $(gum style --foreground 212 'yay')" -- sudo pacman -S --noconfirm git && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si
+fi
+echo -e "$(gum style --foreground 212 'yay') is already installed."
+clear
+
+# Setup git
+SETGIT=$(gum choose "Yes" "No" --header "Do you want to setup git?")
+
+[[ "$SETGIT" == "Yes" ]] && bash $CONFIG_DIR/modules/git || echo "Skipping $(gum style --foreground 212 'git') setup"
+sleep 1 && clear
+
+# Setup modules
+
+REMOVED_MODULES=(git)
+ALL_MODULES=$(ls $CONFIG_DIR/modules)
+FILTERED_MODULES=()
+
+for module in $ALL_MODULES; do
+	if [[ ! " ${REMOVED_MODULES[@]} " =~ " ${module} " ]]; then
+		FILTERED_MODULES+=("$module")
+	fi
+done
+
+selected_modules(){
+	ruta=$1
+	archivos=""
+	for archivo in $(ls $1); do
+		archivos+="$archivo,"
+	done
+	echo $archivos
+}
+SELECTED_MODULES=$(selected_modules $CONFIG_DIR/modules)
+
+
+OPTIONS=$(gum choose ${FILTERED_MODULES[@]} --no-limit --header "Select the modules you want to install:" --selected "$SELECTED_MODULES")
+
+for module in $OPTIONS; do
+	BASENAME=$(basename $module)
 	export FILES_DIR=$CONFIG_DIR/files/$BASENAME
-	echo "Running $script"
-	bash $script
+	echo "Running $module"
+	bash $CONFIG_DIR/modules/$module
 done

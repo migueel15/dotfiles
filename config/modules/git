@@ -14,3 +14,5 @@ if [ ! -f ~/.git-credentials ]; then
 fi
 
 echo "https://$GITHUB_USER:$GITHUB_TOKEN@github.com" > ~/.git-credentials
+echo -e "Setup $(gum style --foreground 212 "Git") completed!"
+sleep 1 && clear

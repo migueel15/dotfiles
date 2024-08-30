@@ -1,5 +1,5 @@
 #!/bin/bash
 
-if ! which spotify-launcher &> /dev/null; then
-    yay -S spotify-launcher
+if ! which spotify &> /dev/null; then
+    yay -S spotify
 fi
