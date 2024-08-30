@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if ! which awesome &> /dev/null; then
-    echo "Installing AwesomeWM"
-    yay -S rofi wmctrl visual-studio-code-bin firefox solaar bluez bluez-utils blueberry networkmanager network-manager-applet picom autorandr playerctl pamixer brightnessctl ranger zathura tlp tlpui gpick pavucontrol pipewire-alsa pipewire-pulse pipewire-audio nodejs upower luarocks
-    sudo luarocks install lyaml
-    sudo luarocks install dkjson
+		gum spin --spinner dot --title "Checking for $(gum style --foreground 212 'yay')" -- 
+    yay -S rofi wmctrl visual-studio-code-bin firefox solaar bluez bluez-utils blueberry networkmanager network-manager-applet picom autorandr playerctl pamixer brightnessctl ranger zathura tlp tlpui gpick pavucontrol pipewire-alsa pipewire-pulse pipewire-audio nodejs upower luarocks &&
+    sudo luarocks install lyaml &&
+    sudo luarocks install dkjson &&
     yay -S awesome-git
 fi
 

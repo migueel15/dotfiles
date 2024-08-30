@@ -11,7 +11,7 @@ sudo pacman -Syy &> /dev/null
 
 # Install gum
 if ! which gum &> /dev/null; then
-	sudo pacman -S --noconfirm gum &> /dev/null
+sudo pacman -S --noconfirm gum &> /dev/null
 fi
 
 # Welcome message
@@ -54,7 +54,6 @@ selected_modules(){
 	echo $archivos
 }
 SELECTED_MODULES=$(selected_modules $CONFIG_DIR/modules)
-
 
 OPTIONS=$(gum choose ${FILTERED_MODULES[@]} --no-limit --header "Select the modules you want to install:" --selected "$SELECTED_MODULES")
 
