@@ -35,7 +35,6 @@ if not gears.filesystem.file_readable(pathFile) then
 	awful.spawn.with_shell("xset -dpms")
 end
 
-awful.spawn.with_shell("~/.scripts/pull-repos")
 awful.spawn(app.networkManager)
 
 local idxMainScreenTag, idxSecondScreenTag = read_from_file("/tmp/screenTags.txt")
