@@ -1,0 +1,14 @@
+[Unit]
+Description=Push repos to github on shutdown
+After=network.target
+Before=shutdown.target reboot.target halt.target
+Conflicts=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/miguel/.scripts/push-repos
+RemainAfterExit=true
+
+[Install]
+WantedBy=halt.target reboot.target shutdown.target
+
