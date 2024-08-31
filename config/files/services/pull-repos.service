@@ -1,5 +1,6 @@
 [Unit]
 Description=Pull repos from github at startup
+After=network-online.target
 
 [Service]
 Type=oneshot
