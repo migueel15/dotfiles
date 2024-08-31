@@ -1,13 +1,9 @@
 [Unit]
 Description=Pull repos from github at startup
-Wants=network.target network-online.target
-After=network.target network-online.target
 
 [Service]
 Type=oneshot
 ExecStart=/home/miguel/.scripts/pull-repos
-Restart=on-failure
-RestartSec=5s
 
 [Install]
 WantedBy=default.target
