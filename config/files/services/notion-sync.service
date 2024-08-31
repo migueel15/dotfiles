@@ -1,0 +1,13 @@
+[Unit]
+Description=Sync notion and cv calendar
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/miguel/repos/Notion-Sync-CampusVirtual
+ExecStart=/usr/bin/npm run start
+
+Restart=allways
+
+[Install]
+WantedBy=default.target
