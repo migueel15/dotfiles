@@ -5,8 +5,9 @@ After=network.target network-online.target
 
 [Service]
 Type=oneshot
-RemainAfterExit=true
 ExecStart=/home/miguel/.scripts/pull-repos
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=default.target
