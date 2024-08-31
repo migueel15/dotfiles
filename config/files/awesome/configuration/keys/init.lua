@@ -158,13 +158,7 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "select previous", group = "layout" }),
 
 	awful.key({ modkey, "Control" }, "k", function()
-		if naughty.is_suspended() then
-			awful.spawn.with_shell("polybar-msg action disturb hook 0")
-		end
-		if not naughty.is_suspended() then
-			awful.spawn.with_shell("polybar-msg action disturb hook 1")
-		end
-		naughty.toggle()
+		awesome.emit_signal("notification_toggle")
 	end, { description = "toggle notifications", group = "awesome" }),
 
 	awful.key({
