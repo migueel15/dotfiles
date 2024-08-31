@@ -8,3 +8,4 @@ ExecStart=/home/miguel/.scripts/pull-repos
 
 [Install]
 WantedBy=default.target
+
