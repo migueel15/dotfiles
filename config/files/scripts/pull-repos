@@ -2,6 +2,8 @@
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
+until ping -c1 google.com; do sleep 5; done
+
 echo -e "${YELLOW}Pulling dotfiles${NC}"
 cd $HOME/.config/dotfiles/
 git pull
