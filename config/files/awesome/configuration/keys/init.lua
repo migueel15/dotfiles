@@ -158,7 +158,7 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "select previous", group = "layout" }),
 
 	awful.key({ modkey, "Control" }, "k", function()
-		awesome.emit_signal("notification_toggle")
+		awesome.emit_signal("donot_disturb_toggle")
 	end, { description = "toggle notifications", group = "awesome" }),
 
 	awful.key({

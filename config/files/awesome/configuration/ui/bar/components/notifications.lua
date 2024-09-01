@@ -21,13 +21,40 @@ local notification = wibox.widget({
 	},
 })
 
+local notification_center = awful.popup({
+	widget = {
+		{
+			{
+
+				widget = wibox.widget.textbox,
+				text = "Notifications",
+			},
+
+			layout = wibox.layout.fixed.vertical,
+		},
+		margins = 10,
+		widget = wibox.container.margin,
+	},
+	placement = {},
+	ontop = true,
+	visible = false,
+	parent = notification,
+})
+
 notification:connect_signal("button::press", function(_, _, _, button)
+	if button == 1 then
+		awful.placement.next_to(notification_center, {
+			preferred_positions = { "bottom" },
+		})
+		notification_center.visible = not notification_center.visible
+	end
+
 	if button == 3 then
-		awesome.emit_signal("notification_toggle")
+		awesome.emit_signal("donot_disturb_toggle")
 	end
 end)
 
-awesome.connect_signal("notification_toggle", function()
+awesome.connect_signal("donot_disturb_toggle", function()
 	naughty.toggle()
 	if naughty.is_suspended() then
 		currentIcon = beautiful.notification_disable.icon
