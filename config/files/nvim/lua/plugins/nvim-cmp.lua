@@ -8,6 +8,7 @@ return {
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
+		"SergioRibera/cmp-dotenv",
 
 		"rafamadriz/friendly-snippets",
 	},
@@ -58,6 +59,13 @@ return {
 				}),
 			}),
 			sources = {
+				{
+					name = "dotenv",
+					option = {
+						show_content_on_docs = false,
+						item_kind = cmp.lsp.CompletionItemKind.Constant,
+					},
+				},
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
