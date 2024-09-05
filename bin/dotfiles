@@ -68,8 +68,8 @@ fi
 # Setup modules
 
 REMOVED_MODULES=(git, bitwarden)
-# ALL_MODULES=$(ls $CONFIG_DIR/modules)
-ALL_MODULES=($(find $CONFIG_DIR/modules -maxdepth 1 -type f -exec basename {} \;))
+ALL_MODULES=$(ls $CONFIG_DIR/modules)
+# ALL_MODULES=($(find $CONFIG_DIR/modules -maxdepth 1 -type f -exec basename {} \;))
 FILTERED_MODULES=()
 
 for module in $ALL_MODULES; do
