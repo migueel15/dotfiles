@@ -53,7 +53,7 @@ if [[ -f $HOME/.bw_session ]]; then
 fi
 
 alias bwl="bw lock && unset BW_SESSION"
-alias bwu="bw unlock --raw > ~/.config/dotfiles/.bw_session && export BW_SESSION=\$(cat ~/.config/dotfiles/.bw_session)"
+alias bwu="bw unlock --raw > ~/.bw_session && export BW_SESSION=\$(cat ~.bw_session)"
 
 
 # functions
