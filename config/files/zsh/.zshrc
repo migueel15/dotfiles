@@ -44,6 +44,18 @@ alias awm="$HOME/Scripts/runAwesomewmScript.sh"
 alias segundo="cd $HOME/Universidad/segundo/"
 alias ij="intellij-idea-ultimate-edition"
 
+#-- dotfiles --
+alias dotfiles="source $HOME/.config/dotfiles/bin/dotfiles"
+
+# BITWARDEN
+if [[ -f $HOME/.bw_session ]]; then
+	export BW_SESSION=$(cat $HOME/.bw_session )
+fi
+
+alias bwl="bw lock && unset BW_SESSION"
+alias bwu="bw unlock --raw > ~/.config/dotfiles/.bw_session && export BW_SESSION=\$(cat ~/.config/dotfiles/.bw_session)"
+
+
 # functions
 windows(){
   sudo grub-reboot 1
@@ -112,7 +124,6 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.scripts
-export PATH=$PATH:$HOME/.config/dotfiles/bin
 export PATH=$PATH:$HOME/.console-ninja/.bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin

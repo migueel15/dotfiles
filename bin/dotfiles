@@ -4,6 +4,15 @@ BIN_DIR="$DOTFILES_DIR/bin"
 DISTROS="$BIN_DIR/distros"
 CONFIG_DIR="$DOTFILES_DIR/config"
 
+runModule ()
+{
+	local module=$1
+	local BASENAME=$(basename $module)
+	export FILES_DIR=$CONFIG_DIR/files/$BASENAME
+	echo "Running $module"
+	bash $CONFIG_DIR/modules/$module
+}
+
 clear
 
 # Sync pacman
@@ -27,16 +36,40 @@ fi
 echo -e "$(gum style --foreground 212 'yay') is already installed."
 clear
 
-# Setup git
-SETGIT=$(gum choose "Yes" "No" --header "Do you want to setup git?")
+# Setup bitwarden
+if ! which bw &> /dev/null; then
+	gum spin --spinner dot --title "Checking for $(gum style --foreground 212 'bitwarden-cli')" -- sleep 1
+	yay -S --noconfirm bitwarden-cli
+fi
 
-[[ "$SETGIT" == "Yes" ]] && bash $CONFIG_DIR/modules/git || echo "Skipping $(gum style --foreground 212 'git') setup"
-sleep 1 && clear
+local BW_PATH=$HOME/.bw_session
+if [[ ! -f $BW_PATH ]]; then
+	echo "Login to $(gum style --foreground 212 'bitwarden')"
+	while true; do
+		BW_SESSION=$(bw login --raw)
+		if [[ $? -eq 0 ]]; then
+			echo "$BW_SESSION" > $BW_PATH
+			export BW_SESSION
+			break
+		else
+			echo "$(gum style --foreground 196 'Error: ') $(gum style --foreground 196 'Invalid credentials'))"
+		fi
+	done
+fi
+
+# Setup git
+
+# if [ ! -f $DOTFILES_DIR/.git_configured ]; then
+# 	SETGIT=$(gum choose "Yes" "No" --header "Do you want to setup git?")
+# 	[[ "$SETGIT" == "Yes" ]] && $(touch $DOTFILES_DIR/.git_configured) && runModule git || echo "Skipping $(gum style --foreground 212 'git') setup"
+# sleep 1 && clear
+# fi
 
 # Setup modules
 
-REMOVED_MODULES=(git)
-ALL_MODULES=$(ls $CONFIG_DIR/modules)
+REMOVED_MODULES=(git, bitwarden)
+# ALL_MODULES=$(ls $CONFIG_DIR/modules)
+ALL_MODULES=($(find $CONFIG_DIR/modules -maxdepth 1 -type f -exec basename {} \;))
 FILTERED_MODULES=()
 
 for module in $ALL_MODULES; do
@@ -58,8 +91,5 @@ SELECTED_MODULES=$(selected_modules $CONFIG_DIR/modules)
 OPTIONS=$(gum choose ${FILTERED_MODULES[@]} --no-limit --header "Select the modules you want to install:" --selected "$SELECTED_MODULES")
 
 for module in $OPTIONS; do
-	BASENAME=$(basename $module)
-	export FILES_DIR=$CONFIG_DIR/files/$BASENAME
-	echo "Running $module"
-	bash $CONFIG_DIR/modules/$module
+	runModule $module
 done
