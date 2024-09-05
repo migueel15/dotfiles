@@ -42,7 +42,7 @@ if ! which bw &> /dev/null; then
 	yay -S --noconfirm bitwarden-cli
 fi
 
-local BW_PATH=$HOME/.bw_session
+BW_PATH=$HOME/.bw_session
 if [[ ! -f $BW_PATH ]]; then
 	echo "Login to $(gum style --foreground 212 'bitwarden')"
 	while true; do
