@@ -1,0 +1,9 @@
+#!/bin/bash
+# Verificar si la ruta de destino existe y crearla si no existe
+if [ ! -d "$HOME/.local/share/fonts/" ]; then
+    echo "La ruta $HOME/.local/share/fonts/ no existe. Creándola..."
+    mkdir -p "$HOME/.local/share/fonts/"
+fi
+
+# Copiar los archivos
+sudo cp -r $FILES_DIR/* $HOME/.local/share/fonts/

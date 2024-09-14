@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+sleep 1
+while ps -ef | grep "electron" | grep "obsidian" ; do
+  sleep 1
+done
+~/.scripts/sync-obsidian

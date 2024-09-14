@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+until ping -c1 google.com; do sleep 5; done
+
+echo -e "${YELLOW}Pulling dotfiles${NC}"
+cd $HOME/.config/dotfiles/
+git pull
+
+echo -e "${YELLOW}Pulling SecondBrain${NC}"
+cd $HOME/SecondBrain/
+git fetch origin
+git reset --hard origin/main
+
+echo -e "${YELLOW}Pulling Universidad${NC}"
+cd $HOME/Universidad/
+git pull
+git submodule foreach "git checkout main; git pull"
+
+echo -e "${YELLOW}Pulling CVNotion${NC}"
+cd $HOME/repos/Notion-Sync-CampusVirtual/
+git pull

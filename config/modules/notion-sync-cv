@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if ! which npm &> /dev/null; then
+	sudo pacman -S --noconfirm npm &> /dev/null
+fi
+
+REPOS_PATH=$HOME/repos
+if [ ! -d "$REPOS_PATH" ]; then
+		mkdir -p $REPOS_PATH
+fi
+
+if [ ! -d "$REPOS_PATH/Notion-Sync-CampusVirtual" ]; then
+	git clone https://github.com/migueel15/Notion-Sync-CampusVirtual.git $REPOS_PATH/Notion-Sync-CampusVirtual
+	cd $REPOS_PATH/Notion-Sync-CampusVirtual
+	npm install
+fi
+
+container_status=$(docker inspect notion-sync-cv  2> /dev/null | jq -r ".[0].State.Status")
+
+if [ "$container_status" == "null" ]; then
+	gum spin --spinner dot --title "Creating notion-sync-cv container..." -- $FILES_DIR/create-container
+fi

@@ -1,0 +1,6 @@
+require("core.mappings")
+require("core.lazy")
+require("core.autocmds")
+require("core.globals")
+require("core.custom")
+require("core.options")

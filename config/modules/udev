@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo ln -sfn $FILES_DIR/battery-control.rules /etc/udev/rules.d/battery-control.rules
+

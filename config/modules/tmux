@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! which tmux &> /dev/null; then
+    yay -S tmux
+fi
+
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+    git clone "https://github.com/tmux-plugins/tpm" ~/.tmux/plugins/tpm
+fi
+
+ln -snf $FILES_DIR $HOME/.config/tmux

@@ -1,0 +1,9 @@
+[Unit]
+Description=Pull repos from github at startup
+
+[Service]
+Type=oneshot
+ExecStart=/home/miguel/.scripts/pull-repos
+
+[Install]
+WantedBy=default.target
