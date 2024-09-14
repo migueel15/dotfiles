@@ -36,7 +36,7 @@ return {
 			},
 			color_overrides = {},
 			custom_highlights = function()
-				return { LineNr = { fg = '#7E94AB' } }
+				return { LineNr = { fg = "#7E94AB" } }
 				--return { LineNr = { fg = colors.blue } }
 			end,
 			integrations = {
@@ -45,6 +45,7 @@ return {
 				nvimtree = true,
 				treesitter = true,
 				notify = false,
+				harpoon = true,
 				mini = {
 					enabled = true,
 					indentscope_color = "",
@@ -54,6 +55,6 @@ return {
 		})
 
 		-- setup must be called before loading
-		vim.cmd.colorscheme "catppuccin"
-	end
+		vim.cmd.colorscheme("catppuccin")
+	end,
 }
