@@ -1,25 +1,22 @@
 <div align="center">
 
-# FireVim
+# NeoVim
 ##### My custom configuration for Nvim
 
 [![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
 [![Neovim](https://img.shields.io/badge/Neovim%200.8+-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
-  <div>
-    <img alt="Nvim dashboard"  src="https://github.com/migueel15/FireVim/assets/57865265/6067f1fe-cb60-4d0c-b476-7b0882517f8d" />
-    <img alt="Nvim example"  src="https://github.com/migueel15/FireVim/assets/57865265/8c8dccef-4638-492d-beee-a2eb04a5bfe0" />
-  </div>
-</div>
+
+![captura_20240914-203950](https://github.com/user-attachments/assets/d0a051ef-2d2e-40d2-a9ca-9bafb277cd05)
+![captura_20240914-204028](https://github.com/user-attachments/assets/e71a928f-b946-41e3-97e8-0104605dd0b5)
+![captura_20240914-204058](https://github.com/user-attachments/assets/77066216-f6fb-408e-8909-ab3b7eff413f)
+
+
 
 ### Installation
 ```sh 
 # Remove current nvim config
 rm -rf $XDG_CONFIG_HOME/nvim
 rm -rf $HOME/.local/share/nvim/
-
-# Install firevim config
-git clone https://github.com/migueel15/FireVim.git $XDG_CONFIG_HOME/nvim
-nvim
 ```
 >Next time you open nvim it will install all the necesary plugins
 
