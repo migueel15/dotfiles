@@ -6,6 +6,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 
 local enabled = true
+local lastConnected = false
 local connected = false
 local Icon = ""
 local Color = ""
@@ -24,15 +25,26 @@ function CheckEnable()
 end
 
 function CheckConnectedDevice()
-	awful.spawn.easy_async_with_shell("bluetoothctl info | grep 'Connected: yes'", function(command)
+	awful.spawn.easy_async_with_shell("bluetoothctl devices Connected", function(command)
 		if command == nil then
 			return
 		end
 		if command == "" then
 			connected = false
+			if lastConnected ~= connected then
+				gears.timer.start_new(2, function()
+					awesome.emit_signal("volume:update_sink_list")
+				end)
+			end
 		else
 			connected = true
+			if lastConnected ~= connected then
+				gears.timer.start_new(5, function()
+					awesome.emit_signal("volume:update_sink_list")
+				end)
+			end
 		end
+		lastConnected = connected
 	end)
 end
 
@@ -42,11 +54,12 @@ function SetValues(widget)
 
 	if enabled then
 		if connected then
+			Icon = beautiful.bluetooth_connected.icon
 			Color = beautiful.bluetooth_connected.color
 		else
+			Icon = beautiful.bluetooth_enable.icon
 			Color = beautiful.bluetooth_enable.color
 		end
-		Icon = beautiful.bluetooth_enable.icon
 	else
 		Icon = beautiful.bluetooth_disable.icon
 		Color = beautiful.bluetooth_disable.color
