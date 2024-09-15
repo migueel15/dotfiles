@@ -48,87 +48,11 @@ local volume = wibox.widget({
 })
 
 local checkWidgets = {}
-local popup = {}
-local popup_content = wibox.layout.fixed.vertical()
+local popup_content = wibox.widget({
+	layout = wibox.layout.fixed.vertical,
+})
 
-awful.spawn.easy_async_with_shell("pactl list sinks | grep 'Name: ' | awk -F'Name: ' '{print $2}'", function(stdout)
-	awful.spawn.easy_async_with_shell(
-		"pactl info | grep 'Default Sink:' | awk -F 'Default Sink: ' '{print$2}'",
-		function(default_sink)
-			for sinkName in string.gmatch(stdout, "([^\n]+)\n") do
-				awful.spawn.easy_async_with_shell("pw-cli info " .. sinkName, function(out)
-					local id = out:match("id:%s*(%d+)")
-					local name = out:match('node.description%s*=%s*"(.-)"')
-
-					function trim(s)
-						return s:match("^%s*(.-)%s*$")
-					end
-
-					local state = trim(sinkName) == trim(default_sink)
-
-					local sinkObject = { id = id, name = name, state = state }
-
-					local checkWidget = wibox.widget({
-						checked = state,
-						shape = gears.shape.circle,
-						forced_width = 15,
-						forced_height = 15,
-						widget = wibox.widget.checkbox,
-					})
-
-					table.insert(checkWidgets, checkWidget)
-
-					local row = wibox.widget({
-						{
-							{
-								{
-									checkWidget,
-									valign = "center",
-									widget = wibox.container.place,
-								},
-								{
-									text = sinkObject.name,
-									widget = wibox.widget.textbox,
-								},
-								spacing = 10,
-								widget = wibox.layout.fixed.horizontal,
-							},
-							margins = 5,
-							widget = wibox.container.margin,
-						},
-						widget = wibox.container.background,
-						bg = config.popup_bg,
-					})
-
-					row:connect_signal("mouse::enter", function()
-						row.bg = config.popup_row_hover
-						row.fg = config.popup_bg
-					end)
-
-					row:connect_signal("mouse::leave", function()
-						row.bg = config.popup_bg
-						row.fg = config.popup_fg
-					end)
-
-					row:connect_signal("button::press", function()
-						awful.spawn.easy_async("wpctl set-default " .. sinkObject.id, function()
-							for _, cw in ipairs(checkWidgets) do
-								cw.checked = false
-							end
-							checkWidget.checked = true
-							popup.visible = false
-							awesome.emit_signal("volume:update_status")
-						end)
-					end)
-
-					popup_content:add(row)
-				end)
-			end
-		end
-	)
-end)
-
-popup = awful.popup({
+local popup = awful.popup({
 	ontop = true,
 	visible = false,
 	bg = config.popup_bg,
@@ -141,6 +65,93 @@ popup = awful.popup({
 		widget = wibox.container.margin,
 	},
 })
+
+function updateSinkList(widget)
+	awful.spawn.easy_async_with_shell("pactl list sinks | grep 'Name: ' | awk -F'Name: ' '{print $2}'", function(stdout)
+		awful.spawn.easy_async_with_shell(
+			"pactl info | grep 'Default Sink:' | awk -F 'Default Sink: ' '{print$2}'",
+			function(default_sink)
+				for sinkName in string.gmatch(stdout, "([^\n]+)\n") do
+					awful.spawn.easy_async_with_shell("pw-cli info " .. sinkName, function(out)
+						local id = out:match("id:%s*(%d+)")
+						local name = out:match('node.description%s*=%s*"(.-)"')
+
+						function trim(s)
+							return s:match("^%s*(.-)%s*$")
+						end
+
+						local state = trim(sinkName) == trim(default_sink)
+
+						local sinkObject = { id = id, name = name, state = state }
+
+						local checkWidget = wibox.widget({
+							checked = state,
+							shape = gears.shape.circle,
+							forced_width = 15,
+							forced_height = 15,
+							widget = wibox.widget.checkbox,
+						})
+
+						table.insert(checkWidgets, checkWidget)
+
+						local row = wibox.widget({
+							{
+								{
+									{
+										checkWidget,
+										valign = "center",
+										widget = wibox.container.place,
+									},
+									{
+										text = sinkObject.name,
+										widget = wibox.widget.textbox,
+									},
+									spacing = 10,
+									widget = wibox.layout.fixed.horizontal,
+								},
+								margins = 5,
+								widget = wibox.container.margin,
+							},
+							widget = wibox.container.background,
+							bg = config.popup_bg,
+						})
+
+						row:connect_signal("mouse::enter", function()
+							row.bg = config.popup_row_hover
+							row.fg = config.popup_bg
+						end)
+
+						row:connect_signal("mouse::leave", function()
+							row.bg = config.popup_bg
+							row.fg = config.popup_fg
+						end)
+
+						row:connect_signal("button::press", function()
+							awful.spawn.easy_async("wpctl set-default " .. sinkObject.id, function()
+								for _, cw in ipairs(checkWidgets) do
+									cw.checked = false
+								end
+								checkWidget.checked = true
+								popup.visible = false
+								awesome.emit_signal("volume:update_status")
+							end)
+						end)
+
+						popup_content:add(row)
+					end)
+				end
+			end
+		)
+	end)
+end
+
+updateSinkList(popup)
+
+awesome.connect_signal("volume:update_sink_list", function()
+	popup_content:reset()
+	checkWidgets = {}
+	updateSinkList(popup)
+end)
 
 popup:connect_signal("mouse::leave", function()
 	popup.visible = false
