@@ -43,8 +43,7 @@ theme.date = { icon = "", color = theme.icon_enable_color }
 ------ bluetooth widget ------
 theme.bluetooth_enable = { icon = "󰂯", color = theme.icon_enable_color }
 theme.bluetooth_disable = { icon = "󰂲", color = theme.icon_disable_color }
-theme.bluetooth_connected = { icon = "󰂯", color = theme.colors.white }
-theme.bluetooth_disconnected = { icon = "󰂲", color = theme.icon_disable_color }
+theme.bluetooth_connected = { icon = "󰂱", color = theme.icon_enable_color }
 ------------------------------
 
 ------- Battery widget -------
