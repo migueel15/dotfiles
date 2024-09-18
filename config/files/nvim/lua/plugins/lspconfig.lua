@@ -117,6 +117,7 @@ return {
 			yamlls = {},
 			eslint = {},
 			marksman = {},
+			angularls = {},
 			jsonls = {},
 			lua_ls = {
 				Lua = {
