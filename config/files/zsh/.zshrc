@@ -126,6 +126,7 @@ export PATH=$PATH:$HOME/.config/dotfiles/bin
 export PATH=$PATH:$HOME/.console-ninja/.bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin
+export PATH=$PATH:$HOME/Aplicaciones/USE/bin
 
 
 PATH=~/.console-ninja/.bin:$PATH
