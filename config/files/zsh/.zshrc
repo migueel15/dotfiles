@@ -42,6 +42,7 @@ alias syd='~/Scripts/SyncDotfiles.sh'
 alias img='kitty +kitten icat'
 alias awm="$HOME/Scripts/runAwesomewmScript.sh"
 alias segundo="cd $HOME/Universidad/segundo/"
+alias tercero="cd $HOME/Universidad/tercero/"
 alias ij="intellij-idea-ultimate-edition"
 
 # BITWARDEN
@@ -62,8 +63,8 @@ windows(){
 
 fzfvim() 
 {
-    local fname
-    local current_dir=$PWD
+	local fname
+	local current_dir=$PWD
   fname=$(fzf) || return
   nvim "$fname"
   cd $current_dir
@@ -71,8 +72,10 @@ fzfvim()
 
 nvimconf ()
 {
+	local current_dir=$PWD
   cd $XDG_CONFIG_HOME/nvim/
   nvim
+	cd $current_dir
 }
 
 pdf ()
@@ -123,13 +126,12 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.scripts
 export PATH=$PATH:$HOME/.config/dotfiles/bin
-export PATH=$PATH:$HOME/.console-ninja/.bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin
 export PATH=$PATH:$HOME/Aplicaciones/USE/bin
 
-
-PATH=~/.console-ninja/.bin:$PATH
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
