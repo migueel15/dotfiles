@@ -97,7 +97,7 @@ theme.notion_status_color = {
 	active = theme.colors.secondary,
 	inactive = theme.colors.red,
 }
-theme.notion_icon = os.getenv("HOME") .. "/.config/awesome/configuration/theme/icons/notion-logo.svg"
+theme.notion_icon = os.getenv("HOME") .. "/.config/awesome/configuration/theme/icons/notion-cv-logo.svg"
 
 ------------------------------
 
