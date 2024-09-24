@@ -8,4 +8,11 @@ if ! which awesome &> /dev/null; then
     yay -S awesome-git
 fi
 
+if ! which sp -v &> /dev/null; then
+		git clone https://gist.github.com/fa6258f3ff7b17747ee3.git /tmp/fa6258f3ff7b17747ee3
+		cd /tmp/fa6258f3ff7b17747ee3
+		chmod +x sp
+		sudo cp ./sp /usr/local/bin/
+fi
+
 ln -sfn $FILES_DIR $HOME/.config/awesome
