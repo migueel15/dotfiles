@@ -103,11 +103,9 @@ return {
 
 		local servers = {
 			clangd = {},
-			csharp_ls = {},
 			cmake = {},
 			gopls = {},
 			pyright = {},
-			rust_analyzer = {},
 			ts_ls = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {},
@@ -133,8 +131,6 @@ return {
 						enable = true,
 					},
 					telemetry = { enable = false },
-					-- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-					-- diagnostics = { disable = { 'missing-fields' } },
 				},
 			},
 		}
