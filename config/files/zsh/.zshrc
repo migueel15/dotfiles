@@ -36,6 +36,7 @@ alias cat='bat'
 #-- system --
 alias sdw='shutdown now'
 alias rb='reboot'
+alias explorer='nautilus . & disown'
 
 #-- shortcuts --
 alias syd='~/Scripts/SyncDotfiles.sh'
