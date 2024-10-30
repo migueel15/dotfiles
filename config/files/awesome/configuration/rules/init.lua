@@ -265,6 +265,26 @@ naughty.connect_signal("request::display_error", function(message, startup)
 	})
 end)
 
+naughty.connect_signal("destroyed", function(n, reason)
+	if not n.clients then
+		return
+	end
+	if reason == require("naughty.constants").notification_closed_reason.dismissed_by_user then
+		local jumped = false
+		for _, c in ipairs(n.clients) do
+			c.urgent = true
+			if jumped then
+				c:activate({
+					context = "client.jumpto",
+				})
+			else
+				c:jump_to()
+				jumped = true
+			end
+		end
+	end
+end)
+
 -----------------------
 -------- MOUSE --------
 -----------------------
