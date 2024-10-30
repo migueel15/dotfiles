@@ -46,6 +46,7 @@ alias awm="$HOME/Scripts/runAwesomewmScript.sh"
 alias segundo="cd $HOME/Universidad/segundo/"
 alias tercero="cd $HOME/Universidad/tercero/"
 alias ij="intellij-idea-ultimate-edition"
+alias ranger="yazi"
 
 # BITWARDEN
 if [[ -f $HOME/.bw_session ]]; then
