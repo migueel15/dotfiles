@@ -102,6 +102,7 @@ return {
 		})
 
 		local servers = {
+			texlab = {},
 			clangd = {},
 			cmake = {},
 			gopls = {},
