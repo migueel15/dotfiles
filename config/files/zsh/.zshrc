@@ -24,6 +24,9 @@ alias gs='git status'
 alias gd='git diff'
 alias gb='git branch'
 alias gsw='git switch'
+alias glog='git log --graph --oneline --decorate --color \
+--pretty=format:"%C(yellow)%h%C(reset) %C(red)%d%C(reset) (%C(blue)%an%C(reset), %C(green)%ar%C(reset)) %s"
+'
 alias lg='lazygit'
 
 #-- lsd --
