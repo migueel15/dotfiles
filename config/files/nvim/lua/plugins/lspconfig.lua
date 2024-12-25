@@ -12,12 +12,6 @@ return {
 	},
 	config = function()
 		local on_attach = function(_, bufnr)
-			-- NOTE: Remember that lua is a real programming language, and as such it is possible
-			-- to define small helper and utility functions so you don't have to repeat yourself
-			-- many times.
-			--
-			-- In this case, we create a function that lets us more easily define mappings specific
-			-- for LSP related items. It sets the mode, buffer and description for us each time.
 			local nmap = function(keys, func, desc)
 				if desc then
 					desc = "LSP: " .. desc
@@ -68,7 +62,7 @@ return {
 				"csharpier",
 				"stylua",
 				"isort",
-				"prettier",
+				-- "prettierd",
 			},
 		})
 
@@ -77,24 +71,7 @@ return {
 			sources = {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.csharpier,
-				null_ls.builtins.formatting.prettier.with({
-					filetypes = {
-						"html",
-						"css",
-						"scss",
-						"json",
-						"yaml",
-						"markdown",
-						"javascript",
-						"typescript",
-					},
-					extra_args = {
-						"--no-semi",
-						"--arrow-parens always",
-						"--quote-props consistent",
-					},
-				}),
-				-- null_ls.builtins.formatting.goimports_reviser,
+				-- null_ls.builtins.formatting.prettierd,
 				null_ls.builtins.formatting.goimports,
 				null_ls.builtins.code_actions.gomodifytags,
 				null_ls.builtins.formatting.isort,
@@ -103,6 +80,7 @@ return {
 
 		local servers = {
 			texlab = {},
+			biome = {},
 			clangd = {},
 			cmake = {},
 			gopls = {},
@@ -114,7 +92,7 @@ return {
 			sqlls = {},
 			tailwindcss = {},
 			yamlls = {},
-			eslint = {},
+			-- eslint = {},
 			marksman = {},
 			angularls = {},
 			jsonls = {},
