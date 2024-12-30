@@ -1,10 +1,10 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.8.6",
+			"BDFDB": "3.8.7",
 			"BetterFriendList": "1.5.5",
 			"GameActivityToggle": "1.2.8",
-			"ImageUtilities": "5.5.0",
+			"ImageUtilities": "5.5.1",
 			"PluginRepo": "2.5.9",
 			"QuickMention": "1.0.5",
 			"ReadAllNotificationsButton": "1.7.8",
@@ -16,12 +16,13 @@
 		},
 		"general": {
 			"shareData": true,
-			"showSupportBadges": false,
 			"showToasts": false,
+			"checkForUpdates": false,
+			"showSupportBadges": false,
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "5c8a7f3a090786109c0efc7fd556f1e592f269e1",
+			"0BDFDB.data.json": "c6b6a9f869b0c35638e63670b80b651378f1925b",
 			"0BDFDB.raw.css": "73a3192c633a7900fd5b0a7536eaeef6769d4b62"
 		}
 	}
