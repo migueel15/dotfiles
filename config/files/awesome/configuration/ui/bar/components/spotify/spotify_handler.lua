@@ -140,7 +140,7 @@ local function worker(user_args)
 		elseif button == 3 then
 			for _, c in ipairs(client.get()) do
 				if c.class == "Spotify" then
-					c:jump_to()
+					c:activate({ switch_to_tag = true, raise = true })
 				end
 			end
 		elseif button == 4 then
