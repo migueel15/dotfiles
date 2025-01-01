@@ -11,6 +11,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local watch = require("awful.widget.watch")
+local naughty = require("naughty")
 
 local function ellipsize(text, length)
 	-- utf8 only available in Lua 5.3+
@@ -136,6 +137,12 @@ local function worker(user_args)
 	spotify_widget:connect_signal("button::press", function(_, _, _, button)
 		if button == 1 then
 			awful.spawn(PLAY_PAUSE_CMD, false) -- left click
+		elseif button == 3 then
+			for _, c in ipairs(client.get()) do
+				if c.class == "Spotify" then
+					c:jump_to()
+				end
+			end
 		elseif button == 4 then
 			awful.spawn(NEXT_SONG_CMD, false)  -- scroll up
 		elseif button == 5 then
