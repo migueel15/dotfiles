@@ -3,11 +3,17 @@
         "voiceDisconnect": true,
         "showToasts": false,
         "mediaKeys": false,
-        "bdContextMenu": true
+        "bdContextMenu": true,
+        "themeAttributes": true
     },
     "addons": {
         "addonErrors": true,
         "editAction": "detached"
+    },
+    "store": {
+        "bdAddonStore": true,
+        "alwaysEnable": false,
+        "addonEmbeds": true
     },
     "customcss": {
         "customcss": true,
