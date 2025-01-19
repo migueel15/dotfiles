@@ -114,6 +114,9 @@ return {
 			},
 		}
 
+		-- setup java
+		require("java").setup()
+
 		require("neodev").setup()
 
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
