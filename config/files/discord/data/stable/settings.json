@@ -39,6 +39,7 @@
         "debuggerHotkey": false,
         "reactDevTools": false,
         "inspectElement": false,
-        "devToolsWarning": false
+        "devToolsWarning": false,
+        "recovery": true
     }
 }
