@@ -30,7 +30,7 @@
     },
     "window": {
         "transparency": false,
-        "removeMinimumSize": false,
+        "removeMinimumSize": true,
         "frame": false
     },
     "developer": {

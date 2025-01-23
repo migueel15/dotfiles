@@ -6,7 +6,8 @@
             "customcss": false,
             "window": true,
             "developer": true,
-            "editor": true
+            "editor": true,
+            "store": false
         }
     },
     "addonlistControls": {
