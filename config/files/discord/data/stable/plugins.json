@@ -11,6 +11,6 @@
     "QuickMention": true,
     "ReadAllNotificationsButton": true,
     "SpotifyControls": true,
-    "ThemeRepo": true,
+    "ThemeRepo": false,
     "APlatformIndicators": false
 }
