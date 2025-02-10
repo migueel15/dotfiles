@@ -1,14 +1,14 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.9.2",
+			"BDFDB": "3.9.3",
 			"BetterFriendList": "1.5.5",
 			"GameActivityToggle": "1.2.9",
-			"ImageUtilities": "5.5.2",
+			"ImageUtilities": "5.5.3",
 			"PluginRepo": "2.6.0",
 			"QuickMention": "1.0.7",
 			"ReadAllNotificationsButton": "1.7.8",
-			"SpotifyControls": "1.4.1",
+			"SpotifyControls": "1.4.2",
 			"ThemeRepo": "2.6.0"
 		},
 		"choices": {
