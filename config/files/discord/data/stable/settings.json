@@ -7,7 +7,7 @@
         "themeAttributes": true
     },
     "addons": {
-        "addonErrors": true,
+        "addonErrors": false,
         "editAction": "detached"
     },
     "store": {
