@@ -27,7 +27,6 @@ if not gears.filesystem.file_readable(pathFile) then
 	awful.spawn(app.openrgb)
 	awful.spawn(app.solaar)
 	awful.spawn(app.mpris)
-	awful.spawn(app.picom)
 	awful.spawn(app.discord)
 
 	-- Set screen to never sleep
