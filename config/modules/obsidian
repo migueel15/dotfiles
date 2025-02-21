@@ -4,7 +4,7 @@ SECOND_BRAIN_DIR=$HOME/SecondBrain
 GIT_REPO="https://github.com/migueel15/SecondBrain.git"
 
 if ! which obsidian &> /dev/null; then
-    yay -S obsidian
+    yay -S obsidian glow
 fi
 
 if [ ! -d "$SECOND_BRAIN_DIR" ]; then
