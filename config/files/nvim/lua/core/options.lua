@@ -29,6 +29,7 @@ opt.swapfile = false      -- Disable swapfiles
 opt.termguicolors = true
 opt.showmode = false      -- Disable mode info under lualine
 opt.pumheight = 15
+opt.conceallevel = 1
 
 -----------------------------------------------------------
 -- Tabs, indent
