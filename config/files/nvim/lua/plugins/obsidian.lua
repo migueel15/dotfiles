@@ -22,5 +22,8 @@ return {
 			},
 		},
 		notes_subdir = "04-Notes",
+		templates = {
+			folder = "02-Templates",
+		},
 	},
 }
