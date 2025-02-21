@@ -82,6 +82,7 @@ return {
 			copilot_node_command = "node", -- Node.js version must be > 18.x
 			server_opts_overrides = {},
 		})
+		-- vim.cmd("Copilot disable")
 		-- vim.keymap.set("n", "<leader>ct", "<cmd>Copilot toggle<cr>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<leader>ct", "<cmd>CopilotToggle<cr>", { noremap = true, silent = true })
 	end,

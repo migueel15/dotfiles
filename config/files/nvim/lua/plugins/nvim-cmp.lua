@@ -65,7 +65,7 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 			},
 			experimental = {
-				ghost_text = true,
+				ghost_text = false,
 			},
 		})
 		-- vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true })
