@@ -16,14 +16,6 @@ return {
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 
-		-- cmp.event:on("menu_opened", function()
-		-- 	vim.b.copilot_suggestion_hidden = true
-		-- end)
-		--
-		-- cmp.event:on("menu_closed", function()
-		-- 	vim.b.copilot_suggestion_hidden = false
-		-- end)
-
 		require("luasnip.loaders.from_vscode").lazy_load()
 		luasnip.config.setup({})
 		cmp.setup({
@@ -31,6 +23,11 @@ return {
 				format = lspkind.cmp_format({
 					mode = "text_symbol",
 					ellipsis_char = "...",
+				}),
+			},
+			window = {
+				completion = cmp.config.window.bordered({
+					border = "single",
 				}),
 			},
 			snippet = {

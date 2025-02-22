@@ -35,10 +35,6 @@ return {
 				operators = {},
 			},
 			color_overrides = {},
-			custom_highlights = function()
-				return { LineNr = { fg = "#7E94AB" } }
-				--return { LineNr = { fg = colors.blue } }
-			end,
 			integrations = {
 				cmp = true,
 				gitsigns = true,
@@ -50,8 +46,13 @@ return {
 					enabled = true,
 					indentscope_color = "",
 				},
-				-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 			},
+
+			custom_highlights = function(colors)
+				return {
+					LineNr = { fg = "#7E94AB" },
+				}
+			end,
 		})
 
 		-- setup must be called before loading

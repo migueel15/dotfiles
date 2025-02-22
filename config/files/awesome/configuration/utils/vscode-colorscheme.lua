@@ -1,22 +1,27 @@
 function setVSCodeTheme(theme)
-  local json = require("dkjson")
-  local file = io.open(os.getenv("HOME") .. "/.config/Code/User/settings.json", "r")
+	local json = require("dkjson")
+	local settingsPath = os.getenv("HOME") .. "/.config/Code/User/settings.json"
 
-  if file then
-    local jsonData = file:read("*a")
-    file:close()
+	local file = io.open(settingsPath, "r")
+	if not file then
+		return
+	end
 
-    local settings = json.decode(jsonData)
-    settings["workbench.colorTheme"] = theme
+	local jsonData = file:read("*a")
+	file:close()
 
-    local modifiedVersion = json.encode(settings, { indent = true })
+	local settings = json.decode(jsonData)
+	settings["workbench.colorTheme"] = theme
 
-    local outFile = io.open(os.getenv("HOME") .. "/.config/Code/User/settings.json", "w")
-    if outFile then
-      outFile:write(modifiedVersion)
-      outFile:close()
-    end
-  end
+	local modifiedVersion = json.encode(settings, { indent = true })
+
+	local outFile = io.open(settingsPath, "w")
+	if not outFile then
+		return
+	end
+
+	outFile:write(modifiedVersion)
+	outFile:close()
 end
 
 return setVSCodeTheme
