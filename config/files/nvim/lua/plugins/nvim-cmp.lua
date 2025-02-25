@@ -20,9 +20,19 @@ return {
 		luasnip.config.setup({})
 		cmp.setup({
 			formatting = {
+				fields = { "abbr", "kind", "menu" },
 				format = lspkind.cmp_format({
+					with_text = true,
 					mode = "text_symbol",
 					ellipsis_char = "...",
+					menu = {
+						buffer = "[buf]",
+						nvim_lsp = "[LSP]",
+						nvim_lua = "[api]",
+						path = "[path]",
+						luasnip = "[snip]",
+						gh_issues = "[issues]",
+					},
 				}),
 			},
 			window = {
@@ -30,6 +40,7 @@ return {
 					border = "single",
 				}),
 			},
+
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -62,6 +73,7 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 			},
 			experimental = {
+				native_menu = false,
 				ghost_text = false,
 			},
 		})
