@@ -279,9 +279,9 @@
 		"AvatarConstants": {"strings": ["\"SIZE_20\"", "\"SIZE_32\""], "exported": false, "value": "exports", "map": {
 			"AvatarSizes": ["\"SIZE_20\"", "\"SIZE_32\""]
 		}},
-		"Avatars": {"props": ["AnimatedAvatar", "Avatar"], "exported": false, "value": "exports", "map": {
-			"AnimatedAvatar": ["AnimatedAvatar"],
-			"Avatar": ["Avatar"]
+		"Avatars": {"strings": [".UNKNOWN", "foreignObject", "fromIsMobile"], "exported": false, "value": "exports", "map": {
+			"AnimatedAvatar": ["{\"compare\":null}"],
+			"Avatar": ["statusColor", ".UNKNOWN"]
 		}},
 		"Badges": {"strings": ["disableColor", "baseShapeRound", "textBadge"], "exported": false, "value": "exports", "map": {
 			"BadgeShapes": ["baseShapeRoundRight", "baseShapeRoundLeft"],
@@ -1393,6 +1393,7 @@
 	"LazyloadedClassModules": {
 		"AuthBoxBackgroundCharacter": "bdd070",
 		"AuthBoxBackgroundSplash": "f421fb",
+		"ColorPickerInner": "_889ee",
 		"CustomStatusModal": "_9b8f6",
 		"ForumPage": "f369db",
 		"GuildInviteModal": "_67dba",
