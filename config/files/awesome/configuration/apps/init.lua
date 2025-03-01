@@ -10,7 +10,7 @@ app.browser = "zen-browser"
 app.locker = "~/Scripts/LockScreen.sh"
 app.sysmenu = rofi .. "powermenu.sh &"
 app.obsidian = "obsidian"
-app.explorer = "GTK_THEME=Adwaita:dark nautilus"
+app.explorer = "GTK_THEME=Adwaita:dark nautilus -w"
 
 app.discord = "discord"
 app.whatsapp = "whatsapp-nativefier"
