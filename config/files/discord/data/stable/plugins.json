@@ -7,10 +7,14 @@
     "GameActivityToggle": true,
     "ImageUtilities": true,
     "NoSpotifyPause": true,
-    "PluginRepo": true,
+    "PluginRepo": false,
     "QuickMention": true,
     "ReadAllNotificationsButton": true,
     "SpotifyControls": true,
     "ThemeRepo": false,
-    "APlatformIndicators": false
+    "APlatformIndicators": false,
+    "Double Click To Edit": true,
+    "SplitLargeMessages": true,
+    "TypingIndicator": false,
+    "Right Click to Join": true
 }

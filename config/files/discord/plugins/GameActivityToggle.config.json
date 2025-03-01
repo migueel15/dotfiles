@@ -5,10 +5,10 @@
 			"value": false
 		},
 		"general": {
-			"showButton": true,
-			"showItem": false,
+			"playDisable": true,
 			"playEnable": true,
-			"playDisable": true
+			"showButton": true,
+			"showItem": false
 		},
 		"selections": {
 			"enableSound": "stream_started",
