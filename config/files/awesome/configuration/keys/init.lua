@@ -64,9 +64,9 @@ awful.keyboard.append_global_keybindings({
 		awful.spawn(app.vscode)
 	end, { description = "open vscode", group = "launcher" }),
 	awful.key({ modkey }, "o", function()
-		awful.spawn(app.obsidian)
-		awful.spawn.with_shell("sh ~/.scripts/obsidian-open")
-	end, { description = "open obsidian", group = "launcher" }),
+		awful.spawn(app.nvimNotes)
+		-- awful.spawn.with_shell("sh ~/.scripts/obsidian-open")
+	end, { description = "open notetaking app (nvim)", group = "launcher" }),
 	awful.key({ modkey }, "e", function()
 		awful.spawn.with_shell(app.explorer)
 	end, { description = "open file explorer", group = "launcher" }),

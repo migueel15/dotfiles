@@ -51,6 +51,7 @@ alias tercero="cd $HOME/Universidad/tercero/"
 alias ij="intellij-idea-ultimate-edition"
 alias ranger="yazi"
 alias notes="glow $HOME/SecondBrain/04-Notes/"
+alias nt="nvim $HOME/SecondBrain/04-Notes/"
 alias todo="nvim $HOME/SecondBrain/04-Notes/todo.md"
 
 # BITWARDEN
