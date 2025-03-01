@@ -16,5 +16,6 @@
     "Double Click To Edit": true,
     "SplitLargeMessages": true,
     "TypingIndicator": false,
-    "Right Click to Join": true
+    "Right Click to Join": true,
+    "Right Click Join": false
 }
