@@ -11,7 +11,7 @@ app.locker = "~/Scripts/LockScreen.sh"
 app.sysmenu = rofi .. "powermenu.sh &"
 app.obsidian = "obsidian"
 app.nvimNotes = "kitty nvim " .. os.getenv("HOME") .. "/SecondBrain/04-Notes/"
-app.explorer = "GTK_THEME=Adwaita:dark nautilus -w"
+app.explorer = "nautilus -w"
 
 app.discord = "discord"
 app.whatsapp = "whatsapp-nativefier"
