@@ -191,7 +191,8 @@
 		"MessageToolbarUtils": {"props": ["useMessageMenu"]},
 		"MessageUtils": {"props": ["receiveMessage", "editMessage"]},
 		"ModalUtils": {"strings": [".modalKey", "onCloseCallback", "Layer:"], "exported": false, "value": "exports", "map": {
-			"openModal": ["backdropStyle:", "modalKey:", "Layer:"]
+			"openModal": ["backdropStyle:", "modalKey:", "Layer:"],
+			"closeAll": ["[e];if(null!=t)for(let n of t)"]
 		}},
 		"NitroUtils": {"props": ["canUseIncreasedMessageLength", "canUsePremiumGuildMemberProfile"]},
 		"NotificationSettingsUtils": {"props": ["setDesktopType", "setTTSType"]},
@@ -313,7 +314,7 @@
 		"Heading": {"strings": ["data-excessive", ".defaultColor"], "funcStrings": ["defaultColor"]},
 		"HeaderBarComponents": {"strings": ["isAuthenticated", ".HEADER_BAR"]},
 		"Image": {"strings": ["containerRef", "zoomable", "LOADING"]},
-		"ImageModal": {"strings": ["MODAL_CAROUSEL_NEXT", "shouldHideMediaOptions"]},
+		"ImageModal": {"strings": ["MODAL_CAROUSEL_NEXT", "shouldHideMediaOptions", "SELECTED_ITEM_CHANGE"]},
 		"ImageModalOuter": {"strings": ["MEDIA_VIEWER", "numMediaItem", "LIGHTBOX"]},
 		"LayerContainerComponents": {"strings": ["layerContainerElement", "LayerProvider"], "exported": false, "value": "exports", "map": {
 			"createLayer": [".createContext"],
@@ -1179,7 +1180,8 @@
 			"operations": "operations_3V47CY",
 			"previous": "previous_xsNq6B",
 			"sibling": "sibling_6vI7Pu",
-			"switchIcon": "switchIcon_QY6cR4"
+			"switchIcon": "switchIcon_QY6cR4",
+			"viewer": "viewer_ds98Ts"
 		},
 		"LastMessageDate": {
 			"icon": "icon_ocEw13"
@@ -1632,6 +1634,7 @@
 		"Slider": {"props": ["slider", "grabber"]},
 		"Spinner": {"props": ["spinner", "chasingDots"]},
 		"Spoiler": {"props": ["spoilerContainer", "hidden"]},
+		"Stack": {"props": ["stack"], "length": 1},
 		"Switch": {"props": ["container", "slider", "input"]},
 		"Table": {"props": ["stickyHeader", "sortIcon"]},
 		"Text": {"props": ["defaultColor", "defaultMarginh1"]},
@@ -1736,6 +1739,7 @@
 		"_imageutilitiesprevious": ["ImageUtilities", "previous"],
 		"_imageutilitiessibling": ["ImageUtilities", "sibling"],
 		"_imageutilitiesswitchicon": ["ImageUtilities", "switchIcon"],
+		"_imageutilitiesviewer": ["ImageUtilities", "viewer"],
 		"_lastmessagedateicon": ["LastMessageDate", "icon"],
 		"_oldtitlebarenabled": ["OldTitleBar", "oldTitleBarEnabled"],
 		"_oldtitlebarsettingstoolbar": ["OldTitleBar", "settingsToolbar"],
@@ -2388,6 +2392,7 @@
 		"guildfolderexpandedbackgroundcollapsed": ["GuildFolder", "collapsed"],
 		"guildfolderexpandedbackgroundhover": ["GuildFolder", "hover"],
 		"guildfolderguildicon": ["GuildFolder", "guildIcon"],
+		"guildfoldericon": ["GuildFolder", "folderIcon"],
 		"guildfoldericonwrapper": ["GuildFolder", "folderIconWrapper"],
 		"guildfoldericonwrapperclosed": ["GuildFolder", "closedFolderIconWrapper"],
 		"guildfoldericonwrapperexpanded": ["GuildFolder", "expandedFolderIconWrapper"],
@@ -2446,6 +2451,7 @@
 		"guildsvg": ["Guild", "svg"],
 		"guildswrapper": ["GuildsWrapper", "wrapper"],
 		"guildswrapperhidden": ["GuildsWrapper", "hidden"],
+		"guildswrapperitems": ["GuildsWrapper", "itemsContainer"],
 		"guildswrapperunreadmentionsbar": ["GuildsWrapper", "unreadMentionsBar"],
 		"guildswrapperunreadmentionsbarbottom": ["GuildsWrapper", "unreadMentionsIndicatorBottom"],
 		"guildswrapperunreadmentionsbartop": ["GuildsWrapper", "unreadMentionsIndicatorTop"],
@@ -3146,6 +3152,7 @@
 		"spoilerhidden": ["Spoiler", "hidden"],
 		"spoilertext": ["Spoiler", "spoilerContent"],
 		"spoilerwarning": ["Spoiler", "spoilerWarning"],
+		"stack": ["Stack", "stack"],
 		"strikethrough": ["TextStyle", "strikethrough"],
 		"stopanimations": ["NotFound", "stopAnimations"],
 		"subtext": ["NotFound", "subtext"],
