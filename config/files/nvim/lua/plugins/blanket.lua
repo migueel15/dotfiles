@@ -6,8 +6,12 @@ return {
 			filetypes = "java",
 		})
 
-		-- vim.api.nvim_create_user_command("Coverage", function()
-		-- 	require("blanket").report()
-		-- end, {})
+		vim.api.nvim_create_user_command("CoverageStart", function()
+			require("blanket").start()
+		end, {})
+
+		vim.api.nvim_create_user_command("CoverageClose", function()
+			require("blanket").stop()
+		end, {})
 	end,
 }
