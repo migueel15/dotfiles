@@ -24,3 +24,21 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_command("autocmd User FugitiveChanged NvimTreeRefresh")
+
+-- load blanket on java files with jacoco.xml
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		if vim.bo.filetype == "java" then
+			local path = vim.fn.getcwd() .. "/target/site/jacoco/jacoco.xml"
+			if vim.fn.filereadable(path) == 1 then
+				require("blanket").setup({
+					report_path = path,
+					filetypes = "java",
+				})
+				require("blanket").start()
+			end
+		end
+	end,
+	group = formatting_group,
+	pattern = "*",
+})
