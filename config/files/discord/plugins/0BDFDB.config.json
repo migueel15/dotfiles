@@ -3,13 +3,13 @@
 		"changeLogs": {
 			"BDFDB": "3.9.8",
 			"BetterFriendList": "1.5.5",
-			"GameActivityToggle": "1.3.2",
+			"GameActivityToggle": "1.3.3",
 			"ImageUtilities": "5.5.4",
 			"PluginRepo": "2.6.0",
 			"QuickMention": "1.0.7",
-			"ReadAllNotificationsButton": "1.7.8",
-			"SplitLargeMessages": "1.8.5",
-			"SpotifyControls": "1.4.3",
+			"ReadAllNotificationsButton": "1.8.0",
+			"SplitLargeMessages": "1.8.6",
+			"SpotifyControls": "1.4.5",
 			"ThemeRepo": "2.6.0"
 		},
 		"choices": {
@@ -23,8 +23,8 @@
 			"useChromium": false
 		},
 		"hashes": {
-			"0BDFDB.data.json": "fcab86c60c2ca22b099b8ca0ca58fc668d5df1a8",
-			"0BDFDB.raw.css": "1803f451c26300a6f5f9a6601b329c184ac37b70"
+			"0BDFDB.data.json": "e7d2dde9e0cd4ca9ae0d268702548b1f4d83291e",
+			"0BDFDB.raw.css": "cec4311b8167b458d340541837e00a13f1a613ed"
 		}
 	}
 }

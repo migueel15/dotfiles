@@ -2,7 +2,7 @@
  * @name SpotifyControls
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.4.3
+ * @version 1.4.5
  * @description Adds a Control Panel while listening to Spotify on a connected Account
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -30,9 +30,9 @@ module.exports = (_ => {
 				else return r.text();
 			}).then(b => {
 				if (!b) throw new Error();
-				else return require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.showToast("Finished downloading BDFDB Library", {type: "success"}));
+				else return require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0BDFDB.plugin.js"), b, _ => BdApi.UI.showToast("Finished downloading BDFDB Library", {type: "success"}));
 			}).catch(error => {
-				BdApi.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
+				BdApi.UI.alert("Error", "Could not download BDFDB Library Plugin. Try again later or download it manually from GitHub: https://mwittrien.github.io/downloader/?library");
 			});
 		}
 		
@@ -40,7 +40,7 @@ module.exports = (_ => {
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
-				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
+				BdApi.UI.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
 					confirmText: "Download Now",
 					cancelText: "Cancel",
 					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
@@ -73,6 +73,18 @@ module.exports = (_ => {
 			"track"
 		];
 	
+		const SpotifyControlsCoverComponent = props => {
+			let asset = BDFDB.LibraryModules.ApplicationAssetUtils.getAssetImage(props.song);
+			return asset && asset.largeImage && asset.largeImage.src ? BDFDB.ReactUtils.createElement("img", {
+				className: BDFDB.disCN._spotifycontrolscover,
+				src: asset.largeImage.src
+			}) : BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
+				className: BDFDB.disCN._spotifycontrolscover,
+				width: "100%",
+				height: "100%",
+				name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK_ACTIVITY
+			});
+		};
 		const SpotifyControlsComponent = class SpotifyControls extends BdApi.React.Component {
 			componentDidMount() {
 				controls = this;
@@ -133,7 +145,7 @@ module.exports = (_ => {
 				}
 				if (!lastSong) return null;
 				
-				let coverSrc = BDFDB.LibraryModules.ApplicationAssetUtils.getAssetImage(lastSong.application_id, lastSong.assets.large_image);
+				let coverSrc = (BDFDB.ReactUtils.hookCall(BDFDB.LibraryModules.ApplicationAssetUtils.getAssetImage, lastSong) || {largeImage: {}}).largeImage.src;
 				let connection = (BDFDB.LibraryStores.ConnectedAccountsStore.getAccounts().find(n => n.type == "spotify") || {});
 				showActivity = showActivity != undefined ? showActivity : (connection.show_activity || connection.showActivity);
 				currentVolume = this.props.draggingVolume ? currentVolume : socketDevice.device.volume_percent;
@@ -155,14 +167,8 @@ module.exports = (_ => {
 										else BDFDB.ReactUtils.forceUpdate(this);
 									},
 									children: [
-										coverSrc ? BDFDB.ReactUtils.createElement("img", {
-											className: BDFDB.disCN._spotifycontrolscover,
-											src: coverSrc
-										}) : BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
-											className: BDFDB.disCN._spotifycontrolscover,
-											width: "100%",
-											height: "100%",
-											name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK_ACTIVITY
+										BDFDB.ReactUtils.createElement(SpotifyControlsCoverComponent, {
+											song: lastSong
 										}),
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
 											className: BDFDB.disCN._spotifycontrolscovermaximizer,
