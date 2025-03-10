@@ -96,6 +96,7 @@ return {
 			marksman = {},
 			angularls = {},
 			jsonls = {},
+			lemminx = {},
 			lua_ls = {
 				Lua = {
 
