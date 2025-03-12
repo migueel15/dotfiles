@@ -47,12 +47,6 @@ return {
 					indentscope_color = "",
 				},
 			},
-
-			custom_highlights = function(colors)
-				return {
-					LineNr = { fg = "#7E94AB" },
-				}
-			end,
 		})
 
 		-- setup must be called before loading

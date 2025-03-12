@@ -3,7 +3,9 @@ return {
 	config = function()
 		require("blanket").setup({
 			report_path = vim.fn.getcwd() .. "/target/site/jacoco/jacoco.xml",
-			-- filetypes = "java",
+			signs = {
+				covered_color = "Added",
+			},
 		})
 
 		vim.api.nvim_create_user_command("CoverageStart", function()
