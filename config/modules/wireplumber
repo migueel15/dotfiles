@@ -1,15 +1,1 @@
-#!/bin/bash
-
-rm -rf $HOME/.config/wireplumber
-
-if ! which pipewire &> /dev/null; then
-    yay -S pipewire pipewire-pulse pipewire-jack pipewire-alsa
-fi
-
-if ! which wireplumber &> /dev/null; then
-    yay -S wireplumber
-fi
-
-ln -snf $FILES_DIR $HOME/.config/wireplumber
-
-systemctl --user restart pipewire
+/home/miguel/.config/wireplumber
