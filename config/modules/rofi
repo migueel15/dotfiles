@@ -4,4 +4,12 @@ if ! which rofi &> /dev/null; then
     yay -S rofi
 fi
 
+if ! which betterlockscreen &> /dev/null; then
+		yay -S betterlockscreen
+fi
+
+if ! which systemd &> /dev/null; then
+		yay -S systemd
+fi
+
 ln -snf $FILES_DIR $HOME/.config/rofi

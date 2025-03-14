@@ -24,8 +24,8 @@ configuration {
     element-padding:             35px 0px;
     element-border-radius:       60px;
 
-    prompt-font:                 "Iosevka Nerd Font Bold 48";
-    textbox-font:                "Iosevka Nerd Font 12";
+    prompt-font:                 "JetBrains Mono Bold 48";
+    textbox-font:                "JetBrains Mono 12";
     element-text-font:           "feather 48";
 
     background-window:           black/20%;
@@ -124,7 +124,7 @@ element-text {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
-    vertical-align:              0.5;
+    vertical-align:              0;
     horizontal-align:            0.5;
 }
 element selected.normal {
