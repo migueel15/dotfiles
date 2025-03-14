@@ -34,6 +34,13 @@ if not gears.filesystem.file_readable(pathFile) then
 	awful.spawn.with_shell("xset -dpms")
 end
 
+-- if picom not running, start it
+awful.spawn.easy_async_with_shell("pgrep picom", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.picom)
+	end
+end)
+
 awful.spawn(app.networkManager)
 
 local idxMainScreenTag, idxSecondScreenTag = read_from_file("/tmp/screenTags.txt")
