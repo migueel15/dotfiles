@@ -26,13 +26,17 @@ fi
 # Welcome message
 gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "Hello, there! Welcome to my $(gum style --foreground 212 'dotfiles')."
 
+tput cup 8 0
+
 # Install yay
 
 if ! which yay &> /dev/null; then
 	gum spin --spinner dot --title "Installing $(gum style --foreground 212 'yay')" -- sudo pacman -S --noconfirm git && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si
 fi
 echo -e "$(gum style --foreground 212 'yay') is already installed."
-clear
+tput cup 8 0
+tput ed
+# clear
 
 #--- SET UP BITWARDEN ---#
 
@@ -64,6 +68,9 @@ fi
 
 gum spin --spinner dot --title "Syncing bitwarden..." -- bw sync
 
+tput cup 8 0
+tput ed
+
 #--- SET UP GIT ---#
 GIT_DATA=$(gum spin --spinner dot --title "Setting up git..." -- bw get item "git-credentials")
 
@@ -84,6 +91,9 @@ echo "https://$GITHUB_USER:$GITHUB_TOKEN@github.com" > ~/.git-credentials
 echo "https://$GITHUB_USER:$GITLAB_TOKEN@gitlab.com" >> ~/.git-credentials
 
 echo -e "Setup $(gum style --foreground 212 "Git") completed!"
+
+tput cup 8 0
+tput ed
 
 #--- INSTALL MODULES ---#
 
