@@ -6,6 +6,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"jay-babu/mason-null-ls.nvim",
 		"nvimtools/none-ls.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 
 		-- Additional lua configuration, makes nvim stuff amazing!
 		"folke/neodev.nvim",
@@ -54,6 +55,16 @@ return {
 		-- mason-lspconfig requires that these setup functions are called in this order
 		-- before setting up the servers.
 		require("mason").setup()
+
+		-- Setup DAP config
+		require("mason-nvim-dap").setup({
+			ensure_installed = {
+				"python",
+				"java",
+				"delve",
+			},
+			handlers = {},
+		})
 		require("mason-lspconfig").setup()
 
 		require("mason-null-ls").setup({
