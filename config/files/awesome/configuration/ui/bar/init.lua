@@ -6,6 +6,13 @@ require("awful.autofocus")
 local gears = require("gears")
 
 screen.connect_signal("request::desktop_decoration", function(s)
+	local icons = {}
+	for i = 1, beautiful.tag_number do
+		table.insert(icons, beautiful.tag.icon)
+	end
+
+	awful.tag(icons, s, awful.layout.suit.tile)
+
 	-- Create the wibox
 	s.mywibox = awful.wibar({
 		position = "top",
