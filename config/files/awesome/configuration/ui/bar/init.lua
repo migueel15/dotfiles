@@ -23,6 +23,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 				layout = wibox.layout.align.horizontal,
 				{
 					layout = wibox.layout.fixed.horizontal,
+					Widgets.logout,
 					Widgets.workspace(s),
 					Widgets.cpu,
 					Widgets.ram,
@@ -37,7 +38,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 					Widgets.notifications,
 					Widgets.bluetooth,
 					Widgets.notion_sync,
-					--Widgets.logout,
 					Widgets.systray,
 				},
 			},

@@ -89,7 +89,7 @@ theme.bg_urgent = theme.colors.primary
 ------------------------------
 
 ------- Systray widget -------
-theme.logout = { icon = "⏻", color = theme.icon_enable_color }
+theme.logout = { icon = "󰣇", color = theme.icon_enable_color }
 ------------------------------
 
 ------- Notion widget -------
