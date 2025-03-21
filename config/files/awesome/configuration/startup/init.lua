@@ -24,15 +24,40 @@ if not gears.filesystem.file_readable(pathFile) then
 	local command = "echo started > " .. pathFile
 	awful.spawn.with_shell(command)
 	awful.spawn.with_shell("~/.scripts/set-monitors")
-	awful.spawn(app.openrgb)
-	awful.spawn(app.solaar)
-	awful.spawn(app.mpris)
-	awful.spawn(app.discord)
+	-- if openrgb not running, start it
 
 	-- Set screen to never sleep
 	awful.spawn.with_shell("xset s off")
 	awful.spawn.with_shell("xset -dpms")
 end
+
+-- if openrgb not running, start it
+awful.spawn.easy_async_with_shell("pgrep openrgb", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.openrgb)
+	end
+end)
+
+-- if solaar not running, start it
+awful.spawn.easy_async_with_shell("pgrep solaar", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.solaar)
+	end
+end)
+
+-- if mpris not running, start it
+awful.spawn.easy_async_with_shell("pgrep mpris", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.mpris)
+	end
+end)
+
+-- if discord not running, start it
+awful.spawn.easy_async_with_shell("pgrep discord", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.discord)
+	end
+end)
 
 -- if picom not running, start it
 awful.spawn.easy_async_with_shell("pgrep picom", function(stdout)
@@ -41,7 +66,12 @@ awful.spawn.easy_async_with_shell("pgrep picom", function(stdout)
 	end
 end)
 
-awful.spawn(app.networkManager)
+-- if nm-applet not running, start it
+awful.spawn.easy_async_with_shell("pgrep nm-applet", function(stdout)
+	if stdout == "" then
+		awful.spawn(app.networkManager)
+	end
+end)
 
 local idxMainScreenTag, idxSecondScreenTag = read_from_file("/tmp/screenTags.txt")
 screen[1].tags[idxMainScreenTag]:view_only()
