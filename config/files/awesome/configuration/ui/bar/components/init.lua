@@ -13,5 +13,6 @@ Widgets.workspace = require("configuration.ui.bar.components.workspace")
 Widgets.logout = require("configuration.ui.bar.components.logout")
 Widgets.spotify = require("configuration.ui.bar.components.spotify")
 Widgets.notion_sync = require("configuration.ui.bar.components.notion_sync")
+Widgets.mic = require("configuration.ui.bar.components.mic")
 
 return Widgets

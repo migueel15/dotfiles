@@ -72,6 +72,12 @@ theme.volume_medium = { icon = "󰖀", color = theme.icon_enable_color }
 theme.volume_high = { icon = "󰕾", color = theme.icon_enable_color }
 ------------------------------
 
+-------- Mic control ---------
+theme.mic_muted = { icon = "󰍭", color = theme.icon_disable_color }
+theme.mic_unmuted = { icon = "󰍬", color = theme.icon_enable_color }
+
+------------------------------
+
 ------- Systray widget -------
 -- theme.bg_systray = theme.colors.primary
 theme.systray_icon_spacing = dpi(3)
@@ -94,8 +100,8 @@ theme.logout = { icon = "󰣇", color = theme.icon_enable_color }
 
 ------- Notion widget -------
 theme.notion_status_color = {
-	active = theme.colors.secondary,
-	inactive = theme.colors.red,
+  active = theme.colors.secondary,
+  inactive = theme.colors.red,
 }
 theme.notion_icon = os.getenv("HOME") .. "/.config/awesome/configuration/theme/icons/notion-cv-logo.svg"
 
