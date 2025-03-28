@@ -1,13 +1,30 @@
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local awful = require("awful")
-local naughty = require("naughty")
-local app = require("configuration.apps")
 
-local mic = wibox.widget({
+local function toggleMicStatus()
+  awful.spawn.with_shell("pamixer --default-source -t")
+end
+
+local function getMicState()
+  awful.spawn.easy_async_with_shell("pamixer --default-source --get-mute", function(stdout)
+    local muted = stdout:match("true") and true or false
+    awesome.emit_signal("microphone::mute_changed", muted)
+  end)
+end
+
+awful.spawn.with_line_callback("pactl subscribe", {
+  stdout = function(line)
+    if line:match("source") or line:match("default-source") then
+      getMicState()
+    end
+  end,
+})
+
+local micWidget = wibox.widget({
   widget = wibox.container.background,
   bg = beautiful.bg_normal,
-  fg = beautiful.logout.color,
+  fg = beautiful.colors.secondary,
   {
     widget = wibox.container.margin,
     left = beautiful.widget_margin,
@@ -18,32 +35,26 @@ local mic = wibox.widget({
   },
 })
 
-function toggleMicStatus()
-  awful.spawn.with_shell("pamixer --default-source -t")
-  awful.spawn.easy_async_with_shell("pamixer --default-source --get-mute", function(stdout)
-    updateWidget(stdout)
-  end)
-end
+getMicState()
 
-function updateWidget(stdout)
-  if stdout:match("true") then
-    mic.fg = beautiful.colors.red
-    mic.children[1].children[1].text = beautiful.mic_muted.icon
+function updateWidget(muted)
+  if muted then
+    micWidget.fg = beautiful.colors.red
+    micWidget.children[1].children[1].text = beautiful.mic_muted.icon
   else
-    mic.fg = beautiful.colors.text
-    mic.children[1].children[1].text = beautiful.mic_unmuted.icon
+    micWidget.fg = beautiful.colors.secondary
+    micWidget.children[1].children[1].text = beautiful.mic_unmuted.icon
   end
 end
 
--- each 1 secod check the mic status
-awful.widget.watch("pamixer --default-source --get-mute", 1, function(widget, stdout)
-  updateWidget(stdout)
-end)
-
-mic:connect_signal("button::press", function(_, _, _, button)
+micWidget:connect_signal("button::press", function(_, _, _, button)
   if button == 1 then
     toggleMicStatus()
   end
 end)
 
-return mic
+awesome.connect_signal("microphone::mute_changed", function(muted)
+  updateWidget(muted)
+end)
+
+return micWidget
