@@ -13,13 +13,15 @@ local function getMicState()
   end)
 end
 
-awful.spawn.with_line_callback("pactl subscribe", {
-  stdout = function(line)
-    if line:match("source") or line:match("default-source") then
-      getMicState()
-    end
-  end,
-})
+awful.spawn.easy_async_with_shell("pkill -f 'pactl subscribe'", function()
+  awful.spawn.with_line_callback("pactl subscribe", {
+    stdout = function(line)
+      if line:match("source") or line:match("default-source") then
+        getMicState()
+      end
+    end,
+  })
+end)
 
 local micWidget = wibox.widget({
   widget = wibox.container.background,

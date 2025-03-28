@@ -4,6 +4,7 @@ local naughty = require("naughty")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local json = require("dkjson")
+local capi = { mouse = mouse }
 
 local notion_icon = wibox.widget({
   widget = wibox.widget.imagebox,
@@ -46,9 +47,87 @@ local notion_widget = wibox.widget({
   left = beautiful.widget_margin,
 })
 
+local function createTask(title, date, status)
+  return {
+    {
+      {
+        text = date,
+        widget = wibox.widget.textbox,
+      },
+      {
+        widget = wibox.container.background,
+        bg = beautiful.colors.primary,
+        fg = beautiful.colors.blue,
+        {
+          text = title,
+          widget = wibox.widget.textbox,
+        },
+      },
+      {
+        text = status,
+        widget = wibox.widget.textbox,
+        font = "JetBrainsMono Nerd Font 8",
+      },
+      layout = wibox.layout.fixed.horizontal,
+      spacing = 5,
+    },
+    margins = 5,
+    widget = wibox.container.margin,
+  }
+end
+
+local listaTareas = wibox.widget({
+  layout = wibox.layout.fixed.vertical,
+})
+
+local popup = awful.popup({
+  widget = {
+    {
+      {
+        widget = wibox.container.margin,
+        margins = 10,
+        {
+          widget = wibox.container.background,
+          bg = beautiful.colors.secondary,
+          fg = beautiful.colors.primary,
+          {
+            text = "Tareas Notion",
+            vlaign = "center",
+            halign = "center",
+            widget = wibox.widget.textbox,
+          },
+        },
+      },
+      {
+        listaTareas,
+        widget = wibox.container.margin,
+        margins = 10,
+      },
+      layout = wibox.layout.fixed.vertical,
+    },
+    margins = 10,
+    widget = wibox.container.margin,
+  },
+  border_color = beautiful.colors.secondary,
+  border_width = 1,
+  shape = gears.shape.rounded_rect,
+  parent = notion_widget,
+  ontop = true,
+  visible = false,
+})
+
 notion_widget:connect_signal("button::press", function(_, _, _, button)
   if button == 3 then
     ActivateNotionSyncContainer()
+  end
+
+  if button == 1 then
+    if popup.visible then
+      popup.visible = false
+    else
+      getCVTasks()
+      popup.visible = true
+    end
   end
 end)
 
@@ -89,5 +168,16 @@ function getCVTasks()
 end
 
 getCVTasks()
+
+popup:connect_signal("mouse::leave", function()
+  popup.visible = false
+end)
+
+awesome.connect_signal("notion:tasks", function(tasks)
+  listaTareas:reset()
+  for _, task in ipairs(tasks) do
+    listaTareas:add(createTask(task.title, task.date, task.status))
+  end
+end)
 
 return notion_widget
