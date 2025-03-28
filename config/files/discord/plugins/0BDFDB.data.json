@@ -177,7 +177,7 @@
 		}},
 		"KeyEvents": {"props": ["aliases", "code", "codes"]},
 		"LanguageUtils": {"props": ["getLanguages", "getLocale"]},
-		"LanguageIntlUtils": {"props": ["formatToPlainString"]},
+		"LanguageIntlUtils": {"props": ["formatToPlainString", "formatToParts"]},
 		"LoginUtils": {"props": ["login", "logout"]},
 		"MediaEngineUtils": {"props": ["setOutputDevice", "setInputDevice"]},
 		"MemberDisplayUtils": {"strings": [".getGuildMemberProfile", ".getUser("], "exported": false, "value": "exports", "map": {
@@ -350,7 +350,7 @@
 			"ModalSize": ["\"DYNAMIC\"", "\"LARGE\""]
 		}},
 		"Paginator": {"strings": ["totalPageCount", "selectedPage", "endButtonInner"]},
-		"PanelButton": {"strings": ["Masks.PANEL_BUTTON"]},
+		"PanelButton": {"strings": ["Masks.PANEL_BUTTON"], "funcStrings": ["{}"]},
 		"PopoutFocusLock": {"strings": ["impressionName", "useImperativeHandle"], "funcStrings": ["impressionName"]},
 		"PrivateChannelItems": {"strings": ["getRecipientId", "isStatusIndicatorEnabled", "avatarWithText"], "exported": false, "value": "exports", "map": {
 			"DirectMessage": ["getUser", "getRecipientId"],
@@ -1654,7 +1654,7 @@
 		"TypingCoowldown": {"props": ["cooldownWrapper", "slowModeIcon"]},
 		"UnreadBar": {"props": ["active", "bar", "unread"]},
 		"UploadModal": {"props": ["uploadModal", "bgScale"]},
-		"UserBadges": {"props": ["badge", "container", "orbBadge"]},
+		"UserBadges": {"props": ["badge", "container"], "length": 5, "smaller": true},
 		"UserBanner": {"props": ["popoutBanner", "popoutBannerPremium"]},
 		"UserHeaderUsername": {"props": ["clickableUsername", "nickname", "bot"]},
 		"UserPopoutBody": {"props": ["body", "menus"]},
