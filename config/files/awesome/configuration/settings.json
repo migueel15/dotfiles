@@ -1,8 +1,8 @@
-	{
-		"theme": "catppuccin", // [ "catppuccin", "gruvbox", "nord", "rose-pine", "default" ]
-		"vscodeTheme": true,
-		"obsidianTheme": true,
-		"obsidianPath": "~/SecondBrain",
-		"alacrittyTheme": false,
-		"alacrittyPath": "~/.config/alacritty/alacritty.yml"
-	}
+{
+  "theme": "catppuccin", // [ "catppuccin", "gruvbox", "nord", "rose-pine", "default" ]
+  "vscodeTheme": true,
+  "obsidianTheme": true,
+  "obsidianPath": "~/SecondBrain",
+  "alacrittyTheme": false,
+  "alacrittyPath": "~/.config/alacritty/alacritty.yml"
+}
