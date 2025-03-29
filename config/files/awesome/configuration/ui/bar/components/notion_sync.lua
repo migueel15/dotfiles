@@ -111,25 +111,28 @@ local popup = awful.popup({
   border_color = beautiful.colors.secondary,
   border_width = 1,
   shape = gears.shape.rounded_rect,
-  parent = notion_widget,
   ontop = true,
   visible = false,
+  -- placement = function(c)
+  -- awful.placement.top_right(c, { margins = { top = 50, right = 10 } })
+  -- awful.placement.next_to(popup, { preferred_positions = { "bottom" } })
+  -- end,
 })
 
-notion_widget:connect_signal("button::press", function(_, _, _, button)
-  if button == 3 then
-    ActivateNotionSyncContainer()
-  end
-
-  if button == 1 then
+notion_widget:buttons(awful.util.table.join(
+  awful.button({}, 1, function()
     if popup.visible then
       popup.visible = false
     else
+      popup:move_next_to(capi.mouse.current_widget_geometry, { preferred_positions = { "bottom" } })
       getCVTasks()
       popup.visible = true
     end
-  end
-end)
+  end),
+  awful.button({}, 3, function()
+    ActivateNotionSyncContainer()
+  end)
+))
 
 gears.timer({
   timeout = 60,
@@ -143,6 +146,17 @@ gears.timer({
 awesome.connect_signal("notion:request_status", function()
   GetNotionSyncStatus()
 end)
+
+function setCachedValues()
+  awful.spawn.easy_async_with_shell("cat /tmp/notion_data.json", function(stdout, stderr, reason, exit_code)
+    if exit_code ~= 0 then
+      return
+    end
+    local notion_data = json.decode(stdout)
+    local naughty = require("naughty")
+    awesome.emit_signal("notion:tasks", notion_data)
+  end)
+end
 
 function getCVTasks()
   awful.spawn.easy_async_with_shell("cat " .. os.getenv("HOME") .. "/.bw_session", function(bw_session)
@@ -167,6 +181,7 @@ function getCVTasks()
   end)
 end
 
+setCachedValues()
 getCVTasks()
 
 popup:connect_signal("mouse::leave", function()
