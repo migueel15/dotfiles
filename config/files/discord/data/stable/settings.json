@@ -3,7 +3,7 @@
         "voiceDisconnect": true,
         "showToasts": false,
         "mediaKeys": false,
-        "bdContextMenu": true,
+        "bdContextMenu": false,
         "themeAttributes": true
     },
     "addons": {
