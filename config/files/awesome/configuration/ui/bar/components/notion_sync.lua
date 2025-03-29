@@ -51,15 +51,19 @@ local function createTask(title, date, status)
   return {
     {
       {
-        text = date,
-        widget = wibox.widget.textbox,
-      },
-      {
         widget = wibox.container.background,
         bg = beautiful.colors.primary,
         fg = beautiful.colors.blue,
         {
           text = title,
+          widget = wibox.widget.textbox,
+        },
+      },
+      {
+        widget = wibox.container.background,
+        fg = beautiful.colors.orange,
+        {
+          text = " " .. date .. " ",
           widget = wibox.widget.textbox,
         },
       },
