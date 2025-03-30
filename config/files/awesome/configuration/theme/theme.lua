@@ -15,6 +15,9 @@ theme.border_normal = theme.colors.dark
 theme.border_focus = theme.colors.secondary
 theme.border_width = dpi(2)
 theme.useless_gap = dpi(2)
+theme.border_radius = dpi(2)
+
+theme.notification_icon = "/usr/share/awesome/icons/awesome64.png"
 ------------------------------
 ------------------------------
 ------ Widgets Settings ------
