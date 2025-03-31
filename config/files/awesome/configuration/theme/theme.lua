@@ -102,11 +102,13 @@ theme.logout = { icon = "󰣇", color = theme.icon_enable_color }
 ------------------------------
 
 ------- Notion widget -------
-theme.notion_status_color = {
-  active = theme.colors.secondary,
-  inactive = theme.colors.red,
+theme.notion = {
+  color = {
+    active = theme.icon_enable_color,
+    inactive = theme.colors.red,
+  },
+  icon = os.getenv("HOME") .. "/.config/awesome/configuration/theme/icons/notion-cv-logo.svg",
 }
-theme.notion_icon = os.getenv("HOME") .. "/.config/awesome/configuration/theme/icons/notion-cv-logo.svg"
 
 ------------------------------
 
