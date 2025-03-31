@@ -7,7 +7,7 @@ end
 M.runMvnMain = function()
   local packagePath = M.getPackagePath()
   local fileName = vim.fn.expand("%:t:r")
-  local command = "mvn exec:java -Dexec.mainClass='" .. packagePath .. "." .. fileName .. "'"
+  local command = "mvn exec:java -Dexec.mainClass=" .. packagePath .. "." .. fileName
   print(command)
   vim.cmd("TermExec go_back=0 cmd='" .. command .. "'")
 end
