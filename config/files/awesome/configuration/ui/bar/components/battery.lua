@@ -6,15 +6,13 @@ local naughty = require("naughty")
 local currentIcon = ""
 local currentColor = ""
 
-local cmd =
-[[sh -c "upower -i /org/freedesktop/UPower/devices/battery_BAT0"]]
+local cmd = [[sh -c "upower -i /org/freedesktop/UPower/devices/battery_BAT0"]]
 
-
-local batteryText = wibox.widget {
+local batteryText = wibox.widget({
   widget = wibox.widget.textbox,
-}
+})
 
-local battery = wibox.widget {
+local battery = wibox.widget({
   layout = wibox.container.margin,
   left = beautiful.widget_margin,
   {
@@ -41,8 +39,8 @@ local battery = wibox.widget {
         },
       },
     },
-  }
-}
+  },
+})
 
 function getValues(data)
   return tonumber(data:match("percentage:%s*(%d*)%%")), data:match("state:%s*(%a*)")
@@ -72,7 +70,6 @@ local batValue = awful.widget.watch(cmd, 1, function(widget, stdout)
     currentIcon = beautiful.battery_charging.icon
     currentColor = beautiful.battery_charging.color
   end
-
 
   battery.children[1].children[2].fg = currentColor
   battery.children[1].children[2].children[1].children[1].text = currentIcon

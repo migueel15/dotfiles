@@ -5,21 +5,6 @@ local awful = require("awful")
 local naughty = require("naughty")
 local gears = require("gears")
 
--- local systray = wibox.widget({
--- 	{
--- 		{
--- 			widget = wibox.widget.systray(),
--- 			base_size = 25,
--- 		},
--- 		widget = wibox.container.background,
--- 		margins = 5,
--- 	},
--- 	widget = wibox.container.background,
--- 	forced_width = 150,
--- 	forced_height = 24,
--- })
---
-
 local systray = wibox.widget({
   widget = wibox.container.background,
   {
@@ -59,23 +44,6 @@ local popup = awful.popup({
   end,
 })
 
--- initial setup. Will render and get position
--- popup.opacity = 0
--- popup.visible = true
--- gears.timer.start_new(1, function()
--- 	popup.visible = false
--- end)
-
--- local timer = gears.timer({
--- 	timeout = 0.1,
--- 	auto_start = false,
--- 	callback = function()
--- 		local offset = awful.screen.focused().geometry.x
--- 		local x_position = offset + awful.screen.focused().geometry.width - popup.width - 2
--- 		popup.x = x_position
--- 	end,
--- })
---
 popup:connect_signal("mouse::leave", function()
   arrow.fg = beautiful.colors.gray
   popup.visible = false

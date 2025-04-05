@@ -5,11 +5,13 @@ local beautiful = require("beautiful")
 
 local cmd = [[sh -c "vmstat 1 2 | tail -1 | awk '{printf \"%d\", $15}'"]]
 local cpuValue = awful.widget.watch(cmd, 1, function(widget, stdout)
-  if stdout == nil then return end
+  if stdout == nil then
+    return
+  end
   widget:set_text(string.format("%2d%%", 100 - math.floor(tonumber(stdout))))
 end)
 
-local cpu = wibox.widget {
+local cpu = wibox.widget({
   layout = wibox.container.margin,
   left = beautiful.widget_margin,
   {
@@ -18,7 +20,7 @@ local cpu = wibox.widget {
       widget = wibox.container.background,
       fg = beautiful.colors.text,
       bg = beautiful.colors.primary,
-      cpuValue
+      cpuValue,
     },
     {
       widget = wibox.container.background,
@@ -32,8 +34,8 @@ local cpu = wibox.widget {
           text = beautiful.cpu.icon,
         },
       },
-    }
-  }
-}
+    },
+  },
+})
 
 return cpu

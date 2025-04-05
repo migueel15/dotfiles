@@ -60,7 +60,10 @@ theme.battery_charging = { icon = "󰂄", color = theme.icon_enable_color }
 
 ------ Workspace widget ------
 theme.tag_number = 6
-theme.tag = { icon = "", color = theme.icon_enable_color }
+theme.tag = { icon = "" }
+theme.taglist_fg_focus = theme.colors.white
+theme.taglist_fg_urgent = theme.colors.secondary
+theme.taglist_fg_occupied = theme.colors.secondary
 ------------------------------
 
 ---- Notifications widget ----
@@ -88,9 +91,6 @@ theme.systray_max_rows = 1
 ------------------------------
 
 --------- Tag widget ---------
-theme.taglist_fg_focus = theme.colors.white
-theme.taglist_fg_urgent = theme.colors.secondary
-theme.taglist_fg_occupied = theme.colors.secondary
 theme.fg_normal = theme.colors.grey
 theme.bg_normal = theme.colors.primary
 theme.bg_focus = theme.colors.primary

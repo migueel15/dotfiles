@@ -5,11 +5,11 @@ local beautiful = require("beautiful")
 
 local cmd = [[sh -c "free -m | grep 'Mem:' | awk '{printf \"%d,%d\", $3, $2}'"]]
 local ramValues = awful.widget.watch(cmd, 1, function(widget, stdout)
-  local used, total = stdout:match('([^,]+),([^,]+)')
+  local used, total = stdout:match("([^,]+),([^,]+)")
   widget:set_text(string.format("%2d%%", math.floor((used / total) * 100)))
 end)
 
-local ram = wibox.widget {
+local ram = wibox.widget({
   layout = wibox.container.margin,
   left = beautiful.widget_margin,
   {
@@ -18,7 +18,7 @@ local ram = wibox.widget {
       widget = wibox.container.background,
       bg = beautiful.colors.primary,
       fg = beautiful.colors.text,
-      ramValues
+      ramValues,
     },
     {
       widget = wibox.container.background,
@@ -33,7 +33,7 @@ local ram = wibox.widget {
         },
       },
     },
-  }
-}
+  },
+})
 
 return ram

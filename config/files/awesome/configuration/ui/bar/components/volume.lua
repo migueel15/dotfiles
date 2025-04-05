@@ -1,9 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local gears = require("gears")
-local getAudioSinks = require("configuration.utils.getAudioSinks")
 local config = {}
 
 config.popup_bg = beautiful.colors.primary
@@ -160,8 +158,9 @@ end)
 volume:connect_signal("button::press", function(_, _, _, button)
   if button == 1 then
   elseif button == 3 then
-    awful.spawn("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
-    awesome.emit_signal("volume:update_status")
+    awful.spawn.easy_async("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", function()
+      awesome.emit_signal("volume:update_status")
+    end)
   elseif button == 4 then
     awful.spawn.easy_async("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+", function()
       awesome.emit_signal("volume:update_status")

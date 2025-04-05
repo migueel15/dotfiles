@@ -1,10 +1,11 @@
-local settings = require("configuration.utils.read-json-settings")
+local settings = require("configuration.settings")
 local colorscheme = settings.theme
 local theme = {}
 
 local check = require("configuration.utils.file-exist-in-path")
-local opciones = require("configuration.utils.get-files-in-path")(os.getenv("HOME") ..
-  "/.config/awesome/configuration/theme/colorschemes")
+local opciones = require("configuration.utils.get-files-in-path")(
+  os.getenv("HOME") .. "/.config/awesome/configuration/theme/colorschemes"
+)
 
 local check = check(opciones, colorscheme)
 if check then
@@ -29,4 +30,3 @@ if settings.alacrittyTheme then
 end
 
 return theme
-

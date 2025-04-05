@@ -5,7 +5,7 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local wibox = require("wibox")
 
-require("configuration.rules.noti")
+require("configuration.rules.notification")
 
 -----------------------
 ------- CLIENTS -------

@@ -4,24 +4,37 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
 local wibox = require("wibox")
-local naughty = require("naughty")
 
 local helpers = {}
 
-function helpers.volume_control(step)
-  local cmd
-  if step == 0 then
-    cmd = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-  else
-    sign = step > 0 and "+" or ""
-    cmd = "pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ "
-        .. sign
-        .. tostring(step)
-        .. "%"
+function helpers.launch_if_not_open(pip, app)
+  awful.spawn.easy_async_with_shell("pgrep " .. pip, function(stdout)
+    if stdout == "" then
+      awful.spawn(app)
+    end
+  end)
+end
+
+function helpers.reload_focused_screen_tags()
+  local function readTagsFromFile(filename)
+    local file = io.open(filename, "r")
+    if file then
+      local content = file:read("*all")
+      file:close()
+
+      local var1, var2 = content:match("([^,]+),([^,]+)")
+      return tonumber(var1), tonumber(var2)
+    else
+      return 1, 1
+    end
   end
-  awful.spawn.with_shell(cmd)
+
+  local idxMainScreenTag, idxSecondScreenTag = readTagsFromFile("/tmp/screenTags.txt")
+  screen[1].tags[idxMainScreenTag]:view_only()
+  if screen[2] then
+    screen[2].tags[idxSecondScreenTag]:view_only()
+  end
 end
 
 function helpers.colorize_text(txt, fg)

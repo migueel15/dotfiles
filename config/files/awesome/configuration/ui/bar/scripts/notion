@@ -42,6 +42,4 @@ RESPONSE=$(curl -s -X POST 'https://api.notion.com/v1/databases/'"$DATABASE_ID"'
     ]
   }')
 
-# echo $RESPONSE | jq -c '[.results[] | { "title": .properties["Nombre de tarea"].title[].plain_text, "date": (.properties["Fecha"].date.start | split("T") | ( .[0] | strptime("%Y-%m-%d") | strftime("%d-%m-%Y")) + " " + (.[1] | split(".") | .[0])), "status": .properties["Resumen"].formula.string}]'
-
 echo $RESPONSE | jq -c '[.results[] | { "title": .properties["Nombre de tarea"].title[].plain_text, "date": (.properties["Fecha"].date.start | split("T") | ( .[0] | strptime("%Y-%m-%d") | strftime("%d %b")) + " " + (.[1] | split(".") | .[0] | split(":") | .[0] + ":" + .[1])), "status": .properties["Resumen"].formula.string}]'
