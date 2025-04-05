@@ -1,4 +1,10 @@
 -- Keymaps for better default experience
+
+-- Source lua
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>", { silent = true })
+vim.keymap.set("v", "<space>x", ":lua<CR>", { silent = true })
+
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
