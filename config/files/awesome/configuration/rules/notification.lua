@@ -6,6 +6,7 @@ local awful = require("awful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local helpers = require("configuration.helpers")
+local json = require("dkjson")
 
 naughty.config.defaults.ontop = true
 -- naughty.config.defaults.icon_size = dpi(32)

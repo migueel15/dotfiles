@@ -20,7 +20,7 @@ app.detectScreen = "autorandr -c"
 app.solaar = "solaar --window=hide"
 app.mpris = "mpris-proxy"
 
-app.notion = app.browser .. " https://notion.so"
+app.notion = app.browser .. " https://www.notion.so/miguedm/Inicio-65fca48212e3468391b8d0b336e38ac2"
 app.calendar = app.browser .. " https://calendar.notion.so/"
 app.chatgpt = app.browser .. " https://chat.openai.com/chat"
 app.github = app.browser .. " https://github.com/migueel15"
