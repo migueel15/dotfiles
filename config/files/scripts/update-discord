@@ -6,6 +6,9 @@ pkill Discord
 yay -Sy
 yay -S discord --noconfirm
 
+discord & disown
+
+
 if [[ ! -d $DISCORD_PATH ]]; then
  mkdir $DISCORD_PATH 
  cd $DISCORD_PATH
