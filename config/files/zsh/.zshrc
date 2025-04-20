@@ -63,6 +63,8 @@ alias bw_login="bw login --raw > ~/.bw_session && export BW_SESSION=\$(cat ~.bw_
 alias bw_lock="bw lock && unset BW_SESSION"
 alias bw_unlock="bw unlock --raw > ~/.bw_session && export BW_SESSION=\$(cat ~.bw_session)"
 
+# server
+alias ubuntu="ssh -i ~/.ssh/oracle.key ubuntu@143.47.40.193"
 
 # functions
 windows(){
