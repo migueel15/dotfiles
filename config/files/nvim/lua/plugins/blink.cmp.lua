@@ -14,7 +14,7 @@ return {
         nerdfont = {
           module = "blink-nerdfont",
           name = "Nerd Fonts",
-          score_offset = 15,
+          score_offset = -15,
           opts = { insert = true },
         },
       },
