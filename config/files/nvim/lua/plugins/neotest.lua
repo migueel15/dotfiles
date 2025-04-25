@@ -35,9 +35,13 @@ return {
         require("neotest").run.run()
       end, { desc = "Run nearest test", noremap = true, silent = true })
 
-      vim.keymap.set("n", "<leader>ra", function()
+      vim.keymap.set("n", "<leader>rf", function()
         require("neotest").run.run(vim.fn.expand("%"))
       end, { desc = "Run all tests in file", noremap = true, silent = true })
+
+      vim.keymap.set("n", "<leader>ra", function()
+        require("neotest").run.run("src")
+      end, { desc = "Run all tests in src", noremap = true, silent = true })
     end,
   },
 }
