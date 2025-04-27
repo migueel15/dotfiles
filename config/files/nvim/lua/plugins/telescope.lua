@@ -4,6 +4,7 @@ return {
   branch = "0.1.x",
   dependencies = {
     "nvim-telescope/telescope-file-browser.nvim",
+    "andrew-george/telescope-themes",
     "nvim-lua/plenary.nvim",
   },
   config = function()
@@ -20,6 +21,7 @@ return {
 
     pcall(require("telescope").load_extension, "fzf")
     pcall(require("telescope").load_extension, "file_browser")
+    pcall(require("telescope").load_extension, "themes")
 
     local function find_git_root()
       local current_file = vim.api.nvim_buf_get_name(0)
