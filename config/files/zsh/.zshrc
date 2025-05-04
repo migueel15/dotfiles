@@ -28,6 +28,13 @@ alias glog='git log --graph --oneline --decorate --color \
 --pretty=format:"%C(yellow)%h%C(reset) %C(red)%d%C(reset) (%C(blue)%an%C(reset), %C(green)%ar%C(reset)) %s"
 '
 alias lg='lazygit'
+# github
+alias ghi="gh issue create"
+ghid (){
+  gh issue develop "$1" -c
+}
+alias ghpr="gh pr create"
+alias ghprm="gh pr merge"
 
 #-- lsd --
 alias ll='lsd -lh --group-dirs=first'
