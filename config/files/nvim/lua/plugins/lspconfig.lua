@@ -82,10 +82,12 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.csharpier,
+        null_ls.builtins.formatting.yamlfmt,
         null_ls.builtins.formatting.biome,
         null_ls.builtins.formatting.goimports,
         null_ls.builtins.code_actions.gomodifytags,
         null_ls.builtins.formatting.isort,
+        null_ls.builtins.diagnostics.yamllint,
       },
     })
 
