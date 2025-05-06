@@ -14,6 +14,7 @@ source ~/.oh-my-zsh/custom/plugins/zsh-sudo/sudo.plugin.zsh
 [ -f /home/$USER/.ghcup/env ] && source /home/$USER/.ghcup/env
 
 # aliases
+alias cd="z"
 #-- git --
 alias g='git'
 alias ga='git add'
@@ -164,3 +165,17 @@ source <(fzf --zsh)
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(zoxide init zsh)"
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c -z | fzf --height 40% --reverse --border-label ' SESSIONS ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+bindkey -s '^f' "sesh-sessions\n"

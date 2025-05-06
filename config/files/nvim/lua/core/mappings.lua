@@ -41,7 +41,7 @@ vim.keymap.set("x", "<M-j>", ":m '>+1<CR>gv", { noremap = true, silent = true })
 vim.keymap.set("x", "<M-k>", ":m '<-2<CR>gv", { noremap = true, silent = true })
 
 -- Set tmux sessionizer
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Toggleterm
 vim.keymap.set("t", "<C-p>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })

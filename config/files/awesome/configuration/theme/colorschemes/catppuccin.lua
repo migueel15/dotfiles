@@ -1,7 +1,6 @@
 local theme = {}
 theme.font = "Iosevka Nerd Font Propo, Medium 11"
--- theme.wallpaper = "~/.config/awesome/configuration/theme/wallpapers/mars-car.jpg"
-theme.wallpaper = "~/.config/awesome/configuration/theme/wallpapers/snow_mountain.jpg"
+theme.wallpaper = "~/.config/awesome/configuration/theme/wallpapers/mesh-gradient-blue.png"
 theme.vscode = "Catppuccin Mocha"
 theme.obsidian = "Catppuccin"
 local colors = {}

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if ! which wezterm &> /dev/null; then
+    yay -S wezterm
+fi
+
+rm -rf $HOME/.config/wezterm
+ln -snf $FILES_DIR $HOME/.config/wezterm
