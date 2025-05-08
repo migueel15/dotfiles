@@ -6,6 +6,7 @@ app.terminal = "wezterm"
 app.editor = os.getenv("EDITOR") or "nano"
 app.editor_cmd = app.terminal .. " -e " .. app.editor
 app.vscode = "code"
+app.cursor = "cursor"
 app.browser = "zen-browser"
 app.locker = "~/Scripts/LockScreen.sh"
 -- app.sysmenu = rofi .. "powermenu.sh &"
