@@ -48,7 +48,7 @@ awful.keyboard.append_global_keybindings({
     awful.spawn(app.browser)
   end, { description = "open browser", group = "launcher" }),
   awful.key({ modkey }, "v", function()
-    awful.spawn(app.cursor)
+    awful.spawn(app.ide)
   end, { description = "open cursor", group = "launcher" }),
   awful.key({ modkey }, "o", function()
     awful.spawn(app.nvimNotes)
