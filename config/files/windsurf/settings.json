@@ -1,0 +1,106 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.sideBar.location": "right",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "workbench.startupEditor": "none",
+  "editor.fontFamily": "\"JetBrainsMono Nerd Font\", 'Droid Sans Mono', 'monospace', monospace",
+  "editor.insertSpaces": true,
+  "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.compactFolders": false,
+  "npm.enableRunFromFolder": true,
+  "material-icon-theme.hidesExplorerArrows": true,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "editor.wordWrap": "wordWrapColumn",
+  "workbench.tree.indent": 12,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#468ed1"
+  },
+
+  // Vim settings
+  "vim.leader": ",",
+  "vim.highlightedyank.enable": true,
+  "vim.handleKeys": {
+    "<C-p>": false,
+    "<C-w>": false,
+    "<C-d>": true,
+    "<C-s>": false,
+    "<C-z>": false,
+    "<C-m>": false
+  },
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<M-j>"],
+      "commands": ["editor.action.moveLinesDownAction"],
+      "silent": true
+    },
+    {
+      "before": ["<M-k>"],
+      "commands": ["editor.action.moveLinesUpAction"],
+      "silent": true
+    }
+  ],
+
+  "vim.normalModeKeyBindings": [
+    // {
+    //   "before": ["<M-j>"],
+    //   "commands": ["editor.action.moveLinesDownAction"],
+    //   "silent": true
+    // },
+    // {
+    //   "before": ["<M-k>"],
+    //   "commands": ["editor.action.moveLinesUpAction"],
+    //   "silent": true
+    // },
+    {
+      "before": ["<C-d>"],
+      "after": ["<C-d>", "z", "z"]
+    },
+    {
+      "before": ["<C-u>"],
+      "after": ["<C-u>", "z", "z"]
+    },
+    {
+      "before": ["<leader>", "f", "w"],
+      "commands": ["workbench.action.quickTextSearch"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "f", "f"],
+      "commands": ["workbench.action.quickOpen"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"],
+      "silent": true
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "r", "n"],
+      "commands": ["editor.action.rename"],
+      "silent": true
+    }
+  ],
+  "window.confirmSaveUntitledWorkspace": false
+}

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+EDITOR="windsurf"
+CONFIG_PATH="$XDG_CONFIG_HOME/Windsurf"
+EXTENSION_PATH="$HOME/.$EDITOR"
+
+
+if ! which windsurf &> /dev/null; then
+    yay -S windsurf
+fi
+
+if [ -e "$HOME/.windsurf" ] && [ ! -L "$HOME/.windsurf" ]; then
+    echo "Eliminando directorio real $HOME/.windsurf"
+    rm -rf "$HOME/.windsurf"
+fi
+
+ln -snf $FILES_DIR/.$EDITOR $HOME/.windsurf
+
+ln -snf $FILES_DIR/keybindings.json $CONFIG_PATH/User/keybindings.json
+ln -snf $FILES_DIR/settings.json $CONFIG_PATH/User/settings.json
