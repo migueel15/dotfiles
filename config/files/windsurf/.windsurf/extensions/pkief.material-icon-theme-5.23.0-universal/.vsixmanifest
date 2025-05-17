@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 		<Metadata>
-			<Identity Language="en-US" Id="material-icon-theme" Version="5.22.0" Publisher="PKief" />
+			<Identity Language="en-US" Id="material-icon-theme" Version="5.23.0" Publisher="PKief" />
 			<DisplayName>Material Icon Theme</DisplayName>
 			<Description xml:space="preserve">Material Design Icons for Visual Studio Code</Description>
 			<Tags>icons,theme,material,icon-theme,customization,__web_extension,__sponsor_extension</Tags>

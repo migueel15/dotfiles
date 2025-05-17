@@ -615,9 +615,6 @@
     "sty": {
       "iconPath": "./../icons/sty.clone.svg"
     },
-    "cls": {
-      "iconPath": "./../icons/cls.clone.svg"
-    },
     "ltx": {
       "iconPath": "./../icons/ltx.clone.svg"
     },
@@ -1838,6 +1835,9 @@
     },
     "hadolint": {
       "iconPath": "./../icons/hadolint.svg"
+    },
+    "coloredpetrinets": {
+      "iconPath": "./../icons/coloredpetrinets.svg"
     },
     "file": {
       "iconPath": "./../icons/file.svg"
@@ -9933,6 +9933,7 @@
     "fish": "console",
     "exp": "console",
     "nu": "console",
+    "xsh": "console",
     "ps1": "powershell",
     "psm1": "powershell",
     "psd1": "powershell",
@@ -10004,7 +10005,6 @@
     "lbx": "lbx",
     "tex": "tex",
     "sty": "sty",
-    "cls": "cls",
     "ltx": "ltx",
     "dtx": "dtx",
     "pptx": "powerpoint",
@@ -10683,7 +10683,9 @@
     "reg": "regedit",
     "gnu": "gnuplot",
     "smk": "snakemake",
-    "snakemake": "snakemake"
+    "snakemake": "snakemake",
+    "cpn": "coloredpetrinets",
+    "pnml": "coloredpetrinets"
   },
   "fileNames": {
     ".pug-lintrc": "pug",

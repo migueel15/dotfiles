@@ -35,7 +35,9 @@ ghid (){
   gh issue develop "$1" -c
 }
 alias ghpr="gh pr create"
+alias ghprd="gh pr create --draft"
 alias ghprm="gh pr merge"
+alias ghd="gh dash"
 
 #-- lsd --
 alias ll='lsd -lh --group-dirs=first'

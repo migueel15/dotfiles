@@ -2,6 +2,27 @@
 
 # Changelog
 
+## v5.23.0
+
+[compare changes](https://github.com/material-extensions/vscode-material-icon-theme/compare/v5.22.0...v5.23.0)
+
+### 🚀 Enhancements
+
+- Add cpn icon ([#3005](https://github.com/material-extensions/vscode-material-icon-theme/pull/3005))
+- Add .xsh to console icon ([#3012](https://github.com/material-extensions/vscode-material-icon-theme/pull/3012))
+
+### 🩹 Fixes
+
+- Update changelog (replace emails with usernames) ([12df8f5a](https://github.com/material-extensions/vscode-material-icon-theme/commit/12df8f5a))
+- Update username in changelog ([8d79f38c](https://github.com/material-extensions/vscode-material-icon-theme/commit/8d79f38c))
+- Icon "*.cls" Apex Salesforce not found ([faa509b6](https://github.com/material-extensions/vscode-material-icon-theme/commit/faa509b6))
+
+### ❤️ Contributors
+
+- Kgruiz <kgruiz08@gmail.com>
+- Murilo De Souza Neves <murilogrilosn@gmail.com>
+- Philipp Kief <philipp.kief@gmx.de>
+
 ## v5.22.0
 
 [compare changes](https://github.com/material-extensions/vscode-material-icon-theme/compare/v5.21.1...v5.22.0)
@@ -40,9 +61,8 @@
 
 ### ❤️ Contributors
 
-- Marlon Luís De Col <marlondecol@proton.me>
+- Marlon Luís de Col ([@marlondecol](https://github.com/marlondecol))
 - Sawyer Nicastro ([@SawyerNic](https://github.com/SawyerNic))
-- Marlon De Col <marlondecol@proton.me>
 - Chuanyi Zhang ([@ChuanyiZ](https://github.com/ChuanyiZ))
 - Navid Talebian ([@Navidtm](https://github.com/Navidtm))
 - Tom ([@ImDarkTom](https://github.com/ImDarkTom))
@@ -51,7 +71,7 @@
 - Zero ([@Groupguanfang](https://github.com/Groupguanfang))
 - 魔王少年 ([@maou-shonen](https://github.com/maou-shonen))
 - Karlos ([@aixegorri](https://github.com/aixegorri))
-- Crocodilo 🐊 <cappuccino5353@gmail.com>
+- Crocodilo 🐊
 
 ## v5.21.1
 
@@ -90,10 +110,10 @@
 ### ❤️ Contributors
 
 - Gabriel Mitelman Tkacz ([@gtkacz](https://github.com/gtkacz))
-- Cameron Cowen <cameronc94@gmail.com>
+- Cameron Cowen ([@milkyware](https://github.com/milkyware))
 - Firecrafter28 ([@Firecrafter28](https://github.com/Firecrafter28))
 - Philipp Kief ([@PKief](https://github.com/PKief))
-- Philipp Bauer <ciriousjoker@gmail.com>
+- Philipp Bauer ([@ciriousjoker](https://github.com/ciriousjoker))
 - Thaddeus Crews ([@Repiteo](https://github.com/Repiteo))
 - Vaibhav Naik ([@Vaibhav-Naik-26](https://github.com/Vaibhav-Naik-26))
 - Lucas Colombo ([@lucas-labs](https://github.com/lucas-labs))
@@ -138,7 +158,7 @@
 ### ❤️ Contributors
 
 - Rowan Walsh ([@rowan-walsh](https://github.com/rowan-walsh))
-- Pete Davison <pd93.uk@outlook.com>
+- Pete Davison ([@pd93](https://github.com/pd93))
 - Firecrafter28 ([@Firecrafter28](https://github.com/Firecrafter28))
 - Philipp Kief ([@PKief](https://github.com/PKief))
 - Yen Cheng Lin ([@ridemountainpig](https://github.com/ridemountainpig))

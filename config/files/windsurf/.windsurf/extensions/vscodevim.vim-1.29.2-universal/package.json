@@ -3,7 +3,7 @@
 	"displayName": "Vim",
 	"description": "Vim emulation for Visual Studio Code",
 	"icon": "images/icon.png",
-	"version": "1.29.1",
+	"version": "1.29.2",
 	"publisher": "vscodevim",
 	"galleryBanner": {
 		"color": "#e3f4ff",
@@ -67,7 +67,7 @@
 			{
 				"key": "Escape",
 				"command": "extension.vim_escape",
-				"when": "editorTextFocus && vim.active && !inDebugRepl && !inlineSuggestionVisible && !inlineEditIsVisible && !testing.isPeekVisible && !testing.isInPeek && !suggestWidgetVisible && !dirtyDiffVisible && (vim.mode == 'Insert' || !notebookEditorFocused)"
+				"when": "editorTextFocus && vim.active && !inDebugRepl"
 			},
 			{
 				"key": "Escape",
@@ -1246,8 +1246,8 @@
 		"*.ts": "eslint --fix"
 	},
 	"__metadata": {
-		"installedTimestamp": 1747347942775,
+		"installedTimestamp": 1747417814760,
 		"targetPlatform": "universal",
-		"size": 3948509
+		"size": 3948335
 	}
 }
