@@ -68,11 +68,6 @@
     "command": "-workbench.action.togglePanel"
   },
   {
-    "key": "ctrl+v",
-    "command": "workbench.action.splitEditor",
-    "when": "!splitEditorsVertically && activeEditor != 'workbench.editor.composer'"
-  },
-  {
     "key": "ctrl+h",
     "command": "-extension.vim_ctrl+h",
     "when": "editorTextFocus && vim.active && vim.use<C-h> && !inDebugRepl"

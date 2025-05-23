@@ -102,5 +102,8 @@
       "silent": true
     }
   ],
-  "window.confirmSaveUntitledWorkspace": false
+  "window.confirmSaveUntitledWorkspace": false,
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  }
 }
