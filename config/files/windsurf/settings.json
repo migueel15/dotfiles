@@ -105,5 +105,6 @@
   "window.confirmSaveUntitledWorkspace": false,
   "workbench.editorAssociations": {
     "*.svg": "default"
-  }
+  },
+  "git.enableSmartCommit": true
 }
