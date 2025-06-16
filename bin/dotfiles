@@ -6,7 +6,7 @@ CONFIG_DIR="$DOTFILES_DIR/config"
 
 runModule ()
 {
-	local module=$1
+	local module=$
 	local BASENAME=$(basename $module)
 	export FILES_DIR=$CONFIG_DIR/files/$BASENAME
 	echo "Running $module"
