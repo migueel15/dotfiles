@@ -1,3 +1,5 @@
 #!/bin/bash
 
-yay -S bitwarden-cli
+if ! yay -Q | grep bitwarden-cli &>/dev/null; then
+  yay -S bitwarden-cli
+fi
