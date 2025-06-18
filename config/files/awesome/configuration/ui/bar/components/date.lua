@@ -1,6 +1,6 @@
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local textclock = wibox.widget.textclock("%a %d %b - %H:%M")
+local textclock = wibox.widget.textclock("%a %d %b | %H:%M")
 
 local date = wibox.widget({
   layout = wibox.layout.fixed.horizontal,
