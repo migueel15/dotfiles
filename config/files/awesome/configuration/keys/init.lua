@@ -77,8 +77,8 @@ awful.keyboard.append_global_keybindings({
     awful.spawn.with_shell(app.calendar)
   end, { description = "run calendar", group = "launcher" }),
   awful.key({ modkey }, "x", function()
-    awful.spawn(app.chatgpt)
-  end, { description = "run chatgpt", group = "launcher" }),
+    awful.spawn(app.llm)
+  end, { description = "run llm web", group = "launcher" }),
   awful.key({ modkey }, "g", function()
     awful.spawn(app.github)
   end, { description = "run github", group = "launcher" }),

@@ -22,7 +22,7 @@ app.mpris = "mpris-proxy"
 
 app.notion = app.browser .. " https://www.notion.so/miguedm/Inicio-65fca48212e3468391b8d0b336e38ac2"
 app.calendar = app.browser .. " https://calendar.notion.so/"
-app.chatgpt = app.browser .. " https://chat.openai.com/chat"
+app.llm = app.browser .. " https://grok.com/"
 app.github = app.browser .. " https://github.com/migueel15"
 
 -- app.buscador = "rofi -no-config -no-lazy-grab -show drun -modi drun -theme " .. rofi .. "launcher.rasi"
