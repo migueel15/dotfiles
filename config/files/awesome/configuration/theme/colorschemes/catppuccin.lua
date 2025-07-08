@@ -1,5 +1,6 @@
 local theme = {}
-theme.font = "Iosevka Nerd Font Propo, Medium 11"
+-- theme.font = "Iosevka Nerd Font Propo, Medium 11"
+theme.font = "JetBrainsMono Nerd Font Propo, Medium 10"
 theme.wallpaper = "~/.config/awesome/configuration/theme/wallpapers/mesh-gradient-blue.png"
 theme.vscode = "Catppuccin Mocha"
 theme.obsidian = "Catppuccin"
