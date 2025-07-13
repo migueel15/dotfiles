@@ -63,6 +63,7 @@ alias ranger="yazi"
 alias notes="glow $HOME/SecondBrain/04-Notes/"
 alias nt="nvim $HOME/SecondBrain/04-Notes/"
 alias todo="nvim $HOME/SecondBrain/04-Notes/todo.md"
+alias oc="opencode"
 
 # BITWARDEN
 if [[ -f $HOME/.bw_session ]]; then

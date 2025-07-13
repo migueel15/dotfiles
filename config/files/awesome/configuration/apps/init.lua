@@ -2,7 +2,7 @@ local rofi = "~/.config/awesome/configuration/ui/rofi/"
 
 local app = {}
 
-app.terminal = "wezterm"
+app.terminal = "kitty"
 app.editor = os.getenv("EDITOR") or "nano"
 app.editor_cmd = app.terminal .. " -e " .. app.editor
 app.ide = "windsurf"
