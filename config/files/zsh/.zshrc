@@ -182,3 +182,6 @@ function sesh-sessions() {
   }
 }
 bindkey -s '^f' "sesh-sessions\n"
+
+# opencode
+export PATH=/home/miguel/.opencode/bin:$PATH
