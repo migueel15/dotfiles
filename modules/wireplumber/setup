@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+rm -rf $HOME/.config/wireplumber
+
+ln -snf $CONFIG_DIR $HOME/.config/wireplumber
+
+systemctl --user enable --now wireplumber.service
+systemctl --user restart wireplumber.service
+systemctl --user restart pipewire

@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+check_command() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+initial_setup_yay() {
+  if check_command yay; then
+    log_success "yay ya está instalado."
+    return
+  fi
+
+  log_info "yay no está instalado. Procediendo a instalar..."
+
+  sudo pacman -S --needed --noconfirm git base-devel
+
+  tmpdir=$(mktemp -d)
+  git clone https://aur.archlinux.org/yay.git "$tmpdir/yay"
+  cd "$tmpdir/yay"
+  makepkg -si --noconfirm
+  cd -
+  rm -rf "$tmpdir"
+
+  if check_command yay; then
+    log_success "yay instalado correctamente."
+  else
+    log_error "Error instalando yay."
+    exit 1
+  fi
+}
+
+setup_bw() {
+  local session_file="$HOME/.bw_session"
+  local status
+
+  if check_command bw; then
+    log_success "Bitwarden CLI está instalado."
+    status=$(bw status | jq -r '.status')
+
+    if [[ "$status" == "unauthenticated" ]]; then
+      log_info "Iniciando sesión en Bitwarden CLI..."
+      export BW_SESSION=$(bw login --raw)
+      echo "$BW_SESSION" > "$session_file"
+    elif [[ "$status" == "locked" ]]; then
+      log_info "Desbloqueando Bitwarden CLI..."
+      export BW_SESSION=$(bw unlock --raw)
+      echo "$BW_SESSION" > "$session_file"
+    elif [[ "$status" == "unlocked" ]]; then
+      log_info "Bitwarden CLI está desbloqueado."
+    else
+      log_warn "Estado desconocido de Bitwarden CLI: $status"
+    fi
+    return
+  fi
+}

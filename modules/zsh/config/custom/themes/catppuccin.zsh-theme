@@ -1,0 +1,1 @@
+catppuccin-zsh/catppuccin.zsh-theme

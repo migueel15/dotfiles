@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Asumimos que logger ya fue cargado antes en el script principal
+
+# Función para filtrar un archivo deps:
+# Ignora líneas vacías y comentarios (líneas que empiezan con '#')
+parse_deps_file() {
+  local file="$1"
+  grep -Ev '^\s*($|#)' "$file" || true
+}
+
+# Función para instalar paquetes desde un archivo deps usando yay
+install_packages_from_deps() {
+  local deps_file="$1"
+
+  if [[ ! -f "$deps_file" ]]; then
+    log_warn "Archivo de dependencias no encontrado: $deps_file"
+    return
+  fi
+
+  local packages
+  packages=$(parse_deps_file "$deps_file")
+
+  if [[ -z "$packages" ]]; then
+    log_info "No hay paquetes para instalar en $deps_file"
+    return
+  fi
+
+  local -a pkgs_array
+  mapfile -t pkgs_array <<<"$packages"
+
+  # Ejecutar yay silencioso: salida normal y error a /dev/null
+  yay -S --needed --noconfirm "${pkgs_array[@]}" > /dev/null 2>&1
+
+  if [[ $? -eq 0 ]]; then
+    log_success "Paquetes instalados desde $deps_file"
+  else
+    log_error "Error al instalar paquetes desde $deps_file"
+  fi
+}
+

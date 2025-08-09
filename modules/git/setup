@@ -1,0 +1,17 @@
+GIT_DATA=$(bw get item "git-credentials")
+
+GITHUB_USER=$(echo $GIT_DATA | jq -r ".fields[0].value") 
+GITHUB_EMAIL=$(echo $GIT_DATA | jq -r ".fields[1].value") 
+GITHUB_TOKEN=$(echo $GIT_DATA | jq -r ".fields[2].value") 
+GITLAB_TOKEN=$(echo $GIT_DATA | jq -r ".fields[3].value") 
+git config --global user.email $GITHUB_EMAIL 
+git config --global user.name $GITHUB_USER 
+git config --global credential.helper store
+
+# Crear ~/.git-credentials si no existe
+rm -f ~/.git-credentials
+if [ ! -f ~/.git-credentials ]; then
+    touch ~/.git-credentials
+fi
+echo "https://$GITHUB_USER:$GITHUB_TOKEN@github.com" > ~/.git-credentials
+echo "https://$GITHUB_USER:$GITLAB_TOKEN@gitlab.com" >> ~/.git-credentials

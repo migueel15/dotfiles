@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+
+if [ ! -d "$HOME/.oh-my-zsh/" ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/tty
+fi
+
+rm -rf "$HOME/.oh-my-zsh/custom"
+ln -sf "$CONFIG_DIR/custom" "$HOME/.oh-my-zsh/custom"
+
+ln -sf "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
+ln -sf "$CONFIG_DIR/.Xresources" "$HOME/.Xresources"

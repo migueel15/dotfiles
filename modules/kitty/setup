@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+target="$HOME/.config/kitty"
+
+if [[ -e "$target" || -L "$target" ]]; then
+  rm -rf "$target"
+fi
+
+ln -s "$CONFIG_DIR" "$target"

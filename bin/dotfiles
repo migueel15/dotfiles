@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Definir DOTFILES_DIR como la carpeta raíz (un nivel arriba de bin/)
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Importar logger y funciones comunes
+source "$DOTFILES_DIR/core/logger"
+# source "$DOTFILES_DIR/core/utils"
+source "$DOTFILES_DIR/core/package"
+source "$DOTFILES_DIR/core/initial_setup"
+
+print_help() {
+  cat <<EOF
+Uso: dotfiles <comando> [opciones]
+
+Comandos:
+  list                Listar módulos disponibles
+  install <modulo>    Instalar un módulo (todos si no se especifica)
+  generate <modulo>   Crear un módulo nuevo
+  setup               Instalar yay si no está y dependencias base
+  help                Mostrar esta ayuda
+EOF
+}
+
+list_modules() {
+  log_title "Módulos disponibles:"
+  for mod in "$DOTFILES_DIR/modules"/*; do
+    [ -d "$mod" ] && echo "  - $(basename "$mod")"
+  done
+}
+
+install_deps_from_file() {
+  local file="$1"
+  if [[ -f "$file" ]]; then
+    log_info "Instalando dependencias desde $file"
+    install_packages_from_deps "$file"  # Función en core/package
+  else
+    log_warn "No existe el archivo $file"
+  fi
+}
+
+install_global_deps() {
+  log_title "Instalando dependencias globales..."
+  install_deps_from_file "$DOTFILES_DIR/packages/deps"
+}
+
+install_module() {
+  local mod="$1"
+  local mod_dir="$DOTFILES_DIR/modules/$mod"
+
+  if [[ ! -d "$mod_dir" ]]; then
+    log_error "El módulo '$mod' no existe."
+    exit 1
+  fi
+
+  log_title "Instalando módulo '$mod'..."
+
+  install_deps_from_file "$mod_dir/deps"
+
+  if [[ -x "$mod_dir/setup" ]]; then
+    log_info "Ejecutando setup del módulo..."
+    export CONFIG_DIR="$mod_dir/config"
+    (cd "$mod_dir" && ./setup)
+  else
+    log_warn "No se encontró un setup ejecutable para '$mod'"
+  fi
+
+  log_success "Módulo '$mod' instalado."
+}
+
+install_all_modules() {
+  for mod_path in "$DOTFILES_DIR/modules"/*; do
+    if [[ -d "$mod_path" ]]; then
+      install_module "$(basename "$mod_path")"
+    fi
+  done
+}
+
+generate_module() {
+  local mod="$1"
+  local mod_dir="$DOTFILES_DIR/modules/$mod"
+
+  if [[ -d "$mod_dir" ]]; then
+    log_warn "El módulo '$mod' ya existe en $mod_dir"
+    return 1
+  fi
+
+  mkdir -p "$mod_dir/config"
+  touch "$mod_dir/deps"
+  cat > "$mod_dir/setup" <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+EOF
+
+  chmod +x "$mod_dir/setup"
+
+  log_success "Módulo '$mod' creado en $mod_dir con estructura básica."
+}
+
+
+main() {
+  if [[ $# -lt 1 ]]; then
+    print_help
+    exit 0
+  fi
+
+  case "$1" in
+    list)
+      list_modules
+      ;;
+    install)
+
+      initial_setup_yay
+      install_global_deps
+      setup_bw
+
+      if [[ $# -eq 1 ]]; then
+        install_all_modules
+      else
+        install_module "$2"
+      fi
+      ;;
+    generate)
+      if [[ $# -lt 2 ]]; then
+        log_error "Debes especificar el nombre del módulo a generar."
+        exit 1
+      fi
+      generate_module "$2"
+      ;;
+    setup)
+      initial_setup_yay
+      install_global_deps
+      setup_bw
+      ;;
+    help|--help|-h)
+      print_help
+      ;;
+    *)
+      log_error "Comando desconocido: $1"
+      print_help
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

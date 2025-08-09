@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FONTS_DIR="$HOME/.local/share/fonts"
+
+# Script setup básico para módulo
+if [ ! -d "$FONTS_DIR" ]; then
+    mkdir -p "$FONTS_DIR"
+fi
+
+# Copiar los archivos
+sudo cp -r $CONFIG_DIR/* "$FONTS_DIR"
