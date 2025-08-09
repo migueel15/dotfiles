@@ -1,0 +1,10 @@
+[Unit]
+Description=Push repos to github
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStop=/home/miguel/.scripts/push-repos
+
+[Install]
+WantedBy=default.target

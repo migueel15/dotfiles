@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+ln -snf $CONFIG_DIR $HOME/.config/systemd/user/myservices
+
+for service in $HOME/.config/systemd/user/myservices/*.service; do
+	systemctl --user enable --now $HOME/.config/systemd/user/myservices/$(basename $service)
+done

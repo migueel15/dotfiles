@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+until ping -c1 google.com; do sleep 5; done
+
+echo -e "${YELLOW}Pushing dotfiles${NC}"
+cd $HOME/.dotfiles
+git add .
+git commit -m "Update dotfiles: $(date)"
+git push origin main
+
+echo -e "${YELLOW}Pushing Universidad${NC}"
+cd $HOME/Universidad/
+git add .
+git commit -m "Update Universidad: $(date)"
+git push origin main
+git submodule foreach "git add . && git commit -m 'Update Submodule $path: $(date)' && git push"
+
+# echo -e "${YELLOW}Pushing minecraft backup${NC}"
+# cd $HOME/.modMinecraft/Instances/Server/
+# git add .
+# git commit -m "Update minecraft-backup: $(date)"
+# git push origin main
