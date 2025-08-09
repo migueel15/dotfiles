@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+rm -rf $HOME/.config/rofi
+
+ln -snf $CONFIG_DIR $HOME/.config/rofi

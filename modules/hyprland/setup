@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Script setup básico para módulo
+DEST=$HOME/.config/hypr
+
+rm -rf $DEST
+
+ln -snf $CONFIG_DIR $DEST
+
+# Install plugins
+hyprpm update
+hyprpm add https://github.com/Duckonaut/split-monitor-workspaces # Add the plugin repository
+hyprpm enable split-monitor-workspaces # Enable the plugin
+hyprpm reload # Reload the plugins
