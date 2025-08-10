@@ -2,7 +2,7 @@
 
 * {
   font-family: JetBrainsMono Nerd Font;
-  font-size: 15px;
+  font-size: 14px;
   min-height: 0;
 }
 
@@ -43,12 +43,12 @@ button:hover {
 
 #custom-music,
 #tray,
-#backlight,
 #clock,
 #battery,
 #pulseaudio,
 #custom-lock,
 #custom-power {
+  font-size: 17px;
   padding: 0.5rem 1rem;
   margin: 5px 0;
 }
@@ -69,15 +69,6 @@ button:hover {
 
 #battery.warning:not(.charging) {
   color: @red;
-}
-
-#backlight {
-  color: @yellow;
-}
-
-#backlight,
-#battery {
-  border-radius: 0;
 }
 
 #pulseaudio {
