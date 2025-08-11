@@ -7,6 +7,7 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
   "modules-right": [
+    "hyprland/window",
     "custom/music",
     "pulseaudio",
     "battery",
@@ -14,6 +15,25 @@
     "custom/lock",
     "custom/power"
   ],
+  "hyprland/window": {
+    "format": "{initialClass}",
+    "icon": true,
+    "icon-size": 19,
+    "seperate-outputs": true,
+    "rewrite": {
+      "": "  Arch",
+      "Mozilla Firefox": "Firefox",
+      "(.*) Thunar": "Thunar",
+      "(.*)obs(.*)": "OBS",
+      "Spotify (.*)": "Spotify",
+      "discord(.*)": "Discord",
+      "Code": "VS Code",
+      "Docker Desktop": " Docker",
+      "kitty": "Kitty",
+      "zen": "Zen"
+    },
+    "on-click-middle": "pkill waybar && hyprctl dispatch exec waybar"
+  },
 
   "hyprland/workspaces": {
     "disable-scroll": true,

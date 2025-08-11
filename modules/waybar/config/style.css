@@ -2,7 +2,7 @@
 
 * {
   font-family: JetBrainsMono Nerd Font;
-  font-size: 14px;
+  font-size: 17px;
   min-height: 35px;
 }
 
@@ -44,4 +44,17 @@ tooltip label {
 
 #workspaces button.visible {
   color: @white;
+}
+
+#workspaces label {
+  font-size: 12px;
+}
+
+#pulseaudio,
+#battery,
+#tray,
+#custom-lock,
+#custom-power {
+  padding: 0rem 1rem;
+  /* margin: 5px 0; */
 }
