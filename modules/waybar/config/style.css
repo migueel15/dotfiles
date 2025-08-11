@@ -3,7 +3,7 @@
 * {
   font-family: JetBrainsMono Nerd Font;
   font-size: 14px;
-  min-height: 0;
+  min-height: 35px;
 }
 
 button {
@@ -19,81 +19,29 @@ button:hover {
   background: none;
   border: none;
 }
+tooltip {
+  background-color: @base;
+}
+
+tooltip label {
+  color: @text;
+}
 
 #waybar {
   background: @base;
   color: @text;
-  margin: 5px 5px;
 }
 
 #workspaces {
-  border-radius: 1rem;
-  margin: 5px;
+  background-color: @base;
   margin-left: 1rem;
 }
 
 #workspaces button {
-  padding: 1px;
+  padding: 0px 2px;
   color: @blue;
 }
 
 #workspaces button.visible {
   color: @white;
-}
-
-#custom-music,
-#tray,
-#clock,
-#battery,
-#pulseaudio,
-#custom-lock,
-#custom-power {
-  font-size: 17px;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
-}
-
-#clock {
-  color: @blue;
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
-}
-
-#battery {
-  color: @green;
-}
-
-#battery.charging {
-  color: @green;
-}
-
-#battery.warning:not(.charging) {
-  color: @red;
-}
-
-#pulseaudio {
-  color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
-}
-
-#custom-music {
-  color: @mauve;
-  border-radius: 1rem;
-}
-
-#custom-lock {
-  border-radius: 1rem 0px 0px 1rem;
-  color: @lavender;
-}
-
-#custom-power {
-  margin-right: 1rem;
-  border-radius: 0px 1rem 1rem 0px;
-  color: @red;
-}
-
-#tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
 }
