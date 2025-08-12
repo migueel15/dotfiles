@@ -1,7 +1,11 @@
 hyprland
 hyprpaper
 hyprlock
+hyprpicker
+wl-clipboard
 swww
+bluez
+bluez-utils
 cmake
 meson
 cpio

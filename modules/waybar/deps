@@ -1,3 +1,5 @@
 waybar
 pavucontrol
 network-manager-applet
+bluez
+bluez-utils
