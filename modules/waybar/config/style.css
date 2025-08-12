@@ -2,8 +2,8 @@
 
 * {
   font-family: JetBrainsMono Nerd Font;
-  font-size: 17px;
-  min-height: 35px;
+  font-size: 19px;
+  min-height: 40px;
 }
 
 button {
@@ -34,7 +34,6 @@ tooltip label {
 
 #workspaces {
   background-color: @base;
-  margin-left: 1rem;
 }
 
 #workspaces button {
@@ -42,12 +41,15 @@ tooltip label {
   color: @blue;
 }
 
+#workspaces button.empty {
+  color: @overlay1;
+}
+
 #workspaces button.visible {
   color: @white;
 }
-
 #workspaces label {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 #pulseaudio,
@@ -57,4 +59,16 @@ tooltip label {
 #custom-power {
   padding: 0rem 1rem;
   /* margin: 5px 0; */
+}
+
+#pulseaudio.muted {
+  color: @overlay1;
+}
+
+#bluetooth.disabled {
+  color: @overlay1;
+}
+
+#bluetooth.connected {
+  color: @blue;
 }

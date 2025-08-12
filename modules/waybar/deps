@@ -3,3 +3,5 @@ pavucontrol
 network-manager-applet
 bluez
 bluez-utils
+blueberry
+wireplumber

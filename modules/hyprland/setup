@@ -10,6 +10,10 @@ ln -snf $CONFIG_DIR $DEST
 
 # Install plugins
 hyprpm update
-hyprpm add https://github.com/Duckonaut/split-monitor-workspaces # Add the plugin repository
-hyprpm enable split-monitor-workspaces # Enable the plugin
+
+if ! hyprpm list plugins | grep -q "split-monitor-workspaces"; then
+    hyprpm add https://github.com/Duckonaut/split-monitor-workspaces
+    hyprpm enable split-monitor-workspaces
+fi
+
 hyprpm reload # Reload the plugins

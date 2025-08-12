@@ -20,7 +20,7 @@
     "format-icons": {
       "active": "",
       "default": "",
-      "empty": ""
+      "empty": ""
     }
   },
 
@@ -61,11 +61,21 @@
   "pulseaudio": {
     "scroll-step": 5, // %, can be a float
     "format": "{icon} {volume}%",
-    "format-muted": "",
+    "format-muted": "  {volume}%",
     "format-icons": {
       "default": ["", "", " "]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱",
+    "format-disabled": "󰂲",
+    "format-on": "󰂯",
+    "tooltip-format-connected": "{device_alias} - {device_battery_percentage}%",
+    "on-click": "blueberry"
   },
 
   "custom/lock": {
@@ -77,6 +87,6 @@
   "custom/power": {
     "tooltip": false,
     "on-click": "wlogout &",
-    "format": "襤"
+    "format": "⏻"
   }
 }
