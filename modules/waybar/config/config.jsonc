@@ -10,7 +10,7 @@
     "bluetooth",
     "battery",
     "custom/lock",
-    "tray"
+    "group/group-toggle"
   ],
 
   "hyprland/workspaces": {
@@ -42,8 +42,9 @@
   "clock": {
     "timezone": "Europe/Madrid",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": " {:%d/%m/%Y}",
-    "format": " {:%H:%M}"
+    // "format": " {:%H:%M}"
+    "format": "{:%A %H:%M}",
+    "format-alt": "{:%d %B W%V %Y}"
   },
 
   "battery": {
@@ -88,5 +89,18 @@
     "tooltip": false,
     "on-click": "wlogout &",
     "format": "⏻"
+  },
+
+  "custom/traytoggle": {
+    "tooltip": false,
+    "format": ""
+  },
+
+  "group/group-toggle": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500
+    },
+    "modules": ["custom/traytoggle", "tray"]
   }
 }

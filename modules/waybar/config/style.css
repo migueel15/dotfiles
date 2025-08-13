@@ -54,11 +54,19 @@ tooltip label {
 
 #pulseaudio,
 #battery,
-#tray,
 #custom-lock,
 #custom-power {
   padding: 0rem 1rem;
   /* margin: 5px 0; */
+}
+
+#tray,
+#custom-traytoggle {
+  padding: 0rem 1rem 0rem 0rem;
+}
+
+#custom-traytoggle {
+  color: @blue;
 }
 
 #pulseaudio.muted {
