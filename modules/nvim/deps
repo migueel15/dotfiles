@@ -1,0 +1,10 @@
+neovim
+cmake
+curl
+pkg-config
+libtool
+unzip
+ripgrep
+wl-clipboard
+npm
+prettier
