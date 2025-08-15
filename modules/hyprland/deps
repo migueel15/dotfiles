@@ -12,3 +12,5 @@ cpio
 pkgconf
 git
 gcc
+grim
+slurp
