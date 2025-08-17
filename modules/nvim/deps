@@ -8,3 +8,5 @@ ripgrep
 wl-clipboard
 npm
 prettier
+luarocks
+dotnet-sdk
