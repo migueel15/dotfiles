@@ -1,9 +1,12 @@
 @import "mocha.css";
 
 * {
-  font-family: NotoSans Nerd Font;
+  /* font-family: NotoSans Nerd Font; */
+  /* font-family: Ubuntu Nerd Font Propo; */
+  font-family: JetBrainsMono Nerd Font Propo;
   font-size: 19px;
   min-height: 40px;
+  border: none;
 }
 
 button {
@@ -28,6 +31,7 @@ tooltip label {
 }
 
 #waybar {
+  border-radius: 0px;
   background: @base;
   color: @text;
 }
@@ -37,7 +41,7 @@ tooltip label {
 }
 
 #workspaces button {
-  padding: 0px 2px;
+  padding: 0px 1px;
   color: @blue;
 }
 
@@ -52,17 +56,24 @@ tooltip label {
   font-size: 13px;
 }
 
+#workspaces,
+#custom-music,
+#bluetooth,
 #pulseaudio,
 #battery,
 #custom-lock,
-#custom-power {
-  padding: 0rem 1rem;
+#custom-notification {
+  padding: 0rem 0.5rem;
   /* margin: 5px 0; */
 }
 
 #tray,
 #custom-traytoggle {
-  padding: 0rem 1rem 0rem 0rem;
+  padding: 0rem 1rem 0rem 0.5rem;
+}
+
+#custom-power {
+  padding: 0rem 0rem 0rem 1rem;
 }
 
 #custom-traytoggle {

@@ -3,9 +3,9 @@ status=$(playerctl --player=spotify status 2>/dev/null)
 title=$(playerctl --player=spotify metadata --format '{{ title }}' 2> /dev/null)
 
 if [ "$status" = "Playing" ]; then
-  echo "  $title";
+  echo " $title";
 elif [ "$status" = "Paused" ]; then
-  echo "  $title";
+  echo " $title";
 else 
   echo "";
 fi
