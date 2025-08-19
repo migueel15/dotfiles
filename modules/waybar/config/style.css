@@ -1,9 +1,8 @@
 @import "mocha.css";
 
 * {
-  /* font-family: NotoSans Nerd Font; */
-  /* font-family: Ubuntu Nerd Font Propo; */
-  font-family: JetBrainsMono Nerd Font Propo;
+  /* font-family: JetBrainsMono Nerd Font Propo; */
+  font-family: CaskaydiaMono Nerd Font Propo;
   font-size: 19px;
   min-height: 40px;
   border: none;
