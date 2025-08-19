@@ -1,151 +1,140 @@
 {
-  "reload_style_on_change": true,
-  "layer": "top",
-  "position": "top",
-  "modules-left": [
-    "custom/power",
-    "hyprland/workspaces",
-    "cpu",
-    "memory",
-    "disk"
-  ],
-  "modules-center": ["clock"],
-  "modules-right": [
-    "custom/music",
-    "custom/notification",
-    "pulseaudio",
-    "bluetooth",
-    "battery",
-    "custom/lock",
-    "group/group-toggle"
-  ],
-
-  "hyprland/workspaces": {
-    "disable-scroll": true,
-    "sort-by-name": true,
-    "format": " {icon} ",
-    "format-icons": {
-      "active": "",
-      "default": "",
-      "empty": ""
-    }
-  },
-  "cpu": {
-    "format": "<span color='#89b4fa'>󰍛</span> <span color='#cdd6f4'>{usage}%</span>",
-    "interval": 1,
-    "format-alt-click": "click",
-    "format-alt": "<span color='#89b4fa'>{icon0}{icon1}{icon2}{icon3}</span> <span color='#FFFFFF'>{usage:>2}%</span> <span color='#00FF00'>󰍛</span>",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
-    "on-click": "gnome-system-monitor"
-  },
-  "memory": {
-    "interval": 3,
-    "format": "<span color='#89b4fa'></span> <span color='#cdd6f4'>{used:0.1f}G</span>"
-  },
-  "disk": {
-    "interval": 3,
-    "path": "/home",
-    "format": "<span color='#89b4fa'></span> <span color='#cdd6f4'>{free}</span>",
-    "unit": "GB"
-  },
-
-  "tray": {
-    "icon-size": 21,
-    "spacing": 10
-  },
-
-  "custom/music": {
-    "format": "{}",
-    "escape": true,
-    "interval": 1,
-    "tooltip": true,
-    "exec": "/$HOME/.config/waybar/scripts/music",
-    "on-click": "playerctl play-pause",
-    "max-length": 20
-  },
-
-  "clock": {
-    "timezone": "Europe/Madrid",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    // "format": " {:%H:%M}"
-    "format": "{:%A %H:%M}",
-    "format-alt": "{:%d %B W%V %Y}"
-  },
-
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon}",
-    "format-charging": "",
-    "format-plugged": "",
-    "format-alt": "{icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", "", "", "", ""]
-  },
-
-  "pulseaudio": {
-    "scroll-step": 5, // %, can be a float
-    "format": "{icon} {volume}%",
-    "format-muted": " {volume}%",
-    "format-icons": {
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol",
-    "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle"
-  },
-
-  "bluetooth": {
-    "format": "󰂯",
-    "format-connected": "󰂱",
-    "format-disabled": "󰂲",
-    "format-on": "󰂯",
-    "tooltip-format-connected": "{device_alias} - {device_battery_percentage}%",
-    "on-click": "blueberry"
-  },
-
-  "custom/lock": {
-    "tooltip": false,
-    "on-click": "hyprlock",
-    "format": ""
-  },
-
-  "custom/power": {
-    "tooltip": false,
-    "on-click": "wlogout &",
-    "format": "󰐥"
-  },
-
-  "custom/traytoggle": {
-    "tooltip": false,
-    "format": ""
-  },
-
-  "group/group-toggle": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 500
-    },
-    "modules": ["custom/traytoggle", "tray"]
-  },
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "󱅫",
-      "none": "󰂚",
-      "dnd-notification": "󰂛<span foreground='red'><sup></sup></span>",
-      "dnd-none": "󰂛",
-      "inhibited-notification": "󱅫",
-      "inhibited-none": "󰂚",
-      "dnd-inhibited-notification": "󱏧",
-      "dnd-inhibited-none": "󰂛"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  }
+	"reload_style_on_change": true,
+	"layer": "top",
+	"position": "top",
+	"modules-left": [
+		"custom/power",
+		"hyprland/workspaces",
+		"cpu",
+		"memory",
+		"disk"
+	],
+	"modules-center": ["clock"],
+	"modules-right": [
+		"custom/music",
+		"custom/notification",
+		"pulseaudio",
+		"bluetooth",
+		"battery",
+		"custom/lock",
+		"group/group-toggle"
+	],
+	"hyprland/workspaces": {
+		"disable-scroll": true,
+		"sort-by-name": true,
+		"format": " {icon} ",
+		"format-icons": {
+			"active": "",
+			"default": "",
+			"empty": ""
+		}
+	},
+	"cpu": {
+		"format": "<span color='#89b4fa'>󰍛</span> <span color='#cdd6f4'>{usage}%</span>",
+		"interval": 1,
+		"format-alt-click": "click",
+		"format-alt": "<span color='#89b4fa'>{icon0}{icon1}{icon2}{icon3}</span> <span color='#FFFFFF'>{usage:>2}%</span> <span color='#00FF00'>󰍛</span>",
+		"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+		"on-click": "gnome-system-monitor"
+	},
+	"memory": {
+		"interval": 3,
+		"format": "<span color='#89b4fa'></span> <span color='#cdd6f4'>{used:0.1f}G</span>"
+	},
+	"disk": {
+		"interval": 3,
+		"path": "/home",
+		"format": "<span color='#89b4fa'></span> <span color='#cdd6f4'>{free}</span>",
+		"unit": "GB"
+	},
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10
+	},
+	"custom/music": {
+		"format": "{}",
+		"escape": true,
+		"interval": 1,
+		"tooltip": true,
+		"exec": "/$HOME/.config/waybar/scripts/music",
+		"on-click": "playerctl play-pause",
+		"max-length": 20
+	},
+	"clock": {
+		"timezone": "Europe/Madrid",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		// "format": " {:%H:%M}"
+		"format": "{:%A %H:%M}",
+		"format-alt": "{:%d %B W%V %Y}"
+	},
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "<span color='#89b4fa'>{icon}</span>",
+		"format-charging": "<span color='#89b4fa'></span>",
+		"format-plugged": "<span color='#89b4fa'></span>",
+		"format-alt": "<span color='#89b4fa'>{icon}</span>",
+		"format-icons": ["", "", "", "", "", "", "", "", "", "", "", ""]
+	},
+	"pulseaudio": {
+		"scroll-step": 5, // %, can be a float
+		"format": "<span color='#89b4fa'>{icon}</span> <span color='#cdd6f4'>{volume}%</span>",
+		"format-muted": "󰖁 {volume}%",
+		"format-icons": {
+			"default": ["", "", ""]
+		},
+		"on-click": "pavucontrol",
+		"on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle"
+	},
+	"bluetooth": {
+		"format": "<span color='#89b4fa'>󰂯</span>",
+		"format-connected": "<span color='#89b4fa'>󰂱</span>",
+		"format-disabled": "<span color='#89b4fa'>󰂲</span>",
+		"format-on": "<span color='#89b4fa'>󰂯</span>",
+		"tooltip-format-connected": "{device_alias} - {device_battery_percentage}%",
+		"on-click": "blueberry"
+	},
+	"custom/lock": {
+		"tooltip": false,
+		"on-click": "hyprlock",
+		"format": "<span color='#89b4fa'></span>"
+	},
+	"custom/power": {
+		"tooltip": false,
+		"on-click": "wlogout &",
+		"format": "󰐥"
+	},
+	"custom/traytoggle": {
+		"tooltip": false,
+		"format": "<span color='#89b4fa'></span>"
+	},
+	"group/group-toggle": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 500
+		},
+		"modules": ["custom/traytoggle", "tray"]
+	},
+	"custom/notification": {
+		"tooltip": false,
+		"format": "<span color='#89b4fa'>{icon}</span>",
+		"format-icons": {
+			"notification": "<span color='#89b4fa'>󱅫</span>",
+			"none": "<span color='#89b4fa'>󰂚</span>",
+			"dnd-notification": "󰂛<span foreground='red'><sup></sup></span>",
+			"dnd-none": "<span color='#89b4fa'>󰂛</span>",
+			"inhibited-notification": "<span color='#89b4fa'>󱅫</span>",
+			"inhibited-none": "<span color='#89b4fa'>󰂚</span>",
+			"dnd-inhibited-notification": "<span color='#89b4fa'>󱏧</span>",
+			"dnd-inhibited-none": "<span color='#89b4fa'>󰂛</span>"
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
+	}
 }
