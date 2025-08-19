@@ -58,23 +58,33 @@ tooltip label {
 }
 
 #workspaces,
+#cpu,
+#memory,
+#disk,
+#clock,
 #custom-music,
 #bluetooth,
 #pulseaudio,
 #battery,
 #custom-lock,
 #custom-notification {
-  padding: 0rem 0.5rem;
-  /* margin: 5px 0; */
-}
-
-#tray,
-#custom-traytoggle {
-  padding: 0rem 1rem 0rem 0.5rem;
+  margin: 0rem 0.5rem;
 }
 
 #custom-power {
-  padding: 0rem 0rem 0rem 1rem;
+  margin: 0rem 0.5rem 0rem 1rem;
+}
+
+#group-group-toggle {
+  margin: 0rem 1rem 0rem 0.5rem;
+}
+
+#tray {
+  margin: 0rem 1rem 0rem 0rem;
+}
+
+#custom-traytoggle {
+  margin: 0rem 1rem 0rem 0.5rem;
 }
 
 #custom-traytoggle {
