@@ -8,3 +8,13 @@ fi
 
 rm -rf  $HOME/.config/tmux
 ln -snf $CONFIG_DIR $HOME/.config/tmux
+
+# Instalar plugins de tmux
+if command -v tmux &> /dev/null && [ -x ~/.tmux/plugins/tpm/scripts/install_plugins.sh ]; then
+    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+fi
+
+# Recargar configuración si tmux está corriendo
+if tmux info &> /dev/null; then
+    tmux source-file ~/.config/tmux/tmux.conf
+fi
