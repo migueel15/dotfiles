@@ -2,6 +2,8 @@
 set -euo pipefail
 
 # Script setup básico para módulo
+mkdir -p $HOME/.config/systemd/user/myservices
+
 ln -snf $CONFIG_DIR $HOME/.config/systemd/user/myservices
 
 for service in $HOME/.config/systemd/user/myservices/*.service; do
