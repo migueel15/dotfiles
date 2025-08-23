@@ -60,6 +60,7 @@ install_module() {
 
   if [[ -x "$mod_dir/setup" ]]; then
     log_info "Ejecutando setup del módulo..."
+    export DOTFILES_DIR=$DOTFILES_DIR
     export CONFIG_DIR="$mod_dir/config"
     (cd "$mod_dir" && ./setup)
   else
@@ -91,6 +92,7 @@ generate_module() {
   cat > "$mod_dir/setup" <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
+source $DOTFILES_DIR/core/logger # log_info log_error log_success log_title log_warn
 
 # Script setup básico para módulo
 EOF
