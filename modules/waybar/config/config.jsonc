@@ -9,7 +9,9 @@
     "memory",
     "disk"
   ],
-  "modules-center": ["clock"],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "custom/music",
     "custom/notification",
@@ -34,7 +36,16 @@
     "interval": 1,
     "format-alt-click": "click",
     "format-alt": "<span color='#89b4fa'>{icon0}{icon1}{icon2}{icon3}</span> <span color='#FFFFFF'>{usage:>2}%</span> <span color='#00FF00'>󰍛</span>",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
     "on-click": "gnome-system-monitor"
   },
   "memory": {
@@ -52,12 +63,22 @@
     "spacing": 10
   },
   "custom/music": {
-    "format": "{}",
+    "format": "{icon} {text}",
+    "format-playing": "holaaa",
     "escape": true,
+    "return-type": "json",
     "interval": 1,
     "tooltip": true,
     "exec": "/$HOME/.config/waybar/scripts/music",
-    "on-click": "playerctl play-pause",
+    "format-icons": {
+      "playing": "<span color='#89b4fa'></span>",
+      "paused": "",
+      "unknown": ""
+    },
+    "on-click": "playerctl --player=spotify play-pause",
+    "on-click-right": "hyprctl dispatch focuswindow class:Spotify",
+    "on-scroll-up": "playerctl --player=spotify next",
+    "on-scroll-down": "playerctl --player=spotify previous",
     "max-length": 20
   },
   "clock": {
@@ -76,14 +97,31 @@
     "format-charging": "<span color='#89b4fa'></span>",
     "format-plugged": "<span color='#89b4fa'></span>",
     "format-alt": "<span color='#89b4fa'>{icon}</span>",
-    "format-icons": ["", "", "", "", "", "", "", "", "", "", "", ""]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "pulseaudio": {
     "scroll-step": 5, // %, can be a float
     "format": "<span color='#89b4fa'>{icon}</span> <span color='#cdd6f4'>{volume}%</span>",
     "format-muted": "󰖁 {volume}%",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
     "on-click": "pavucontrol",
     "on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle"
@@ -115,7 +153,10 @@
     "drawer": {
       "transition-duration": 500
     },
-    "modules": ["custom/traytoggle", "tray"]
+    "modules": [
+      "custom/traytoggle",
+      "tray"
+    ]
   },
   "custom/notification": {
     "tooltip": false,

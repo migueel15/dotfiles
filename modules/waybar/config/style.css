@@ -102,3 +102,7 @@ tooltip label {
 #bluetooth.connected {
   color: @blue;
 }
+
+#custom-music.paused {
+  color: @overlay1;
+}

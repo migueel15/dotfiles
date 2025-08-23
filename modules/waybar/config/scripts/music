@@ -1,11 +1,52 @@
 #!/bin/bash
-status=$(playerctl --player=spotify status 2>/dev/null)
-title=$(playerctl --player=spotify metadata --format '{{ title }}' 2> /dev/null)
 
-if [ "$status" = "Playing" ]; then
-  echo " $title";
-elif [ "$status" = "Paused" ]; then
-  echo " $title";
-else 
-  echo "";
-fi
+#
+# if [ "$status" = "Playing" ]; then
+#   echo " $title";
+# elif [ "$status" = "Paused" ]; then
+#   echo " $title";
+# else 
+#   echo "";
+# fi
+
+spotify_status() {
+    local status=$(playerctl --player=spotify status 2>/dev/null)
+    local title=$(playerctl --player=spotify metadata --format '{{ title }}' 2> /dev/null)
+    local album=$(playerctl --player=spotify metadata album 2>/dev/null)
+    local artist=$(playerctl --player=spotify metadata artist 2>/dev/null)
+
+    local text=""
+    local alt=""
+    local tooltip="$title - $artist"
+    local class=""
+
+    if [ "$status" = "Playing" ]; then
+      text="$title";
+      class="playing"
+      alt="playing"
+    elif [ "$status" = "Paused" ]; then
+      text="$title";
+      class="paused"
+      alt="paused"
+    else 
+      text=""
+      class="undefined"
+      alt="unknown"
+    fi
+
+
+    
+    jq -n \
+        --arg text "$text" \
+        --arg alt "$alt" \
+        --arg tooltip "$tooltip" \
+        --arg class "$class" \
+        '{
+            text: $text,
+            alt: $alt,
+            tooltip: $tooltip,
+            class: $class,
+        }' | jq --unbuffered --compact-output
+}
+
+spotify_status 
