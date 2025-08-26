@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source $DOTFILES_DIR/core/logger # log_info log_error log_success log_title log_warn
+
+# Script setup básico para módulo
