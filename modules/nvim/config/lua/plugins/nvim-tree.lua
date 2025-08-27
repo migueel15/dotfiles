@@ -1,7 +1,6 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- dependencies = { "DaikyXendo/nvim-material-icon" },
   config = function()
     require("nvim-tree").setup({
       filters = {
@@ -68,24 +67,24 @@ return {
 
           glyphs = {
             default = "󰈚",
-            symlink = "",
+            symlink = "",
             folder = {
-              default = "",
-              empty = "",
-              empty_open = "",
-              open = "",
-              symlink = "",
-              symlink_open = "",
-              arrow_open = "",
-              arrow_closed = "",
+              default = "",
+              empty = "",
+              empty_open = "",
+              open = "",
+              symlink = "",
+              symlink_open = "",
+              arrow_open = "",
+              arrow_closed = "",
             },
             git = {
               unstaged = "✗",
               staged = "✓",
-              unmerged = "",
+              unmerged = "",
               renamed = "➜",
               untracked = "★",
-              deleted = "",
+              deleted = "",
               ignored = "◌",
             },
           },
@@ -98,6 +97,7 @@ return {
     vim.api.nvim_set_hl(0, "NvimTreeGitFolderNewHL", { link = "diffAdded" })
     vim.api.nvim_set_hl(0, "NvimTreeGitNewIcon", { link = "diffAdded" })
 
+    -- Keymaps
     vim.keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
   end,
 }

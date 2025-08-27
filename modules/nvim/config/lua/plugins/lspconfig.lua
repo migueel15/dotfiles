@@ -1,189 +1,112 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = {
-    -- Automatically install LSPs to stdpath for neovim
-    { "williamboman/mason.nvim", config = true },
-    "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-null-ls.nvim",
-    "nvimtools/none-ls.nvim",
-    "jay-babu/mason-nvim-dap.nvim",
-
-    -- Additional lua configuration, makes nvim stuff amazing!
-    "folke/neodev.nvim",
-  },
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local on_attach = function(_, bufnr)
-      local nmap = function(keys, func, desc)
-        if desc then
-          desc = "LSP: " .. desc
-        end
-
-        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-      end
-
-      nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-      nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-      nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-      nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-      nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-      nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-      nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-      nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
-      -- See `:help K` for why this keymap
-      nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-      -- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-      -- Lesser used LSP functionality
-      nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-      nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-      nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-      nmap("<leader>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, "[W]orkspace [L]ist Folders")
-
-      -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-        vim.lsp.buf.format()
-      end, { desc = "Format current buffer with LSP" })
-    end
-
-    -- set glsl analyzer
-    require("lspconfig").glsl_analyzer.setup({})
-
-    -- mason-lspconfig requires that these setup functions are called in this order
-    -- before setting up the servers.
-    require("mason").setup()
-
-    -- Setup DAP config
-    require("mason-nvim-dap").setup({
-      ensure_installed = {
-        "python",
-        "java",
-        "delve",
-      },
-      handlers = {},
-    })
-    require("mason-lspconfig").setup()
-
-    require("mason-null-ls").setup({
-      automatic_installation = true,
-      ensure_installed = {
-        "goimports",
-        "csharpier",
-        "stylua",
-        "isort",
-      },
-    })
-
-    local null_ls = require("null-ls")
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.csharpier,
-        null_ls.builtins.formatting.yamlfmt,
-        null_ls.builtins.formatting.biome,
-        null_ls.builtins.formatting.goimports,
-        null_ls.builtins.code_actions.gomodifytags,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.yamllint,
-      },
-    })
-
-    local servers = {
-      texlab = {},
-      biome = {},
-      clangd = {},
-      cmake = {},
-      gopls = {},
-      pyright = {},
-      ts_ls = {},
-      html = { filetypes = { "html", "twig", "hbs" } },
-      emmet_ls = {
-        filetypes = {
-          "css",
-          "eruby",
-          "html",
-          "javascript",
-          "javascriptreact",
-          "less",
-          "sass",
-          "scss",
-          "svelte",
-          "pug",
-          "typescriptreact",
-          "vue",
-        },
-      },
-      cssls = {},
-      jdtls = {},
-      sqlls = {},
-      tailwindcss = {},
-      yamlls = {},
-      -- eslint = {},
-      marksman = {},
-      angularls = {},
-      jsonls = {},
-      lemminx = {},
-      lua_ls = {
+    -- Configuración moderna para Neovim 0.11+
+    
+    -- Configurar servers con vim.lsp.config()
+    vim.lsp.config('lua_ls', {
+      cmd = { 'lua-language-server' },
+      filetypes = { 'lua' },
+      root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+      settings = {
         Lua = {
-
+          diagnostics = {
+            globals = { "vim" },
+          },
           workspace = {
             library = {
-              "/usr/share/nvim/runtime/lua",
-              "/usr/share/nvim/runtime/lua/lsp",
-              "/usr/share/awesome/lib",
+              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+              [vim.fn.stdpath("config") .. "/lua"] = true,
             },
           },
-          diagnostics = {
-            globals = {
-              "awesome",
-              "awful",
-              "client",
-              "screen",
-              "root",
-              "mouse",
-              "tag",
-            },
-          },
-          completion = {
-            enable = true,
-          },
-          telemetry = { enable = false },
         },
       },
-    }
-
-    -- setup java
-    require("java").setup()
-
-    require("neodev").setup()
-
-    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    -- Ensure the servers above are installed
-    local mason_lspconfig = require("mason-lspconfig")
-
-    mason_lspconfig.setup({
-      ensure_installed = vim.tbl_keys(servers),
     })
 
-    -- mason_lspconfig.setup_handlers({
-    --   function(server_name)
-    --     require("lspconfig")[server_name].setup({
-    --       capabilities = capabilities,
-    --       on_attach = on_attach,
-    --       settings = servers[server_name],
-    --       filetypes = (servers[server_name] or {}).filetypes,
-    --     })
-    --   end,
-    -- })
+    -- Configurar otros servers
+    local servers = {
+      { name = 'pyright', cmd = { 'pyright-langserver', '--stdio' }, filetypes = { 'python' } },
+      { name = 'ts_ls', cmd = { 'typescript-language-server', '--stdio' }, filetypes = { 'javascript', 'typescript' } },
+      { name = 'html', cmd = { 'vscode-html-language-server', '--stdio' }, filetypes = { 'html' } },
+      { name = 'cssls', cmd = { 'vscode-css-language-server', '--stdio' }, filetypes = { 'css', 'scss', 'less' } },
+      { name = 'tailwindcss', cmd = { 'tailwindcss-language-server', '--stdio' }, filetypes = { 'html', 'css', 'javascript', 'typescript' } },
+      { name = 'jsonls', cmd = { 'vscode-json-language-server', '--stdio' }, filetypes = { 'json' } },
+      { name = 'bashls', cmd = { 'bash-language-server', 'start' }, filetypes = { 'sh', 'bash' } },
+      { name = 'marksman', cmd = { 'marksman', 'server' }, filetypes = { 'markdown' } },
+    }
 
-    -- Setup dianostics
-    vim.diagnostic.config({ virtual_text = true, signs = true })
-    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+    for _, server in ipairs(servers) do
+      vim.lsp.config(server.name, {
+        cmd = server.cmd,
+        filetypes = server.filetypes,
+        root_markers = { '.git' },
+      })
+    end
+
+    -- Habilitar todos los servers
+    local server_names = { 'lua_ls', 'pyright', 'ts_ls', 'html', 'cssls', 'tailwindcss', 'jsonls', 'bashls', 'marksman' }
+    for _, name in ipairs(server_names) do
+      vim.lsp.enable(name)
+    end
+
+    -- Configurar completeopt para mejor experiencia de completado
+    vim.opt.completeopt = { "menuone", "noselect", "popup" }
+
+    -- Configurar keymaps y autocomandos con LspAttach
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local opts = { buffer = args.buf, noremap = true, silent = true }
+
+        -- LSP keybinds usando las nuevas funciones por defecto
+        vim.keymap.set("n", "gR", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>D", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+        -- Habilitar completado nativo de LSP
+        if client:supports_method('textDocument/completion') then
+          vim.lsp.completion.enable(true, client.id, args.buf, {
+            autotrigger = true,
+            convert = function(item)
+              -- Personalizar cómo se muestran los elementos de completado
+              return {
+                abbr = item.label,
+                kind = item.kind and vim.lsp.protocol.CompletionItemKind[item.kind] or '',
+                menu = item.detail or '',
+              }
+            end,
+          })
+        end
+
+        -- Keymaps para completado
+        vim.keymap.set('i', '<C-Space>', function()
+          vim.lsp.completion.get()
+        end, { buffer = args.buf, desc = 'Trigger LSP completion' })
+
+        -- Auto-format al guardar si el server lo soporta
+        if client:supports_method('textDocument/formatting') then
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = args.buf,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+            end,
+          })
+        end
+      end,
+    })
+
+    -- Configurar diagnostic signs
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
     for type, icon in pairs(signs) do
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
