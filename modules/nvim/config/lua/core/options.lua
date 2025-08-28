@@ -42,6 +42,6 @@ opt.smartindent = true -- Autoindent new lines
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
-opt.history = 100      -- Remember N lines in history
+opt.history = 200      -- Remember N lines in history
 opt.lazyredraw = false -- Faster scrolling
 opt.updatetime = 50    -- ms to wait for trigger an event
