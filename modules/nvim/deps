@@ -7,6 +7,8 @@ unzip
 ripgrep
 wl-clipboard
 npm
+pnpm
 prettier
 luarocks
 dotnet-sdk
+jdtls
