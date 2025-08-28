@@ -30,13 +30,32 @@ install_packages_from_deps() {
   local -a pkgs_array
   mapfile -t pkgs_array <<<"$packages"
 
-  # Ejecutar yay silencioso: salida normal y error a /dev/null
-  yay -S --needed --noconfirm "${pkgs_array[@]}" > /dev/null 2>&1
+  local failed_packages=()
+  local installed_count=0
+  local total_count=${#pkgs_array[@]}
 
-  if [[ $? -eq 0 ]]; then
-    log_success "Paquetes instalados desde $deps_file"
+  log_info "Instalando $total_count paquetes desde $(basename "$deps_file")..."
+
+  # Pre-autenticar sudo para evitar que se cuelgue pidiendo contraseña
+  sudo -v
+
+  # Instalar cada paquete individualmente
+  for package in "${pkgs_array[@]}"; do
+    log_info "[$((installed_count + 1))/$total_count] Instalando $package..."
+    
+    if yay -S --needed --noconfirm "$package" &> /dev/null; then
+      installed_count=$((installed_count + 1))
+    else
+      log_warn "Error al instalar $package"
+      failed_packages+=("$package")
+    fi
+  done
+
+  # Reporte final
+  if [[ ${#failed_packages[@]} -eq 0 ]]; then
+    log_success "Todos los paquetes ($installed_count/$total_count) instalados correctamente desde $(basename "$deps_file")"
   else
-    log_error "Error al instalar paquetes desde $deps_file"
+    log_warn "$installed_count/$total_count paquetes instalados. Fallos: ${failed_packages[*]}"
   fi
 }
 
