@@ -31,10 +31,6 @@ return {
 			vim.lsp.enable(server)
 		end
 
-		-- Configurar completeopt para mejor experiencia de completado
-		-- vim.opt.completeopt = { "menuone", "noselect", "popup" }
-		vim.opt.completeopt = { "menu", "menuone", "noinsert", "fuzzy", "popup" }
-
 		-- Configurar keymaps y autocomandos con LspAttach
 		vim.api.nvim_create_autocmd('LspAttach', {
 			callback = function(args)
@@ -51,52 +47,22 @@ return {
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "<leader>D", vim.diagnostic.open_float, opts)
 				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+				vim.keymap.set("n", "[d", vim.diagnostic.jump({ count = -1, float = true }), opts)
+				vim.keymap.set("n", "]d", vim.diagnostic.jump({ count = 1, float = true }), opts)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-				-- Habilitar completado nativo de LSP con autocompletado
-				if client:supports_method('textDocument/completion') then
-					vim.lsp.completion.enable(true, client.id, args.buf, {
-						autotrigger = true,
-						convert = function(item)
-							return {
-								abbr = item.label,
-								kind = item.kind and vim.lsp.protocol.CompletionItemKind[item.kind] or '',
-								menu = item.detail or '',
-							}
-						end,
-					})
-				end
 
-				-- Keymaps para completado
-				vim.keymap.set('i', '<C-Space>', function()
-					vim.lsp.completion.get()
-				end, { buffer = args.buf, desc = 'Trigger LSP completion' })
-
-				-- vim.api.nvim_create_autocmd("InsertCharPre", {
-				--   callback = function(args)
-				--     vim.lsp.completion.get()
-				--   end
-				-- })
-
-				-- -- Enter para aceptar completado
-				-- vim.keymap.set('i', '<CR>', function()
-				--   if vim.fn.pumvisible() == 1 then
-				--     return '<C-y>'
-				--   else
-				--     return '<CR>'
-				--   end
-				-- end, { buffer = args.buf, expr = true, replace_keycodes = false })
 
 				-- Auto-format al guardar si el server lo soporta
-				if client:supports_method('textDocument/formatting') then
-					vim.api.nvim_create_autocmd('BufWritePre', {
-						buffer = args.buf,
-						callback = function()
-							vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-						end,
-					})
+				if client then
+					if client:supports_method('textDocument/formatting') then
+						vim.api.nvim_create_autocmd('BufWritePre', {
+							buffer = args.buf,
+							callback = function()
+								vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+							end,
+						})
+					end
 				end
 			end,
 		})
