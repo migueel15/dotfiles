@@ -8,7 +8,7 @@ return {
       ensure_installed = {
         "lua_ls",
         "pyright",
-        "ts_ls", -- tsserver se llama ts_ls ahora
+        "ts_ls",
         "html",
         "cssls",
         "tailwindcss",
@@ -16,9 +16,9 @@ return {
         "jsonls",
         "bashls",
         "marksman",
+        "jdtls",
       },
       automatic_installation = true,
     })
-    -- setup_handlers removido - ya no necesario con vim.lsp.config()
   end,
 }
