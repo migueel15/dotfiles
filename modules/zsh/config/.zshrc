@@ -76,12 +76,7 @@ alias bw_unlock="bw unlock --raw > ~/.bw_session && export BW_SESSION=\$(cat ~.b
 
 # server
 alias ubuntu="ssh -i ~/.ssh/oracle.key ubuntu@143.47.40.193"
-
-# functions
-windows(){
-  sudo grub-reboot 1
-  sudo reboot
-}
+alias windows="systemctl reboot --boot-loader-entry=auto-windows"
 
 fzfvim() 
 {
