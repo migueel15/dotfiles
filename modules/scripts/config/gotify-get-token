@@ -1,2 +1,5 @@
 #!/bin/bash
+BW_SESSION=$(cat ~/.bw_session)
+export BW_SESSION=$BW_SESSION
+bw sync &> /tmp/null
 bw get item 'gotify' | jq -r .fields[0].value

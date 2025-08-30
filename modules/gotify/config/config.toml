@@ -1,3 +1,3 @@
 [gotify]
 url = "wss://gotify.dorlab.net"
-token = { command = "gotify-get-token" }
+token = { command = "/home/miguel/.scripts/gotify-get-token" }
