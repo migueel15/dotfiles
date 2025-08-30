@@ -1,0 +1,3 @@
+[gotify]
+url = "wss://gotify.dorlab.net"
+token = { command = "gotify-get-token" }
