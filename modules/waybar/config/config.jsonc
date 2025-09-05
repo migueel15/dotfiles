@@ -125,7 +125,7 @@
 			],
 			"alsa_output.usb-Logitech_PRO_X_Wireless_Gaming_Headset-00.analog-stereo": ""
 		},
-		"on-click": "pavucontrol",
+		"on-click": "~/.config/waybar/scripts/audio_sink_switcher.py",
 		"on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle"
 	},
 	"bluetooth": {
