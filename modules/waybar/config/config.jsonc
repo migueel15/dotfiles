@@ -134,7 +134,8 @@
 		"format-disabled": "<span color='#89b4fa'>󰂲</span>",
 		"format-on": "<span color='#89b4fa'>󰂯</span>",
 		"tooltip-format-connected": "{device_alias} - {device_battery_percentage}%",
-		"on-click": "blueberry"
+		"on-click": "blueberry",
+		"on-click-right": "/$HOME/.config/waybar/scripts/bluetooth"
 	},
 	"custom/lock": {
 		"tooltip": false,
