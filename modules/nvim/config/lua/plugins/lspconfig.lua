@@ -3,7 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			-- Configure lua_ls for better vim API detection
-			require('lspconfig').lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
 						runtime = {
