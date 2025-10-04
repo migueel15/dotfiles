@@ -65,7 +65,8 @@ return {
 				"jsonls",
 				"bashls",
 				"marksman",
-				"jdtls"
+				"jdtls",
+				"astro"
 			}
 		}
 	}
