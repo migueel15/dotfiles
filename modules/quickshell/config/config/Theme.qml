@@ -47,4 +47,18 @@ QtObject {
         property string notFocusedWorkspaceColor: Theme.colors.primary
         property string emptyWorkspaceColor: Theme.colors.overlay
     }
+
+    property QtObject notifications: QtObject {
+        property QtObject icon: QtObject {
+            property string notification: "󱅫"
+            property string none: "󰂚"
+            property string dnd_none: "󰂛"
+            property string dnd_notification: "󰂛"
+        }
+        property font font: Theme.font.icon
+        property int spacing: 8
+        property string activeWorkspaceColor: Theme.colors.white
+        property string notFocusedWorkspaceColor: Theme.colors.primary
+        property string emptyWorkspaceColor: Theme.colors.overlay
+    }
 }
