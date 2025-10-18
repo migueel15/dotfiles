@@ -1,17 +1,36 @@
+//@ pragma UseQApplication
 import Quickshell
 import QtQuick
 
-PanelWindow {
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
+import "config"
+import "./bars"
 
-    implicitHeight: 40
-
-    Text {
-        anchors.centerIn: parent
-        text: "Hello World"
+ShellRoot {
+    id: root
+    Variants {
+        model: Quickshell.screens
+        delegate: Component {
+            Item {
+                required property var modelData
+                TopBar {
+                    screen: modelData
+                }
+                SideBar {
+                    screen: modelData
+                }
+                TopRightCorner {
+                    screen: modelData
+                }
+                TopLeftCorner {
+                    screen: modelData
+                }
+                BottomLeftCorner {
+                    screen: modelData
+                }
+                BottomRightCorner {
+                    screen: modelData
+                }
+            }
+        }
     }
 }
