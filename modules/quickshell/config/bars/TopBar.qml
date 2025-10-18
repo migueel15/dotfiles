@@ -36,10 +36,7 @@ PanelWindow {
     RowLayout {
         height: parent.height
         anchors.right: parent.right
-        Text {
-            text: "Hola"
-        }
-        Notifications {}
-        // SystemTray {}
+
+        ControlPanel {}
     }
 }
