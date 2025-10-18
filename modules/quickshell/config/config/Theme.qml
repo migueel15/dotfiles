@@ -8,8 +8,11 @@ QtObject {
     property string currentTheme: "mocha"
 
     property QtObject colors: QtObject {
-        property color background: "#1e1e2e"        // base
-        property color surface: "#181825"           // mantle
+        // property color background: "#1e1e2e"        // base
+        // property color surface: "#181825"           // mantle
+        //
+        property color background: "#11111B"           // mantle
+        property color surface: "#1e1e2e"        // base
         property color surfaceVariant: "#313244"    // surface0
         property color overlay: "#7f849c"    // surface0
         property color white: "#ffffff"           // yellow

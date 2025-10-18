@@ -4,15 +4,19 @@ import QtQuick
 
 import "config"
 import "./bars"
+import "./components"
 
 ShellRoot {
     id: root
+
     Variants {
         model: Quickshell.screens
         delegate: Component {
             Item {
                 required property var modelData
+
                 TopBar {
+                    id: topBar
                     screen: modelData
                 }
                 SideBar {

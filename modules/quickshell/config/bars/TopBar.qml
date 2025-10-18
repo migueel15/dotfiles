@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick
 import "../config"
 import "./widgets"
+import "../components"
 
 PanelWindow {
     id: topbar
@@ -32,11 +33,22 @@ PanelWindow {
         }
         Workspaces {}
     }
+
     Clock {}
+
     RowLayout {
         height: parent.height
         anchors.right: parent.right
 
-        ControlPanel {}
+        ControlPanel {
+            onClicked: controlPanelPopup.toggle()
+        }
+    }
+
+    ControlPanelPopup {
+        id: controlPanelPopup
+        anchor.window: topbar
+        anchor.rect.x: topbar.width
+        anchor.rect.y: topbar.height + 5
     }
 }
