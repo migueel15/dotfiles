@@ -32,6 +32,16 @@ QtObject {
             pixelSize: 19,
             weight: Font.Normal
         })
+        property font title: Qt.font({
+            family: "CaskaydiaMono Nerd Font Propo",
+            pixelSize: 17,
+            weight: Font.Bold
+        })
+        property font overlay: Qt.font({
+            family: "CaskaydiaMono Nerd Font Propo",
+            pixelSize: 13,
+            weight: Font.Normal
+        })
         property font icon: Qt.font({
             family: "CaskaydiaMono Nerd Font Propo",
             pixelSize: 13,
