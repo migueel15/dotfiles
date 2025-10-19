@@ -56,7 +56,7 @@ QtObject {
             property string notification: "󱅫"
             property string none: "󰂚"
             property string dnd_none: "󰂛"
-            property string dnd_notification: "󰂛"
+            property string dnd_notification: ""
         }
         property font font: Theme.font.icon
         property int spacing: 8

@@ -37,11 +37,16 @@ PanelWindow {
     Clock {}
 
     RowLayout {
+        spacing: 0
         height: parent.height
         anchors.right: parent.right
 
+        Notifications {}
+
         ControlPanel {
             onClicked: controlPanelPopup.toggle()
+            Layout.rightMargin: 8
+            Layout.leftMargin: 8
         }
     }
 
