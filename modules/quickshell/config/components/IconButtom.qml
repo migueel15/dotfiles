@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import QtQuick.Layouts
 
 import "../config"
@@ -10,7 +11,8 @@ Rectangle {
     property string icon: ""
     property bool isHovered: mouseArea.containsMouse
     property int animationDuration: 150
-    property var onClick: null
+    property var command: []
+    property var onClick: () => {}
 
     implicitWidth: 40
     implicitHeight: 40
@@ -29,10 +31,17 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            if (root.onClick) {
-                root.onClick();
+            if (root.command.length > 0) {
+                itemProcess.running = true;
             }
+            root.onClick();
         }
+    }
+
+    Process {
+        id: itemProcess
+        running: false
+        command: root.command
     }
 
     Text {

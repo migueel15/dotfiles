@@ -10,7 +10,7 @@ PopupWindow {
 
     screen: screen
     width: 700
-    height: 450
+    height: 550
     // visible: false
     visible: true
     color: "transparent"

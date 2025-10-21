@@ -83,22 +83,14 @@ Rectangle {
                 spacing: 5
                 IconButtom {
                     icon: ""
-                    onClick: () => {
-                        console.log("a");
-                    }
+                    command: ["hyprlock"]
                 }
 
                 IconButtom {
                     icon: ""
-                    onClick: () => {
-                        console.log("b");
-                    }
                 }
                 IconButtom {
                     icon: ""
-                    onClick: () => {
-                        console.log("c");
-                    }
                 }
             }
         }
