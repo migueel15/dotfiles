@@ -43,7 +43,7 @@ PopupWindow {
             spacing: 15
 
             ControlPanelUserCard {}
-            SystemTray {}
+            // SystemTray {}
             Text {
                 text: "Control Panel"
                 color: "white"
