@@ -3,6 +3,7 @@ import Quickshell
 import QtQuick.Layouts
 import "../config"
 import "../components"
+import "../bars/widgets"
 
 PopupWindow {
     id: root
@@ -45,6 +46,7 @@ PopupWindow {
                 color: "white"
                 font.pixelSize: 18
             }
+            SystemTray {}
         }
     }
 
