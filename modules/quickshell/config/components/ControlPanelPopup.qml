@@ -1,6 +1,8 @@
 import QtQuick
 import Quickshell
 import QtQuick.Layouts
+import Quickshell.Io
+import Quickshell.Services.Pipewire
 import "../config"
 import "../components"
 import "../bars/widgets"
@@ -8,12 +10,12 @@ import "../bars/widgets"
 PopupWindow {
     id: root
     required property var screen
+    property var debug: false
 
     screen: screen
     width: 700
     height: 550
-    // visible: false
-    visible: true
+    visible: root.debug
     color: "transparent"
 
     Rectangle {
@@ -21,7 +23,7 @@ PopupWindow {
 
         width: root.width
         height: root.height
-        // y: -root.height
+        y: !root.debug && -root.height
 
         color: Theme.colors.background
 
@@ -41,12 +43,45 @@ PopupWindow {
             spacing: 15
 
             ControlPanelUserCard {}
+            SystemTray {}
             Text {
                 text: "Control Panel"
                 color: "white"
                 font.pixelSize: 18
             }
-            SystemTray {}
+
+            Repeater {
+                id: repeater
+                model: Pipewire.nodes
+
+                delegate: MouseArea {
+                    id: itemSink
+                    visible: modelData.isSink
+
+                    property var currentSinkId: Pipewire.defaultAudioSink.id
+                    property var thisId: modelData.id
+                    property bool isActive: currentSinkId == thisId
+
+                    implicitWidth: sinkText.implicitWidth
+                    implicitHeight: sinkText.implicitHeight
+                    cursorShape: Qt.PointingHandCursor
+
+                    Process {
+                        id: itemProcess
+                        running: false
+                        command: ["wpctl", "set-default", itemSink.thisId]
+                    }
+
+                    onClicked: {
+                        itemProcess.running = true;
+                    }
+                    Text {
+                        id: sinkText
+                        text: modelData.description
+                        color: itemSink.isActive ? Theme.colors.primary : Theme.colors.text
+                    }
+                }
+            }
         }
     }
 
