@@ -43,7 +43,7 @@ PopupWindow {
             spacing: 15
 
             ControlPanelUserCard {}
-            // SystemTray {}
+            SystemTray {}
             Text {
                 text: "Control Panel"
                 color: "white"
@@ -53,14 +53,14 @@ PopupWindow {
             Repeater {
                 id: repeater
                 model: Pipewire.nodes
+                property var currentSinkId: Pipewire.defaultAudioSink.id
 
                 delegate: MouseArea {
                     id: itemSink
                     visible: modelData.isSink
 
-                    property var currentSinkId: Pipewire.defaultAudioSink.id
                     property var thisId: modelData.id
-                    property bool isActive: currentSinkId == thisId
+                    property bool isActive: repeater.currentSinkId == thisId
 
                     implicitWidth: sinkText.implicitWidth
                     implicitHeight: sinkText.implicitHeight

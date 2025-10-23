@@ -38,7 +38,19 @@ MouseArea {
         id: trayIcon
         width: parent.implicitWidth
         height: parent.implicitHeight
-        source: root.modelData.icon
+        source: {
+            let icon = root.modelData?.icon || "";
+            if (!icon)
+                return "";
+
+            // Process icon path
+            if (icon.includes("?path=")) {
+                const [name, path] = icon.split("?path=");
+                const fileName = name.substring(name.lastIndexOf("/") + 1);
+                return `file://${path}/${fileName}`;
+            }
+            return icon;
+        }
         anchors.centerIn: parent
     }
 }
