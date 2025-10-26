@@ -190,3 +190,8 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/miguel/.lmstudio/bin"
+# End of LM Studio CLI section
+
