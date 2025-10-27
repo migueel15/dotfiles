@@ -4,8 +4,8 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick
 
-import "../components"
-import "../config"
+import qs.common
+import qs.common.components
 
 PanelWindow {
     id: root
@@ -28,17 +28,17 @@ PanelWindow {
 
     anchors {
         right: true
-        // top: true
-        bottom: true
+        top: true
+        // bottom: true
         // left: true
     }
 
     BarCorner {
         id: topRightBarCorner
         anchors {
-            bottom: parent.bottom
+            top: parent.top
             right: parent.right
         }
-        position: "bottom-right"
+        position: "top-right"
     }
 }

@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick.Layouts
 
-import "../config"
+import qs.common
 
 Rectangle {
     id: root

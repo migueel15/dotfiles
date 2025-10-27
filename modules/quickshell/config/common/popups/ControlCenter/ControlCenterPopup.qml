@@ -3,18 +3,17 @@ import Quickshell
 import QtQuick.Layouts
 import Quickshell.Io
 import Quickshell.Services.Pipewire
-import "../config"
-import "../components"
-import "../bars/widgets"
+
+import qs.common
+import qs.common.components
+import qs.common.widgets
+import qs.common.popups.ControlCenter.components
 
 PopupWindow {
     id: root
-    required property var screen
-    property var debug: false
-
-    screen: screen
-    width: 700
-    height: 550
+    property var debug: true
+    implicitWidth: 700
+    implicitHeight: 550
     visible: root.debug
     color: "transparent"
 
@@ -42,8 +41,9 @@ PopupWindow {
             anchors.margins: 20
             spacing: 15
 
-            ControlPanelUserCard {}
+            UserCard {}
             SystemTray {}
+            AudioControl {}
             Text {
                 text: "Control Panel"
                 color: "white"
@@ -53,7 +53,7 @@ PopupWindow {
             Repeater {
                 id: repeater
                 model: Pipewire.nodes
-                property var currentSinkId: Pipewire.defaultAudioSink.id
+                property var currentSinkId: Pipewire.defaultAudioSink?.id
 
                 delegate: MouseArea {
                     id: itemSink

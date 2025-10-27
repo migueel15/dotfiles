@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-import "../../config"
+import qs.common
 
 Rectangle {
     id: root
@@ -11,6 +11,10 @@ Rectangle {
     color: "transparent"
 
     property var currentIcon: Theme.notifications.icon.none
+
+    Component.onDestruction: {
+        swaync_daemon.running = false
+    }
 
     Process {
         id: swaync_daemon

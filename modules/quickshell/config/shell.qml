@@ -2,9 +2,9 @@
 import Quickshell
 import QtQuick
 
-import "config"
-import "./bars"
-import "./components"
+import qs.common
+import qs.common.bars
+import qs.common.bars.components
 
 ShellRoot {
     id: root

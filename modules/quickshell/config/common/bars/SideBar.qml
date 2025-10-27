@@ -1,6 +1,6 @@
 import Quickshell
 import QtQuick
-import "../config"
+import qs.common
 
 PanelWindow {
     color: Theme.colors.background

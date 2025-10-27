@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
 
-import "../../config"
+import qs.common
 
 Rectangle {
     id: clockBackground

@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../config"
+import qs.common
 
 Rectangle {
     id: root

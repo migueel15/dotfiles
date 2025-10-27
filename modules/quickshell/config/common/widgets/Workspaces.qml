@@ -2,13 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 
-import "../../config"
-
-import QtQuick
-import QtQuick.Layouts
-import Quickshell.Hyprland
-
-import "../../config"
+import qs.common
 
 Rectangle {
     id: workspaceRectangle

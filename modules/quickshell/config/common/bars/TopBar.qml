@@ -1,9 +1,10 @@
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
-import "../config"
-import "./widgets"
-import "../components"
+
+import qs.common
+import qs.common.widgets
+import qs.common.popups.ControlCenter
 
 PanelWindow {
     id: topbar
@@ -50,7 +51,7 @@ PanelWindow {
         }
     }
 
-    ControlPanelPopup {
+    ControlCenterPopup {
         id: controlPanelPopup
         anchor.window: topbar
         anchor.rect.x: topbar.width

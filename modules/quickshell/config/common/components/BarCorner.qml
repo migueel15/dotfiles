@@ -1,5 +1,5 @@
 import QtQuick
-import "../config"
+import qs.common
 
 Item {
     id: root
