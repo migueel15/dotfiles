@@ -1,14 +1,15 @@
 #-- oh-my-zsh --
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="catppuccin"
+export ZSH_CUSTOM="$HOME/.dotfiles/modules/zsh/config/custom"
 
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting-theme.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-sudo/sudo.plugin.zsh
+source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting-theme.zsh
+source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_CUSTOM/plugins/zsh-sudo/sudo.plugin.zsh
 
 # imports
 [ -f /home/$USER/.ghcup/env ] && source /home/$USER/.ghcup/env

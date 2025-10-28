@@ -8,8 +8,9 @@ if [ ! -d "$HOME/.oh-my-zsh/" ]; then
     chsh -s $(which zsh)
 fi
 
-rm -rf "$HOME/.oh-my-zsh/custom"
-ln -sf "$CONFIG_DIR/custom" "$HOME/.oh-my-zsh/custom"
+# (Now implemented with ZSH_CUSTOM env)
+# rm -rf "$HOME/.oh-my-zsh/custom"
+# ln -sf "$CONFIG_DIR/custom" "$HOME/.oh-my-zsh/custom"
 
 ln -sf "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$CONFIG_DIR/.Xresources" "$HOME/.Xresources"
