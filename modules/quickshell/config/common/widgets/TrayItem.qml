@@ -21,18 +21,17 @@ MouseArea {
         if (event.button === Qt.LeftButton) {
             modelData.activate();
         } else if (modelData.hasMenu)
-        // menu.open();
+            menu.open();
         {}
     }
 
-    // QsMenuAnchor {
-    //     id: menu
-    //     menu: root.modelData.menu
-    //     anchor.window: this.QsWindow.window
-    //     anchor.item: root
-    //     anchor.edges: Qt.TopEdge | Qt.RightEdge
-    //     anchor.gravity: Qt.BottomEdge | Qt.LeftEdge
-    // }
+    QsMenuAnchor {
+        id: menu
+        menu: root.modelData.menu
+        anchor.window: this.QsWindow.window
+        anchor.edges: Qt.TopEdge | Qt.RightEdge
+        anchor.gravity: Qt.BottomEdge | Qt.LeftEdge
+    }
 
     IconImage {
         id: trayIcon
