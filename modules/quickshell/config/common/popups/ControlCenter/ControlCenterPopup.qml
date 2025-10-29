@@ -11,7 +11,7 @@ import qs.common.popups.ControlCenter.components
 
 PopupWindow {
     id: root
-    property var debug: true
+    property var debug: false
     implicitWidth: 700
     implicitHeight: 550
     visible: root.debug
