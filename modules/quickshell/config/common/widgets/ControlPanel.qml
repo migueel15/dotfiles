@@ -1,13 +1,14 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.common
+import qs.services
 
 Rectangle {
     id: root
 
     signal clicked
     property string networtIcon: "󰛳"
-    property string bluetoothIcon: "󰂯"
+    property string bluetoothIcon: Bluetooth.enabled ? (Bluetooth.connected ? "󰂱" : "󰂯") : "󰂲"
     property string powerIcon: "󰐥"
 
     property var icons: [networtIcon, bluetoothIcon, powerIcon]
