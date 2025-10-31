@@ -20,17 +20,20 @@ MouseArea {
     onClicked: event => {
         if (event.button === Qt.LeftButton) {
             modelData.activate();
-        } else if (modelData.hasMenu)
+        } else if (modelData.hasMenu) {
+            const pos = root.mapToItem(null, 0, root.height);
+            menu.anchor.rect.x = pos.x;
+            menu.anchor.rect.y = pos.y;
             menu.open();
-        {}
+        }
     }
 
     QsMenuAnchor {
         id: menu
         menu: root.modelData.menu
         anchor.window: this.QsWindow.window
-        anchor.edges: Qt.TopEdge | Qt.RightEdge
-        anchor.gravity: Qt.BottomEdge | Qt.LeftEdge
+        anchor.edges: Qt.TopEdge
+        anchor.gravity: Qt.BottomEdge
     }
 
     IconImage {
