@@ -1,7 +1,8 @@
 import Quickshell.Services.SystemTray
 import QtQuick
+import qs.common
 
-Item {
+Rectangle {
     id: root
 
     readonly property Repeater items: items
@@ -9,28 +10,53 @@ Item {
     clip: true
     visible: width > 0 && height > 0 // To avoid warnings about being visible with no size
 
-    implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight
+    height: parent.height
+    implicitWidth: rectangleArea.implicitWidth
+    color: "transparent"
 
-    Row {
-        id: layout
-        spacing: 9
+    MouseArea {
+        id: mouseArea
+        hoverEnabled: true
+        anchors.fill: parent
+    }
 
-        add: Transition {
-            NumberAnimation {
-                properties: "scale"
-                from: 0
-                to: 1
-                duration: 300
-                easing.type: Easing.BezierSpline
-                // easing.bezierCurve:[]
+    Rectangle {
+        id: rectangleArea
+        anchors.centerIn: parent
+
+        implicitWidth: layout.implicitWidth + 16
+        height: parent.height * 0.8
+        radius: 10
+
+        color: mouseArea.containsMouse ? Theme.colors.surfaceVariant : Theme.colors.background
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 150
             }
         }
 
-        Repeater {
-            id: items
-            model: SystemTray.items
-            delegate: TrayItem {}
+        Row {
+            id: layout
+            anchors.centerIn: parent
+            spacing: 8
+
+            add: Transition {
+                NumberAnimation {
+                    properties: "scale"
+                    from: 0
+                    to: 1
+                    duration: 300
+                    easing.type: Easing.BezierSpline
+                    // easing.bezierCurve:[]
+                }
+            }
+
+            Repeater {
+                id: items
+                model: SystemTray.items
+                delegate: TrayItem {}
+            }
         }
     }
 

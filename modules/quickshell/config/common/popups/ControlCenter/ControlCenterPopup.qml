@@ -42,7 +42,6 @@ PopupWindow {
             spacing: 15
 
             UserCard {}
-            SystemTray {}
             AudioControl {}
             Text {
                 text: "Control Panel"

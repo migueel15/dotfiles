@@ -42,6 +42,11 @@ PanelWindow {
         height: parent.height
         anchors.right: parent.right
 
+        SystemTray {
+            Layout.rightMargin: 8
+            Layout.leftMargin: 8
+        }
+
         Notifications {}
 
         ControlPanel {
