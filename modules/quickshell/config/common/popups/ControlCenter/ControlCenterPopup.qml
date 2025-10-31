@@ -47,6 +47,15 @@ Item {
         isOpen = false;
     }
 
+    // MouseArea to prevent clicks from propagating to PopupController
+    MouseArea {
+        anchors.fill: parent
+        z: -1
+        onPressed: mouse => mouse.accepted = true
+        onReleased: mouse => mouse.accepted = true
+        onClicked: mouse => mouse.accepted = true
+    }
+
     Rectangle {
         id: content
         anchors.fill: parent
