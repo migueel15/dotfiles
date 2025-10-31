@@ -1,12 +1,9 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-// import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
-
-// import Qt5Compat.GraphicalEffects
 
 MouseArea {
     id: root
@@ -21,9 +18,9 @@ MouseArea {
         if (event.button === Qt.LeftButton) {
             modelData.activate();
         } else if (modelData.hasMenu) {
-            const pos = root.mapToItem(null, 0, root.height);
+            const pos = root.mapToItem(root.QsWindow.window.contentItem, 0, root.height);
             menu.anchor.rect.x = pos.x;
-            menu.anchor.rect.y = pos.y;
+            menu.anchor.rect.y = pos.y + 5;
             menu.open();
         }
     }
@@ -31,9 +28,7 @@ MouseArea {
     QsMenuAnchor {
         id: menu
         menu: root.modelData.menu
-        anchor.window: this.QsWindow.window
-        anchor.edges: Qt.TopEdge
-        anchor.gravity: Qt.BottomEdge
+        anchor.window: root.QsWindow.window
     }
 
     IconImage {
