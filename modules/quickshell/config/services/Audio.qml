@@ -10,8 +10,8 @@ Singleton {
     property PwNode sink: Pipewire.defaultAudioSink
     property PwNode source: Pipewire.defaultAudioSource
 
-    property real volume: sink?.audio.volume
-    property bool isMuted: sink?.audio.muted
+    property real volume: sink?.audio.volume ?? 0
+    property bool isMuted: sink?.audio.muted ?? false
 
     readonly property string icon: {
         if (root.isMuted) {
