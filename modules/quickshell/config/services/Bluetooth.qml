@@ -12,4 +12,5 @@ Singleton {
     readonly property bool connected: Bluetooth.devices.values.some(d => d.connected)
     readonly property BluetoothDevice activeDevice: Bluetooth.defaultAdapter?.devices.values.find(device => device.connected) ?? null
     readonly property int activeDeviceCount: Bluetooth.defaultAdapter?.devices.values.filter(device => device.connected).length ?? 0
+    readonly property string icon: root.enabled ? (root.connected ? "󰂱" : "󰂯") : "󰂲"
 }
