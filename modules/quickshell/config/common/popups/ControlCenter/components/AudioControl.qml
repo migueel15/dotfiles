@@ -1,12 +1,203 @@
 import QtQuick
-import Quickshell
+import QtQuick.Layouts
+import Quickshell.Services.Pipewire
+import Quickshell.Io
 
+import qs.common
 import qs.services
 
-Rectangle {
-    width: 100
-    height: 100
-    Text {
-        text: Bluetooth.activeDevice.name
+Item {
+    id: root
+
+    implicitWidth: parent.width
+    implicitHeight: column.implicitHeight
+
+    property bool devicesExpanded: false
+
+    Column {
+        id: column
+        width: parent.width
+        spacing: 10
+
+        // Main volume control
+        Rectangle {
+            width: parent.width
+            height: 60
+            color: Theme.colors.surface
+            radius: Theme.barBorderRadius
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.margins: 15
+                spacing: 10
+
+                // Volume icon and slider
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 10
+
+                    Text {
+                        text: Audio.icon
+                        color: Theme.colors.primary
+                        font: Theme.font.base
+                    }
+
+                    // Volume slider
+                    Item {
+                        Layout.fillWidth: true
+                        height: 20
+
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: 6
+                            radius: 3
+                            color: Theme.colors.surfaceVariant
+
+                            Rectangle {
+                                width: parent.width * (Audio.volume || 0)
+                                height: parent.height
+                                radius: parent.radius
+                                color: Theme.colors.primary
+                            }
+
+                            // Slider handle (circle)
+                            Rectangle {
+                                width: 14
+                                height: 14
+                                radius: 7
+                                color: Theme.colors.white
+                                border.color: Theme.colors.primary
+                                border.width: 2
+                                x: (parent.width * (Audio.volume || 0)) - width / 2
+                                y: parent.height / 2 - height / 2
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onPressed: mouse => updateVolume(mouse.x)
+                            onPositionChanged: mouse => {
+                                if (pressed) {
+                                    updateVolume(mouse.x);
+                                }
+                            }
+
+                            function updateVolume(x) {
+                                if (Pipewire.defaultAudioSink) {
+                                    const volume = Math.max(0, Math.min(1, x / width));
+                                    Pipewire.defaultAudioSink.audio.volume = volume;
+                                }
+                            }
+                        }
+                    }
+
+                    Text {
+                        text: Math.round((Audio.volume || 0) * 100) + "%"
+                        color: Theme.colors.text
+                        font: Theme.font.base
+                    }
+                }
+
+                // Expand button
+                Rectangle {
+                    width: 30
+                    height: 30
+                    radius: 6
+                    color: expandButtonMouseArea.containsMouse ? Theme.colors.surfaceVariant : "transparent"
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: root.devicesExpanded ? "" : ""
+                        color: Theme.colors.text
+                        font: Theme.font.base
+                    }
+
+                    MouseArea {
+                        id: expandButtonMouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onClicked: root.devicesExpanded = !root.devicesExpanded
+                    }
+                }
+            }
+        }
+
+        // Devices list
+        Rectangle {
+            width: parent.width
+            height: devicesExpanded ? devicesColumn.implicitHeight + 20 : 0
+            visible: height > 0
+            color: Theme.colors.surface
+            radius: Theme.barBorderRadius
+            clip: true
+
+            Behavior on height {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            Column {
+                id: devicesColumn
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 5
+
+                Repeater {
+                    model: Pipewire.nodes
+
+                    delegate: Rectangle {
+                        required property var modelData
+
+                        width: devicesColumn.width
+                        height: isValidSink ? 35 : 0
+                        visible: isValidSink
+                        radius: 6
+                        color: deviceMouseArea.containsMouse ? Theme.colors.surfaceVariant : "transparent"
+
+                        property bool isActive: Audio.sink?.id === modelData.id
+
+                        // Only show hardware devices (alsa, bluez) and exclude virtual/application sinks
+                        property bool isValidSink: {
+                            if (!modelData.isSink)
+                                return false;
+                            const name = modelData.name || "";
+                            // Only show alsa (USB/internal audio) and bluez (bluetooth) devices
+                            return name.startsWith("alsa_") || name.startsWith("bluez_");
+                        }
+
+                        Text {
+                            anchors.fill: parent
+                            anchors.leftMargin: 10
+                            anchors.rightMargin: 10
+                            verticalAlignment: Text.AlignVCenter
+                            text: modelData.description || modelData.name || "Unknown device"
+                            color: parent.isActive ? Theme.colors.primary : Theme.colors.text
+                            font: Theme.font.base
+                            elide: Text.ElideRight
+                        }
+
+                        MouseArea {
+                            id: deviceMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+
+                            onClicked: {
+                                setDefaultProcess.command = ["wpctl", "set-default", modelData.id];
+                                setDefaultProcess.running = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Process {
+        id: setDefaultProcess
+        running: false
     }
 }

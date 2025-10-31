@@ -54,7 +54,7 @@ PanelWindow {
         ControlPanel {
             onClicked: {
                 if (popupController) {
-                    popupController.toggleControlCenter(topbar.width - 700 - 5, topbar.height + 5);
+                    popupController.toggleControlCenter(topbar.width - 500 - 5, topbar.height + 5);
                 }
             }
             Layout.rightMargin: 8

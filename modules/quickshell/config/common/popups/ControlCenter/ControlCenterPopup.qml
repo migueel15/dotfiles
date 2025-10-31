@@ -16,7 +16,7 @@ Item {
     property int targetX: 0
     property int targetY: 0
 
-    width: 700
+    width: 500
     height: 550
 
     x: targetX
@@ -70,44 +70,6 @@ Item {
 
             UserCard {}
             AudioControl {}
-            Text {
-                text: "Control Panel"
-                color: "white"
-                font.pixelSize: 18
-            }
-
-            Repeater {
-                id: repeater
-                model: Pipewire.nodes
-                property var currentSinkId: Pipewire.defaultAudioSink?.id
-
-                delegate: MouseArea {
-                    id: itemSink
-                    visible: modelData.isSink
-
-                    property var thisId: modelData.id
-                    property bool isActive: repeater.currentSinkId == thisId
-
-                    implicitWidth: sinkText.implicitWidth
-                    implicitHeight: sinkText.implicitHeight
-                    cursorShape: Qt.PointingHandCursor
-
-                    Process {
-                        id: itemProcess
-                        running: false
-                        command: ["wpctl", "set-default", itemSink.thisId]
-                    }
-
-                    onClicked: {
-                        itemProcess.running = true;
-                    }
-                    Text {
-                        id: sinkText
-                        text: modelData.description
-                        color: itemSink.isActive ? Theme.colors.primary : Theme.colors.text
-                    }
-                }
-            }
         }
     }
 }
