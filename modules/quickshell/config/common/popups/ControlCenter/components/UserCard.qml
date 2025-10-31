@@ -19,6 +19,10 @@ Rectangle {
     // Add z-index to ensure menu appears on top
     z: 10
 
+    function closeSystemMenu() {
+        systemMenu.close();
+    }
+
     RowLayout {
         anchors.fill: parent
         anchors.margins: 10

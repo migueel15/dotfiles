@@ -61,6 +61,9 @@ PanelWindow {
     Item {
         id: popupContent
         anchors.fill: parent
+        focus: hasOpenPopup
+
+        Keys.onEscapePressed: closeCurrentPopup()
 
         ControlCenterPopup {
             id: controlCenterPopup
@@ -68,6 +71,7 @@ PanelWindow {
             onIsOpenChanged: {
                 if (isOpen) {
                     popupController.currentPopup = controlCenterPopup;
+                    popupContent.forceActiveFocus();
                 } else if (popupController.currentPopup === controlCenterPopup) {
                     popupController.currentPopup = null;
                 }

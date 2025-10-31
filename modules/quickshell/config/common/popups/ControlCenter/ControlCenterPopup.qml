@@ -51,7 +51,10 @@ Item {
     MouseArea {
         anchors.fill: parent
         z: -1
-        onPressed: mouse => mouse.accepted = true
+        onPressed: {
+            userCard.closeSystemMenu();
+            mouse.accepted = true;
+        }
         onReleased: mouse => mouse.accepted = true
         onClicked: mouse => mouse.accepted = true
     }
@@ -62,13 +65,21 @@ Item {
         color: Theme.colors.background
         radius: 10
 
+        MouseArea {
+            anchors.fill: parent
+            onPressed: userCard.closeSystemMenu()
+            propagateComposedEvents: true
+        }
+
         Column {
             id: mainContainer
             anchors.fill: parent
             anchors.margins: 20
             spacing: 15
 
-            UserCard {}
+            UserCard {
+                id: userCard
+            }
             AudioControl {}
         }
     }
