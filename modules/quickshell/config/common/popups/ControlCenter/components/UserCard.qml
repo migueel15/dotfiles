@@ -16,6 +16,9 @@ Rectangle {
     height: 60
     radius: 10
 
+    // Add z-index to ensure menu appears on top
+    z: 10
+
     RowLayout {
         anchors.fill: parent
         anchors.margins: 10
@@ -92,8 +95,17 @@ Rectangle {
                 }
                 IconButtom {
                     icon: ""
+                    onClick: () => systemMenu.toggle()
                 }
             }
         }
+    }
+
+    // System menu popup
+    SystemMenu {
+        id: systemMenu
+        anchors.top: parent.bottom
+        anchors.right: parent.right
+        anchors.topMargin: 5
     }
 }
