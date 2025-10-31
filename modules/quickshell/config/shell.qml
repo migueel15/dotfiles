@@ -5,6 +5,7 @@ import QtQuick
 import qs.common
 import qs.common.bars
 import qs.common.bars.components
+import "common" as Common
 
 ShellRoot {
     id: root
@@ -18,6 +19,7 @@ ShellRoot {
                 TopBar {
                     id: topBar
                     screen: modelData
+                    popupController: popupCtrl
                 }
                 SideBar {
                     screen: modelData
@@ -32,6 +34,11 @@ ShellRoot {
                     screen: modelData
                 }
                 BottomRightCorner {
+                    screen: modelData
+                }
+
+                Common.PopupController {
+                    id: popupCtrl
                     screen: modelData
                 }
             }

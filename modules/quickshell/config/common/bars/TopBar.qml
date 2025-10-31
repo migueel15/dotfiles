@@ -9,6 +9,8 @@ import qs.common.popups.ControlCenter
 PanelWindow {
     id: topbar
 
+    property var popupController: null
+
     exclusionMode: ExclusionMode.Auto
 
     focusable: false
@@ -50,16 +52,13 @@ PanelWindow {
         Notifications {}
 
         ControlPanel {
-            onClicked: controlPanelPopup.toggle()
+            onClicked: {
+                if (popupController) {
+                    popupController.toggleControlCenter(topbar.width - 700 - 5, topbar.height + 5);
+                }
+            }
             Layout.rightMargin: 8
             Layout.leftMargin: 8
         }
-    }
-
-    ControlCenterPopup {
-        id: controlPanelPopup
-        anchor.window: topbar
-        anchor.rect.x: topbar.width
-        anchor.rect.y: topbar.height + 5
     }
 }

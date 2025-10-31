@@ -9,31 +9,49 @@ import qs.common.components
 import qs.common.widgets
 import qs.common.popups.ControlCenter.components
 
-PopupWindow {
+Item {
     id: root
-    property var debug: true
-    implicitWidth: 700
-    implicitHeight: 550
-    visible: root.debug
-    color: "transparent"
+
+    property bool isOpen: false
+    property int targetX: 0
+    property int targetY: 0
+
+    width: 700
+    height: 550
+
+    x: targetX
+    y: isOpen ? targetY : -height
+
+    visible: opacity > 0
+    opacity: isOpen ? 1 : 0
+
+    Behavior on y {
+        NumberAnimation {
+            duration: 300
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    function open() {
+        isOpen = true;
+    }
+
+    function close() {
+        isOpen = false;
+    }
 
     Rectangle {
         id: content
-
-        width: root.width
-        height: root.height
-        y: !root.debug && -root.height
-
+        anchors.fill: parent
         color: Theme.colors.background
-
         radius: 10
-
-        Behavior on y {
-            NumberAnimation {
-                duration: 300
-                easing.type: Easing.OutCubic
-            }
-        }
 
         Column {
             id: mainContainer
@@ -81,22 +99,6 @@ PopupWindow {
                     }
                 }
             }
-        }
-    }
-
-    Timer {
-        id: closeTimer
-        interval: 300
-        onTriggered: root.visible = false
-    }
-
-    function toggle() {
-        if (visible) {
-            content.y = -root.height;  // Desliza afuera
-            closeTimer.start();
-        } else {
-            visible = true;
-            content.y = 0;
         }
     }
 }
