@@ -62,6 +62,33 @@ Rectangle {
         spacing: 0
 
         SystemMenuItem {
+            icon: ""
+            text: "Apagar"
+            onClicked: {
+                systemMenu.isOpen = false;
+                poweroffProcess.running = true;
+            }
+        }
+
+        SystemMenuItem {
+            icon: "󰜉"
+            text: "Reiniciar"
+            onClicked: {
+                systemMenu.isOpen = false;
+                rebootProcess.running = true;
+            }
+        }
+
+        SystemMenuItem {
+            icon: "󰒲"
+            text: "Suspender"
+            onClicked: {
+                systemMenu.isOpen = false;
+                suspendProcess.running = true;
+            }
+        }
+
+        SystemMenuItem {
             icon: ""
             text: "Bloquear"
             onClicked: {
@@ -76,33 +103,6 @@ Rectangle {
             onClicked: {
                 systemMenu.isOpen = false;
                 logoutProcess.running = true;
-            }
-        }
-
-        SystemMenuItem {
-            icon: "󰒲"
-            text: "Suspender"
-            onClicked: {
-                systemMenu.isOpen = false;
-                suspendProcess.running = true;
-            }
-        }
-
-        SystemMenuItem {
-            icon: "󰜉"
-            text: "Reiniciar"
-            onClicked: {
-                systemMenu.isOpen = false;
-                rebootProcess.running = true;
-            }
-        }
-
-        SystemMenuItem {
-            icon: ""
-            text: "Apagar"
-            onClicked: {
-                systemMenu.isOpen = false;
-                poweroffProcess.running = true;
             }
         }
     }

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Pipewire
+import Quickshell
 import Quickshell.Io
 
 import qs.common
@@ -159,12 +160,10 @@ Item {
 
                         property bool isActive: Audio.sink?.id === modelData.id
 
-                        // Only show hardware devices (alsa, bluez) and exclude virtual/application sinks
                         property bool isValidSink: {
                             if (!modelData.isSink)
                                 return false;
                             const name = modelData.name || "";
-                            // Only show alsa (USB/internal audio) and bluez (bluetooth) devices
                             return name.startsWith("alsa_") || name.startsWith("bluez_");
                         }
 
@@ -186,18 +185,14 @@ Item {
                             cursorShape: Qt.PointingHandCursor
 
                             onClicked: {
-                                setDefaultProcess.command = ["wpctl", "set-default", modelData.id];
-                                setDefaultProcess.running = true;
+                                const command = ["wpctl", "set-default", modelData.id];
+                                Quickshell.execDetached(command);
+                                root.devicesExpanded = false;
                             }
                         }
                     }
                 }
             }
         }
-    }
-
-    Process {
-        id: setDefaultProcess
-        running: false
     }
 }
