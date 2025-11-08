@@ -4,6 +4,7 @@ import Quickshell.Services.Pipewire
 import Quickshell
 import Quickshell.Io
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 import qs.common
 import qs.services
@@ -23,10 +24,15 @@ Item {
 
         Slider {
             id: volumeSlider
+            Material.theme: Material.Dark
             from: 0
             to: 1
             stepSize: 0.01
-            value: Audio.sink.audio.volume
+            value: {
+                console.log("LOG:", Audio.sink.nickname);
+                console.log("LOG AUDIO:", Audio.sink.audio.volume);
+                Audio.sink.audio.volume;
+            }
             onMoved: v => Audio.updateVolume(volumeSlider.value)
         }
 
@@ -197,7 +203,8 @@ Item {
                             cursorShape: Qt.PointingHandCursor
 
                             onClicked: {
-                                Audio.changeDefaultSink(modelData);
+                                // Audio.changeDefaultSink(modelData);
+                                Pipewire.preferredDefaultAudioSink = modelData;
                                 root.devicesExpanded = false;
                             }
                         }

@@ -17,11 +17,29 @@ Singleton {
     Connections {
         target: Pipewire
         function onDefaultAudioSinkChanged() {
-            if (Pipewire.defaultAudioSink?.audio) {
-                root.volume = Pipewire.defaultAudioSink.audio.volume;
-            } else {
-                root.volume = 0;
-            }
+            console.log("New default sink:", Pipewire.defaultAudioSink?.nickname);
+            root.sink = Pipewire.defaultAudioSink;
+            root.volume = Pipewire.defaultAudioSink.audio.volume;
+            root.refreshSinkInfo();
+        }
+    }
+
+    Connections {
+        id: volumeConnection
+        target: root.sink ? root.sink.audio : null
+
+        function onMutedChanged() {
+            root.isMuted = root.sink.audio.muted;
+        }
+    }
+
+    function refreshSinkInfo() {
+        if (sink && sink.audio) {
+            root.volume = sink.audio.volume;
+            root.isMuted = sink.audio.muted;
+        } else {
+            root.volume = 0;
+            root.isMuted = false;
         }
     }
 
@@ -39,7 +57,7 @@ Singleton {
     }
 
     PwObjectTracker {
-        objects: [sink, source]
+        objects: Pipewire.nodes.values
     }
 
     function playSystemSound(soundName) {
