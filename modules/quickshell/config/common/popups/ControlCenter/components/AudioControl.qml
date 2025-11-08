@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Services.Pipewire
 import Quickshell
 import Quickshell.Io
+import QtQuick.Controls
 
 import qs.common
 import qs.services
@@ -19,6 +20,15 @@ Item {
         id: column
         width: parent.width
         spacing: 10
+
+        Slider {
+            id: volumeSlider
+            from: 0
+            to: 1
+            stepSize: 0.01
+            value: Audio.sink.audio.volume
+            onMoved: v => Audio.updateVolume(volumeSlider.value)
+        }
 
         // Main volume control
         Rectangle {
@@ -147,7 +157,7 @@ Item {
                 spacing: 5
 
                 Repeater {
-                    model: Pipewire.nodes
+                    model: Audio.allSinks
 
                     delegate: Rectangle {
                         required property var modelData
@@ -172,7 +182,9 @@ Item {
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
                             verticalAlignment: Text.AlignVCenter
-                            text: modelData.description || modelData.name || "Unknown device"
+                            text: {
+                                Audio.getDisplayName(modelData);
+                            }
                             color: parent.isActive ? Theme.colors.primary : Theme.colors.text
                             font: Theme.font.base
                             elide: Text.ElideRight
@@ -185,8 +197,7 @@ Item {
                             cursorShape: Qt.PointingHandCursor
 
                             onClicked: {
-                                const command = ["wpctl", "set-default", modelData.id];
-                                Quickshell.execDetached(command);
+                                Audio.changeDefaultSink(modelData);
                                 root.devicesExpanded = false;
                             }
                         }
