@@ -31,9 +31,9 @@ Item {
             value: {
                 console.log("LOG:", Audio.sink.nickname);
                 console.log("LOG AUDIO:", Audio.sink.audio.volume);
-                Audio.sink.audio.volume;
+                Audio.volume;
             }
-            onMoved: v => Audio.updateVolume(volumeSlider.value)
+            onMoved: v => Audio.setVolume(volumeSlider.value)
         }
 
         // Main volume control
@@ -163,7 +163,7 @@ Item {
                 spacing: 5
 
                 Repeater {
-                    model: Audio.allSinks
+                    model: Audio.sinks
 
                     delegate: Rectangle {
                         required property var modelData
@@ -204,7 +204,7 @@ Item {
 
                             onClicked: {
                                 // Audio.changeDefaultSink(modelData);
-                                Pipewire.preferredDefaultAudioSink = modelData;
+                                Audio.setAudioSink(modelData);
                                 root.devicesExpanded = false;
                             }
                         }
