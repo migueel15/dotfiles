@@ -26,31 +26,31 @@ Singleton {
     readonly property list<PwNode> sinks: nodes.sinks
     readonly property list<PwNode> sources: nodes.sources
 
-    // Volume [0..1] is readonly from outside
     readonly property alias volume: root._volume
     property real _volume: sink?.audio?.volume ?? 0
+
+    property string audioTheme: "freedesktop"
 
     readonly property alias muted: root._muted
     property bool _muted: !!sink?.audio?.muted
 
-    // Input volume [0..1] is readonly from outside
     readonly property alias inputVolume: root._inputVolume
     property real _inputVolume: source?.audio?.volume ?? 0
 
     readonly property alias inputMuted: root._inputMuted
     property bool _inputMuted: !!source?.audio?.muted
 
-    readonly property real stepVolume: Settings.data.audio.volumeStep / 100.0
+    readonly property real stepVolume: 0.05
 
     PwObjectTracker {
         objects: [...root.sinks, ...root.sources]
     }
 
     Connections {
-        target: sink?.audio ? sink?.audio : null
+        target: root.sink?.audio ? root.sink?.audio : null
 
         function onVolumeChanged() {
-            var vol = (sink?.audio.volume ?? 0);
+            var vol = (root.sink?.audio.volume ?? 0);
             if (isNaN(vol)) {
                 return;
             }
@@ -58,16 +58,15 @@ Singleton {
         }
 
         function onMutedChanged() {
-            root._muted = (sink?.audio.muted ?? true);
-            Logger.i("AudioService", "OnMuteChanged:", root._muted);
+            root._muted = (root.sink?.audio.muted ?? true);
         }
     }
 
     Connections {
-        target: source?.audio ? source?.audio : null
+        target: root.source?.audio ? root.source?.audio : null
 
         function onVolumeChanged() {
-            var vol = (source?.audio.volume ?? 0);
+            var vol = (root.source?.audio.volume ?? 0);
             if (isNaN(vol)) {
                 return;
             }
@@ -75,8 +74,7 @@ Singleton {
         }
 
         function onMutedChanged() {
-            root._inputMuted = (source?.audio.muted ?? true);
-            Logger.i("AudioService", "OnInputMuteChanged:", root._inputMuted);
+            root._inputMuted = (root.source?.audio.muted ?? true);
         }
     }
 
@@ -90,21 +88,15 @@ Singleton {
 
     function setVolume(newVolume: real) {
         if (sink?.ready && sink?.audio) {
-            // Clamp it accordingly
             sink.audio.muted = false;
             sink.audio.volume = Math.max(0, Math.min(1.0, newVolume));
-            //Logger.i("AudioService", "SetVolume", sink.audio.volume);
-        } else {
-            Logger.w("AudioService", "No sink available");
-        }
+        } else {}
     }
 
     function setOutputMuted(muted: bool) {
         if (sink?.ready && sink?.audio) {
             sink.audio.muted = muted;
-        } else {
-            Logger.w("AudioService", "No sink available");
-        }
+        } else {}
     }
 
     function increaseInputVolume() {
@@ -117,32 +109,25 @@ Singleton {
 
     function setInputVolume(newVolume: real) {
         if (source?.ready && source?.audio) {
-            // Clamp it accordingly
             source.audio.muted = false;
             source.audio.volume = Math.max(0, Math.min(1.0, newVolume));
-        } else {
-            Logger.w("AudioService", "No source available");
-        }
+        } else {}
     }
 
     function setInputMuted(muted: bool) {
         if (source?.ready && source?.audio) {
             source.audio.muted = muted;
-        } else {
-            Logger.w("AudioService", "No source available");
         }
     }
 
     function setAudioSink(newSink: PwNode): void {
         Pipewire.preferredDefaultAudioSink = newSink;
-        // Volume is changed by the sink change
         root._volume = newSink?.audio?.volume ?? 0;
         root._muted = !!newSink?.audio?.muted;
     }
 
     function setAudioSource(newSource: PwNode): void {
         Pipewire.preferredDefaultAudioSource = newSource;
-        // Volume is changed by the source change
         root._inputVolume = newSource?.audio?.volume ?? 0;
         root._inputMuted = !!newSource?.audio?.muted;
     }
@@ -161,45 +146,8 @@ Singleton {
         return (inputVolume <= Number.EPSILON) ? "microphone-mute" : "microphone";
     }
 
-    property string audioTheme: "freedesktop"
-    // property PwNode sink: Pipewire.defaultAudioSink
-    // property PwNode source: Pipewire.defaultAudioSource
-    // property var allSinks: Pipewire.nodes.values.filter(n => n.isSink && n.isStream !== true && n.audio !== null)
-    //
-    // property real volume: sink?.audio.volume ?? 0
-    property bool isMuted: sink?.audio.muted ?? false
-
-    // Connections {
-    //     target: Pipewire
-    //     function onDefaultAudioSinkChanged() {
-    //         console.log("New default sink:", Pipewire.defaultAudioSink?.nickname);
-    //         root.sink = Pipewire.defaultAudioSink;
-    //         root.volume = Pipewire.defaultAudioSink.audio.volume;
-    //         root.refreshSinkInfo();
-    //     }
-    // }
-    //
-    // Connections {
-    //     id: volumeConnection
-    //     target: root.sink ? root.sink.audio : null
-    //
-    //     function onMutedChanged() {
-    //         root.isMuted = root.sink.audio.muted;
-    //     }
-    // }
-    //
-    // function refreshSinkInfo() {
-    //     if (sink && sink.audio) {
-    //         root.volume = sink.audio.volume;
-    //         root.isMuted = sink.audio.muted;
-    //     } else {
-    //         root.volume = 0;
-    //         root.isMuted = false;
-    //     }
-    // }
-
     readonly property string icon: {
-        if (root.isMuted) {
+        if (root.muted) {
             return "󰝟";
         }
 
@@ -211,28 +159,11 @@ Singleton {
         return "󰕾";
     }
 
-    // PwObjectTracker {
-    //     objects: Pipewire.nodes.values
-    // }
-
     function playSystemSound(soundName) {
         const soundPath = `/usr/share/sounds/${root.audioTheme}/stereo/${soundName}.oga`;
         const command = ["ffplay", "-nodisp", "-autoexit", soundPath];
         Quickshell.execDetached(command);
     }
-
-    // function incVolume() {
-    //     root.sink.audio.volume = Math.min(1, root.sink.audio.volume + 0.05);
-    // }
-    //
-    // function decVolume() {
-    //     root.sink.audio.volume = Math.min(1, root.sink.audio.volume - 0.05);
-    // }
-
-    // function updateVolume(value: real) {
-    //     console.log("Update volume", value);
-    //     Pipewire.defaultAudioSink.audio.volume = value;
-    // }
 
     function muteSink() {
         root.sink.audio.muted = !root.sink.audio.muted;
@@ -243,11 +174,6 @@ Singleton {
         const priorityOrder = ["", ""];
 
         print(audios.map(s => s.description));
-    }
-
-    function changeDefaultSink(node: PwNode) {
-        const command = ["wpctl", "set-default", node.id];
-        Quickshell.execDetached(command);
     }
 
     function getDisplayName(node: PwNode): string {

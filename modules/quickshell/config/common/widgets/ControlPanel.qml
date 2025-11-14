@@ -33,9 +33,9 @@ Rectangle {
         }
         onWheel: wheel => {
             if (wheel.angleDelta.y > 0) {
-                Audio.incVolume();
+                Audio.increaseVolume();
             } else {
-                Audio.decVolume();
+                Audio.decreaseVolume();
             }
         }
     }
