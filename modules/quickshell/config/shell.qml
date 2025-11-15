@@ -1,6 +1,7 @@
 //@ pragma UseQApplication
 import Quickshell
 import QtQuick
+import QtQuick.Controls.Material
 
 import qs.common
 import qs.common.bars
@@ -9,6 +10,9 @@ import "common" as Common
 
 ShellRoot {
     id: root
+
+    Material.theme: Material.Dark
+    Material.accent: Material.Purple
 
     Variants {
         model: Quickshell.screens

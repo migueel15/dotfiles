@@ -16,24 +16,26 @@ Item {
     implicitHeight: column.implicitHeight
 
     property bool devicesExpanded: false
+    Material.theme: Material.Dark
+    Material.accent: Theme.colors.primary
 
     Column {
         id: column
         width: parent.width
         spacing: 10
-
+        RadioButton {
+            checked: true
+            text: qsTr("First")
+        }
         Slider {
             id: volumeSlider
-            Material.theme: Material.Dark
             from: 0
             to: 1
             stepSize: 0.01
             value: {
-                console.log("LOG:", Audio.sink.nickname);
-                console.log("LOG AUDIO:", Audio.sink.audio.volume);
-                Audio.sink.audio.volume;
+                Audio.volume;
             }
-            onMoved: v => Audio.updateVolume(volumeSlider.value)
+            onMoved: v => Audio.setVolume(volumeSlider.value)
         }
 
         // Main volume control
@@ -106,6 +108,14 @@ Item {
                                     Pipewire.defaultAudioSink.audio.volume = volume;
                                 }
                             }
+
+                            onWheel: wheel => {
+                                if (wheel.angleDelta.y > 0) {
+                                    Audio.increaseVolume();
+                                } else {
+                                    Audio.decreaseVolume();
+                                }
+                            }
                         }
                     }
 
@@ -163,7 +173,7 @@ Item {
                 spacing: 5
 
                 Repeater {
-                    model: Audio.allSinks
+                    model: Audio.sinks
 
                     delegate: Rectangle {
                         required property var modelData
@@ -204,7 +214,7 @@ Item {
 
                             onClicked: {
                                 // Audio.changeDefaultSink(modelData);
-                                Pipewire.preferredDefaultAudioSink = modelData;
+                                Audio.setAudioSink(modelData);
                                 root.devicesExpanded = false;
                             }
                         }
