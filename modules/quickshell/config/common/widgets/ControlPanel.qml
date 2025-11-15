@@ -32,10 +32,10 @@ Rectangle {
         ];
 
         if (Battery.isLaptop) {
-            list.push({
+            list.splice(3,0,{
                 // para que se evalue en cada actualizacion y no sea una copia del valor
-                "icon": () => Battery.icon,
-                "label": () => Battery.label
+                "icon": Battery.icon,
+                "label": Battery.label
             });
         }
 
@@ -94,14 +94,9 @@ Rectangle {
             Repeater {
                 model: root.icons
 
-                // delegate: Text {
-                //     text: modelData
-                //     font: Theme.font.base
-                //     color: mouseArea.containsMouse ? Theme.colors.white : Theme.colors.text
-                // }
                 delegate: IconLabel {
-                    icon: typeof modelData.icon === "function" ? modelData.icon() : modelData.icon ?? null
-                    label: typeof modelData.label === "function" ? modelData.label() : modelData.label ?? null
+                    icon: modelData.icon ?? null
+                    label: modelData.label ?? null
                     font: Theme.font.base
                     color: mouseArea.containsMouse ? Theme.colors.white : Theme.colors.text
                 }

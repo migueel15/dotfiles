@@ -23,22 +23,7 @@ Item {
         id: column
         width: parent.width
         spacing: 10
-        RadioButton {
-            checked: true
-            text: qsTr("First")
-        }
-        Slider {
-            id: volumeSlider
-            from: 0
-            to: 1
-            stepSize: 0.01
-            value: {
-                Audio.volume;
-            }
-            onMoved: v => Audio.setVolume(volumeSlider.value)
-        }
 
-        // Main volume control
         Rectangle {
             width: parent.width
             height: 60

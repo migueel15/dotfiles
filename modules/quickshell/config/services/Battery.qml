@@ -9,6 +9,7 @@ Singleton {
 
     readonly property bool isLaptop: UPower.displayDevice.isLaptopBattery ?? false
     readonly property real batteryPercentage: UPower.displayDevice.percentage
+	readonly property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
     property string icon: {
         let icon = "";
         const charginIcons = ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"];
