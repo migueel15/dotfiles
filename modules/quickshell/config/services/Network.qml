@@ -10,7 +10,7 @@ Singleton {
 
     Timer {
         id: ethernetCheckTimer
-        interval: 1000
+        interval: 10000
         running: true
         repeat: true
         onTriggered: ethernetStateProcess.running = true
@@ -44,7 +44,6 @@ Singleton {
                 if (root.wifiConnected !== result.wifi) {
                     root.wifiConnected = result.wifi;
                 }
-                console.log("ETHERNET:", result.ethernet);
             }
         }
     }
