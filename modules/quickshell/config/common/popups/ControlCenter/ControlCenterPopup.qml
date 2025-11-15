@@ -17,7 +17,8 @@ Item {
     property int targetY: 0
 
     width: 500
-    height: 550
+    height: content.implicitHeight
+    implicitHeight: height
 
     x: targetX
     y: isOpen ? targetY : -height
@@ -64,6 +65,7 @@ Item {
         anchors.fill: parent
         color: Theme.colors.background
         radius: 10
+        implicitHeight: mainContainer.implicitHeight + 40
 
         MouseArea {
             anchors.fill: parent
