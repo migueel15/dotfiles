@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.common
 import qs.services
+import qs.common.components
 
 Rectangle {
     id: root
@@ -12,7 +13,34 @@ Rectangle {
     property string volume: Audio.icon
     property string powerIcon: "󰐥"
 
-    property var icons: [networtIcon, bluetoothIcon, volume, powerIcon]
+    property var icons: {
+        // let list = [networtIcon, bluetoothIcon, volume, powerIcon];
+
+        let list = [
+            {
+                "icon": networtIcon
+            },
+            {
+                "icon": bluetoothIcon
+            },
+            {
+                "icon": volume
+            },
+            {
+                "icon": powerIcon
+            },
+        ];
+
+        if (Battery.isLaptop) {
+            list.push({
+                // para que se evalue en cada actualizacion y no sea una copia del valor
+                "icon": () => Battery.icon,
+                "label": () => Battery.label
+            });
+        }
+
+        return list;
+    }
 
     height: parent.height
     // width: 100
@@ -61,12 +89,19 @@ Rectangle {
         RowLayout {
             id: rowLayout
             anchors.centerIn: parent
+            height: parent.height
             spacing: 8
             Repeater {
                 model: root.icons
 
-                delegate: Text {
-                    text: modelData
+                // delegate: Text {
+                //     text: modelData
+                //     font: Theme.font.base
+                //     color: mouseArea.containsMouse ? Theme.colors.white : Theme.colors.text
+                // }
+                delegate: IconLabel {
+                    icon: typeof modelData.icon === "function" ? modelData.icon() : modelData.icon ?? null
+                    label: typeof modelData.label === "function" ? modelData.label() : modelData.label ?? null
                     font: Theme.font.base
                     color: mouseArea.containsMouse ? Theme.colors.white : Theme.colors.text
                 }

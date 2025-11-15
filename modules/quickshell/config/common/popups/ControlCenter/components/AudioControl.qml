@@ -16,21 +16,23 @@ Item {
     implicitHeight: column.implicitHeight
 
     property bool devicesExpanded: false
+    Material.theme: Material.Dark
+    Material.accent: Theme.colors.primary
 
     Column {
         id: column
         width: parent.width
         spacing: 10
-
+        RadioButton {
+            checked: true
+            text: qsTr("First")
+        }
         Slider {
             id: volumeSlider
-            Material.theme: Material.Dark
             from: 0
             to: 1
             stepSize: 0.01
             value: {
-                console.log("LOG:", Audio.sink.nickname);
-                console.log("LOG AUDIO:", Audio.sink.audio.volume);
                 Audio.volume;
             }
             onMoved: v => Audio.setVolume(volumeSlider.value)
@@ -104,6 +106,14 @@ Item {
                                 if (Pipewire.defaultAudioSink) {
                                     const volume = Math.max(0, Math.min(1, x / width));
                                     Pipewire.defaultAudioSink.audio.volume = volume;
+                                }
+                            }
+
+                            onWheel: wheel => {
+                                if (wheel.angleDelta.y > 0) {
+                                    Audio.increaseVolume();
+                                } else {
+                                    Audio.decreaseVolume();
                                 }
                             }
                         }
