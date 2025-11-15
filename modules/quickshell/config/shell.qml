@@ -25,9 +25,9 @@ ShellRoot {
                     screen: modelData
                     popupController: popupCtrl
                 }
-                SideBar {
-                    screen: modelData
-                }
+                // SideBar {
+                //     screen: modelData
+                // }
                 TopRightCorner {
                     screen: modelData
                 }
