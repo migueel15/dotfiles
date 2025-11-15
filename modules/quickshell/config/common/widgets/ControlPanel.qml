@@ -8,7 +8,7 @@ Rectangle {
     id: root
 
     signal clicked
-    property string networtIcon: "󰛳"
+    property string networtIcon: Network.ethernetConnected ? "󰛳" : Network.wifiConnected ? "󰖩" : "󰲛"
     property string bluetoothIcon: Bluetooth.icon
     property string volume: Audio.icon
     property string powerIcon: "󰐥"
@@ -32,7 +32,7 @@ Rectangle {
         ];
 
         if (Battery.isLaptop) {
-            list.splice(3,0,{
+            list.splice(3, 0, {
                 // para que se evalue en cada actualizacion y no sea una copia del valor
                 "icon": Battery.icon,
                 "label": Battery.label
