@@ -129,10 +129,7 @@ Item {
                         id: expandButtonMouseArea
                         anchors.fill: parent
                         hoverEnabled: true
-                        // onClicked: root.devicesExpanded = !root.devicesExpanded
-                        onClicked: {
-                            console.log(Pipewire.defaultAudioSink.id);
-                        }
+                        onClicked: root.devicesExpanded = !root.devicesExpanded
                     }
                 }
             }
