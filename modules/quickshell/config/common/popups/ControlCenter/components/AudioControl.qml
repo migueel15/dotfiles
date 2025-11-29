@@ -171,12 +171,7 @@ Item {
 
                         property bool isActive: Audio.sink?.id === modelData.id
 
-                        property bool isValidSink: {
-                            if (!modelData.isSink)
-                                return false;
-                            const name = modelData.name || "";
-                            return name.startsWith("alsa_") || name.startsWith("bluez_");
-                        }
+                        property bool isValidSink: modelData.isSink && !!modelData.audio
 
                         Text {
                             anchors.fill: parent
