@@ -13,7 +13,7 @@ Rectangle {
     property var currentIcon: Theme.notifications.icon.none
 
     Component.onDestruction: {
-        swaync_daemon.running = false
+        swaync_daemon.running = false;
     }
 
     Process {
