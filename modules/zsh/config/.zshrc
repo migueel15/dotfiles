@@ -124,7 +124,8 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # exports
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export JAVA_HOME="/usr/lib/jvm/java-22-openjdk"
+export PYSPARK_PYTHON=$(which python)
 export CFLAGS="-Wall -Wextra -Werror -O2"
 export LC_ALL=es_ES.UTF-8
 export LANG=es_ES.UTF-8
