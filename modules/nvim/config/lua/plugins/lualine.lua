@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	dependencies = { "nvim-tree/nvim-web-devicons", 'AndreM222/copilot-lualine' },
 	config = function()
 		-- local copilot_indicator = function()
 		-- 	local client = vim.lsp.get_clients({ name = "copilot" })[1]
