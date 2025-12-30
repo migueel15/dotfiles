@@ -40,6 +40,11 @@ install_deps_from_file() {
   fi
 }
 
+update_yay_repo() {
+  log_info "Actualizando repositorios de yay..."
+  yay -Syy --noconfirm
+}
+
 install_global_deps() {
   log_title "Instalando dependencias globales..."
   install_deps_from_file "$DOTFILES_DIR/packages/deps"
@@ -116,6 +121,7 @@ main() {
     install)
 
       initial_setup_yay
+	  update_yay_repo
       install_global_deps
       setup_bw
 
@@ -134,6 +140,7 @@ main() {
       ;;
     setup)
       initial_setup_yay
+	  update_yay_repo
       install_global_deps
       setup_bw
       ;;
