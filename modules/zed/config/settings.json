@@ -1,0 +1,71 @@
+{
+	"relative_line_numbers": "enabled",
+	"diagnostics": {
+		"inline": {
+			"enabled": true
+		}
+	},
+	"git": {
+		"inline_blame": {
+			"enabled": false
+		}
+	},
+	"toolbar": {
+		"breadcrumbs": true,
+		"quick_actions": false
+	},
+	"scrollbar": {
+		"show": "never"
+	},
+	"features": {
+		"edit_prediction_provider": "copilot"
+	},
+	"telemetry": {
+		"diagnostics": true,
+		"metrics": false
+	},
+	"vim_mode": true,
+	"project_panel": {
+		"hide_root": false,
+		"scrollbar": {
+			"show": "auto"
+		},
+		"folder_icons": true,
+		"dock": "right",
+		"auto_fold_dirs": false
+	},
+	"agent": {
+		"single_file_review": true,
+		"enable_feedback": true,
+		"dock": "left",
+		"always_allow_tool_actions": false,
+		"enabled": true,
+		"button": true,
+		"model_parameters": []
+	},
+	"minimap": {
+		"show": "never"
+	},
+	"buffer_font_fallbacks": ["Droid Sans Mono", "monospace", "monospace"],
+	"buffer_font_family": "JetBrainsMono Nerd Font",
+	"file_types": {
+		"css": ["*.css"]
+	},
+	"auto_indent_on_paste": true,
+	"hard_tabs": true,
+	"tab_size": 2,
+	"icon_theme": {
+		"mode": "dark",
+		"light": "Zed (Default)",
+		"dark": "Material Icon Theme"
+	},
+	"base_keymap": "VSCode",
+	"ui_font_size": 18,
+	"agent_buffer_font_size": 15,
+	"buffer_font_size": 15,
+	"theme": {
+		"mode": "dark",
+		"light": "One Light",
+		"dark": "Catppuccin Mocha"
+	}
+}

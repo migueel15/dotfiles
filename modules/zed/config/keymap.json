@@ -1,0 +1,65 @@
+[
+	{
+		"context": "Workspace",
+		"bindings": {
+			", c c": "agent::ToggleFocus",
+			"ctrl-p": "file_finder::Toggle",
+			", f f": "file_finder::Toggle",
+			", f w": "workspace::NewSearch"
+		}
+	},
+	{
+		"context": "AgentPanel",
+		"bindings": {
+			", c c": "workspace::ToggleLeftDock"
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-;": "terminal_panel::Toggle",
+			", t": "project_panel::ToggleFocus",
+			"ctrl-l": null
+		}
+	},
+	{
+		"context": "Editor && vim_mode == normal",
+		"bindings": {
+			"ctrl-h": "workspace::ActivatePaneLeft",
+			"ctrl-l": "workspace::ActivatePaneRight",
+			"ctrl-k": "workspace::ActivatePaneUp",
+			"ctrl-j": "workspace::ActivatePaneDown"
+		}
+	},
+	{
+		"context": "Dock",
+		"bindings": {
+			"ctrl-l": "workspace::ActivateNextPane",
+			"ctrl-h": "workspace::ActivatePreviousPane"
+		}
+	},
+	{
+		"context": "ProjectPanel && not_editing",
+		"bindings": {
+			", t": "project_panel::ToggleFocus",
+			"a": "project_panel::NewFile",
+			"d": "project_panel::Delete",
+			"r": "project_panel::Rename",
+			"tab": "project_panel::Open"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"ctrl-;": "terminal_panel::Toggle",
+			"ctrl-l": "terminal::Clear",
+			"ctrl-k": "workspace::ActivatePaneUp"
+		}
+	},
+	{
+		"context": "vim_mode == literal",
+		"bindings": {
+			"ctrl-l": null
+		}
+	}
+]
