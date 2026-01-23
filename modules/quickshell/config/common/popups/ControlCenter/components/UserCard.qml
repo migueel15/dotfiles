@@ -95,7 +95,8 @@ Rectangle {
                 }
 
                 IconButtom {
-                    icon: ""
+                    icon: "󰂯"
+                    command: ["blueberry"]
                 }
                 IconButtom {
                     icon: ""
