@@ -44,6 +44,11 @@ PanelWindow {
         height: parent.height
         anchors.right: parent.right
 
+        NowPlaying {
+            Layout.rightMargin: 8
+            Layout.leftMargin: 8
+        }
+
         SystemTray {
             Layout.rightMargin: 8
             Layout.leftMargin: 8

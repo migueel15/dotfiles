@@ -1,8 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Services.Pipewire
-import Quickshell
-import Quickshell.Io
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
@@ -16,6 +13,7 @@ Item {
     implicitHeight: column.implicitHeight
 
     property bool devicesExpanded: false
+
     Material.theme: Material.Dark
     Material.accent: Theme.colors.primary
 
@@ -43,83 +41,27 @@ Item {
                 anchors.margins: 15
                 spacing: 10
 
-                // Volume icon and slider
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: 10
 
                     Text {
-                        text: Audio.icon
-                        color: Theme.colors.primary
+                        text: Bluetooth.icon
+                        color: Bluetooth.enabled ? Theme.colors.primary : Theme.colors.text
                         font: Theme.font.base
-                    }
-
-                    // Volume slider
-                    Item {
-                        Layout.fillWidth: true
-                        height: 20
-
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width
-                            height: 6
-                            radius: 3
-                            color: Theme.colors.surfaceVariant
-
-                            Rectangle {
-                                width: parent.width * (Audio.volume || 0)
-                                height: parent.height
-                                radius: parent.radius
-                                color: Theme.colors.primary
-                            }
-
-                            // Slider handle (circle)
-                            Rectangle {
-                                width: 14
-                                height: 14
-                                radius: 7
-                                color: Theme.colors.white
-                                border.color: Theme.colors.primary
-                                border.width: 2
-                                x: (parent.width * (Audio.volume || 0)) - width / 2
-                                y: parent.height / 2 - height / 2
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onPressed: mouse => updateVolume(mouse.x)
-                            onPositionChanged: mouse => {
-                                if (pressed) {
-                                    updateVolume(mouse.x);
-                                }
-                            }
-
-                            function updateVolume(x) {
-                                if (Pipewire.defaultAudioSink) {
-                                    const volume = Math.max(0, Math.min(1, x / width));
-                                    Pipewire.defaultAudioSink.audio.volume = volume;
-                                }
-                            }
-
-                            onWheel: wheel => {
-                                if (wheel.angleDelta.y > 0) {
-                                    Audio.increaseVolume();
-                                } else {
-                                    Audio.decreaseVolume();
-                                }
-                            }
-                        }
                     }
 
                     Text {
-                        text: Math.round((Audio.volume || 0) * 100) + "%"
+                        Layout.fillWidth: true
+                        text: Bluetooth.activeDevice
+                            ? Bluetooth.getDisplayName(Bluetooth.activeDevice)
+                            : "Bluetooth"
                         color: Theme.colors.text
                         font: Theme.font.base
+                        elide: Text.ElideRight
                     }
                 }
 
-                // Expand button
                 Rectangle {
                     width: 30
                     height: 30
@@ -143,7 +85,6 @@ Item {
             }
         }
 
-        // Devices list
         Rectangle {
             width: parent.width
             height: devicesExpanded ? devicesColumn.implicitHeight + 20 : 0
@@ -165,33 +106,59 @@ Item {
                 anchors.margins: 10
                 spacing: 5
 
+                Text {
+                    width: devicesColumn.width
+                    height: Bluetooth.available ? 0 : 35
+                    visible: !Bluetooth.available
+                    text: "Bluetooth no disponible"
+                    color: Theme.colors.text
+                    font: Theme.font.base
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                Text {
+                    width: devicesColumn.width
+                    height: Bluetooth.available && Bluetooth.devices.length === 0 ? 35 : 0
+                    visible: Bluetooth.available && Bluetooth.devices.length === 0
+                    text: "No hay dispositivos"
+                    color: Theme.colors.text
+                    font: Theme.font.base
+                    verticalAlignment: Text.AlignVCenter
+                }
+
                 Repeater {
-                    model: Audio.sinks
+                    model: Bluetooth.devices
 
                     delegate: Rectangle {
                         required property var modelData
 
                         width: devicesColumn.width
-                        height: isValidSink ? 35 : 0
-                        visible: isValidSink
+                        height: 35
                         radius: 6
                         color: deviceMouseArea.containsMouse ? Theme.colors.surfaceVariant : "transparent"
 
-                        property bool isActive: Audio.sink?.id === modelData.id
+                        property bool isActive: Bluetooth.activeDevice?.address === modelData.address
 
-                        property bool isValidSink: modelData.isSink && !!modelData.audio
-
-                        Text {
+                        RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 10
                             anchors.rightMargin: 10
-                            verticalAlignment: Text.AlignVCenter
-                            text: {
-                                Audio.getDisplayName(modelData);
+                            spacing: 10
+
+                            Text {
+                                Layout.fillWidth: true
+                                text: Bluetooth.getDisplayName(modelData)
+                                color: parent.isActive ? Theme.colors.primary : Theme.colors.text
+                                font: Theme.font.base
+                                elide: Text.ElideRight
                             }
-                            color: parent.isActive ? Theme.colors.primary : Theme.colors.text
-                            font: Theme.font.base
-                            elide: Text.ElideRight
+
+                            Text {
+                                text: modelData.connected ? "Conectado" : ""
+                                color: Theme.colors.primary
+                                font: Theme.font.base
+                                visible: modelData.connected
+                            }
                         }
 
                         MouseArea {
@@ -201,8 +168,11 @@ Item {
                             cursorShape: Qt.PointingHandCursor
 
                             onClicked: {
-                                // Audio.changeDefaultSink(modelData);
-                                Audio.setAudioSink(modelData);
+                                if (modelData.connected) {
+                                    Bluetooth.disconnectDevice(modelData);
+                                } else {
+                                    Bluetooth.connectDevice(modelData);
+                                }
                                 root.devicesExpanded = false;
                             }
                         }
