@@ -16,9 +16,10 @@ Uso: dotfiles <comando> [opciones]
 
 Comandos:
   list                Listar módulos disponibles
-  install <modulo>    Instalar un módulo (todos si no se especifica)
+  status              Revisar estado del entorno
+  install <modulo>    Instalar un módulo (apps + todos si no se especifica)
   generate <modulo>   Crear un módulo nuevo
-  setup               Instalar yay si no está y dependencias base
+  setup [--env]       Instalar dependencias del CLI y Bitwarden
   help                Mostrar esta ayuda
 EOF
 }
@@ -26,7 +27,23 @@ EOF
 list_modules() {
   log_title "Módulos disponibles:"
   for mod in "$DOTFILES_DIR/modules"/*; do
-    [ -d "$mod" ] && echo "  - $(basename "$mod")"
+    if [[ -d "$mod" ]]; then
+      local mod_name
+      local deps_status
+      local setup_status
+      local config_status
+
+      mod_name=$(basename "$mod")
+      deps_status="no"
+      setup_status="no"
+      config_status="no"
+
+      [[ -s "$mod/deps" ]] && deps_status="yes"
+      [[ -x "$mod/setup" ]] && setup_status="yes"
+      [[ -d "$mod/config" ]] && config_status="yes"
+
+      printf "  %-16s deps:%-3s setup:%-3s config:%-3s\n" "$mod_name" "$deps_status" "$setup_status" "$config_status"
+    fi
   done
 }
 
@@ -45,9 +62,14 @@ update_yay_repo() {
   yay -Syy --noconfirm
 }
 
-install_global_deps() {
-  log_title "Instalando dependencias globales..."
+install_cli_deps() {
+  log_title "Instalando dependencias del CLI..."
   install_deps_from_file "$DOTFILES_DIR/packages/deps"
+}
+
+install_apps() {
+  log_title "Instalando apps globales..."
+  install_deps_from_file "$DOTFILES_DIR/packages/apps"
 }
 
 install_module() {
@@ -81,6 +103,56 @@ install_all_modules() {
       install_module "$(basename "$mod_path")"
     fi
   done
+}
+
+status_report() {
+  log_title "Estado del entorno:"
+
+  if check_command yay; then
+    log_success "yay disponible"
+  else
+    log_error "yay no está instalado"
+  fi
+
+  if check_command jq; then
+    log_success "jq disponible"
+  else
+    log_error "jq no está instalado"
+  fi
+
+  if check_command bw; then
+    local bw_status
+    bw_status=$(bw status 2>/dev/null | jq -r '.status' 2>/dev/null || echo "unknown")
+    case "$bw_status" in
+      unauthenticated)
+        log_warn "Bitwarden: sin sesión"
+        ;;
+      locked)
+        log_warn "Bitwarden: bloqueado"
+        ;;
+      unlocked)
+        log_success "Bitwarden: desbloqueado"
+        ;;
+      *)
+        log_warn "Bitwarden: estado desconocido"
+        ;;
+    esac
+  else
+    log_error "Bitwarden CLI no está instalado"
+  fi
+
+  local missing_setup=()
+  for mod_path in "$DOTFILES_DIR/modules"/*; do
+    if [[ -d "$mod_path" && ! -x "$mod_path/setup" ]]; then
+      missing_setup+=("$(basename "$mod_path")")
+    fi
+  done
+
+  if [[ ${#missing_setup[@]} -gt 0 ]]; then
+    log_warn "Módulos sin setup ejecutable: ${missing_setup[*]}"
+  else
+    log_success "Todos los módulos tienen setup ejecutable"
+  fi
 }
 
 generate_module() {
@@ -118,14 +190,12 @@ main() {
     list)
       list_modules
       ;;
+    status)
+      status_report
+      ;;
     install)
-
-      initial_setup_yay
-	  update_yay_repo
-      install_global_deps
-      setup_bw
-
       if [[ $# -eq 1 ]]; then
+        install_apps
         install_all_modules
       else
         install_module "$2"
@@ -139,10 +209,32 @@ main() {
       generate_module "$2"
       ;;
     setup)
-      initial_setup_yay
-	  update_yay_repo
-      install_global_deps
-      setup_bw
+      if [[ ${2:-} == "--env" ]]; then
+        exec 3>&1
+        exec 1>&2
+        initial_setup_yay
+        update_yay_repo
+        install_cli_deps
+        setup_bw
+        exec 1>&3
+        exec 3>&-
+
+        if [[ -z "${BW_SESSION:-}" && -s "$HOME/.bw_session" ]]; then
+          BW_SESSION=$(<"$HOME/.bw_session")
+        fi
+
+        if [[ -n "${BW_SESSION:-}" ]]; then
+          printf 'export BW_SESSION=%q\n' "$BW_SESSION"
+        else
+          log_error "No se pudo obtener BW_SESSION"
+          exit 1
+        fi
+      else
+        initial_setup_yay
+        update_yay_repo
+        install_cli_deps
+        setup_bw
+      fi
       ;;
     help|--help|-h)
       print_help

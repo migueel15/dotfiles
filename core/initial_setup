@@ -34,23 +34,29 @@ setup_bw() {
   local session_file="$HOME/.bw_session"
   local status
 
-  if check_command bw; then
-    log_success "Bitwarden CLI está instalado."
-    status=$(bw status | jq -r '.status')
+  if ! check_command bw; then
+    log_error "Bitwarden CLI no está instalado."
+    exit 1
+  fi
 
-    if [[ "$status" == "unauthenticated" ]]; then
-      log_info "Iniciando sesión en Bitwarden CLI..."
-      export BW_SESSION=$(bw login --raw)
-      echo "$BW_SESSION" > "$session_file"
-    elif [[ "$status" == "locked" ]]; then
-      log_info "Desbloqueando Bitwarden CLI..."
-      export BW_SESSION=$(bw unlock --raw)
-      echo "$BW_SESSION" > "$session_file"
-    elif [[ "$status" == "unlocked" ]]; then
-      log_info "Bitwarden CLI está desbloqueado."
-    else
-      log_warn "Estado desconocido de Bitwarden CLI: $status"
-    fi
-    return
+  log_success "Bitwarden CLI está instalado."
+  status=$(bw status | jq -r '.status')
+
+  if [[ "$status" == "unauthenticated" ]]; then
+    log_info "Iniciando sesión en Bitwarden CLI..."
+    export BW_SESSION=$(bw login --raw)
+    echo "$BW_SESSION" > "$session_file"
+  elif [[ "$status" == "locked" ]]; then
+    log_info "Desbloqueando Bitwarden CLI..."
+    export BW_SESSION=$(bw unlock --raw)
+    echo "$BW_SESSION" > "$session_file"
+  elif [[ "$status" == "unlocked" ]]; then
+    log_info "Bitwarden CLI está desbloqueado."
+  else
+    log_warn "Estado desconocido de Bitwarden CLI: $status"
+  fi
+
+  if [[ -z "${BW_SESSION:-}" && -s "$session_file" ]]; then
+    export BW_SESSION=$(<"$session_file")
   fi
 }
