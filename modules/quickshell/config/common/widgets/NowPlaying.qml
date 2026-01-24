@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Services.Mpris
 
 import qs.common
@@ -7,19 +8,44 @@ import qs.common
 Rectangle {
     id: root
 
+    function isSpotifyPlayer(player) {
+        if (!player) {
+            return false;
+        }
+
+        const desktopEntry = (player.desktopEntry ?? "").toLowerCase();
+        const identity = (player.identity ?? "").toLowerCase();
+        const name = (player.name ?? "").toLowerCase();
+        const serviceName = (player.serviceName ?? "").toLowerCase();
+
+        return desktopEntry === "spotify"
+            || identity.includes("spotify")
+            || name.includes("spotify")
+            || serviceName.includes("spotify");
+    }
+
+    function focusSpotify() {
+        Quickshell.execDetached(["hyprctl", "dispatch", "focuswindow", "class:spotify"]);
+    }
+
     readonly property var activePlayer: {
         const players = Mpris.players.values ?? [];
         if (players.length === 0) {
             return null;
         }
 
-        const playingPlayer = players.find(player => player.playbackState === MprisPlaybackState.Playing);
+        const spotifyPlayers = players.filter(player => root.isSpotifyPlayer(player));
+        if (spotifyPlayers.length === 0) {
+            return null;
+        }
+
+        const playingPlayer = spotifyPlayers.find(player => player.playbackState === MprisPlaybackState.Playing);
         if (playingPlayer) {
             return playingPlayer;
         }
 
-        const pausedPlayer = players.find(player => player.trackTitle || player.trackArtist);
-        return pausedPlayer ?? players[0];
+        const pausedPlayer = spotifyPlayers.find(player => player.trackTitle || player.trackArtist);
+        return pausedPlayer ?? spotifyPlayers[0];
     }
 
     readonly property bool hasTrack: !!activePlayer && (!!activePlayer.trackTitle || !!activePlayer.trackArtist)
@@ -136,6 +162,13 @@ Rectangle {
             color: root.isPlaying ? Theme.colors.text : Theme.colors.surfaceVariant
             font: Theme.font.base
             elide: Text.ElideRight
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: root.activePlayer ? Qt.PointingHandCursor : Qt.ArrowCursor
+                enabled: !!root.activePlayer
+                onClicked: root.focusSpotify()
+            }
         }
     }
 }
