@@ -36,4 +36,12 @@ Singleton {
 
         return device.alias || device.name || device.address || "Unknown device";
     }
+
+    function getBatteryLabel(device: BluetoothDevice): string {
+        if (!device || !device.connected || !device.batteryAvailable) {
+            return "";
+        }
+
+        return `${Math.round(device.battery * 100)}%`;
+    }
 }

@@ -5,6 +5,7 @@ import QtQuick
 import qs.common
 import qs.common.widgets
 import qs.common.popups.ControlCenter
+import Quickshell.Io
 
 PanelWindow {
     id: topbar
@@ -25,6 +26,12 @@ PanelWindow {
 
     implicitHeight: Theme.barSize
 
+    Process {
+        id: reloadProc
+        running: false
+        command: ["hyprctl", "reload"]
+    }
+
     RowLayout {
         height: parent.height
         spacing: 15
@@ -33,6 +40,14 @@ PanelWindow {
             leftPadding: 15
             text: "󰣇"
             font: Theme.font.base
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    reloadProc.running = true;
+                }
+            }
         }
         Workspaces {}
     }

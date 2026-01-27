@@ -60,6 +60,16 @@ Item {
                         font: Theme.font.base
                         elide: Text.ElideRight
                     }
+
+                    Text {
+                        text: Bluetooth.activeDevice
+                            ? Bluetooth.getBatteryLabel(Bluetooth.activeDevice)
+                            : ""
+                        color: Theme.colors.primary
+                        font: Theme.font.base
+                        visible: text.length > 0
+                        Layout.alignment: Qt.AlignRight
+                    }
                 }
 
                 Rectangle {
@@ -154,7 +164,12 @@ Item {
                             }
 
                             Text {
-                                text: modelData.connected ? "Conectado" : ""
+                                text: modelData.connected
+                                    ? (() => {
+                                        const batteryLabel = Bluetooth.getBatteryLabel(modelData);
+                                        return batteryLabel ? `Conectado · ${batteryLabel}` : "Conectado";
+                                    })()
+                                    : ""
                                 color: Theme.colors.primary
                                 font: Theme.font.base
                                 visible: modelData.connected
