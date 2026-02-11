@@ -1,0 +1,145 @@
+// This configuration is merged with the default vicinae configuration file, which you can obtain by running the `vicinae config default` command.
+// Every item defined in this file takes precedence over the values defined in the default config or any other imported file.
+//
+// You can make manual edits to this file, however you should keep in mind that this file may be written to by vicinae when a configuration change is made through the GUI.
+// When that happens, any custom comments or formatting will be lost.
+//
+// If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
+//
+// Learn more about configuration at https://docs.vicinae.com/config
+
+{
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "pop_to_root_on_close": true,
+   "font": {
+      "normal": {
+         "family": "Ubuntu Nerd Font",
+         "size": 12
+      }
+   },
+   "theme": {
+      "dark": {
+         "name": "catppuccin-mocha"
+      }
+   },
+   "favorites": [
+      "@jomifepe/store.raycast.bitwarden:search",
+      "@jomifepe/store.raycast.bitwarden:authenticator",
+      "@thomas/store.raycast.google-calendar:list-events",
+      "@uetchy/store.raycast.nextcloud:search",
+      "@CzBiX/store.raycast.proxmox:storage",
+      "@CzBiX/store.raycast.proxmox:index"
+   ],
+   "providers": {
+      "@CzBiX/store.raycast.proxmox": {
+         "preferences": {
+            "serverUrl": "https://proxmox.dorlab.net",
+            "tokenId": "root@pam!vicinae"
+         },
+         "entrypoints": {
+            "index": {
+               "alias": "proxmox vms lxcs"
+            },
+            "storage": {
+               "alias": "proxmox storage"
+            }
+         }
+      },
+      "@Sn0wye/store.raycast.lucide-icons": {
+         "entrypoints": {
+            "index": {
+               "alias": "lucide"
+            }
+         }
+      },
+      "@jomifepe/store.raycast.bitwarden": {
+         "preferences": {
+            "cliPath": "/usr/bin/bw",
+            "repromptIgnoreDuration": "-1"
+         },
+         "entrypoints": {
+            "authenticator": {
+               "alias": "bw auth"
+            },
+            "search": {
+               "alias": "bw pass"
+            }
+         }
+      },
+      "@rithvikvibhu/store.vicinae.arch-packages": {
+         "entrypoints": {
+            "search-arch-packages": {
+               "alias": "aur"
+            }
+         }
+      },
+      "@thomas/store.raycast.google-calendar": {
+         "entrypoints": {
+            "list-events": {
+               "alias": "cal"
+            }
+         }
+      },
+      "@thomaslombart/store.raycast.github": {
+         "preferences": {
+            "baseClonePath": "/home/miguel/repos"
+         }
+      },
+      "@uetchy/store.raycast.nextcloud": {
+         "preferences": {
+            "hostname": "nextcloud.dorlab.net",
+            "username": "google-104716263441975506747"
+         },
+         "entrypoints": {
+            "search": {
+               "alias": "nc"
+            }
+         }
+      },
+      "applications": {
+         "preferences": {
+            "paths": [
+               "/home/miguel/.local/share/applications",
+               "/home/miguel/.local/share/flatpak/exports/share/applications",
+               "/var/lib/flatpak/exports/share/applications",
+               "/usr/share/applications"
+            ]
+         },
+         "entrypoints": {
+            "code": {
+               "alias": "code"
+            },
+            "discord": {
+               "alias": "discord"
+            },
+            "org.gnome.Nautilus": {
+               "alias": "explorer"
+            },
+            "spotify": {
+               "alias": "spotify"
+            }
+         }
+      },
+      "files": {
+         "entrypoints": {
+            "search": {
+               "alias": "file"
+            }
+         }
+      },
+      "power": {
+         "entrypoints": {
+            "power-off": {
+               "alias": "sdw"
+            }
+         }
+      },
+      "raycast-compat": {
+         "entrypoints": {
+            "store": {
+               "alias": "extension store"
+            }
+         }
+      }
+   }
+}
