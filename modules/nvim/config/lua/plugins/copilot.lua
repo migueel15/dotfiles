@@ -1,16 +1,16 @@
 return {
 	"zbirenbaum/copilot.lua",
 	dependencies = {
-		'AndreM222/copilot-lualine'
+		"AndreM222/copilot-lualine",
 	},
 	config = function()
 		require("copilot").setup({
 			suggestion = {
 				auto_trigger = true,
 				keymap = {
-					accept = false
-				}
-			}
+					accept = false,
+				},
+			},
 		})
 		vim.keymap.set("n", "<leader>ct", "<cmd>Copilot toggle<cr>", { desc = "Toggle Copilot" })
 		vim.keymap.set("i", "<Tab>", function()
@@ -25,5 +25,5 @@ return {
 				require("copilot.suggestion").dismiss()
 			end
 		end, { silent = true })
-	end
+	end,
 }

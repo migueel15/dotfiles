@@ -9,18 +9,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- format on save
-local formatting_group = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-
+-- local formatting_group = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+--
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	callback = function()
+-- 		if vim.bo.filetype == "cs" then
+-- 			vim.api.nvim_command("silent! Neoformat")
+-- 		else
+-- 			vim.lsp.buf.format()
+-- 		end
+-- 	end,
+-- 	group = formatting_group,
+-- 	pattern = "*",
+-- })
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		if vim.bo.filetype == "cs" then
-			vim.api.nvim_command("silent! Neoformat")
-		else
-			vim.lsp.buf.format()
-		end
-	end,
-	group = formatting_group,
 	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
 })
 
 vim.api.nvim_command("autocmd User FugitiveChanged NvimTreeRefresh")
