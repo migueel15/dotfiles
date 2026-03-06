@@ -8,7 +8,7 @@ Singleton {
     id: root
 
     readonly property bool isLaptop: UPower.displayDevice.isLaptopBattery ?? false
-    readonly property real batteryPercentage: UPower.displayDevice.percentage
+    readonly property real batteryPercentage: UPower.displayDevice.percentage ?? 0
 	readonly property bool isCharging: UPower.displayDevice.state === UPowerDeviceState.Charging
     property string icon: {
         let icon = "";
@@ -25,5 +25,5 @@ Singleton {
         }
         return icon;
     }
-    property string label: `${root.batteryPercentage * 100}%`
+    property string label: `${(root.batteryPercentage * 100).toFixed(0)}%`
 }
