@@ -43,7 +43,7 @@ install_packages_from_deps() {
   for package in "${pkgs_array[@]}"; do
     log_info "[$((installed_count + 1))/$total_count] Instalando $package..."
     
-    if yay -S --needed --noconfirm "$package" &> /dev/null; then
+    if yay -S --needed --noconfirm "$package"; then
       installed_count=$((installed_count + 1))
     else
       log_warn "Error al instalar $package"
@@ -58,4 +58,3 @@ install_packages_from_deps() {
     log_warn "$installed_count/$total_count paquetes instalados. Fallos: ${failed_packages[*]}"
   fi
 }
-

@@ -81,9 +81,9 @@ M.runJavaFile = function()
 	-- Si no existe buffer o no es válido, crear uno nuevo
 	if not M.output_buf or not vim.api.nvim_buf_is_valid(M.output_buf) then
 		M.output_buf = vim.api.nvim_create_buf(false, true)
-		vim.api.nvim_buf_set_option(M.output_buf, 'buftype', 'nofile')
-		vim.api.nvim_buf_set_option(M.output_buf, 'bufhidden', 'hide')
-		vim.api.nvim_buf_set_option(M.output_buf, 'swapfile', false)
+		vim.api.nvim_buf_set_option(M.output_buf, "buftype", "nofile")
+		vim.api.nvim_buf_set_option(M.output_buf, "bufhidden", "hide")
+		vim.api.nvim_buf_set_option(M.output_buf, "swapfile", false)
 		vim.api.nvim_buf_set_name(M.output_buf, "Java Output")
 	end
 
@@ -93,7 +93,7 @@ M.runJavaFile = function()
 	-- Si no hay ventana existente, crear split sin hacer focus
 	if not existing_win then
 		local current_win = vim.api.nvim_get_current_win()
-		vim.cmd('split')
+		vim.cmd("split")
 		vim.api.nvim_win_set_buf(0, M.output_buf)
 		vim.api.nvim_set_current_win(current_win)
 	end
@@ -103,10 +103,10 @@ vim.api.nvim_create_user_command("MvnRun", function()
 	require("core.custom.maven").runMvnMain()
 end, {})
 
-vim.api.nvim_create_user_command("JavaRun", function()
+vim.api.nvim_create_user_command("JavaRunMain", function()
 	require("core.custom.maven").runJavaFile()
 end, {})
 
-vim.keymap.set({ "n", "t" }, "<leader>jr", "<cmd>JavaRun<cr>", { desc = "Run java file" })
+vim.keymap.set({ "n", "t" }, "<leader>mr", "<cmd>JavaRunMain<cr>", { desc = "Run java file" })
 
 return M

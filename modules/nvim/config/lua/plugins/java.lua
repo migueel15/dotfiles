@@ -1,5 +1,13 @@
 return {
-	"mfussenegger/nvim-jdtls",
+	{
+		"nvim-java/nvim-java",
+		config = function()
+			require("java").setup()
+			vim.lsp.enable("jdtls")
+			vim.keymap.set("n", "<leader>jr", "<cmd>JavaRunnerRunMain<cr>", { desc = "Run Java Main" })
+		end,
+	},
+	-- "mfussenegger/nvim-jdtls",
 	{
 		"eatgrass/maven.nvim",
 		cmd = { "Maven", "MavenExec" },
@@ -9,5 +17,5 @@ return {
 				executable = "./mvnw",
 			})
 		end,
-	}
+	},
 }
