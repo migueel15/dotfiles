@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQml
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
@@ -13,6 +14,11 @@ MouseArea {
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     implicitWidth: 18
     implicitHeight: 18
+    property bool trayReady: false
+
+    Component.onCompleted: {
+        trayReady = (root.modelData?.icon ?? "") !== "";
+    }
 
     onClicked: event => {
         if (event.button === Qt.LeftButton) {
@@ -31,11 +37,20 @@ MouseArea {
         anchor.window: root.QsWindow.window
     }
 
+    Connections {
+        target: root.modelData
+
+        function onReady() {
+            root.trayReady = true;
+        }
+    }
+
     IconImage {
         id: trayIcon
         width: parent.implicitWidth
         height: parent.implicitHeight
-        source: root.modelData?.icon ?? ""
+        asynchronous: true
+        source: root.trayReady ? (root.modelData?.icon ?? "") : ""
         anchors.centerIn: parent
     }
 }
