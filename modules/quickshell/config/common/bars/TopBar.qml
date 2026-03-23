@@ -29,7 +29,14 @@ PanelWindow {
     Process {
         id: reloadProc
         running: false
-        command: ["hyprctl", "reload"]
+		command: ["bash", Qt.resolvedUrl("../../utils/reloadHyprland.sh").toString().replace("file://", "")]
+
+		onRunningChanged: {
+			if (!running) {
+				// Process finished, reset state
+				reloadProc.running = false;
+			}
+		}
     }
 
     RowLayout {
