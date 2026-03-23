@@ -29,7 +29,14 @@ PanelWindow {
     Process {
         id: reloadProc
         running: false
-        command: ["hyprctl", "reload"]
+		command: ["sh", "-c", "hyprctl reload && pkill quickshell; hyprctl dispatch exec quickshell"]
+
+		onRunningChanged: {
+			if (!running) {
+				// Process finished, reset state
+				reloadProc.running = false;
+			}
+		}
     }
 
     RowLayout {
