@@ -29,7 +29,7 @@ PanelWindow {
     Process {
         id: reloadProc
         running: false
-		command: ["sh", "-c", "hyprctl reload && pkill quickshell; hyprctl dispatch exec quickshell"]
+		command: ["bash", Qt.resolvedUrl("../../utils/reloadHyprland.sh").toString().replace("file://", "")]
 
 		onRunningChanged: {
 			if (!running) {
