@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 Singleton {
@@ -27,12 +28,14 @@ Singleton {
     readonly property list<PwNode> sources: nodes.sources
 
     readonly property alias volume: root._volume
-    property real _volume: sink?.audio?.volume ?? 0
+    property real _volume: root.normalizeVolume(sink?.audio?.volume)
+    property real _observedOutputVolume: root.normalizeVolume(sink?.audio?.volume)
 
     property string audioTheme: "freedesktop"
 
     readonly property alias muted: root._muted
     property bool _muted: !!sink?.audio?.muted
+    property bool _observedOutputMuted: !!sink?.audio?.muted
 
     readonly property alias inputVolume: root._inputVolume
     property real _inputVolume: source?.audio?.volume ?? 0
@@ -41,9 +44,78 @@ Singleton {
     property bool _inputMuted: !!source?.audio?.muted
 
     readonly property real stepVolume: 0.05
+    readonly property bool outputUsesWpctlFallback: root.isVolumeInvalid(root.sink?.audio?.volume)
+    property real pendingOutputVolume: root._volume
+    property bool pendingOutputMuted: root._muted
+    property bool outputVolumeDirty: false
+    property bool outputMuteDirty: false
 
     PwObjectTracker {
         objects: [...root.sinks, ...root.sources]
+    }
+
+    Timer {
+        id: outputVolumePollTimer
+        interval: 1500
+        running: root.outputUsesWpctlFallback
+        repeat: true
+
+        onTriggered: {
+            if (!outputVolumeReader.running) {
+                outputVolumeReader.running = true;
+            }
+        }
+    }
+
+    Timer {
+        id: outputRefreshTimer
+        interval: 150
+        running: false
+        repeat: false
+
+        onTriggered: {
+            if (root.outputUsesWpctlFallback && !outputVolumeReader.running) {
+                outputVolumeReader.running = true;
+            }
+        }
+    }
+
+    Process {
+        id: outputVolumeReader
+        running: false
+        command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
+
+        stdout: StdioCollector {
+            onStreamFinished: root.updateOutputStateFromWpctl(text)
+        }
+    }
+
+    Timer {
+        id: outputApplyTimer
+        interval: 75
+        running: false
+        repeat: false
+
+        onTriggered: root.applyPendingOutputState()
+    }
+
+    onSinkChanged: {
+        root._volume = root.normalizeVolume(root.sink?.audio?.volume, root._volume);
+        root._muted = !!root.sink?.audio?.muted;
+        root._observedOutputVolume = root._volume;
+        root._observedOutputMuted = root._muted;
+        root.pendingOutputVolume = root._volume;
+        root.pendingOutputMuted = root._muted;
+
+        if (root.outputUsesWpctlFallback && !outputVolumeReader.running) {
+            outputVolumeReader.running = true;
+        }
+    }
+
+    onOutputUsesWpctlFallbackChanged: {
+        if (root.outputUsesWpctlFallback && !outputVolumeReader.running) {
+            outputVolumeReader.running = true;
+        }
     }
 
     Connections {
@@ -54,11 +126,14 @@ Singleton {
             if (isNaN(vol)) {
                 return;
             }
+            root._observedOutputVolume = vol;
             root._volume = vol;
         }
 
         function onMutedChanged() {
-            root._muted = (root.sink?.audio.muted ?? true);
+            const muted = (root.sink?.audio.muted ?? true);
+            root._observedOutputMuted = muted;
+            root._muted = muted;
         }
     }
 
@@ -87,13 +162,38 @@ Singleton {
     }
 
     function setVolume(newVolume: real) {
+        const clampedVolume = root.normalizeVolume(newVolume, root._volume);
+
+        if (root.outputUsesWpctlFallback) {
+            root._muted = false;
+            root._volume = clampedVolume;
+            root.pendingOutputVolume = clampedVolume;
+            root.outputVolumeDirty = true;
+
+            if (root._observedOutputMuted || root.pendingOutputMuted) {
+                root.pendingOutputMuted = false;
+                root.outputMuteDirty = true;
+            }
+
+            outputApplyTimer.restart();
+            return;
+        }
+
         if (sink?.ready && sink?.audio) {
             sink.audio.muted = false;
-            sink.audio.volume = Math.max(0, Math.min(1.0, newVolume));
+            sink.audio.volume = clampedVolume;
         } else {}
     }
 
     function setOutputMuted(muted: bool) {
+        if (root.outputUsesWpctlFallback) {
+            root._muted = muted;
+            root.pendingOutputMuted = muted;
+            root.outputMuteDirty = true;
+            outputApplyTimer.restart();
+            return;
+        }
+
         if (sink?.ready && sink?.audio) {
             sink.audio.muted = muted;
         } else {}
@@ -122,8 +222,13 @@ Singleton {
 
     function setAudioSink(newSink: PwNode): void {
         Pipewire.preferredDefaultAudioSink = newSink;
-        root._volume = newSink?.audio?.volume ?? 0;
+        root._volume = root.normalizeVolume(newSink?.audio?.volume, root._volume);
         root._muted = !!newSink?.audio?.muted;
+        root._observedOutputVolume = root._volume;
+        root._observedOutputMuted = root._muted;
+        root.pendingOutputVolume = root._volume;
+        root.pendingOutputMuted = root._muted;
+        outputRefreshTimer.restart();
     }
 
     function setAudioSource(newSource: PwNode): void {
@@ -166,7 +271,65 @@ Singleton {
     }
 
     function muteSink() {
-        root.sink.audio.muted = !root.sink.audio.muted;
+        root.setOutputMuted(!root.muted);
+    }
+
+    function isVolumeInvalid(value): bool {
+        return value === undefined || value === null || isNaN(value) || !isFinite(value);
+    }
+
+    function normalizeVolume(value, fallback): real {
+        const fallbackVolume = fallback === undefined ? 0 : fallback;
+
+        if (root.isVolumeInvalid(value)) {
+            return Math.max(0, Math.min(1.0, fallbackVolume));
+        }
+
+        return Math.max(0, Math.min(1.0, value));
+    }
+
+    function applyPendingOutputState() {
+        if (!root.outputUsesWpctlFallback) {
+            root.outputVolumeDirty = false;
+            root.outputMuteDirty = false;
+            return;
+        }
+
+        const commands = [];
+
+        if (root.outputMuteDirty && !root.pendingOutputMuted) {
+            commands.push("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0");
+        }
+
+        if (root.outputVolumeDirty) {
+            commands.push(`wpctl set-volume @DEFAULT_AUDIO_SINK@ ${root.pendingOutputVolume.toFixed(3)}`);
+        }
+
+        if (root.outputMuteDirty && root.pendingOutputMuted) {
+            commands.push("wpctl set-mute @DEFAULT_AUDIO_SINK@ 1");
+        }
+
+        root.outputVolumeDirty = false;
+        root.outputMuteDirty = false;
+
+        if (commands.length > 0) {
+            Quickshell.execDetached(["bash", "-lc", commands.join(" && ")]);
+            outputRefreshTimer.restart();
+        }
+    }
+
+    function updateOutputStateFromWpctl(text: string) {
+        const volumeMatch = text.match(/Volume:\s*([0-9]*\.?[0-9]+)/);
+
+        if (volumeMatch) {
+            const volume = root.normalizeVolume(parseFloat(volumeMatch[1]), root._volume);
+            root._observedOutputVolume = volume;
+            root._volume = volume;
+        }
+
+        const muted = text.indexOf("[MUTED]") !== -1;
+        root._observedOutputMuted = muted;
+        root._muted = muted;
     }
 
     function checkActiveDevices() {

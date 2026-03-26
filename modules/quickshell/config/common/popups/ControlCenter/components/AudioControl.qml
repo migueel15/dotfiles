@@ -98,7 +98,7 @@ Item {
                             function updateVolume(x) {
                                 if (Pipewire.defaultAudioSink) {
                                     const volume = Math.max(0, Math.min(1, x / width));
-                                    Pipewire.defaultAudioSink.audio.volume = volume;
+                                    Audio.setVolume(volume);
                                 }
                             }
 
