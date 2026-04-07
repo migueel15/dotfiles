@@ -10,10 +10,16 @@ return {
 				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-				-- java = { "google-java-format" },
+				java = { "google-java-format" },
 			},
 			default_format_opts = {
 				lsp_format = "fallback",
+			},
+
+			formatters = {
+				["google-java-format"] = {
+					prepend_args = { "--aosp", "--skip-sorting-imports", "--skip-removing-unused-imports" },
+				},
 			},
 		})
 	end,
