@@ -23,6 +23,25 @@ return {
 				},
 			})
 
+			vim.lsp.config("emmet_language_server", {
+				filetypes = {
+					"astro",
+					"css",
+					"eruby",
+					"html",
+					"htmlangular",
+					"htmldjango",
+					"javascriptreact",
+					"less",
+					"sass",
+					"scss",
+					"svelte",
+					"typescriptreact",
+					"vue",
+					"jsp",
+				},
+			})
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local opts = { buffer = args.buf, noremap = true, silent = true }
@@ -61,7 +80,7 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss",
-				"emmet_ls",
+				"emmet_language_server",
 				"jsonls",
 				"bashls",
 				"marksman",
