@@ -4,6 +4,7 @@ local Terminal = toggleterm_terminal.Terminal
 
 local runners = {
 	python = "python %",
+	go = "go run .",
 }
 
 local code_runner_term
