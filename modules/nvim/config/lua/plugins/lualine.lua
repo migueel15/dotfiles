@@ -1,6 +1,6 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", 'AndreM222/copilot-lualine' },
+	dependencies = { "nvim-tree/nvim-web-devicons", "AndreM222/copilot-lualine" },
 	config = function()
 		-- local copilot_indicator = function()
 		-- 	local client = vim.lsp.get_clients({ name = "copilot" })[1]
@@ -22,7 +22,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "catppuccin",
+				theme = "auto",
 				component_separators = "",
 				section_separators = "",
 			},
