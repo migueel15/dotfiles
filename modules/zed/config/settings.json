@@ -1,5 +1,17 @@
 {
-	"text_rendering_mode": "platform_default",
+	"edit_predictions": {
+  "mode": "subtle"
+ },
+ "outline_panel": {
+  "dock": "left"
+ },
+ "collaboration_panel": {
+  "dock": "left"
+ },
+ "git_panel": {
+  "dock": "left"
+ },
+ "text_rendering_mode": "platform_default",
  "relative_line_numbers": "enabled",
 	"diagnostics": {
 		"inline": {
