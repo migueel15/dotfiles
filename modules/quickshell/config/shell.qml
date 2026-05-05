@@ -6,6 +6,7 @@ import QtQuick.Controls.Material
 import qs.common
 import qs.common.bars
 import qs.common.bars.components
+import qs.common.components
 import "common" as Common
 
 ShellRoot {
@@ -45,6 +46,9 @@ ShellRoot {
                     id: popupCtrl
                     screen: modelData
                 }
+
+				VolumeOSD{}
+				
             }
         }
     }
