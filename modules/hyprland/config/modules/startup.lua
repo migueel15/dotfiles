@@ -1,9 +1,12 @@
 local apps = require "modules.apps"
 
+hl.env("XCURSOR_SIZE", tostring(apps.cursor_size))
+hl.env("HYPRCURSOR_SIZE", tostring(apps.cursor_size))
+
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("hypridle")
-	hl.exec_cmd("sh -c 'sleep 1 && quickshell")
+	hl.exec_cmd("sleep 1 && quickshell")
 	hl.exec_cmd("hyprpm reload -n")
 	hl.exec_cmd("nm-applet")
 	hl.exec_cmd("openrgb --startminimized -p purple")
@@ -16,11 +19,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor_theme" ..
 		" " .. apps.cursor_theme)
 end)
-
-hl.env(
-	"XCURSOR_SIZE",
-	apps.cursor_size
-)
 
 hl.config({
 	cursor = {
