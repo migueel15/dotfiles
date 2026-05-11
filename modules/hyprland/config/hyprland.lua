@@ -1,5 +1,5 @@
+require("modules.monitors")
 require("modules.devices")
 require("modules.startup")
 require("modules.theme")
 require("modules.mappings")
-require("modules.monitors")

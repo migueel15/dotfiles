@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-pos="$(hyprctl cursorpos -j | jq -r '"\(.x) \(.y)"')"
+json="$(hyprctl cursorpos -j)"
+
+x="$(jq -r '.x' <<< "$json")"
+y="$(jq -r '.y' <<< "$json")"
+
 hyprctl reload
-hyprctl dispatch movecursor $pos
+hyprctl dispatch "hl.dsp.cursor.move({x=$x, y=$y})"
 
 pkill quickshell 
-hyprctl  dispatch exec quickshell
+hyprctl dispatch 'hl.dsp.exec_cmd("quickshell")'

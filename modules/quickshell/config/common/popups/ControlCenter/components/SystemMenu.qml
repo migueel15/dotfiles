@@ -35,7 +35,7 @@ Rectangle {
     Process {
         id: logoutProcess
         running: false
-        command: ["hyprctl", "dispatch", "exit"]
+        command: ["hyprctl", "dispatch", "hl.dsp.exit()"]
     }
 
     Process {
