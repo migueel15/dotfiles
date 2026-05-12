@@ -1,6 +1,7 @@
 local apps = require("modules.apps")
 local config = require("modules.config")
 local utils = require("modules.utils")
+local dmsplit = require("plugins.dmsplit")
 
 -- KEYBINDINGS
 
@@ -52,18 +53,18 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ next = true }))
 
 -- Workspaces
 
-for i = 1, config.workspace_number, 1 do
+for i = 1, dmsplit.get_workspaces_number() do
 	hl.bind("SUPER + " .. i, function()
-		utils.switch_to_local_workspace(i)
+		dmsplit.switch_to_local_workspace(i)
 	end)
 
 	hl.bind("SUPER + SHIFT + " .. i, function()
-		utils.switch_window_to_local_workspace(i)
+		dmsplit.switch_window_to_local_workspace(i)
 	end)
 end
 
 hl.bind(mainMod .. " + P", function()
-	utils.switch_window_to_other_monitor()
+	dmsplit.switch_window_to_other_monitor()
 end)
 
 -- Scroll through existing workspaces with mainMod + scroll
