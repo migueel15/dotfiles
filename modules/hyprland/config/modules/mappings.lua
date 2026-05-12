@@ -1,4 +1,6 @@
 local apps = require("modules.apps")
+local config = require("modules.config")
+local utils = require("modules.utils")
 
 -- KEYBINDINGS
 
@@ -49,15 +51,20 @@ hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.pin())
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ next = true }))
 
 -- Workspaces
--- OJO: estos dispatchers son de split-monitor-workspaces / split-workspace plugin.
--- Si hl.dsp no tiene wrapper para ellos, usa hyprctl dispatch.
 
-for i = 1, 6 do
-	hl.bind(mainMod .. " + " .. i, exec("hyprctl dispatch split-workspace " .. i))
-	hl.bind(mainMod .. " + SHIFT + " .. i, exec("hyprctl dispatch split-movetoworkspacesilent " .. i))
+for i = 1, config.workspace_number, 1 do
+	hl.bind("SUPER + " .. i, function()
+		utils.switch_to_local_workspace(i)
+	end)
+
+	hl.bind("SUPER + SHIFT + " .. i, function()
+		utils.switch_window_to_local_workspace(i)
+	end)
 end
 
-hl.bind(mainMod .. " + P", exec("hyprctl dispatch split-changemonitorsilent next"))
+hl.bind(mainMod .. " + P", function()
+	utils.switch_window_to_other_monitor()
+end)
 
 -- Scroll through existing workspaces with mainMod + scroll
 

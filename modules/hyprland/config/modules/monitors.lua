@@ -1,3 +1,4 @@
+local config = require("modules.config")
 hl.monitor({
 	output = "desc:BNQ BenQ EX2710Q TBM00955019",
 	mode = "2560x1440@165",
@@ -7,7 +8,8 @@ hl.monitor({
 hl.monitor({
 	output = "desc:BNQ ZOWIE XL LCD N1J03633SL0",
 	mode = "1920x1080@144",
-	position = "auto",
+	position = "2560x0",
+	mirror = config.mirror and "desc:BNQ BenQ EX2710Q TBM00955019" or ""
 })
 
 hl.monitor({
