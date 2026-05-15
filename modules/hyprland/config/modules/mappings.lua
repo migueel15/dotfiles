@@ -24,6 +24,7 @@ hl.bind("Print", exec(apps.screenshot))
 
 hl.bind(mainMod .. " + Return", exec(apps.terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 
 -- hl.bind(mainMod .. " + CTRL + M", hl.dsp.exit())
 

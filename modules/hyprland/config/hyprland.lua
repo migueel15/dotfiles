@@ -6,7 +6,7 @@ require("modules.theme")
 local dmsplit = require("plugins.dmsplit")
 
 dmsplit.setup({
-	num_workspaces = 5,
+	num_workspaces = 6,
 	persistent_workspaces = true
 })
 
