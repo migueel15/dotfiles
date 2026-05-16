@@ -28,5 +28,5 @@ hl.window_rule({
 		class = "spotify"
 	},
 	monitor = get_second_monitor_id() .. " silent",
-	workspace = 5 .. " silent"
+	workspace = 6 .. " silent"
 })

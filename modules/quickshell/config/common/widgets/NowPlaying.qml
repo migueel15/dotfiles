@@ -18,10 +18,7 @@ Rectangle {
         const name = (player.name ?? "").toLowerCase();
         const serviceName = (player.serviceName ?? "").toLowerCase();
 
-        return desktopEntry === "spotify"
-            || identity.includes("spotify")
-            || name.includes("spotify")
-            || serviceName.includes("spotify");
+        return desktopEntry === "spotify" || identity.includes("spotify") || name.includes("spotify") || serviceName.includes("spotify");
     }
 
     function focusSpotify() {
@@ -70,7 +67,7 @@ Rectangle {
             Text {
                 anchors.centerIn: parent
                 text: "󰒮"
-                color: root.isPlaying ? Theme.colors.text : Theme.colors.surfaceVariant
+                color: root.isPlaying ? Theme.colors.overlay : Theme.colors.surfaceVariant
                 font: Theme.font.base
                 opacity: root.activePlayer?.canGoPrevious ? 1 : 0.4
             }
@@ -94,16 +91,14 @@ Rectangle {
             Text {
                 anchors.centerIn: parent
                 text: root.isPlaying ? "󰏤" : "󰐊"
-                color: root.isPlaying ? Theme.colors.text : Theme.colors.surfaceVariant
+                color: root.isPlaying ? Theme.colors.overlay : Theme.colors.surfaceVariant
                 font: Theme.font.base
                 opacity: (root.activePlayer?.canPlay || root.activePlayer?.canPause) ? 1 : 0.4
             }
 
             MouseArea {
                 anchors.fill: parent
-                cursorShape: (root.activePlayer?.canPlay || root.activePlayer?.canPause)
-                    ? Qt.PointingHandCursor
-                    : Qt.ArrowCursor
+                cursorShape: (root.activePlayer?.canPlay || root.activePlayer?.canPause) ? Qt.PointingHandCursor : Qt.ArrowCursor
                 onClicked: {
                     if (!root.activePlayer) {
                         return;
@@ -129,7 +124,7 @@ Rectangle {
             Text {
                 anchors.centerIn: parent
                 text: "󰒭"
-                color: root.isPlaying ? Theme.colors.text : Theme.colors.surfaceVariant
+                color: root.isPlaying ? Theme.colors.overlay : Theme.colors.surfaceVariant
                 font: Theme.font.base
                 opacity: root.activePlayer?.canGoNext ? 1 : 0.4
             }
@@ -159,7 +154,7 @@ Rectangle {
 
                 return root.activePlayer.trackTitle || root.activePlayer.trackArtist;
             }
-            color: root.isPlaying ? Theme.colors.text : Theme.colors.surfaceVariant
+            color: root.isPlaying ? Theme.colors.overlay : Theme.colors.surfaceVariant
             font: Theme.font.base
             elide: Text.ElideRight
 

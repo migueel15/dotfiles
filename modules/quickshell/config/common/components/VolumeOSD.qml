@@ -40,13 +40,16 @@ Scope {
             // Since the panel's screen is unset, it will be picked by the compositor
             // when the window is created. Most compositors pick the current active monitor.
 
+            // anchors.top: true
+            // anchors.right: true
             anchors.bottom: true
-            // margins.bottom: screen.height / 5
-            margins.bottom: 20
+            margins.bottom: screen.height / 50
+            // margins.top: 15
+            // margins.right: 10
             exclusiveZone: 0
 
-            implicitWidth: 400
-            implicitHeight: 50
+            implicitWidth: 250
+            implicitHeight: 35
             color: "transparent"
 
             // An empty click mask prevents the window from blocking mouse events.
@@ -54,7 +57,8 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                radius: height / 2
+                // radius: height / 2
+                radius: 15
                 // color: "#80000000"
                 color: Theme.colors.background
 
@@ -66,7 +70,7 @@ Scope {
                     }
 
                     IconImage {
-                        implicitSize: 25
+                        implicitSize: 18
                         // source: Quickshell.iconPath("",true)
                         source: Qt.resolvedUrl("../assets/volume.svg")
                     }
