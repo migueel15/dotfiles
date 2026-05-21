@@ -14,18 +14,13 @@ return {
 		},
 		completion = { documentation = { auto_show = true } },
 		sources = {
-			default = { "avante", "lsp", "path", "snippets", "buffer", "nerdfont" },
+			default = { "lsp", "path", "snippets", "buffer", "nerdfont" },
 			providers = {
 				nerdfont = {
 					module = "blink-nerdfont",
 					name = "Nerd Fonts",
 					score_offset = -15,
 					opts = { insert = true },
-				},
-				avante = {
-					module = "blink-cmp-avante",
-					name = "Avante",
-					opts = {},
 				},
 			},
 		},
