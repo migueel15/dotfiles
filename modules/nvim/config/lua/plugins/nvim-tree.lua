@@ -17,7 +17,6 @@ return {
 				update_root = true,
 			},
 			view = {
-				adaptive_size = true,
 				side = "right",
 				width = 30,
 				preserve_window_proportions = true,
@@ -75,10 +74,10 @@ return {
 							open = "󰝰",
 							symlink = "",
 							symlink_open = "",
-							-- arrow_open = "󰅀",
-							-- arrow_closed = "󰅂",
-							arrow_open = "├",
-							arrow_closed = "│",
+							arrow_closed = "󰅂",
+							arrow_open = "󰅀",
+							-- arrow_open = "├",
+							-- arrow_closed = "│",
 						},
 						git = {
 							unstaged = "✗",

@@ -85,7 +85,7 @@ return {
 				"bashls",
 				"marksman",
 				"jdtls",
-				"astro",
+				"gopls",
 			},
 		},
 	},

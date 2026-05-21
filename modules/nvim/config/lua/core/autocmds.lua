@@ -31,21 +31,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.api.nvim_command("autocmd User FugitiveChanged NvimTreeRefresh")
 
--- load blanket on java files with jacoco.xml
-local last_modified_time = nil
-vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		if vim.bo.filetype == "java" then
-			local path = vim.fn.getcwd() .. "/target/site/jacoco/jacoco.xml"
-			if vim.fn.filereadable(path) == 1 then
-				local current_modified_time = vim.fn.getftime(path)
-				if last_modified_time ~= current_modified_time then
-					last_modified_time = current_modified_time
-					vim.cmd("CoverageRefresh")
-				end
-			end
-		end
-	end,
-	group = formatting_group,
-	pattern = "*",
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { '*' },
+	callback = function() pcall(vim.treesitter.start) end,
 })

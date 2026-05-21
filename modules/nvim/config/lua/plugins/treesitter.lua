@@ -1,9 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "main",
-	-- dependencies = {
-	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
-	-- },
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter").setup({
@@ -24,7 +20,7 @@ return {
 				"bash",
 			},
 			auto_install = true,
-			sync_install = false,
+			sync_install = true,
 			ignore_install = {},
 			highlight = {
 				enable = true,
