@@ -45,8 +45,25 @@ return {
 					operators = {},
 				},
 				color_overrides = {},
+				custom_highlights = function(colors)
+					return {
+						BlinkCmpMenu = { bg = colors.base },
+						BlinkCmpMenuBorder = { fg = colors.overlay0, bg = colors.base },
+						BlinkCmpDocBorder = { fg = colors.overlay0, bg = colors.base },
+						BlinkCmpSignatureHelpBorder = { fg = colors.overlay0, bg = colors.base },
+						BlinkCmpLabel = { fg = colors.text, },
+						BlinkCmpLabelMatch = { fg = colors.blue, bold = true },
+						BlinkCmpScrollBarThumb = { bg = colors.blue },
+						BlinkCmpScrollBarGutter = { bg = colors.pink },
+
+						BlinkCmpKindClass = { fg = colors.peach },
+						BlinkCmpKindInterface = { fg = colors.green },
+
+						FloatBorder = { fg = colors.overlay0, bg = colors.base },
+					}
+				end,
 				integrations = {
-					blick_cmp = true,
+					blink_cmp = true,
 					cmp = true,
 					gitsigns = true,
 					indent_blankline = {

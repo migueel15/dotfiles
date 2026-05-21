@@ -2,6 +2,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local lsp_float_opts = { border = "rounded", offset_x = 1, offset_y = 1 }
+
 			-- Configure lua_ls for better vim API detection
 			vim.lsp.config("lua_ls", {
 				settings = {
@@ -55,9 +57,15 @@ return {
 					-- Actions
 					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "K", function()
+						vim.lsp.buf.hover(lsp_float_opts)
+					end, opts)
+					vim.keymap.set("n", "<C-k>", function()
+						vim.lsp.buf.signature_help(lsp_float_opts)
+					end, opts)
+					vim.keymap.set("i", "<C-k>", function()
+						vim.lsp.buf.signature_help(lsp_float_opts)
+					end, opts)
 				end,
 			})
 		end,
