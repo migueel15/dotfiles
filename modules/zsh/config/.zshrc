@@ -159,6 +159,7 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin
 export PATH=$PATH:$HOME/Aplicaciones/USE/bin
 export PATH=$PATH:$HOME/.dotfiles/bin
+export PATH=$PATH:$HOME/repos/gocli
 
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
