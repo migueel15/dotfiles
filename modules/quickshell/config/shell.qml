@@ -1,5 +1,6 @@
 //@ pragma UseQApplication
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Controls.Material
 
@@ -7,7 +8,10 @@ import qs.common
 import qs.common.bars
 import qs.common.bars.components
 import qs.common.components
+import qs.common.services
 import "common" as Common
+
+import qs.modules.wallpaper
 
 ShellRoot {
     id: root
@@ -47,8 +51,11 @@ ShellRoot {
                     screen: modelData
                 }
 
-				VolumeOSD{}
-				
+                VolumeOSD {}
+
+                WallpaperLayer {
+                    screen: modelData
+                }
             }
         }
     }

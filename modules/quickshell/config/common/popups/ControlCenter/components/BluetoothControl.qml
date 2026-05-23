@@ -4,7 +4,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 
 import qs.common
-import qs.services
+import qs.common.services
 
 Item {
     id: root
@@ -53,18 +53,14 @@ Item {
 
                     Text {
                         Layout.fillWidth: true
-                        text: Bluetooth.activeDevice
-                            ? Bluetooth.getDisplayName(Bluetooth.activeDevice)
-                            : "Bluetooth"
+                        text: Bluetooth.activeDevice ? Bluetooth.getDisplayName(Bluetooth.activeDevice) : "Bluetooth"
                         color: Theme.colors.text
                         font: Theme.font.base
                         elide: Text.ElideRight
                     }
 
                     Text {
-                        text: Bluetooth.activeDevice
-                            ? Bluetooth.getBatteryLabel(Bluetooth.activeDevice)
-                            : ""
+                        text: Bluetooth.activeDevice ? Bluetooth.getBatteryLabel(Bluetooth.activeDevice) : ""
                         color: Theme.colors.primary
                         font: Theme.font.base
                         visible: text.length > 0
@@ -164,12 +160,10 @@ Item {
                             }
 
                             Text {
-                                text: modelData.connected
-                                    ? (() => {
+                                text: modelData.connected ? (() => {
                                         const batteryLabel = Bluetooth.getBatteryLabel(modelData);
                                         return batteryLabel ? `Conectado · ${batteryLabel}` : "Conectado";
-                                    })()
-                                    : ""
+                                    })() : ""
                                 color: Theme.colors.primary
                                 font: Theme.font.base
                                 visible: modelData.connected

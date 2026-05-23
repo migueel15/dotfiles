@@ -10,6 +10,7 @@ source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting-theme
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_CUSTOM/plugins/zsh-sudo/sudo.plugin.zsh
+source $HOME/.zshrc-senda
 
 # imports
 [ -f /home/$USER/.ghcup/env ] && source /home/$USER/.ghcup/env
@@ -159,7 +160,7 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin
 export PATH=$PATH:$HOME/Aplicaciones/USE/bin
 export PATH=$PATH:$HOME/.dotfiles/bin
-export PATH=$PATH:$HOME/repos/gocli
+export PATH=$PATH:$HOME/repos/SendaDesktopManager/core/dist/
 
 # Load Angular CLI autocompletion.
 # source <(ng completion script)
