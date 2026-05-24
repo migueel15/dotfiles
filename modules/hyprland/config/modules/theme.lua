@@ -116,12 +116,21 @@ hl.curve("quick", {
 	},
 })
 
+hl.curve("overshoot", {
+	type = "bezier",
+	points = {
+		{ 0.5, 0.9 },
+		{ 0.1, 1.04 }
+	}
+})
+
 -- Animations
 
+-- General
 hl.animation({
 	leaf = "global",
 	enabled = true,
-	speed = 10,
+	speed = 100,
 	bezier = "default",
 })
 
@@ -132,107 +141,53 @@ hl.animation({
 	bezier = "easeOutQuint",
 })
 
-hl.animation({
-	leaf = "windows",
-	enabled = true,
-	speed = 4.79,
-	bezier = "easeOutQuint",
-})
-
+-- Windows
 hl.animation({
 	leaf = "windowsIn",
 	enabled = true,
-	speed = 4.1,
-	bezier = "easeOutQuint",
-	style = "popin 87%",
+	speed = 2,
+	bezier = "overshoot",
+	style = "slide",
 })
 
 hl.animation({
 	leaf = "windowsOut",
 	enabled = true,
-	speed = 1.49,
-	bezier = "linear",
-	style = "popin 87%",
+	speed = 2,
+	bezier = "overshoot",
+	style = "slide",
 })
 
 hl.animation({
-	leaf = "fadeIn",
-	enabled = true,
-	speed = 1.73,
-	bezier = "almostLinear",
-})
-
-hl.animation({
-	leaf = "fadeOut",
-	enabled = true,
-	speed = 1.46,
-	bezier = "almostLinear",
-})
-
-hl.animation({
-	leaf = "fade",
-	enabled = true,
-	speed = 3.03,
-	bezier = "quick",
-})
-
-hl.animation({
-	leaf = "layers",
-	enabled = true,
-	speed = 3.81,
-	bezier = "easeOutQuint",
-})
-
-hl.animation({
-	leaf = "layersIn",
+	leaf = "windowsMove",
 	enabled = true,
 	speed = 4,
-	bezier = "easeOutQuint",
-	style = "fade",
+	bezier = "overshoot",
+	style = "slide",
 })
 
-hl.animation({
-	leaf = "layersOut",
-	enabled = true,
-	speed = 1.5,
-	bezier = "linear",
-	style = "fade",
-})
-
-hl.animation({
-	leaf = "fadeLayersIn",
-	enabled = true,
-	speed = 1.79,
-	bezier = "almostLinear",
-})
-
-hl.animation({
-	leaf = "fadeLayersOut",
-	enabled = true,
-	speed = 1.39,
-	bezier = "almostLinear",
-})
-
+-- Workspaces
 hl.animation({
 	leaf = "workspaces",
 	enabled = true,
-	speed = 1.94,
-	bezier = "almostLinear",
-	style = "fade",
+	speed = 3,
+	bezier = "overshoot",
+	style = "slide"
 })
 
+-- Layers
 hl.animation({
-	leaf = "workspacesIn",
+	leaf = "layers",
 	enabled = true,
-	speed = 1.21,
-	bezier = "almostLinear",
-	style = "fade",
+	speed = 5,
+	style = "slide",
+	bezier = "overshoot",
 })
 
+-- Fade
 hl.animation({
-	leaf = "workspacesOut",
+	leaf = "fade",
 	enabled = true,
-	speed = 1.94,
-	bezier = "almostLinear",
-	style = "fade",
+	speed = 2,
+	bezier = "quick",
 })
