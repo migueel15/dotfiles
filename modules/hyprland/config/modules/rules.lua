@@ -30,3 +30,26 @@ hl.window_rule({
 	monitor = get_second_monitor_id() .. " silent",
 	workspace = 6 .. " silent"
 })
+
+
+-- Change animations for screenshots
+hl.layer_rule({
+	match = {
+		namespace = "hyprpicker"
+	},
+	no_anim = true,
+})
+
+hl.layer_rule({
+	match = {
+		namespace = "selection"
+	},
+	animation = "fade"
+})
+
+hl.layer_rule({
+	match = {
+		namespace = ".*Static.*"
+	},
+	animation = "fade"
+})
