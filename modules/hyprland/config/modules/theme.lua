@@ -138,7 +138,7 @@ hl.curve("overshoot", {
 hl.animation({
 	leaf = "global",
 	enabled = true,
-	speed = 100,
+	speed = 2,
 	bezier = "default",
 })
 

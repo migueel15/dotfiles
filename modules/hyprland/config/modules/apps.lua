@@ -23,8 +23,8 @@ M.llm = M.web_open .. [[ "https://chatgpt.com/"]]
 M.github = M.web_open .. [[ "https://github.com/migueel15"]]
 M.nextcloud = M.web_open .. [[ "https://nextcloud.dorlab.net"]]
 
-M.screenshot = "hyprshot -z -m region --raw | satty --right-click-copy --filename -"
--- M.screenshot = "hyprshot -z -m region --clipboard-only"
+-- M.screenshot = "hyprshot -z -m region --raw | satty --right-click-copy --filename -"
+M.screenshot = "hyprshot -z -m region --clipboard-only"
 
 M.discord = "discord"
 M.whatsapp = "whatsdesk"
