@@ -16,7 +16,7 @@ end
 hl.window_rule({
 	name = "Discord placement",
 	match = {
-		class = "discord"
+		class = "^(discord|vesktop)$"
 	},
 	monitor = get_second_monitor_id() .. " silent",
 	workspace = 5 .. " silent"

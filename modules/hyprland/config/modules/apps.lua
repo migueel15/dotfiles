@@ -26,7 +26,7 @@ M.nextcloud = M.web_open .. [[ "https://nextcloud.dorlab.net"]]
 -- M.screenshot = "hyprshot -z -m region --raw | satty --right-click-copy --filename -"
 M.screenshot = "hyprshot -z -m region --clipboard-only"
 
-M.discord = "discord"
+M.discord = "vesktop"
 M.whatsapp = "whatsdesk"
 
 M.cursor_theme = "Bibata-Modern-Ice"
