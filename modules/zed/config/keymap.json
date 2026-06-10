@@ -61,5 +61,29 @@
 		"bindings": {
 			"ctrl-l": null
 		}
-	}
+	},
+ {
+  "context": "VimControl && !menu",
+  "bindings": {
+   ", c a": "editor::ToggleCodeActions"
+  }
+ },
+ {
+  "context": "VimControl && !menu",
+  "unbind": {
+   "g r a": "editor::ToggleCodeActions"
+  }
+ },
+ {
+  "context": "FileFinder || FileFinder > Picker > Editor || FileFinder > Picker > menu",
+  "bindings": {
+   "ctrl-x": "pane::SplitUp"
+  }
+ },
+ {
+  "context": "FileFinder || FileFinder > Picker > Editor || FileFinder > Picker > menu",
+  "unbind": {
+   "ctrl-k": "pane::SplitUp"
+  }
+ }
 ]
