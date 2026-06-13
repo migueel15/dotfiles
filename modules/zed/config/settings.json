@@ -1,5 +1,10 @@
 {
-	"edit_predictions": {
+	"agent_servers": {
+  "codex-acp": {
+   "type": "registry"
+  }
+ },
+ "edit_predictions": {
   "mode": "subtle"
  },
  "outline_panel": {
@@ -68,8 +73,8 @@
 	"hard_tabs": true,
 	"tab_size": 2,
 	"icon_theme": {
-		"mode": "dark",
-		"light": "Zed (Default)",
+		"mode": "light",
+		"light": "Material Icon Theme",
 		"dark": "Material Icon Theme"
 	},
 	"base_keymap": "VSCode",
@@ -77,8 +82,8 @@
 	"agent_buffer_font_size": 15,
 	"buffer_font_size": 15,
 	"theme": {
-		"mode": "dark",
+		"mode": "light",
 		"light": "Catppuccin Mocha - No Italics",
-		"dark": "Catppuccin Mocha - No Italics"
+		"dark": "Islands Dark"
 	}
 }
