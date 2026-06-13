@@ -85,5 +85,17 @@
   "unbind": {
    "ctrl-k": "pane::SplitUp"
   }
+ },
+ {
+  "context": "VimControl && !menu",
+  "bindings": {
+   ", r n": "editor::Rename"
+  }
+ },
+ {
+  "context": "VimControl && !menu",
+  "unbind": {
+   "g r n": "editor::Rename"
+  }
  }
 ]
