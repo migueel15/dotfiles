@@ -1,10 +1,14 @@
 {
-	"agent_servers": {
+	"show_edit_predictions": false,
+ "agent_servers": {
   "codex-acp": {
    "type": "registry"
   }
  },
  "edit_predictions": {
+  "copilot": {
+   "enable_next_edit_suggestions": false
+  },
   "mode": "subtle"
  },
  "outline_panel": {
