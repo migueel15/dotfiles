@@ -29,13 +29,17 @@ opt.termguicolors = true
 opt.showmode = false      -- Disable mode info under lualine
 opt.pumheight = 15
 opt.conceallevel = 1
-
+opt.fillchars = {
+	eob = " ",
+}
+vim.opt.signcolumn = "yes"
+vim.opt.statuscolumn = "%s%=%l    "
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
 opt.expandtab = false  -- Use spaces instead of tabs
-opt.shiftwidth = 4     -- Shift 2 spaces when tab
-opt.tabstop = 4        -- 1 tab == 2 spaces
+opt.shiftwidth = 2     -- Shift 2 spaces when tab
+opt.tabstop = 2        -- 1 tab == 2 spaces
 opt.smartindent = true -- Autoindent new lines
 
 -----------------------------------------------------------

@@ -1,6 +1,6 @@
 {
 	"terminal": {
-  "font_weight": 400.0
+  "font_weight": 600.0
  },
  "cli_default_open_behavior": "new_window",
  "show_edit_predictions": false,
@@ -10,7 +10,6 @@
   }
  },
  "edit_predictions": {
-  "provider": "copilot",
   "copilot": {
    "enable_next_edit_suggestions": false
   },
@@ -44,6 +43,9 @@
 	"scrollbar": {
 		"show": "never"
 	},
+	"features": {
+		"edit_prediction_provider": "copilot"
+	},
 	"telemetry": {
 		"diagnostics": true,
 		"metrics": false
@@ -63,6 +65,7 @@
   "single_file_review": true,
 		"enable_feedback": true,
 		"dock": "left",
+		"always_allow_tool_actions": false,
 		"enabled": true,
 		"button": true,
 		"model_parameters": []

@@ -48,7 +48,26 @@ hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" }))
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.pin())
+hl.bind(mainMod .. " + SHIFT + S", function()
+	local current = hl.get_active_window()
+	if current == nil or (not current.floating) then
+		hl.exec_cmd("notify-send 'Error pinning window'")
+		return
+	end
+
+	local isPinned = current.pinned
+	local class = current.class
+
+	if isPinned then
+		hl.exec_cmd("notify-send '" .. class .. " unpinned'")
+	else
+		hl.exec_cmd("notify-send '" .. class .. " pinned'")
+	end
+
+	hl.dispatch(
+		hl.dsp.window.pin()
+	)
+end)
 
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ next = true }))
 
