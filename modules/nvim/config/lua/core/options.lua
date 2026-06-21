@@ -32,8 +32,25 @@ opt.conceallevel = 1
 opt.fillchars = {
 	eob = " ",
 }
-vim.opt.signcolumn = "yes"
-vim.opt.statuscolumn = "%s%=%l    "
+local statuscolumn_group = vim.api.nvim_create_augroup("CoreStatusColumn", { clear = true })
+local function update_statuscolumn()
+	local is_normal_buffer = vim.bo.buftype == "" and vim.bo.modifiable and vim.bo.filetype ~= "NvimTree"
+
+	if is_normal_buffer then
+		vim.wo.signcolumn = "yes"
+		vim.wo.statuscolumn = "%s%=%l    "
+	else
+		vim.wo.signcolumn = "auto"
+		vim.wo.statuscolumn = ""
+	end
+end
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType", "WinEnter" }, {
+	group = statuscolumn_group,
+	callback = update_statuscolumn,
+})
+
+update_statuscolumn()
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
