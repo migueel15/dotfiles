@@ -1,5 +1,14 @@
 {
-	"terminal": {
+	"context_servers": {
+  "postgres-context-server": {
+   "enabled": true,
+   "remote": false,
+   "settings": {
+    "database_url": "postgresql://admin:admin@localhost:5432/dorlab"
+   }
+  }
+ },
+ "terminal": {
   "font_weight": 400.0
  },
  "cli_default_open_behavior": "new_window",
