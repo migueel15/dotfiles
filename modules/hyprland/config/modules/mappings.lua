@@ -28,6 +28,20 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 
 -- hl.bind(mainMod .. " + CTRL + M", hl.dsp.exit())
 
+hl.bind(mainMod .. " + SHIFT + C", function()
+	local currentMonitor = hl.get_active_monitor()
+	if currentMonitor == nil then return end
+	-- hl.exec_cmd("notify-send '" .. currentMonitor.vrr_active .. "'")
+
+	if not hl.get_active_window().floating then
+		hl.dispatch(hl.dsp.window.float())
+	end
+	hl.dispatch(hl.dsp.window.resize({ x = currentMonitor.width * 0.7, y = currentMonitor.height * 0.8 }))
+	hl.dispatch(
+		hl.dsp.window.center()
+	)
+end)
+
 hl.bind(mainMod .. " + E", exec(apps.fileManager))
 hl.bind(mainMod .. " + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", exec(apps.vicinae))
