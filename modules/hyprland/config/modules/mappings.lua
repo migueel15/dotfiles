@@ -31,7 +31,6 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 hl.bind(mainMod .. " + SHIFT + C", function()
 	local currentMonitor = hl.get_active_monitor()
 	if currentMonitor == nil then return end
-	-- hl.exec_cmd("notify-send '" .. currentMonitor.vrr_active .. "'")
 
 	if not hl.get_active_window().floating then
 		hl.dispatch(hl.dsp.window.float())
