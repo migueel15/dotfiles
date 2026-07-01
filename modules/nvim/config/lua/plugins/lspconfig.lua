@@ -60,7 +60,7 @@ return {
 					vim.keymap.set("n", "K", function()
 						vim.lsp.buf.hover(lsp_float_opts)
 					end, opts)
-					vim.keymap.set("n", "<C-k>", function()
+					vim.keymap.set("n", "<Space>k", function()
 						vim.lsp.buf.signature_help(lsp_float_opts)
 					end, opts)
 					vim.keymap.set("i", "<C-k>", function()
