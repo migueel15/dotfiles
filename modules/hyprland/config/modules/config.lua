@@ -1,5 +1,5 @@
 local M = {}
 
-M.mirror = false
+M.mirror = true
 
 return M
