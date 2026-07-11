@@ -1,82 +1,92 @@
 {
+	"proxy": "",
+	"context_servers": {
+		"postgres-context-server": {
+			"enabled": true,
+			"remote": false,
+			"settings": {
+				"database_url": "postgresql://admin:admin@localhost:5432/dorlab",
+			},
+		},
+	},
 	"terminal": {
-  "font_weight": 600.0
- },
- "cli_default_open_behavior": "new_window",
- "show_edit_predictions": false,
- "agent_servers": {
-  "codex-acp": {
-   "type": "registry"
-  }
- },
- "edit_predictions": {
-  "copilot": {
-   "enable_next_edit_suggestions": false
-  },
-  "mode": "subtle"
- },
- "outline_panel": {
-  "dock": "left"
- },
- "collaboration_panel": {
-  "dock": "left"
- },
- "git_panel": {
-  "dock": "left"
- },
- "text_rendering_mode": "platform_default",
- "relative_line_numbers": "enabled",
+		"font_weight": 400.0,
+	},
+	"cli_default_open_behavior": "new_window",
+	"show_edit_predictions": false,
+	"agent_servers": {
+		"opencode": {
+			"type": "registry",
+		},
+		"codex-acp": {
+			"type": "registry",
+		},
+	},
+	"edit_predictions": {
+		"provider": "copilot",
+		"copilot": {
+			"enable_next_edit_suggestions": false,
+		},
+		"mode": "subtle",
+	},
+	"outline_panel": {
+		"dock": "left",
+	},
+	"collaboration_panel": {
+		"dock": "left",
+	},
+	"git_panel": {
+		"dock": "left",
+	},
+	"text_rendering_mode": "platform_default",
+	"relative_line_numbers": "enabled",
 	"diagnostics": {
 		"inline": {
-			"enabled": true
-		}
+			"enabled": true,
+		},
 	},
 	"git": {
 		"inline_blame": {
-			"enabled": false
-		}
+			"enabled": false,
+		},
 	},
 	"toolbar": {
 		"breadcrumbs": true,
-		"quick_actions": false
+		"quick_actions": false,
 	},
 	"scrollbar": {
-		"show": "never"
-	},
-	"features": {
-		"edit_prediction_provider": "copilot"
+		"show": "never",
 	},
 	"telemetry": {
 		"diagnostics": true,
-		"metrics": false
+		"metrics": false,
 	},
 	"vim_mode": true,
 	"project_panel": {
 		"hide_root": false,
 		"scrollbar": {
-			"show": "auto"
+			"show": "auto",
 		},
 		"folder_icons": true,
 		"dock": "right",
-		"auto_fold_dirs": false
+		"auto_fold_dirs": false,
 	},
 	"agent": {
 		"flexible": false,
-  "single_file_review": true,
+		"single_file_review": true,
 		"enable_feedback": true,
 		"dock": "left",
-		"always_allow_tool_actions": false,
 		"enabled": true,
 		"button": true,
-		"model_parameters": []
+		"model_parameters": [],
 	},
 	"minimap": {
-		"show": "never"
+		"show": "never",
 	},
 	"buffer_font_fallbacks": ["Droid Sans Mono", "monospace", "monospace"],
 	"buffer_font_family": "JetBrainsMono Nerd Font",
 	"file_types": {
-		"css": ["*.css"]
+		"css": ["*.css"],
 	},
 	"auto_indent_on_paste": true,
 	"hard_tabs": true,
@@ -84,7 +94,7 @@
 	"icon_theme": {
 		"mode": "light",
 		"light": "Material Icon Theme",
-		"dark": "Material Icon Theme"
+		"dark": "Material Icon Theme",
 	},
 	"base_keymap": "VSCode",
 	"ui_font_size": 18,
@@ -93,6 +103,6 @@
 	"theme": {
 		"mode": "light",
 		"light": "Catppuccin Mocha - No Italics",
-		"dark": "Islands Dark"
-	}
+		"dark": "Islands Dark",
+	},
 }

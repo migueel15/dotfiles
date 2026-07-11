@@ -10,6 +10,18 @@ local runners = {
 
 local code_runner_term
 
+local function build_make_command()
+	local file_dir = vim.fn.expand("%:p:h")
+	local makefile = vim.fn.findfile("Makefile", file_dir .. ";")
+
+	if makefile == "" then
+		return nil
+	end
+
+	local project_root = vim.fn.fnamemodify(makefile, ":p:h")
+	return "make --no-print-directory -C " .. vim.fn.shellescape(project_root)
+end
+
 local function get_or_create_terminal()
 	if code_runner_term and vim.api.nvim_buf_is_valid(code_runner_term.bufnr) then
 		return code_runner_term
@@ -37,6 +49,11 @@ local function build_command()
 		return nil
 	end
 
+	local make_cmd = build_make_command()
+	if make_cmd then
+		return make_cmd
+	end
+
 	local cmd = runners[ft]
 	if not cmd then
 		print("No runner configured for filetype: " .. ft)
@@ -58,6 +75,8 @@ local function run_current_file()
 	if not cmd then
 		return
 	end
+
+	vim.notify("Ejecutando CodeRunner", vim.log.levels.INFO, { title = "CodeRunner" })
 
 	code_runner_term = get_or_create_terminal()
 	if not code_runner_term:is_open() then
