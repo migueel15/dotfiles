@@ -31,6 +31,14 @@ hl.window_rule({
 	workspace = 6 .. " silent"
 })
 
+hl.window_rule({
+	name = "Game development",
+	match = {
+		class = "GameDev"
+	},
+	float = true,
+	center = true
+})
 
 -- Change animations for screenshots
 hl.layer_rule({
