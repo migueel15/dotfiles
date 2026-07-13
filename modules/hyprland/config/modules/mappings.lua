@@ -41,6 +41,35 @@ hl.bind(mainMod .. " + SHIFT + C", function()
 	)
 end)
 
+hl.bind(mainMod .. " + SHIFT + V", function()
+	local currentMonitor = hl.get_active_monitor()
+	local currentWindow = hl.get_active_window()
+
+	local width = 1133
+	local height = 857
+
+	if currentMonitor == nil or currentWindow == nil then return end
+
+	if not currentWindow.floating then
+		hl.dispatch(hl.dsp.window.float())
+	end
+	hl.dispatch(hl.dsp.window.resize({ x = width, y = height }))
+	hl.dispatch(
+		hl.dsp.window.center()
+	)
+
+	hl.exec_cmd("notify-send 'Modo tableta grafica: Cliente - " .. currentWindow.title .. "'")
+
+	hl.config({
+		input = {
+			tablet = {
+				region_size = { width, height },
+				region_position = { currentWindow.at.x, currentWindow.at.y },
+			}
+		}
+	})
+end)
+
 hl.bind(mainMod .. " + E", exec(apps.fileManager))
 hl.bind(mainMod .. " + Space", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", exec(apps.vicinae))

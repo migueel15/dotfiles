@@ -1,3 +1,5 @@
+Test = "adad"
+
 hl.config({
 	input = {
 		kb_layout = "es",
@@ -9,6 +11,15 @@ hl.config({
 			tap_to_click = true,
 			disable_while_typing = true,
 			scroll_factor = 0.4
+		},
+
+		tablet = {
+			output = "desc:BNQ BenQ EX2710Q TBM00955019",
+			-- region_position = { 384, 164 },
+			-- region_size = { 1792, 1152 }
+
+			-- region_position = { 808, 335 },
+			-- region_size = { 1133, 857 }
 		}
 	}
 })
