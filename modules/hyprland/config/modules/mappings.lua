@@ -52,12 +52,31 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 	if currentWindow == nil then return end
 	if currentMonitor == nil or currentMonitor.id == nil then return end
 
-	local pixelTabletWidth = currentMonitor.width / currentMonitor.scale / currentMonitor.physical_width *
+
+	local monitor_physical_sizes = {
+		["BNQ BenQ EX2710Q TBM00955019"] = {
+			width = 600,
+			height = 340,
+		},
+		["BNQ ZOWIE XL LCD N1J03633SL0"] = {
+			width = 530,
+			height = 300,
+		},
+		["LG Display 0x06EA"] = {
+			width = 370,
+			height = 230,
+		},
+	}
+
+	local monitorPhysicalWidth = monitor_physical_sizes[currentMonitor.description].width
+	local monitorPhysicalHeight = monitor_physical_sizes[currentMonitor.description].height
+
+
+	local pixelTabletWidth = currentMonitor.width / currentMonitor.scale / monitorPhysicalWidth *
 			physicalTabletWidth
 
-	local pixelTabletHeight = currentMonitor.height / currentMonitor.scale / currentMonitor.physical_height *
+	local pixelTabletHeight = currentMonitor.height / currentMonitor.scale / monitorPhysicalHeight *
 			physicalTabletHeight
-
 
 
 	local width = pixelTabletWidth * virtualScale
@@ -73,7 +92,6 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 		hl.dsp.window.center()
 	)
 
-	-- hl.exec_cmd("notify-send 'Modo tableta grafica: Cliente - " .. currentWindow.title .. "'")
 
 	hl.config({
 		input = {
