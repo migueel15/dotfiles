@@ -42,11 +42,25 @@ hl.bind(mainMod .. " + SHIFT + C", function()
 end)
 
 hl.bind(mainMod .. " + SHIFT + V", function()
-	local currentMonitor = hl.get_active_monitor()
-	local currentWindow = hl.get_active_window()
+	local physicalTabletWidth = 260 -- mm
+	local physicalTabletHeight = 200 -- mm
 
-	local width = 1133
-	local height = 857
+	local currentWindow = hl.get_active_window()
+	local currentMonitor = hl.get_active_monitor()
+
+	if currentWindow == nil then return end
+	if currentMonitor == nil or currentMonitor.id == nil then return end
+
+	local pixelTabletWidth = currentMonitor.width / currentMonitor.scale / currentMonitor.physical_width *
+			physicalTabletWidth
+
+	local pixelTabletHeight = currentMonitor.height / currentMonitor.scale / currentMonitor.physical_height *
+			physicalTabletHeight
+
+
+
+	local width = pixelTabletWidth
+	local height = pixelTabletHeight
 
 	if currentMonitor == nil or currentWindow == nil then return end
 
@@ -58,7 +72,7 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 		hl.dsp.window.center()
 	)
 
-	hl.exec_cmd("notify-send 'Modo tableta grafica: Cliente - " .. currentWindow.title .. "'")
+	-- hl.exec_cmd("notify-send 'Modo tableta grafica: Cliente - " .. currentWindow.title .. "'")
 
 	hl.config({
 		input = {

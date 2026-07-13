@@ -8,5 +8,4 @@ M.create_notification = function(text, timeout)
 	})
 end
 
-
 return M
