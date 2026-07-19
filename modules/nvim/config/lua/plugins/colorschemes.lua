@@ -90,4 +90,9 @@ return {
 			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+	{
+		"Mofiqul/vscode.nvim",
+	},
+	{ "rose-pine/neovim",        name = "rose-pine" },
+	{ "ellisonleao/gruvbox.nvim" },
 }

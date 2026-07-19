@@ -55,6 +55,7 @@ alias rb='reboot'
 alias explorer='nautilus -w . & disown'
 
 #-- shortcuts --
+alias nvim='nvim-padding'
 alias syd='~/Scripts/SyncDotfiles.sh'
 alias img='kitty +kitten icat'
 alias awm="$HOME/Scripts/runAwesomewmScript.sh"

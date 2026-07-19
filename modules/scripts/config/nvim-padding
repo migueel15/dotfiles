@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+run_nvim() {
+    command nvim "$@"
+}
+
+# No modificar Kitty dentro de multiplexores.
+if [[ -n "${TMUX:-}" ]] ||
+   [[ -n "${ZELLIJ:-}" ]] ||
+   [[ -n "${STY:-}" ]] ||
+   [[ "${TERM:-}" == tmux* ]] ||
+   [[ "${TERM:-}" == screen* ]]; then
+    run_nvim "$@"
+    exit $?
+fi
+
+# No estamos directamente dentro de una ventana de Kitty.
+if [[ -z "${KITTY_WINDOW_ID:-}" ]]; then
+    run_nvim "$@"
+    exit $?
+fi
+
+# Kitty/kitten no está instalado en este sistema.
+if ! command -v kitten >/dev/null 2>&1; then
+    run_nvim "$@"
+    exit $?
+fi
+
+# Comprobar que realmente podemos comunicarnos con Kitty.
+if ! kitten @ ls >/dev/null 2>&1; then
+    run_nvim "$@"
+    exit $?
+fi
+
+restore_padding() {
+    kitten @ set-spacing \
+        --match "id:${KITTY_WINDOW_ID}" \
+        padding=default >/dev/null 2>&1
+}
+
+# Restaurar el padding aunque Neovim termine con error o por una señal.
+trap restore_padding EXIT INT TERM HUP
+
+kitten @ set-spacing \
+    --match "id:${KITTY_WINDOW_ID}" \
+    padding=0 >/dev/null 2>&1
+
+run_nvim "$@"
