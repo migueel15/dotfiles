@@ -29,3 +29,9 @@ hl.device({
 	sensitivity = 0,
 	accel_profile = "flat"
 })
+
+-- Deshabilita el teclado
+-- hl.device({
+-- 	name = "razer-razer-huntsman-mini",
+-- 	enabled = false
+-- })
