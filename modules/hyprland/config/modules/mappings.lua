@@ -44,7 +44,7 @@ end)
 hl.bind(mainMod .. " + SHIFT + V", function()
 	local physicalTabletWidth = 216 -- mm
 	local physicalTabletHeight = 135 -- mm
-	local virtualScale = 1.5
+	local virtualScale = 1
 
 	local currentWindow = hl.get_active_window()
 	local currentMonitor = hl.get_active_monitor()
