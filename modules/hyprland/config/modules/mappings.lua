@@ -44,32 +44,17 @@ end)
 hl.bind(mainMod .. " + SHIFT + V", function()
 	local physicalTabletWidth = 216 -- mm
 	local physicalTabletHeight = 135 -- mm
-	local virtualScale = 1
+	local virtualScale = 1.2
 
 	local currentWindow = hl.get_active_window()
 	local currentMonitor = hl.get_active_monitor()
 
+
 	if currentWindow == nil then return end
 	if currentMonitor == nil or currentMonitor.id == nil then return end
 
-
-	local monitor_physical_sizes = {
-		["BNQ BenQ EX2710Q TBM00955019"] = {
-			width = 600,
-			height = 340,
-		},
-		["BNQ ZOWIE XL LCD N1J03633SL0"] = {
-			width = 530,
-			height = 300,
-		},
-		["LG Display 0x06EA"] = {
-			width = 370,
-			height = 230,
-		},
-	}
-
-	local monitorPhysicalWidth = monitor_physical_sizes[currentMonitor.description].width
-	local monitorPhysicalHeight = monitor_physical_sizes[currentMonitor.description].height
+	local monitorPhysicalWidth = currentMonitor.physical_width
+	local monitorPhysicalHeight = currentMonitor.physical_height
 
 
 	local pixelTabletWidth = currentMonitor.width / currentMonitor.scale / monitorPhysicalWidth *
@@ -82,11 +67,12 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 	local width = pixelTabletWidth * virtualScale
 	local height = pixelTabletHeight * virtualScale
 
-	if currentMonitor == nil or currentWindow == nil then return end
 
 	if not currentWindow.floating then
 		hl.dispatch(hl.dsp.window.float())
 	end
+
+
 	hl.dispatch(hl.dsp.window.resize({ x = width, y = height }))
 	hl.dispatch(
 		hl.dsp.window.center()
