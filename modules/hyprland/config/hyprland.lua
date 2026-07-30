@@ -12,3 +12,4 @@ dmsplit.setup({
 
 require("modules.startup")
 require("modules.mappings")
+require("modules.senda_api")
