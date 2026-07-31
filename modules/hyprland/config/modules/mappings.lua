@@ -111,9 +111,9 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", actio
 hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + S", function()
 	local current = hl.get_active_window()
-	if current == nil or (not current.floating) then
-		hl.exec_cmd("notify-send 'Error pinning window'")
-		return
+	if current == nil then return end
+	if not current.floating then
+		hl.dispatch(hl.dsp.window.float())
 	end
 
 	local isPinned = current.pinned
