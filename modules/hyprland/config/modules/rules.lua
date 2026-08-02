@@ -40,6 +40,14 @@ hl.window_rule({
 	center = true
 })
 
+hl.layer_rule({
+	name = "Hide notifications",
+	match = {
+		namespace = "swaync-notification-window"
+	},
+	no_screen_share = true
+})
+
 -- Change animations for screenshots
 hl.layer_rule({
 	match = {
