@@ -25,7 +25,7 @@ hl.window_rule({
 hl.window_rule({
 	name = "Spotify placement",
 	match = {
-		class = "spotify"
+		class = "Spotify"
 	},
 	monitor = get_second_monitor_id() .. " silent",
 	workspace = 6 .. " silent"

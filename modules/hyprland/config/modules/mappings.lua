@@ -49,9 +49,8 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 	local currentWindow = hl.get_active_window()
 	local currentMonitor = hl.get_active_monitor()
 
-
-	if currentWindow == nil then return end
 	if currentMonitor == nil or currentMonitor.id == nil then return end
+	if currentWindow == nil then return end
 
 	local monitorPhysicalWidth = currentMonitor.physical_width
 	local monitorPhysicalHeight = currentMonitor.physical_height
@@ -69,13 +68,16 @@ hl.bind(mainMod .. " + SHIFT + V", function()
 
 
 	if not currentWindow.floating then
-		hl.dispatch(hl.dsp.window.float())
+		hl.dispatch(hl.dsp.window.float({ window = currentWindow }))
 	end
 
 
-	hl.dispatch(hl.dsp.window.resize({ x = width, y = height }))
+	hl.dispatch(hl.dsp.window.resize({ x = width, y = height, window = currentWindow }))
 	hl.dispatch(
-		hl.dsp.window.center()
+		hl.dsp.window.center({ window = currentWindow })
+	)
+	hl.dispatch(
+		hl.dsp.focus({ window = currentWindow })
 	)
 
 
