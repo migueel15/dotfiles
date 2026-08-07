@@ -69,3 +69,11 @@ hl.layer_rule({
 	},
 	animation = "fade"
 })
+
+-- Screen anotator
+hl.layer_rule({
+	match = {
+		namespace = "wayscriber*"
+	},
+	no_anim = true
+})

@@ -11,6 +11,9 @@ local function exec(cmd)
 	return hl.dsp.exec_cmd(cmd)
 end
 
+-- Screen anotator
+hl.bind(mainMod .. " + SHIFT + P", exec("wayscriber --daemon-toggle"))
+
 -- WEB SHORTCUTS
 
 hl.bind(mainMod .. " + X", exec(apps.llm))
