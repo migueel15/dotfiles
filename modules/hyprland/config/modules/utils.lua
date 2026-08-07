@@ -57,4 +57,47 @@ M.serialize_table = function(value, visited)
 	end
 end
 
+---@class ReservedArea
+---@field top? number
+---@field left? number
+---@field right? number
+---@field bottom? number
+
+---@param monitor HL.Monitor | nil
+M.has_reserved_area = function(monitor)
+	if monitor == nil then return end
+
+	local diff = monitor.reserved.left ~= 0
+			or monitor.reserved.right ~= 0
+			or monitor.reserved.top ~= 40
+			or monitor.reserved.bottom ~= 0
+
+	return diff
+end
+
+---@param monitor HL.Monitor | nil
+---@param area ReservedArea
+M.create_reserved_area = function(monitor, area)
+	if monitor == nil then return end
+	hl.monitor({
+		output = "desc:" .. monitor.description,
+		reserved_area = area
+	})
+end
+
+---@param monitor HL.Monitor | nil
+M.clear_reserved_area = function(monitor)
+	if monitor == nil then return end
+
+	hl.monitor({
+		output = "desc:" .. monitor.description,
+		reserved_area = {
+			left = 0,
+			right = 0,
+			top = 0,
+			bottom = 0
+		}
+	})
+end
+
 return M

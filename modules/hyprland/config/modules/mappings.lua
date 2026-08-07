@@ -13,9 +13,17 @@ end
 
 -- Screen anotator
 hl.bind(mainMod .. " + SHIFT + P", exec("wayscriber --daemon-toggle"))
+hl.bind(mainMod .. " + SHIFT + L", function()
+	local currentMonitor = hl.get_active_monitor()
+
+	if utils.has_reserved_area(currentMonitor) then
+		utils.clear_reserved_area(currentMonitor)
+	else
+		utils.create_reserved_area(hl.get_active_monitor(), { left = 700 })
+	end
+end)
 
 -- WEB SHORTCUTS
-
 hl.bind(mainMod .. " + X", exec(apps.llm))
 hl.bind(mainMod .. " + G", exec(apps.github))
 hl.bind(mainMod .. " + C", exec(apps.calendar))
