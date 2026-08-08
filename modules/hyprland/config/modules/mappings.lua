@@ -19,7 +19,7 @@ hl.bind(mainMod .. " + SHIFT + L", function()
 	if utils.has_reserved_area(currentMonitor) then
 		utils.clear_reserved_area(currentMonitor)
 	else
-		utils.create_reserved_area(hl.get_active_monitor(), { left = 700 })
+		utils.create_reserved_area(hl.get_active_monitor(), { left = 800 })
 	end
 end)
 
