@@ -7,8 +7,8 @@ local dmsplit = require("plugins.dmsplit")
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
-local function exec(cmd)
-	return hl.dsp.exec_cmd(cmd)
+local exec = function(cmd, ...)
+	return hl.dsp.exec_cmd(cmd, ...)
 end
 
 -- Screen anotator
@@ -34,6 +34,7 @@ hl.bind(mainMod .. " + S", exec(apps.nextcloud))
 hl.bind("Print", exec(apps.screenshot))
 
 hl.bind(mainMod .. " + Return", exec(apps.terminal))
+
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill())
 

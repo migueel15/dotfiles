@@ -57,6 +57,7 @@ M.serialize_table = function(value, visited)
 	end
 end
 
+
 ---@class ReservedArea
 ---@field top? number
 ---@field left? number
@@ -83,6 +84,35 @@ M.create_reserved_area = function(monitor, area)
 		output = "desc:" .. monitor.description,
 		reserved_area = area
 	})
+end
+
+---
+M.get_cursor_local_position = function()
+	local current_monitor = hl.get_active_monitor()
+	local cursor_pos = hl.get_cursor_pos()
+	if current_monitor == nil then return end
+	if cursor_pos == nil then return end
+
+	return {
+		x = cursor_pos.x - current_monitor.position.x,
+		y = cursor_pos.y - current_monitor.position.y
+	}
+end
+
+---@param monitor HL.Monitor | nil
+M.cursor_at_reserved_area = function(monitor)
+	if monitor == nil then return end
+	local reserved_area = M.has_reserved_area(monitor)
+	if reserved_area then
+		local cursor_pos = M.get_cursor_local_position()
+		if cursor_pos == nil then return end
+
+		local inside = cursor_pos.x <= monitor.reserved.left
+		M.create_notification(tostring(inside))
+		return inside
+	end
+
+	return false
 end
 
 ---@param monitor HL.Monitor | nil
