@@ -4,6 +4,7 @@ require("modules.devices")
 require("modules.theme")
 
 local dmsplit = require("plugins.dmsplit")
+local pinstack = require("plugins.pinstack")
 
 dmsplit.setup({
 	num_workspaces = 6,
