@@ -76,15 +76,6 @@ M.has_reserved_area = function(monitor)
 	return diff
 end
 
----@param monitor HL.Monitor | nil
----@param area ReservedArea
-M.create_reserved_area = function(monitor, area)
-	if monitor == nil then return end
-	hl.monitor({
-		output = "desc:" .. monitor.description,
-		reserved_area = area
-	})
-end
 
 ---
 M.get_cursor_local_position = function()
@@ -115,19 +106,5 @@ M.cursor_at_reserved_area = function(monitor)
 	return false
 end
 
----@param monitor HL.Monitor | nil
-M.clear_reserved_area = function(monitor)
-	if monitor == nil then return end
-
-	hl.monitor({
-		output = "desc:" .. monitor.description,
-		reserved_area = {
-			left = 0,
-			right = 0,
-			top = 0,
-			bottom = 0
-		}
-	})
-end
 
 return M
