@@ -13,8 +13,15 @@ hl.monitor({
 })
 
 hl.monitor({
+	output = "desc:LG Electronics LG TV 0x01010101",
+	mode = "preferred",
+	position = "auto",
+	scale = "2"
+})
+
+hl.monitor({
 	output = "",
 	mode = "preferred",
 	position = "auto",
-	scale = "1.25"
+	scale = "1"
 })
