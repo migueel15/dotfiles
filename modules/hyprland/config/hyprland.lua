@@ -11,6 +11,8 @@ dmsplit.setup({
 	persistent_workspaces = true
 })
 
+pinstack.setup({ width = 750 })
+
 require("modules.startup")
 require("modules.mappings")
 require("modules.senda_api")
