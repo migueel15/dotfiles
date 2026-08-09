@@ -32,6 +32,20 @@ M.apply_mappings = function()
 	hl.bind("SUPER" .. " + SHIFT + L", function()
 		M.toggle_pinstack()
 	end)
+
+	hl.bind("SUPER + mouse:272", function()
+		local client = hl.get_active_window()
+		if M.is_cursor_inside_pinstack() then
+			M.attach_client(client)
+			return
+		end
+
+		if not M.is_cursor_inside_pinstack() then
+			if M._has_tag(client) then
+				M.detach_client(client)
+			end
+		end
+	end, { drag = true })
 end
 
 M.apply_listeners = function()
@@ -44,10 +58,6 @@ M.apply_listeners = function()
 	hl.on("window.close", function(client)
 		if M.client_inside_stack(client) then
 			M.close_client(client)
-
-			if #M._state.clients == 0 then
-				M.toggle_pinstack()
-			end
 		end
 	end)
 end
@@ -96,6 +106,7 @@ M.attach_client = function(client)
 	if not M._state.active then return end
 	if client == nil then return end
 
+
 	for _, value in ipairs(M._state.clients) do
 		if client.address == value.address then
 			M.recalculate_stack()
@@ -104,7 +115,22 @@ M.attach_client = function(client)
 	end
 
 	hl.dispatch(hl.dsp.window.tag({ tag = "+pinstack", window = client }))
-	table.insert(M._state.clients, client)
+
+
+	local cursor_pos = hl.get_cursor_pos()
+	if cursor_pos == nil then return end
+
+	if #M._state.clients == 0 then
+		table.insert(M._state.clients, client)
+	else
+		for i, c in ipairs(M._state.clients) do
+			if cursor_pos.y >= c.at.y and cursor_pos.y <= c.at.y + (c.size.y / 2) then
+				table.insert(M._state.clients, i, client)
+			elseif cursor_pos.y > c.at.y + (c.size.y / 2) and cursor_pos.y <= c.at.y + c.size.y then
+				table.insert(M._state.clients, i + 1, client)
+			end
+		end
+	end
 
 	M.recalculate_stack()
 end
@@ -126,6 +152,11 @@ M.detach_client = function(client)
 	table.remove(M._state.clients, current_index)
 
 	M.recalculate_stack()
+
+	if #M._state.clients == 0 then
+		M.toggle_pinstack()
+		return
+	end
 end
 
 ---@param client HL.Window | nil
@@ -143,6 +174,11 @@ M.close_client = function(client)
 	table.remove(M._state.clients, current_index)
 
 	M.recalculate_stack()
+
+	if #M._state.clients == 0 then
+		M.toggle_pinstack()
+		return
+	end
 end
 
 
@@ -151,6 +187,7 @@ M.recalculate_stack = function()
 	if monitor == nil then return end
 
 	local clients_size = #M._state.clients
+
 
 	local client_height = ((monitor.height / monitor.scale) - (M._state.gap * (clients_size + 1))) / clients_size
 	local client_width = M._state.reserved_area - M._state.gap * 2
@@ -213,19 +250,7 @@ end
 
 --
 -- Callback al hacer drop
-hl.bind("SUPER + mouse:272", function()
-	local client = hl.get_active_window()
-	if M.is_cursor_inside_pinstack() then
-		M.attach_client(client)
-		return
-	end
 
-	if not M.is_cursor_inside_pinstack() then
-		if M._has_tag(client) then
-			M.detach_client(client)
-		end
-	end
-end, { drag = true })
 
 -- TODO: Analizar como realocar en demanda de resize
 -- hl.bind("SUPER + mouse:273", function()
