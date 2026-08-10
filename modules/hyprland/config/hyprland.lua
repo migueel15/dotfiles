@@ -2,6 +2,7 @@ require("modules.monitors")
 require("modules.rules")
 require("modules.devices")
 require("modules.theme")
+require("modules.listeners")
 
 local dmsplit = require("plugins.dmsplit")
 local pinstack = require("plugins.pinstack")

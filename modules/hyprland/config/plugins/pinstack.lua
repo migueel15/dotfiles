@@ -36,7 +36,7 @@ M.apply_mappings = function()
 	hl.bind("SUPER + mouse:272", function()
 		local client = hl.get_active_window()
 		if M.is_cursor_inside_pinstack() then
-			M.attach_client(client)
+			M.attach_client(client, true)
 			return
 		end
 
@@ -102,35 +102,55 @@ M.clear_reserved_area = function(monitor)
 end
 
 ---@param client HL.Window | nil
-M.attach_client = function(client)
+---@param dropped boolean? True if window trying to attach is being droped
+M.attach_client = function(client, dropped)
+	dropped = dropped or false
+
 	if not M._state.active then return end
 	if client == nil then return end
 
 
-	for _, value in ipairs(M._state.clients) do
+	for i, value in ipairs(M._state.clients) do
 		if client.address == value.address then
+			table.remove(M._state.clients, i)
 			M.recalculate_stack()
-			return
 		end
 	end
 
 	hl.dispatch(hl.dsp.window.tag({ tag = "+pinstack", window = client }))
 
+	-- local max_height = M._state.reserved_area - (M._state.gap * 2)
+	-- hl.dispatch(hl.dsp.window.set_prop({
+	-- 	window = client,
+	-- 	prop = "max_size",
+	-- 	value = "{" .. max_height .. ", 200}"
+	-- }))
 
-	local cursor_pos = hl.get_cursor_pos()
-	if cursor_pos == nil then return end
 
-	if #M._state.clients == 0 then
-		table.insert(M._state.clients, client)
+	local ref_position
+
+	if dropped then
+		local current_window = hl.get_active_window()
+		if current_window == nil then return end
+
+		ref_position = current_window.at.y + (current_window.size.y / 2)
 	else
-		for i, c in ipairs(M._state.clients) do
-			if cursor_pos.y >= c.at.y and cursor_pos.y <= c.at.y + (c.size.y / 2) then
-				table.insert(M._state.clients, i, client)
-			elseif cursor_pos.y > c.at.y + (c.size.y / 2) and cursor_pos.y <= c.at.y + c.size.y then
-				table.insert(M._state.clients, i + 1, client)
-			end
+		ref_position = hl.get_cursor_pos().y
+	end
+
+
+	local insert_at = #M._state.clients + 1
+
+	for i, c in ipairs(M._state.clients) do
+		local center_y = c.at.y + c.size.y / 2
+
+		if ref_position <= center_y then
+			insert_at = i
+			break
 		end
 	end
+
+	table.insert(M._state.clients, insert_at, client)
 
 	M.recalculate_stack()
 end
@@ -196,11 +216,17 @@ M.recalculate_stack = function()
 		assert(M._has_tag(client), "Error. Client not containing tag")
 		hl.dispatch(hl.dsp.window.float({ action = "enable", window = client }))
 		hl.dispatch(hl.dsp.window.resize({ x = client_width, y = client_height, window = client }))
+		local max_width = M._state.reserved_area - (M._state.gap * 2)
+		-- hl.dispatch(hl.dsp.window.set_prop({
+		-- 	window = client,
+		-- 	prop = "max_size",
+		-- 	value = string.format("{%d,%d}", max_width, 2000)
+		-- }))
 
 		if M._state.active then
 			M._show_client(
 				client,
-				monitor.position.x + M._state.gap,
+				M._state.monitor.position.x + M._state.gap,
 				M._state.gap * index + client_height * (index - 1)
 			)
 		else
@@ -289,7 +315,7 @@ M.is_cursor_inside_pinstack = function()
 
 	if not M._state.active then return false end
 
-	return cur_pos.x <= monitor.position.x + M._state.reserved_area
+	return cur_pos.x <= M._state.monitor.position.x + M._state.reserved_area
 end
 
 
