@@ -64,15 +64,33 @@ end
 
 M.toggle_pinstack = function()
 	if M._state.active then
+		M._state.active = false
+		M.recalculate_stack()
+
 		M.clear_reserved_area(M._state.monitor)
 		M._state.monitor = nil
-		M._state.active = false
 	else
 		local currentMonitor = hl.get_active_monitor()
 		M._state.monitor = currentMonitor
 		M.create_reserved_area(M._state.monitor, { left = M._state.reserved_area })
 		M._state.active = true
+		M.recalculate_stack()
 	end
+end
+
+M.disable_pinstack = function()
+	M._state.active = false
+	M.recalculate_stack()
+
+	M.clear_reserved_area(M._state.monitor)
+	M._state.monitor = nil
+end
+
+M.enable_pinstack = function()
+	local currentMonitor = hl.get_active_monitor()
+	M._state.monitor = currentMonitor
+	M.create_reserved_area(M._state.monitor, { left = M._state.reserved_area })
+	M._state.active = true
 	M.recalculate_stack()
 end
 
@@ -167,14 +185,18 @@ M.detach_client = function(client)
 
 	if not current_index then return end
 
-	hl.dispatch(hl.dsp.window.float({ false, client }))
+	hl.dispatch(hl.dsp.window.float({ action = "off", window = client }))
 	hl.dispatch(hl.dsp.window.tag({ tag = "-pinstack", window = client }))
+	hl.dispatch(hl.dsp.window.pin({
+		action = "off",
+		window = client
+	}))
 	table.remove(M._state.clients, current_index)
 
 	M.recalculate_stack()
 
 	if #M._state.clients == 0 then
-		M.toggle_pinstack()
+		M.disable_pinstack()
 		return
 	end
 end
@@ -196,43 +218,43 @@ M.close_client = function(client)
 	M.recalculate_stack()
 
 	if #M._state.clients == 0 then
-		M.toggle_pinstack()
+		M.disable_pinstack()
 		return
 	end
 end
 
 
 M.recalculate_stack = function()
-	local monitor = hl.get_active_monitor()
+	if not M._state.active then
+		for _, client in ipairs(M._state.clients) do
+			M._hide_client(client)
+		end
+		return
+	end
+
+	local monitor = M._state.monitor
 	if monitor == nil then return end
 
 	local clients_size = #M._state.clients
+
+	if clients_size == 0 then
+		return
+	end
 
 
 	local client_height = ((monitor.height / monitor.scale) - (M._state.gap * (clients_size + 1))) / clients_size
 	local client_width = M._state.reserved_area - M._state.gap * 2
 
 	for index, client in ipairs(M._state.clients) do
-		assert(M._has_tag(client), "Error. Client not containing tag")
-		hl.dispatch(hl.dsp.window.float({ action = "enable", window = client }))
+		hl.dispatch(hl.dsp.window.float({ action = "on", window = client }))
 		hl.dispatch(hl.dsp.window.resize({ x = client_width, y = client_height, window = client }))
-		local max_width = M._state.reserved_area - (M._state.gap * 2)
-		-- hl.dispatch(hl.dsp.window.set_prop({
-		-- 	window = client,
-		-- 	prop = "max_size",
-		-- 	value = string.format("{%d,%d}", max_width, 2000)
-		-- }))
-
 		if M._state.active then
 			M._show_client(
 				client,
 				M._state.monitor.position.x + M._state.gap,
-				M._state.gap * index + client_height * (index - 1)
+				M._state.monitor.position.y + M._state.gap * index + client_height * (index - 1)
 			)
-		else
-			M._hide_client(client)
 		end
-		hl.dispatch(hl.dsp.window.pin({ true, client }))
 	end
 end
 
@@ -246,10 +268,15 @@ M._hide_client = function(client)
 		value = "true"
 	}))
 
-	hl.dispatch(hl.dsp.window.move({
-		x = -100000,
-		y = 0,
+	hl.dispatch(hl.dsp.window.pin({
+		action = "off",
 		window = client
+	}))
+
+	hl.dispatch(hl.dsp.window.move({
+		workspace = "special:pinstack-hidden",
+		window = client,
+		follow = false
 	}))
 end
 
@@ -260,31 +287,27 @@ M._show_client = function(client, x, y)
 	if client == nil then return end
 
 	hl.dispatch(hl.dsp.window.move({
+		workspace = hl.get_active_workspace(),
+		window = client
+
+	}))
+	hl.dispatch(hl.dsp.window.move({
 		x = x,
 		y = y,
 		window = client
 	}))
+	hl.dispatch(hl.dsp.window.pin({
+		action = "on",
+		window = client
+	}))
 
-	if M._has_tag(client) then
-		hl.dispatch(hl.dsp.window.set_prop({
-			window = client,
-			prop = "no_anim",
-			value = "false"
-		}))
-	end
+	hl.dispatch(hl.dsp.window.set_prop({
+		window = client,
+		prop = "no_anim",
+		value = "false"
+	}))
 end
 
---
--- Callback al hacer drop
-
-
--- TODO: Analizar como realocar en demanda de resize
--- hl.bind("SUPER + mouse:273", function()
--- 	M.recalculate_stack()
--- end, { repeating = true })
-
-
----
 ---@param client HL.Window | nil
 ---@param tag string | nil
 ---@return boolean
@@ -308,14 +331,22 @@ M._has_tag = function(client, tag)
 end
 
 M.is_cursor_inside_pinstack = function()
-	local monitor = hl.get_active_monitor()
 	local cur_pos = hl.get_cursor_pos()
-	if monitor == nil then return false end
 	if cur_pos == nil then return false end
+	local monitor = M._state.monitor
 
 	if not M._state.active then return false end
+	if monitor == nil then return false end
 
-	return cur_pos.x <= M._state.monitor.position.x + M._state.reserved_area
+	local left = monitor.position.x
+	local right = left + M._state.reserved_area
+	local top = monitor.position.y
+	local bottom = top + monitor.height / monitor.scale
+
+	return cur_pos.x >= left
+			and cur_pos.x <= right
+			and cur_pos.y >= top
+			and cur_pos.y <= bottom
 end
 
 
