@@ -16,7 +16,7 @@ hl.monitor({
 	output = "desc:LG Electronics LG TV 0x01010101",
 	mode = "preferred",
 	position = "auto",
-	scale = "2",
+	scale = "1.67",
 	-- mirror = config.mirror and "desc:BNQ BenQ EX2710Q TBM00955019" or "",
 })
 
