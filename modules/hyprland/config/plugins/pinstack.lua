@@ -116,7 +116,6 @@ M._update_monitor_reserved_area = function(monitor, area)
 	local current_monitor_mode = string.format("%dx%d@%f", monitor.width, monitor.height, monitor.refresh_rate)
 	local current_monitor_position = string.format("%dx%d", monitor.position.x, monitor.position.y)
 	local current_reserved_area = monitor.reserved
-	utils.create_notification(utils.serialize_table(current_reserved_area))
 	hl.monitor({
 		output = monitor.name,
 		mode = current_monitor_mode,
