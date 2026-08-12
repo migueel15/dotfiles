@@ -2,6 +2,7 @@ local M = {}
 local toggleterm_terminal = require("toggleterm.terminal")
 local Terminal = toggleterm_terminal.Terminal
 
+--- @type table<string, string | function>
 local runners = {
 	python = "python %",
 	go = "go run .",
@@ -20,6 +21,18 @@ local function build_make_command()
 
 	local project_root = vim.fn.fnamemodify(makefile, ":p:h")
 	return "make --no-print-directory -C " .. vim.fn.shellescape(project_root)
+end
+
+local function build_cmake_command()
+	local file_dir = vim.fn.expand("%:p:h")
+	local cmakelists = vim.fn.findfile("CMakeLists.txt", file_dir .. ";")
+
+	if cmakelists == "" then
+		return nil
+	end
+
+	local project_root = vim.fn.fnamemodify(makefile, ":p:h")
+	return "cmake -B build && cmake --build build && ./build/main"
 end
 
 local function get_or_create_terminal()
@@ -47,6 +60,11 @@ local function build_command()
 	if file == "" then
 		print("No file to run")
 		return nil
+	end
+
+	local cmake_cmd = build_cmake_command()
+	if cmake_cmd then
+		return cmake_cmd
 	end
 
 	local make_cmd = build_make_command()
