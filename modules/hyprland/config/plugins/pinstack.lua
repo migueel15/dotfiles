@@ -110,6 +110,7 @@ end
 ---
 --- Hyprland por defecto calcula los valores adecuados en estos casos por lo que no
 --- puedo reconstruir los campos iniciales.
+---
 ---@param monitor HL.Monitor
 ---@param area ReservedArea
 M._update_monitor_reserved_area = function(monitor, area)
@@ -144,14 +145,6 @@ M.attach_client = function(client, dropped)
 	end
 
 	hl.dispatch(hl.dsp.window.tag({ tag = "+pinstack", window = client }))
-
-	-- local max_height = M._state.reserved_area - (M._state.gap * 2)
-	-- hl.dispatch(hl.dsp.window.set_prop({
-	-- 	window = client,
-	-- 	prop = "max_size",
-	-- 	value = "{" .. max_height .. ", 200}"
-	-- }))
-
 
 	local ref_position
 
