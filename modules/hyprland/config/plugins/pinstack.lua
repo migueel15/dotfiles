@@ -64,17 +64,9 @@ end
 
 M.toggle_pinstack = function()
 	if M._state.active then
-		M._state.active = false
-		M.recalculate_stack()
-
-		M.clear_reserved_area(M._state.monitor)
-		M._state.monitor = nil
+		M.disable_pinstack()
 	else
-		local currentMonitor = hl.get_active_monitor()
-		M._state.monitor = currentMonitor
-		M.create_reserved_area(M._state.monitor, { left = M._state.reserved_area })
-		M._state.active = true
-		M.recalculate_stack()
+		M.enable_pinstack()
 	end
 end
 
@@ -98,24 +90,41 @@ end
 ---@param area ReservedArea
 M.create_reserved_area = function(monitor, area)
 	if monitor == nil then return end
-	hl.monitor({
-		output = "desc:" .. monitor.description,
-		reserved_area = area,
-	})
+	M._update_monitor_reserved_area(monitor, area)
 end
 
 ---@param monitor HL.Monitor | nil
 M.clear_reserved_area = function(monitor)
 	if monitor == nil then return end
+	M._update_monitor_reserved_area(monitor, {
+		left = -M._state.reserved_area,
+	})
+end
 
+--- Genera un hl.monitor con los datos previos y actualiza el reserved_area
+--- En 0.56 hyprland no tiene dispatchers para cambiar atributos por lo que hay que
+--- reconstruirlos antes.
+--- No hay forma de saber valores iniciales de la configuracion ya que hay atributos
+--- que se convierten como `mode` o `position` que pueden tomar valores como
+--- `preferred` o `auto` respectivamente
+---
+--- Hyprland por defecto calcula los valores adecuados en estos casos por lo que no
+--- puedo reconstruir los campos iniciales.
+---@param monitor HL.Monitor
+---@param area ReservedArea
+M._update_monitor_reserved_area = function(monitor, area)
+	local current_monitor_mode = string.format("%dx%d@%f", monitor.width, monitor.height, monitor.refresh_rate)
+	local current_monitor_position = string.format("%dx%d", monitor.position.x, monitor.position.y)
+	local current_reserved_area = monitor.reserved
+	utils.create_notification(utils.serialize_table(current_reserved_area))
 	hl.monitor({
-		output = "desc:" .. monitor.description,
+		output = monitor.name,
+		mode = current_monitor_mode,
+		position = current_monitor_position,
+		scale = monitor.scale,
 		reserved_area = {
-			left = 0,
-			right = 0,
-			top = 0,
-			bottom = 0
-		}
+			left = current_reserved_area.left + area.left,
+		},
 	})
 end
 
