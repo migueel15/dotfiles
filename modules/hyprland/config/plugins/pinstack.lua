@@ -34,6 +34,13 @@ M.apply_mappings = function()
 	end)
 
 	hl.bind("SUPER + mouse:272", function()
+		if M.is_cursor_inside_pinstack() then
+			local client = hl.get_active_window()
+			M.detach_client(client)
+		end
+	end, { mouse = true })
+
+	hl.bind("SUPER + mouse:272", function()
 		local client = hl.get_active_window()
 		if M.is_cursor_inside_pinstack() then
 			M.attach_client(client, true)
@@ -43,6 +50,12 @@ M.apply_mappings = function()
 		if not M.is_cursor_inside_pinstack() then
 			if M._has_tag(client) then
 				M.detach_client(client)
+				hl.dispatch(hl.dsp.window.float({ action = "off", window = client }))
+				hl.dispatch(hl.dsp.window.tag({ tag = "-pinstack", window = client }))
+				hl.dispatch(hl.dsp.window.pin({
+					action = "off",
+					window = client
+				}))
 			end
 		end
 	end, { drag = true })
@@ -186,12 +199,6 @@ M.detach_client = function(client)
 
 	if not current_index then return end
 
-	hl.dispatch(hl.dsp.window.float({ action = "off", window = client }))
-	hl.dispatch(hl.dsp.window.tag({ tag = "-pinstack", window = client }))
-	hl.dispatch(hl.dsp.window.pin({
-		action = "off",
-		window = client
-	}))
 	table.remove(M._state.clients, current_index)
 
 	M.recalculate_stack()
