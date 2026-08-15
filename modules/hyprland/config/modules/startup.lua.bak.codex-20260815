@@ -2,7 +2,6 @@ local apps = require "modules.apps"
 
 hl.env("XCURSOR_SIZE", tostring(apps.cursor_size))
 hl.env("HYPRCURSOR_SIZE", tostring(apps.cursor_size))
-hl.env("QT_QPA_PLATFORMTHEME", "qt5ct:qt6ct")
 
 hl.on("hyprland.start", function()
 	-- hl.exec_cmd("hyprpaper")
