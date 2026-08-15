@@ -31,6 +31,9 @@ alias gsw='git switch'
 alias glog='git log --graph --oneline --decorate --color \
 --pretty=format:"%C(yellow)%h%C(reset) %C(red)%d%C(reset) (%C(blue)%an%C(reset), %C(green)%ar%C(reset)) %s"
 '
+webcam (){
+	droidcam-cli 192.168.1.$1 4747
+}
 alias lg='lazygit'
 # github
 alias ghi="gh issue create"
