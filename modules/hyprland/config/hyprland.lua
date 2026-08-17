@@ -1,5 +1,4 @@
 require("modules.monitors")
-require("modules.rules")
 require("modules.devices")
 require("modules.theme")
 require("modules.listeners")
@@ -14,6 +13,7 @@ dmsplit.setup({
 
 pinstack.setup({ width = 750 })
 
+require("modules.rules")
 require("modules.startup")
 require("modules.mappings")
 require("modules.senda_api")

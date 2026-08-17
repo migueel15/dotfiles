@@ -31,25 +31,24 @@ local function build_cmake_command()
 		return nil
 	end
 
-	local project_root = vim.fn.fnamemodify(makefile, ":p:h")
+	local project_root = vim.fn.fnamemodify(cmakelists, ":p:h")
 	return "cmake -B build && cmake --build build && ./build/main"
 end
 
-local function get_or_create_terminal()
-	if code_runner_term and vim.api.nvim_buf_is_valid(code_runner_term.bufnr) then
-		return code_runner_term
+local function terminal_is_alive(term)
+	if not term then
+		return false
 	end
 
-	code_runner_term = toggleterm_terminal.get_all()[1]
-	if code_runner_term then
-		return code_runner_term
+	if not term.bufnr or not vim.api.nvim_buf_is_valid(term.bufnr) then
+		return false
 	end
 
-	code_runner_term = Terminal:new({
-		direction = "horizontal",
-	})
+	if not term.job_id or term.job_id <= 0 then
+		return false
+	end
 
-	return code_runner_term
+	return vim.fn.jobwait({ term.job_id }, 0)[1] == -1
 end
 
 local function build_command()
@@ -94,13 +93,39 @@ local function run_current_file()
 		return
 	end
 
-	vim.notify("Ejecutando CodeRunner", vim.log.levels.INFO, { title = "CodeRunner" })
+	vim.notify("Ejecutando CodeRunner", vim.log.levels.INFO, {
+		title = "CodeRunner",
+	})
 
-	code_runner_term = get_or_create_terminal()
+	local terminal_existed = terminal_is_alive(code_runner_term)
+
+	if not terminal_existed then
+		code_runner_term = Terminal:new({
+			direction = "horizontal",
+		})
+
+		code_runner_term:open()
+
+		-- Esperamos simplemente a que ToggleTerm cree el channel.
+		vim.defer_fn(function()
+			code_runner_term:send(cmd, true)
+		end, 100)
+
+		return
+	end
+
 	if not code_runner_term:is_open() then
 		code_runner_term:open()
 	end
-	code_runner_term:send(cmd, true)
+
+	-- Hay un proceso anterior ejecutándose.
+	code_runner_term:send("\003", false)
+
+	vim.defer_fn(function()
+		if terminal_is_alive(code_runner_term) then
+			code_runner_term:send(cmd, true)
+		end
+	end, 100)
 end
 
 vim.keymap.set("n", "<leader>cr", run_current_file, { desc = "Run current file" })

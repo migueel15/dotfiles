@@ -1,3 +1,5 @@
+local dmsplit = require("plugins.dmsplit")
+
 local get_second_monitor_id = function()
 	local monitors = hl.get_monitors()
 	local target_description = "BNQ ZOWIE XL LCD N1J03633SL0"
@@ -12,14 +14,16 @@ local get_second_monitor_id = function()
 	return fallback and fallback.id or 0
 end
 
+local second_monitor = get_second_monitor_id()
+
 
 hl.window_rule({
 	name = "Discord placement",
 	match = {
 		class = "^(discord|vesktop)$"
 	},
-	monitor = get_second_monitor_id() .. " silent",
-	workspace = 5 .. " silent"
+	monitor = second_monitor .. " silent",
+	workspace = dmsplit.get_monitor_range(second_monitor).min + 4 .. " silent"
 })
 
 hl.window_rule({
@@ -27,8 +31,8 @@ hl.window_rule({
 	match = {
 		class = "Spotify"
 	},
-	monitor = get_second_monitor_id() .. " silent",
-	workspace = 6 .. " silent"
+	monitor = second_monitor .. " silent",
+	workspace = dmsplit.get_monitor_range(second_monitor).min + 5 .. " silent"
 })
 
 hl.window_rule({

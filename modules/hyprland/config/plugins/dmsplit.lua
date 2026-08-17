@@ -66,9 +66,9 @@ local function get_monitor_range(monitor)
 	}
 end
 
----@param monitor HL.Monitor
+---@param monitor HL.Monitor | string | integer
 function M.get_monitor_range(monitor)
-	return get_monitor_range(monitor)
+	return get_monitor_range(hl.get_monitor(monitor))
 end
 
 ---Genera los workspaces segun config.

@@ -25,6 +25,15 @@ return {
 				},
 			})
 
+
+			vim.lsp.config("qml-language-server", {
+				cmd = { "qml-language-server" },
+				filetypes = { "qml" },
+				root_markers = { { "qmldir", "shell.qml" }, ".git" },
+			})
+
+			vim.lsp.enable("qml-language-server")
+
 			vim.lsp.config("emmet_language_server", {
 				filetypes = {
 					"astro",
@@ -98,6 +107,21 @@ return {
 			},
 		},
 	},
+	{
+		"bombsimon/garmin-monkeyc.nvim",
+		ft = "monkeyc",
+		config = function()
+			require("garmin-monkeyc").setup({
+				on_attach = nil,
+				type_check_level = "Default", -- Default | Off | Gradual | Informative | Strict
+				optimization_level = "Default", -- Default | None | Basic | Fast | Slow
+				function_completion = "snippet", -- "snippet" (cursor inside ()) | "strip"
+				sdk_path = nil,              -- SDK path, set if not in the OS default
+				device = nil,                -- device id for type-checking (leave blank unless needed)
+				developer_key = "~/.Garmin/developer_key",
+			})
+		end,
+	}
 	-- {
 	-- 	"nvimtools/none-ls.nvim",
 	-- 	dependencies = "nvim-lua/plenary.nvim",
