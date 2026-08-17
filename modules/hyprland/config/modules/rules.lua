@@ -16,7 +16,6 @@ end
 
 local second_monitor = get_second_monitor_id()
 
-
 hl.window_rule({
 	name = "Discord placement",
 	match = {

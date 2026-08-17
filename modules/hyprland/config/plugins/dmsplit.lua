@@ -55,7 +55,7 @@ local function clear_applied_workspaces()
 end
 
 local function get_monitor_range(monitor)
-	local base = monitor.id
+	local base = type(monitor) == "number" and monitor or monitor.id
 	local min = (base * M._config.num_workspaces) + 1
 	local max = (base + 1) * M._config.num_workspaces
 
@@ -68,6 +68,13 @@ end
 
 ---@param monitor HL.Monitor | string | integer
 function M.get_monitor_range(monitor)
+	-- A numeric ID is enough to calculate its workspace range. During startup,
+	-- Hyprland may not expose the monitor object yet, so resolving it here can
+	-- legitimately return nil even though the ID is valid for this calculation.
+	if type(monitor) == "number" then
+		return get_monitor_range(monitor)
+	end
+
 	return get_monitor_range(hl.get_monitor(monitor))
 end
 
