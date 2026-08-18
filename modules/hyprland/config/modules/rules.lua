@@ -1,38 +1,50 @@
 local dmsplit = require("plugins.dmsplit")
 
-local get_second_monitor_id = function()
-	local monitors = hl.get_monitors()
-	local target_description = "BNQ ZOWIE XL LCD N1J03633SL0"
+local target_monitor_description = "BNQ ZOWIE XL LCD N1J03633SL0"
+local placement_rules_monitor_id
 
-	for _, monitor in ipairs(monitors) do
-		if monitor.description == target_description then
-			return monitor.id
+local function get_target_monitor()
+	for _, monitor in ipairs(hl.get_monitors()) do
+		if monitor.description == target_monitor_description then
+			return monitor
 		end
 	end
-
-	local fallback = monitors[2] or monitors[1]
-	return fallback and fallback.id or 0
 end
 
-local second_monitor = get_second_monitor_id()
+local function apply_app_placement_rules()
+	local monitor = get_target_monitor()
+	if monitor == nil then
+		return
+	end
+	if placement_rules_monitor_id == monitor.id then
+		return
+	end
 
-hl.window_rule({
-	name = "Discord placement",
-	match = {
-		class = "^(discord|vesktop)$"
-	},
-	monitor = second_monitor .. " silent",
-	workspace = dmsplit.get_monitor_range(second_monitor).min + 4 .. " silent"
-})
+	local range = dmsplit.get_monitor_range(monitor)
 
-hl.window_rule({
-	name = "Spotify placement",
-	match = {
-		class = "Spotify"
-	},
-	monitor = second_monitor .. " silent",
-	workspace = dmsplit.get_monitor_range(second_monitor).min + 5 .. " silent"
-})
+	hl.window_rule({
+		name = "Discord placement",
+		match = {
+			class = "^(discord|vesktop)$"
+		},
+		monitor = monitor.id .. " silent",
+		workspace = range.min + 4 .. " silent"
+	})
+
+	hl.window_rule({
+		name = "Spotify placement",
+		match = {
+			class = "Spotify"
+		},
+		monitor = monitor.id .. " silent",
+		workspace = range.min + 5 .. " silent"
+	})
+
+	placement_rules_monitor_id = monitor.id
+end
+
+apply_app_placement_rules()
+hl.on("monitor.added", apply_app_placement_rules)
 
 hl.window_rule({
 	name = "Game development",
