@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+# Keep non-ChatGPT playback at this fraction while ChatGPT records.
+readonly DUCK_FACTOR="0.30"
+readonly FADE_STEPS=10
+readonly FADE_STEP_SECONDS="0.03"
+declare -A original_volumes=()
+ducked=0
+
+chatgpt_is_recording() {
+  pactl list source-outputs 2>/dev/null \
+    | rg -q 'application\.process\.binary = "ChatGPT"'
+}
+
+playback_streams() {
+  pactl list sink-inputs 2>/dev/null | awk '
+    function emit() {
+      if (id != "" && volume != "" && binary != "ChatGPT")
+        print id " " volume
+    }
+    /^Sink Input #[0-9]+/ {
+      emit()
+      id = $3
+      sub(/^#/, "", id)
+      volume = ""
+      binary = ""
+      next
+    }
+    /^\tVolume:/ && volume == "" {
+      split($0, fields, "/")
+      volume = fields[2]
+      gsub(/[^0-9.]/, "", volume)
+      next
+    }
+    /application\.process\.binary = / {
+      binary = $0
+      sub(/^.*application\.process\.binary = "/, "", binary)
+      sub(/".*$/, "", binary)
+    }
+    END { emit() }
+  '
+}
+
+fade_stream_volume() {
+  local id="$1"
+  local start="$2"
+  local end="$3"
+  local step volume
+
+  for ((step = 1; step <= FADE_STEPS; step++)); do
+    volume="$(awk -v start="$start" -v end="$end" \
+      -v step="$step" -v steps="$FADE_STEPS" \
+      'BEGIN { printf "%.2f", start + ((end - start) * step / steps) }')"
+    pactl set-sink-input-volume "$id" "${volume}%" 2>/dev/null || return 0
+    sleep "$FADE_STEP_SECONDS"
+  done
+}
+
+duck_new_streams() {
+  local id volume target
+
+  while read -r id volume; do
+    [[ -n "${id:-}" && -n "${volume:-}" ]] || continue
+    [[ -z "${original_volumes[$id]+set}" ]] || continue
+
+    original_volumes[$id]="$volume"
+    target="$(awk -v volume="$volume" -v factor="$DUCK_FACTOR" \
+      'BEGIN { printf "%.2f", volume * factor }')"
+    fade_stream_volume "$id" "$volume" "$target"
+  done < <(playback_streams)
+}
+
+restore_streams() {
+  local id volume current
+
+  for id in "${!original_volumes[@]}"; do
+    volume="${original_volumes[$id]}"
+    current="$(pactl list sink-inputs 2>/dev/null | awk -v wanted="$id" '
+      /^Sink Input #[0-9]+/ {
+        active = ($3 == "#" wanted)
+        next
+      }
+      active && /^\tVolume:/ {
+        split($0, fields, "/")
+        value = fields[2]
+        gsub(/[^0-9.]/, "", value)
+        print value
+        exit
+      }
+    ')"
+    [[ -n "$current" ]] && fade_stream_volume "$id" "$current" "$volume"
+  done
+
+  original_volumes=()
+}
+
+update_state() {
+  if chatgpt_is_recording; then
+    if (( ducked == 0 )); then
+      ducked=1
+    fi
+    duck_new_streams
+  elif (( ducked == 1 )); then
+    restore_streams
+    ducked=0
+  fi
+}
+
+cleanup() {
+  if (( ducked == 1 )); then
+    restore_streams
+  fi
+}
+trap cleanup EXIT INT TERM
+
+update_state
+while IFS= read -r event; do
+  case "$event" in
+    *"source-output"*|*"sink-input"*|*"server"*)
+      sleep 0.10
+      update_state
+      ;;
+  esac
+done < <(pactl subscribe)
