@@ -3,6 +3,8 @@ hl.monitor({
 	output = "desc:BNQ BenQ EX2710Q TBM00955019",
 	mode = "2560x1440@165",
 	position = "0x0",
+	bitdepth = 10,
+	cm = "auto"
 })
 
 hl.monitor({

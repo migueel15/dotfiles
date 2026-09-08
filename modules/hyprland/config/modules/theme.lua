@@ -20,7 +20,14 @@ hl.config({
 	},
 
 	render = {
-		cm_enabled = false,
+		cm_enabled = true,
+		cm_auto_hdr = 1,
+		cm_sdr_eotf = "default",
+		use_fp16 = 2
+	},
+
+	quirks = {
+		prefer_hdr = 2
 	},
 
 	decoration = {
