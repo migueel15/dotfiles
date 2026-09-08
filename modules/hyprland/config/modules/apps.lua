@@ -28,6 +28,7 @@ M.screenshot = "hyprshot -z -m region --clipboard-only"
 
 M.discord = "discord"
 M.whatsapp = "elecwhat"
+M.sunshine = "sunshine"
 
 M.cursor_theme = "Bibata-Modern-Ice"
 M.cursor_size = 26
