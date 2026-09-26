@@ -30,13 +30,13 @@
 		"mode": "subtle"
 	},
 	"outline_panel": {
-		"dock": "left"
+		"dock": "right"
 	},
 	"collaboration_panel": {
-		"dock": "left"
+		"dock": "right"
 	},
 	"git_panel": {
-		"dock": "left"
+		"dock": "right"
 	},
 	"text_rendering_mode": "platform_default",
 	"relative_line_numbers": "enabled",
@@ -101,9 +101,9 @@
 	"agent_buffer_font_size": 15,
 	"buffer_font_size": 15,
 	"theme": {
-		"mode": "light",
+		"mode": "dark",
 		"light": "Catppuccin Mocha - No Italics",
-		"dark": "Islands Dark"
+		"dark": "Catppuccin Mocha - No Italics"
 	},
 
 	"lsp": {
