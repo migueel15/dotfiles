@@ -47,6 +47,17 @@ apply_app_placement_rules()
 hl.on("monitor.added", apply_app_placement_rules)
 
 hl.window_rule({
+	name = "chatgpt-voice-no-blur",
+
+	match = {
+		class = "Chatgpt",
+		xwayland = true,
+	},
+
+	no_blur = true,
+})
+
+hl.window_rule({
 	name = "Game development",
 	match = {
 		class = "GameDev"

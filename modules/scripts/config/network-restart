@@ -1,0 +1,8 @@
+#!/bin/bash
+nmcli device disconnect eno1
+sleep 1
+sudo modprobe -r r8169
+sudo modprobe r8169
+sleep 1
+nmcli device connect eno1
+
