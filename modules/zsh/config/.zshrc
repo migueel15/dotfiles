@@ -85,13 +85,9 @@ alias ubuntu="ssh -i ~/.ssh/oracle.key ubuntu@143.47.40.193"
 alias windows="systemctl reboot --boot-loader-entry=auto-windows"
 
 update_discord(){
-	yay -Syy
-	yay -S discord --noconfirm
-	hyprctl dispatch "hl.dsp.window.kill({window='class:discord'})"
-	sleep 1
-	# betterdiscordctl --d-modules .config/discord/app-*/modules/discord_desktop_core-1 install
-	betterdiscordctl install
-	hyprctl dispatch "hl.dsp.exec_cmd('discord')"
+	yay -Sy
+	yay -S discord bdcli-bin --noconfirm
+  bdcli install --channel stable
 }
 
 fzfvim() 
