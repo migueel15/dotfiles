@@ -12,3 +12,7 @@ echo -e "${YELLOW}Pulling Universidad${NC}"
 cd $HOME/Universidad/
 git pull
 git submodule foreach "git checkout main; git pull"
+
+echo -e "${YELLOW}Pulling SecondBrain${NC}"
+cd $HOME/repos/SecondBrain
+git pull
