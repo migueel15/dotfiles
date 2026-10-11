@@ -210,3 +210,7 @@ esac
 export PATH="$PATH:/home/miguel/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# >>> Codex installer >>>
+export PATH="/home/miguel/.local/bin:$PATH"
+# <<< Codex installer <<<
