@@ -191,13 +191,13 @@ hl.animation({
 })
 
 -- Layers
-hl.animation({
-	leaf = "layers",
-	enabled = true,
-	speed = 5,
-	style = "slide",
-	bezier = "overshoot",
-})
+-- hl.animation({
+-- 	leaf = "layers",
+-- 	enabled = true,
+-- 	speed = 5,
+-- 	style = "slide",
+-- 	bezier = "overshoot",
+-- })
 
 -- Fade
 hl.animation({

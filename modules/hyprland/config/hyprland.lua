@@ -11,7 +11,7 @@ dmsplit.setup({
 	persistent_workspaces = true
 })
 
-pinstack.setup({ width = 750 })
+pinstack.setup({ width = 900 })
 
 require("modules.rules")
 require("modules.startup")
