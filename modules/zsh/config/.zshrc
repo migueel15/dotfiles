@@ -161,7 +161,6 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Aplicaciones/bin
 export PATH=$PATH:$HOME/Aplicaciones/USE/bin
 export PATH=$PATH:$HOME/.dotfiles/bin
-export PATH=$PATH:$HOME/repos/SendaDesktopManager/core/dist/
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # Load Angular CLI autocompletion.
