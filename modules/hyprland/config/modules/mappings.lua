@@ -172,7 +172,7 @@ hl.bind(mainMod .. " + down", hl.dsp.window.resize({ x = 0, y = size_resize, rel
 
 -- Apps shortcuts
 
-hl.bind("ALT + ntilde", exec("handy --toggle-transcription"))
+-- hl.bind("ALT + ntilde", exec("handy --toggle-transcription"))
 
 -- Laptop multimedia keys for volume and LCD brightness
 
