@@ -21,7 +21,6 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd(apps.sunshine)
 	hl.exec_cmd("gotify-desktop")
 	hl.exec_cmd("vicinae server")
-	hl.exec_cmd("handy --start-hidden")
 	hl.exec_cmd("hyprctl setcursor" .. " " .. apps.cursor_theme .. " " .. apps.cursor_size)
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor_theme" ..
 		" " .. apps.cursor_theme)
