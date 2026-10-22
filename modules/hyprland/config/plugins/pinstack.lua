@@ -86,8 +86,8 @@ end
 M.disable_pinstack = function()
 	M._state.active = false
 	M.recalculate_stack()
-
 	M.clear_reserved_area(M._state.monitor)
+
 	M._state.monitor = nil
 end
 
