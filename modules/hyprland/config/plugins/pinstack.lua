@@ -109,9 +109,7 @@ end
 ---@param monitor HL.Monitor | nil
 M.clear_reserved_area = function(monitor)
 	if monitor == nil then return end
-	M._update_monitor_reserved_area(monitor, {
-		left = -M._state.reserved_area,
-	})
+	M._update_monitor_reserved_area(monitor, { left = 0 })
 end
 
 --- Genera un hl.monitor con los datos previos y actualiza el reserved_area
@@ -129,14 +127,15 @@ end
 M._update_monitor_reserved_area = function(monitor, area)
 	local current_monitor_mode = string.format("%dx%d@%f", monitor.width, monitor.height, monitor.refresh_rate)
 	local current_monitor_position = string.format("%dx%d", monitor.position.x, monitor.position.y)
-	local current_reserved_area = monitor.reserved
+	-- `monitor.reserved` incluye las exclusive zones de layers (waybar), no solo el
+	-- reserved_area de la config, asi que no se usa como base: se fija el valor absoluto.
 	hl.monitor({
 		output = monitor.name,
 		mode = current_monitor_mode,
 		position = current_monitor_position,
 		scale = monitor.scale,
 		reserved_area = {
-			left = current_reserved_area.left + area.left,
+			left = area.left,
 		},
 	})
 end
