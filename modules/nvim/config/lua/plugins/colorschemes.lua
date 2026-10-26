@@ -1,4 +1,18 @@
+local senda = vim.fn.expand("~/.config/senda/generated/nvim")
+
 return {
+	{
+		-- Esquema generado por Senda a partir del tema activo del escritorio.
+		dir = senda,
+		name = "senda",
+		lazy = false,
+		priority = 1001,
+		cond = vim.uv.fs_stat(senda) ~= nil,
+		config = function()
+			vim.g.senda_no_italic = true
+			vim.cmd.colorscheme("senda")
+		end,
+	},
 	{
 		"folke/tokyonight.nvim",
 	},
@@ -85,9 +99,10 @@ return {
 					},
 				},
 			})
-
-			-- setup must be called before loading
-			vim.cmd.colorscheme("catppuccin")
+			if not vim.uv.fs_stat(senda) then
+				vim.cmd.colorscheme("catppuccin")
+			end
+			-- Senda carga su esquema; catppuccin queda como alternativa.
 		end,
 	},
 	{
