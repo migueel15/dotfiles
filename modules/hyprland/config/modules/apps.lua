@@ -12,7 +12,7 @@ M.emojis = [[rofi -modi emoji -show emoji -emoji-format "{emoji}"]]
 M.launcher = "~/.local/bin/senda launcher toggle"
 M.web = "zen-browser --blank-window"
 M.web_open = "zen-browser"
-M.screenlock = "hyprlock"
+M.screenlock = "loginctl lock-session"
 M.colorpicker = "hyprpicker -arq"
 
 M.notion = M.web_open .. [[ "https://www.notion.so/miguedm/Inicio-65fca48212e3468391b8d0b336e38ac2"]]

@@ -78,6 +78,9 @@ hl.config({
 	},
 
 	misc = {
+		allow_session_lock_restore = true,
+		session_lock_xray = true,
+		session_lock_blur = true,
 		force_default_wallpaper = 1,
 		disable_hyprland_logo = true,
 		initial_workspace_tracking = 0,
