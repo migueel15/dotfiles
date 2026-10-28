@@ -22,7 +22,7 @@ hl.bind(mainMod .. " + N", exec(apps.notion))
 hl.bind(mainMod .. " + S", exec(apps.nextcloud))
 
 
-hl.bind("Print", exec(apps.screenshot))
+-- hl.bind("Print", exec(apps.screenshot))
 
 hl.bind(mainMod .. " + Return", exec(apps.terminal))
 
