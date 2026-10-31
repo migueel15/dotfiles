@@ -16,4 +16,4 @@ pinstack.setup({ width = 900 })
 require("modules.rules")
 require("modules.startup")
 require("modules.mappings")
-require("modules.senda") -- Senda: referencia gestionada
+require("senda.init") -- Senda: referencia gestionada

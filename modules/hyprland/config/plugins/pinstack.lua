@@ -25,7 +25,17 @@ M._state = {
 M.setup = function(config)
 	M._state.reserved_area = config.width
 	M.apply_mappings()
-	M.apply_listeners()
+	if not M._listening then
+		M.apply_listeners()
+		M._listening = true
+	end
+end
+
+--- Este bind corre antes que el fin del arrastre, que soltaria la ventana donde esta.
+M._after_drag = function(fn)
+	return function()
+		hl.timer(fn, { timeout = 30, type = "oneshot" })
+	end
 end
 
 M.apply_mappings = function()
@@ -38,9 +48,9 @@ M.apply_mappings = function()
 			local client = hl.get_active_window()
 			M.detach_client(client)
 		end
-	end, { mouse = true })
+	end, { non_consuming = true })
 
-	hl.bind("SUPER + mouse:272", function()
+	hl.bind("SUPER + mouse:272", M._after_drag(function()
 		local client = hl.get_active_window()
 		if M.is_cursor_inside_pinstack() then
 			M.attach_client(client, true)
@@ -58,7 +68,10 @@ M.apply_mappings = function()
 				}))
 			end
 		end
-	end, { drag = true })
+	-- En 0.57 el bind consumidor del arrastre "ensombrece" a este al pulsar y no
+	-- se ejecuta al soltar. `transparent` lo excluye de esa sombra; `non_consuming`
+	-- deja que el arrastre de mappings.lua siga funcionando.
+	end), { drag = true, non_consuming = true, transparent = true })
 end
 
 M.apply_listeners = function()
@@ -73,6 +86,27 @@ M.apply_listeners = function()
 			M.close_client(client)
 		end
 	end)
+
+	-- Una recarga (Senda recarga en cada cambio de pantalla) borra el
+	-- reserved_area en tiempo de ejecucion: hay que volver a fijarlo.
+	hl.on("config.reloaded", function()
+		if not M._state.active then return end
+		M._refresh_monitor()
+		M.create_reserved_area(M._state.monitor, { left = M._state.reserved_area })
+		M.recalculate_stack()
+	end)
+end
+
+--- Senda u otro cliente pueden cambiar modo, escala o posicion: se relee por nombre.
+M._refresh_monitor = function()
+	local current = M._state.monitor
+	if current == nil then return end
+	for _, monitor in ipairs(hl.get_monitors()) do
+		if monitor.name == current.name then
+			M._state.monitor = monitor
+			return
+		end
+	end
 end
 
 M.toggle_pinstack = function()
@@ -86,6 +120,7 @@ end
 M.disable_pinstack = function()
 	M._state.active = false
 	M.recalculate_stack()
+	M._refresh_monitor()
 	M.clear_reserved_area(M._state.monitor)
 
 	M._state.monitor = nil
@@ -129,11 +164,13 @@ M._update_monitor_reserved_area = function(monitor, area)
 	local current_monitor_position = string.format("%dx%d", monitor.position.x, monitor.position.y)
 	-- `monitor.reserved` incluye las exclusive zones de layers (waybar), no solo el
 	-- reserved_area de la config, asi que no se usa como base: se fija el valor absoluto.
+	-- senda: runtime
 	hl.monitor({
 		output = monitor.name,
 		mode = current_monitor_mode,
 		position = current_monitor_position,
 		scale = monitor.scale,
+		transform = monitor.transform,
 		reserved_area = {
 			left = area.left,
 		},
@@ -239,6 +276,7 @@ M.recalculate_stack = function()
 		return
 	end
 
+	M._refresh_monitor()
 	local monitor = M._state.monitor
 	if monitor == nil then return end
 
