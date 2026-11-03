@@ -24,6 +24,9 @@ M._state = {
 ---@param config PinStack.Config
 M.setup = function(config)
 	M._state.reserved_area = config.width
+	-- Las ventanas del stack van fijadas (pin) y Hyprland ignora su fullscreen
+	-- salvo con esta opcion; _sync_stack_fullscreen lo deja dentro del hueco.
+	hl.config({ binds = { allow_pin_fullscreen = true } })
 	M.apply_mappings()
 	if not M._listening then
 		M.apply_listeners()
@@ -87,6 +90,17 @@ M.apply_listeners = function()
 		end
 	end)
 
+	-- Con el pinstack activo, la pantalla completa real taparia la franja reservada:
+	-- se convierte en maximizado interno con fullscreen de cliente (respeta reservas).
+	hl.on("window.fullscreen", function(client)
+		if client == nil then return end
+		if M.client_inside_stack(client) then
+			M._sync_stack_fullscreen(client)
+			return
+		end
+		M._sync_fullscreen(client)
+	end)
+
 	-- Una recarga (Senda recarga en cada cambio de pantalla) borra el
 	-- reserved_area en tiempo de ejecucion: hay que volver a fijarlo.
 	hl.on("config.reloaded", function()
@@ -122,8 +136,64 @@ M.disable_pinstack = function()
 	M.recalculate_stack()
 	M._refresh_monitor()
 	M.clear_reserved_area(M._state.monitor)
+	M._restore_fullscreen()
 
 	M._state.monitor = nil
+end
+
+M._limited = {}
+
+---@param client HL.Window
+---@param internal integer
+---@param fs_client integer
+M._set_fullscreen_state = function(client, internal, fs_client)
+	hl.dispatch(hl.dsp.window.fullscreen_state({
+		internal = internal, client = fs_client, action = "set", window = client
+	}))
+end
+
+--- Con estados distintos Hyprland deja de sincronizar la ventana con lo que pide
+--- la aplicacion; al salir se fija 0/0 para que vuelva a sincronizar.
+---@param client HL.Window
+M._sync_fullscreen = function(client)
+	local wants = client.fullscreen == 2 or client.fullscreen_client == 2
+	local limited = M._limited[client.address]
+
+	if wants and M._state.active then
+		if client.fullscreen ~= 1 or client.fullscreen_client ~= 2 then
+			M._limited[client.address] = true
+			M._set_fullscreen_state(client, 1, 2)
+		end
+	elseif wants then
+		M._limited[client.address] = nil
+		if client.fullscreen ~= 2 then M._set_fullscreen_state(client, 2, 2) end
+	elseif limited then
+		M._limited[client.address] = nil
+		M._set_fullscreen_state(client, 0, 0)
+	end
+end
+
+--- Dentro del pinstack la pantalla completa se queda en su hueco: solo el
+--- cliente cree estar en fullscreen (interno 0, cliente 2).
+---@param client HL.Window
+M._sync_stack_fullscreen = function(client)
+	local wants = client.fullscreen == 2 or client.fullscreen_client == 2
+	if wants then
+		if client.fullscreen == 0 and client.fullscreen_client == 2 then return end
+		M._set_fullscreen_state(client, 0, 2)
+	elseif client.fullscreen ~= 0 or client.fullscreen_client ~= 0 then
+		M._set_fullscreen_state(client, 0, 0)
+	else
+		return
+	end
+	M.recalculate_stack()
+end
+
+--- Al cerrar el pinstack, los fullscreen limitados vuelven a ser fullscreen reales.
+M._restore_fullscreen = function()
+	for _, client in ipairs(hl.get_windows()) do
+		if M._limited[client.address] then M._sync_fullscreen(client) end
+	end
 end
 
 M.enable_pinstack = function()
