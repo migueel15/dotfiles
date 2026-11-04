@@ -234,7 +234,7 @@ M._update_monitor_reserved_area = function(monitor, area)
 	local current_monitor_position = string.format("%dx%d", monitor.position.x, monitor.position.y)
 	-- `monitor.reserved` incluye las exclusive zones de layers (waybar), no solo el
 	-- reserved_area de la config, asi que no se usa como base: se fija el valor absoluto.
-	-- senda: runtime
+	-- zenda: runtime
 	hl.monitor({
 		output = monitor.name,
 		mode = current_monitor_mode,

@@ -96,8 +96,8 @@ end)
 
 hl.bind(mainMod .. " + E", exec(apps.fileManager))
 hl.bind(mainMod .. " + Space", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D", exec(apps.launcher))
-hl.bind(mainMod .. " + period", exec(apps.emojis))
+-- hl.bind(mainMod .. " + D", exec(apps.launcher))
+-- hl.bind(mainMod .. " + period", exec(apps.emojis))
 hl.bind(mainMod .. " + W", exec(apps.web))
 -- Gestionado por Senda en modules/senda.lua.
 -- hl.bind(mainMod .. " + CTRL + L", exec(apps.screenlock))
