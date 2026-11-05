@@ -99,7 +99,7 @@ hl.bind(mainMod .. " + Space", hl.dsp.window.float({ action = "toggle" }))
 -- hl.bind(mainMod .. " + D", exec(apps.launcher))
 -- hl.bind(mainMod .. " + period", exec(apps.emojis))
 hl.bind(mainMod .. " + W", exec(apps.web))
--- Gestionado por Senda en modules/senda.lua.
+-- Gestionado por Zenda en zenda/lock.lua.
 -- hl.bind(mainMod .. " + CTRL + L", exec(apps.screenlock))
 hl.bind(mainMod .. " + O", exec(apps.colorpicker))
 hl.bind(mainMod .. " + V", exec(apps.ide))

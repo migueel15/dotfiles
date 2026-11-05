@@ -101,7 +101,7 @@ M.apply_listeners = function()
 		M._sync_fullscreen(client)
 	end)
 
-	-- Una recarga (Senda recarga en cada cambio de pantalla) borra el
+	-- Una recarga (Zenda recarga en cada cambio de pantalla) borra el
 	-- reserved_area en tiempo de ejecucion: hay que volver a fijarlo.
 	hl.on("config.reloaded", function()
 		if not M._state.active then return end
@@ -111,7 +111,7 @@ M.apply_listeners = function()
 	end)
 end
 
---- Senda u otro cliente pueden cambiar modo, escala o posicion: se relee por nombre.
+--- Zenda u otro cliente pueden cambiar modo, escala o posicion: se relee por nombre.
 M._refresh_monitor = function()
 	local current = M._state.monitor
 	if current == nil then return end

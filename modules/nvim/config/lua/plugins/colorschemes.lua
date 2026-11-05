@@ -1,16 +1,16 @@
-local senda = vim.fn.expand("~/.config/senda/generated/nvim")
+local zenda = vim.fn.expand("~/.config/zenda/generated/nvim")
 
 return {
 	{
-		-- Esquema generado por Senda a partir del tema activo del escritorio.
-		dir = senda,
-		name = "senda",
+		-- Esquema generado por Zenda a partir del tema activo del escritorio.
+		dir = zenda,
+		name = "zenda",
 		lazy = false,
 		priority = 1001,
-		cond = vim.uv.fs_stat(senda) ~= nil,
+		cond = vim.uv.fs_stat(zenda) ~= nil,
 		config = function()
-			vim.g.senda_no_italic = true
-			vim.cmd.colorscheme("senda")
+			vim.g.zenda_no_italic = true
+			vim.cmd.colorscheme("zenda")
 		end,
 	},
 	{
@@ -99,10 +99,10 @@ return {
 					},
 				},
 			})
-			if not vim.uv.fs_stat(senda) then
+			if not vim.uv.fs_stat(zenda) then
 				vim.cmd.colorscheme("catppuccin")
 			end
-			-- Senda carga su esquema; catppuccin queda como alternativa.
+			-- Zenda carga su esquema; catppuccin queda como alternativa.
 		end,
 	},
 	{
