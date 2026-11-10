@@ -13,6 +13,9 @@ source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_CUSTOM/plugins/zsh-sudo/sudo.plugin.zsh
 source $HOME/.zshrc-senda
 
+if [[ -n "$SSH_CONNECTION" ]]; then
+    PROMPT="${PROMPT//%n/%n@%m}"
+fi
 # imports
 [ -f /home/$USER/.ghcup/env ] && source /home/$USER/.ghcup/env
 
