@@ -15,3 +15,13 @@ hl.on("workspace.active", function(ws)
 		end
 	end
 end)
+
+--- Map the tablet to the whole focused monitor
+---@param monitor HL.Monitor
+local function map_tablet(monitor)
+	if monitor == nil then return end
+	hl.config({ input = { tablet = { output = monitor.name } } })
+end
+
+hl.on("monitor.focused", map_tablet)
+map_tablet(hl.get_active_monitor())
