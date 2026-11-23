@@ -19,7 +19,7 @@ M.notion = M.web_open .. [[ "https://www.notion.so/miguedm/Inicio-65fca48212e346
 M.calendar = M.web_open .. [[ "https://calendar.notion.so/"]]
 
 -- M.llm = M.web_open .. [[ "https://claude.ai/"]]
-M.llm = "chatgpt"
+M.llm = "~/.local/bin/dory open"
 M.github = M.web_open .. [[ "https://github.com/migueel15"]]
 M.nextcloud = M.web_open .. [[ "https://nextcloud.dorlab.net"]]
 
